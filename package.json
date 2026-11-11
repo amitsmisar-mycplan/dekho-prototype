@@ -7,30 +7,34 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "seed:tmdb": "node --experimental-strip-types scripts/seed-tmdb.ts"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.0",
+    "canvas-confetti": "^1.9.3",
+    "lucide-react": "^0.468.0",
+    "motion": "^12.0.0",
     "next": "^15.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.0",
-    "@tailwindcss/postcss": "^4.1.0",
-    "motion": "^12.0.0",
-    "zustand": "^5.0.0",
-    "lucide-react": "^0.468.0",
-    "canvas-confetti": "^1.9.3"
+    "zustand": "^5.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.7.0",
+    "@eslint/eslintrc": "^3.3.0",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@types/canvas-confetti": "^1.9.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "^15.5.0",
-    "@eslint/eslintrc": "^3.3.0"
+    "typescript": "^5.7.0",
+    "vitest": "^5.1.0"
   },
   "overrides": {
     "postcss": "^8.5.32"
-  }
+  },
+  "type": "module"
 }

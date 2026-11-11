@@ -2,6 +2,7 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, Check, Plus, X } from 'lucide-react';
 import { createPortal } from 'react-dom';
+import Image from 'next/image';
 import { useEffect, useId, useRef, useState, type ButtonHTMLAttributes, type CSSProperties, type ReactNode } from 'react';
 export function Button({ variant = 'primary', children, className = '', ...props }: ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: 'primary' | 'secondary' | 'ghost';
@@ -11,12 +12,12 @@ export function Button({ variant = 'primary', children, className = '', ...props
 export function Chip({ selected = false, children, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & {
     selected?: boolean;
 }) { return <button className={`chip ${selected ? 'selected' : ''}`} aria-pressed={selected} {...props}>{children}{selected && <Check size={14}/>}</button>; }
-export const providers = [['Netflix', '#FF7384'], ['Prime Video', '#65CFFF'], ['JioHotstar', '#C5A1FF'], ['SonyLIV', '#EDC66C'], ['ZEE5', '#E6B4F7'], ['Aha', '#FFA878'], ['Sun NXT', '#FF87A4'], ['MX Player', '#71C6FF'], ['Apple TV+', '#F5F3FA'], ['Lionsgate Play', '#9FE7C6']] as const;
-export function ProviderChip({ name }: {
-    name: string;
-}) { return <span className="provider" style={{ color: providers.find((p) => p[0] === name)?.[1] }}>{name}</span>; }
-export function PosterCard({ title, eyebrow = 'A little movie magic', palette = ['#733842', '#202337'], selected, onAdd, loading = false }: {
+export function ProviderChip({ name, color = 'var(--text)' }: { name: string; color?: string }) {
+    return <span className="provider" style={{ color }}>{name}</span>;
+}
+export function PosterCard({ title, eyebrow = 'A little movie magic', palette = ['#733842', '#202337'], selected, onAdd, loading = false, posterPath = null }: {
     title: string;
+    posterPath?: string | null;
     eyebrow?: string;
     palette?: [
         string,
@@ -26,10 +27,13 @@ export function PosterCard({ title, eyebrow = 'A little movie magic', palette = 
     onAdd?: () => void;
     loading?: boolean;
 }) {
+    const [failedPath, setFailedPath] = useState<string | null>(null);
+    const showImage = Boolean(posterPath && posterPath !== failedPath && /^\/[a-zA-Z0-9_-]+\.(jpg|png|webp)$/.test(posterPath));
     if (loading)
         return <div className="poster skeleton" role="status" aria-label="Loading poster"/>;
     return <div className="poster" style={{ '--poster-a': palette[0], '--poster-b': palette[1] } as CSSProperties}>
-    <div className="poster-orbit" aria-hidden="true"/><span className="poster-eyebrow">{eyebrow}</span><strong>{title}</strong><span className="poster-caption">A CINEMA NIGHT ORIGINAL</span>
+    <div className="poster-orbit" aria-hidden="true"/><span className="poster-eyebrow">{eyebrow}</span><strong>{title}</strong><span className="poster-caption">TONIGHT’S POSSIBILITY</span>
+    {showImage && <Image className="poster-image" src={`https://image.tmdb.org/t/p/w500${posterPath}`} alt={`${title} poster`} fill sizes="(min-width: 768px) 160px, 45vw" unoptimized onError={() => setFailedPath(posterPath)}/>}
     {onAdd && <button className={`poster-add ${selected ? 'added' : ''}`} aria-label={`${selected ? 'Remove' : 'Add'} ${title} ${selected ? 'from' : 'to'} shortlist`} aria-pressed={selected} onClick={onAdd}>{selected ? <Check size={18}/> : <Plus size={18}/>}</button>}
   </div>;
 }

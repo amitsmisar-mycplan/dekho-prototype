@@ -1,0 +1,2848 @@
+{
+  "version": 1,
+  "region": "IN",
+  "illustrative": true,
+  "disclaimer": "Prototype data only. Provider availability, INR prices, ratings, certifications, runtimes and season counts are illustrative snapshots, not verified current listings. Check the provider before watching. TMDb-style ratings are approximate manually seeded values, not live TMDb scores. Series director credits identify a representative lead director. Only original languages are listed; dubbed availability is not asserted.",
+  "titles": [
+    {
+      "id": "panchayat",
+      "slug": "panchayat",
+      "title": "Panchayat",
+      "aliases": [
+        "panchayath",
+        "panchait",
+        "पंचायत"
+      ],
+      "type": "series",
+      "year": 2020,
+      "seasons": 3,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "cast": [
+        "Jitendra Kumar",
+        "Neena Gupta",
+        "Raghubir Yadav",
+        "Chandan Roy"
+      ],
+      "director": "Deepak Kumar Mishra",
+      "synopsis": "A reluctant village secretary arrives with an exit plan. Daily life and unexpected friendships slowly change his mind.",
+      "tmdbRating": 8.0,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#713C4B",
+        "#151C30"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "scam-1992",
+      "slug": "scam-1992",
+      "title": "Scam 1992",
+      "aliases": [
+        "scam",
+        "harshad mehta"
+      ],
+      "type": "series",
+      "year": 2020,
+      "seasons": 1,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Crime",
+        "Drama",
+        "Thriller"
+      ],
+      "cast": [
+        "Pratik Gandhi",
+        "Shreya Dhanwanthary",
+        "Hemant Kher",
+        "Anjali Barot"
+      ],
+      "director": "Hansal Mehta",
+      "synopsis": "An ambitious stockbroker learns to bend the financial system. His spectacular ascent brings scrutiny that money cannot silence.",
+      "tmdbRating": 8.2,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#996036",
+        "#302236"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "sonyliv",
+          "type": "stream",
+          "deepLink": "https://www.sonyliv.com/"
+        }
+      ]
+    },
+    {
+      "id": "12th-fail",
+      "slug": "12th-fail",
+      "title": "12th Fail",
+      "aliases": [
+        "12 fail",
+        "twelfth fail",
+        "barahvi fail"
+      ],
+      "type": "movie",
+      "year": 2023,
+      "runtimeMin": 147,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Drama"
+      ],
+      "cast": [
+        "Vikrant Massey",
+        "Medha Shankr",
+        "Anant V Joshi",
+        "Anshumaan Pushkar"
+      ],
+      "director": "Vidhu Vinod Chopra",
+      "synopsis": "A young man rebuilds his education after a crushing setback. Preparing for the civil services becomes a test of endurance and friendship.",
+      "tmdbRating": 8.0,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F6E69",
+        "#142434"
+      ],
+      "moods": [
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "jiohotstar",
+          "type": "stream",
+          "deepLink": "https://www.hotstar.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "kota-factory",
+      "slug": "kota-factory",
+      "title": "Kota Factory",
+      "aliases": [
+        "kota faktory"
+      ],
+      "type": "series",
+      "year": 2019,
+      "seasons": 3,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "cast": [
+        "Mayur More",
+        "Jitendra Kumar",
+        "Ranjan Raj",
+        "Alam Khan"
+      ],
+      "director": "Raghav Subbu",
+      "synopsis": "Students arrive in a coaching town carrying enormous expectations. Between exams, they find mentors and friends who make the pressure bearable.",
+      "tmdbRating": 8.0,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#615484",
+        "#222039"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good"
+      ],
+      "providers": [
+        {
+          "providerId": "netflix",
+          "type": "stream",
+          "deepLink": "https://www.netflix.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "paatal-lok",
+      "slug": "paatal-lok",
+      "title": "Paatal Lok",
+      "aliases": [
+        "patal lok",
+        "paataal lok"
+      ],
+      "type": "series",
+      "year": 2020,
+      "seasons": 1,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Crime",
+        "Thriller",
+        "Drama"
+      ],
+      "cast": [
+        "Jaideep Ahlawat",
+        "Neeraj Kabi",
+        "Abhishek Banerjee",
+        "Ishwak Singh"
+      ],
+      "director": "Avinash Arun",
+      "synopsis": "A weary police officer inherits a seemingly straightforward assassination case. Following its threads pulls him into a much darker world.",
+      "tmdbRating": 7.5,
+      "certification": "A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#8D4839",
+        "#261A25"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "drishyam-2",
+      "slug": "drishyam-2",
+      "title": "Drishyam 2",
+      "aliases": [
+        "drishyam hindi",
+        "drishyam two",
+        "drishyam 2 hindi"
+      ],
+      "type": "movie",
+      "year": 2022,
+      "runtimeMin": 140,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Crime",
+        "Thriller",
+        "Drama"
+      ],
+      "cast": [
+        "Ajay Devgn",
+        "Tabu",
+        "Akshaye Khanna",
+        "Shriya Saran"
+      ],
+      "director": "Abhishek Pathak",
+      "synopsis": "A family has built a fragile peace around a terrible secret. A renewed investigation threatens to undo their carefully arranged lives.",
+      "tmdbRating": 7.8,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F587D",
+        "#181E2D"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "the-family-man",
+      "slug": "the-family-man",
+      "title": "The Family Man",
+      "aliases": [
+        "family man",
+        "familyman"
+      ],
+      "type": "series",
+      "year": 2019,
+      "seasons": 2,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Action",
+        "Thriller",
+        "Comedy"
+      ],
+      "cast": [
+        "Manoj Bajpayee",
+        "Priyamani",
+        "Sharib Hashmi",
+        "Neeraj Madhav"
+      ],
+      "director": "Raj Nidimoru and Krishna D.K.",
+      "synopsis": "An intelligence officer balances national threats with school runs and marital friction. Neither side of his life is willing to wait.",
+      "tmdbRating": 7.8,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#713C4B",
+        "#151C30"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good",
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "laapataa-ladies",
+      "slug": "laapataa-ladies",
+      "title": "Laapataa Ladies",
+      "aliases": [
+        "lapata ladies",
+        "laapata ladies",
+        "laapta ladies"
+      ],
+      "type": "movie",
+      "year": 2024,
+      "runtimeMin": 122,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "cast": [
+        "Nitanshi Goel",
+        "Pratibha Ranta",
+        "Sparsh Shrivastava",
+        "Ravi Kishan"
+      ],
+      "director": "Kiran Rao",
+      "synopsis": "Two brides are separated from their intended destinations after a train journey. The mix-up opens unexpected paths toward independence.",
+      "tmdbRating": 8.0,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#996036",
+        "#302236"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good"
+      ],
+      "providers": [
+        {
+          "providerId": "netflix",
+          "type": "stream",
+          "deepLink": "https://www.netflix.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "stree-2",
+      "slug": "stree-2",
+      "title": "Stree 2",
+      "aliases": [
+        "stree two",
+        "stree2"
+      ],
+      "type": "movie",
+      "year": 2024,
+      "runtimeMin": 147,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Comedy",
+        "Horror"
+      ],
+      "cast": [
+        "Rajkummar Rao",
+        "Shraddha Kapoor",
+        "Pankaj Tripathi",
+        "Abhishek Banerjee"
+      ],
+      "director": "Amar Kaushik",
+      "synopsis": "A new supernatural threat stalks a small town. Its unlikely protectors reunite with more courage than preparation.",
+      "tmdbRating": 6.8,
+      "certification": "A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F6E69",
+        "#142434"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good",
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "andhadhun",
+      "slug": "andhadhun",
+      "title": "Andhadhun",
+      "aliases": [
+        "andhadhun",
+        "andha dhun"
+      ],
+      "type": "movie",
+      "year": 2018,
+      "runtimeMin": 139,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Crime",
+        "Thriller",
+        "Comedy"
+      ],
+      "cast": [
+        "Ayushmann Khurrana",
+        "Tabu",
+        "Radhika Apte",
+        "Anil Dhawan"
+      ],
+      "director": "Sriram Raghavan",
+      "synopsis": "A pianist witnesses something he should not be able to see. Every attempt to escape draws him deeper into an elaborate deception.",
+      "tmdbRating": 7.7,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#615484",
+        "#222039"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good",
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "jiohotstar",
+          "type": "stream",
+          "deepLink": "https://www.hotstar.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "dangal",
+      "slug": "dangal",
+      "title": "Dangal",
+      "aliases": [
+        "dangal wrestling"
+      ],
+      "type": "movie",
+      "year": 2016,
+      "runtimeMin": 161,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Drama",
+        "Sport",
+        "Family"
+      ],
+      "cast": [
+        "Aamir Khan",
+        "Fatima Sana Shaikh",
+        "Sanya Malhotra",
+        "Sakshi Tanwar"
+      ],
+      "director": "Nitesh Tiwari",
+      "synopsis": "A former wrestler trains his daughters against the expectations of their village. Their journey onto the mat reshapes the whole family.",
+      "tmdbRating": 7.9,
+      "certification": "U",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#8D4839",
+        "#261A25"
+      ],
+      "moods": [
+        "Family",
+        "Feel-good"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "gully-boy",
+      "slug": "gully-boy",
+      "title": "Gully Boy",
+      "aliases": [
+        "gullyboy",
+        "gali boy"
+      ],
+      "type": "movie",
+      "year": 2019,
+      "runtimeMin": 154,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Drama",
+        "Music"
+      ],
+      "cast": [
+        "Ranveer Singh",
+        "Alia Bhatt",
+        "Siddhant Chaturvedi",
+        "Vijay Raaz"
+      ],
+      "director": "Zoya Akhtar",
+      "synopsis": "A young man finds a voice through underground rap. Turning that voice into a future means challenging the boundaries around him.",
+      "tmdbRating": 7.3,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F587D",
+        "#181E2D"
+      ],
+      "moods": [
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "netflix",
+          "type": "stream",
+          "deepLink": "https://www.netflix.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "article-15",
+      "slug": "article-15",
+      "title": "Article 15",
+      "aliases": [
+        "article fifteen"
+      ],
+      "type": "movie",
+      "year": 2019,
+      "runtimeMin": 130,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Crime",
+        "Thriller",
+        "Drama"
+      ],
+      "cast": [
+        "Ayushmann Khurrana",
+        "Nassar",
+        "Manoj Pahwa",
+        "Kumud Mishra"
+      ],
+      "director": "Anubhav Sinha",
+      "synopsis": "A newly posted officer investigates the disappearance of village girls. The case confronts him with a system designed to protect inequality.",
+      "tmdbRating": 7.5,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#713C4B",
+        "#151C30"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "sonyliv",
+          "type": "stream",
+          "deepLink": "https://www.sonyliv.com/"
+        }
+      ]
+    },
+    {
+      "id": "badhaai-ho",
+      "slug": "badhaai-ho",
+      "title": "Badhaai Ho",
+      "aliases": [
+        "badhai ho",
+        "badhaaiho"
+      ],
+      "type": "movie",
+      "year": 2018,
+      "runtimeMin": 124,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Family"
+      ],
+      "cast": [
+        "Ayushmann Khurrana",
+        "Neena Gupta",
+        "Gajraj Rao",
+        "Sanya Malhotra"
+      ],
+      "director": "Amit Sharma",
+      "synopsis": "An adult son struggles with news of his mother's unexpected pregnancy. His family's embarrassment gives way to a warmer understanding of love.",
+      "tmdbRating": 7.2,
+      "certification": "U",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#996036",
+        "#302236"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good",
+        "Family"
+      ],
+      "providers": [
+        {
+          "providerId": "zee5",
+          "type": "stream",
+          "deepLink": "https://www.zee5.com/"
+        }
+      ]
+    },
+    {
+      "id": "tumbbad",
+      "slug": "tumbbad",
+      "title": "Tumbbad",
+      "aliases": [
+        "tumbad"
+      ],
+      "type": "movie",
+      "year": 2018,
+      "runtimeMin": 104,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Horror",
+        "Fantasy",
+        "Thriller"
+      ],
+      "cast": [
+        "Sohum Shah",
+        "Jyoti Malshe",
+        "Anita Date",
+        "Ronjini Chakraborty"
+      ],
+      "director": "Rahi Anil Barve",
+      "synopsis": "A man pursues a hidden fortune beneath a rain-soaked ancestral home. The price of greed grows with every return to its depths.",
+      "tmdbRating": 7.5,
+      "certification": "A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F6E69",
+        "#142434"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "jiohotstar",
+          "type": "stream",
+          "deepLink": "https://www.hotstar.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "piku",
+      "slug": "piku",
+      "title": "Piku",
+      "aliases": [
+        "peeku"
+      ],
+      "type": "movie",
+      "year": 2015,
+      "runtimeMin": 123,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Family"
+      ],
+      "cast": [
+        "Deepika Padukone",
+        "Amitabh Bachchan",
+        "Irrfan Khan",
+        "Moushumi Chatterjee"
+      ],
+      "director": "Shoojit Sircar",
+      "synopsis": "A daughter and her stubborn father set out on a road trip. Their driver becomes an accidental witness to a complicated, affectionate bond.",
+      "tmdbRating": 7.0,
+      "certification": "U",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#615484",
+        "#222039"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good",
+        "Family"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "masaan",
+      "slug": "masaan",
+      "title": "Masaan",
+      "aliases": [
+        "masan"
+      ],
+      "type": "movie",
+      "year": 2015,
+      "runtimeMin": 109,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Drama",
+        "Romance"
+      ],
+      "cast": [
+        "Richa Chadha",
+        "Vicky Kaushal",
+        "Shweta Tripathi",
+        "Sanjay Mishra"
+      ],
+      "director": "Neeraj Ghaywan",
+      "synopsis": "Two lives in Varanasi are shaped by loss and social judgment. Small acts of connection offer the possibility of beginning again.",
+      "tmdbRating": 7.0,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#8D4839",
+        "#261A25"
+      ],
+      "moods": [
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "netflix",
+          "type": "stream",
+          "deepLink": "https://www.netflix.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "darlings",
+      "slug": "darlings",
+      "title": "Darlings",
+      "aliases": [
+        "darling hindi"
+      ],
+      "type": "movie",
+      "year": 2022,
+      "runtimeMin": 133,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Comedy",
+        "Crime",
+        "Drama"
+      ],
+      "cast": [
+        "Alia Bhatt",
+        "Shefali Shah",
+        "Vijay Varma",
+        "Roshan Mathew"
+      ],
+      "director": "Jasmeet K. Reen",
+      "synopsis": "A woman and her mother devise a risky response to an abusive marriage. Their plan turns a cramped home into the setting for darkly comic upheaval.",
+      "tmdbRating": 6.9,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F587D",
+        "#181E2D"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good"
+      ],
+      "providers": [
+        {
+          "providerId": "sonyliv",
+          "type": "stream",
+          "deepLink": "https://www.sonyliv.com/"
+        }
+      ]
+    },
+    {
+      "id": "oppenheimer",
+      "slug": "oppenheimer",
+      "title": "Oppenheimer",
+      "aliases": [
+        "oppenhimer",
+        "openheimer"
+      ],
+      "type": "movie",
+      "year": 2023,
+      "runtimeMin": 181,
+      "languages": [
+        "English"
+      ],
+      "originalLanguage": "English",
+      "genres": [
+        "Drama",
+        "History",
+        "Thriller"
+      ],
+      "cast": [
+        "Cillian Murphy",
+        "Emily Blunt",
+        "Robert Downey Jr.",
+        "Matt Damon"
+      ],
+      "director": "Christopher Nolan",
+      "synopsis": "A physicist leads a wartime project with consequences beyond calculation. The achievement follows him into political hearings and private doubt.",
+      "tmdbRating": 8.1,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#713C4B",
+        "#151C30"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "netflix",
+          "type": "stream",
+          "deepLink": "https://www.netflix.com/in/"
+        },
+        {
+          "providerId": "prime-video",
+          "type": "rent",
+          "priceInr": 149,
+          "deepLink": "https://www.primevideo.com/"
+        },
+        {
+          "providerId": "prime-video",
+          "type": "buy",
+          "priceInr": 499,
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "severance",
+      "slug": "severance",
+      "title": "Severance",
+      "aliases": [
+        "severence"
+      ],
+      "type": "series",
+      "year": 2022,
+      "seasons": 1,
+      "languages": [
+        "English"
+      ],
+      "originalLanguage": "English",
+      "genres": [
+        "Drama",
+        "Mystery",
+        "Science Fiction"
+      ],
+      "cast": [
+        "Adam Scott",
+        "Britt Lower",
+        "Patricia Arquette",
+        "John Turturro"
+      ],
+      "director": "Ben Stiller",
+      "synopsis": "Office workers have their work memories separated from their outside lives. A small disruption makes the boundaries of their world look deeply suspicious.",
+      "tmdbRating": 8.4,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#996036",
+        "#302236"
+      ],
+      "moods": [
+        "Mind-bender"
+      ],
+      "providers": [
+        {
+          "providerId": "apple-tv",
+          "type": "stream",
+          "deepLink": "https://tv.apple.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "knives-out",
+      "slug": "knives-out",
+      "title": "Knives Out",
+      "aliases": [
+        "knivesout"
+      ],
+      "type": "movie",
+      "year": 2019,
+      "runtimeMin": 131,
+      "languages": [
+        "English"
+      ],
+      "originalLanguage": "English",
+      "genres": [
+        "Mystery",
+        "Crime",
+        "Comedy"
+      ],
+      "cast": [
+        "Daniel Craig",
+        "Ana de Armas",
+        "Chris Evans",
+        "Jamie Lee Curtis"
+      ],
+      "director": "Rian Johnson",
+      "synopsis": "A detective visits a wealthy family after its patriarch dies. Everyone has a story, and almost everyone has something to gain.",
+      "tmdbRating": 7.8,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F6E69",
+        "#142434"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good",
+        "Mind-bender"
+      ],
+      "providers": [
+        {
+          "providerId": "apple-tv",
+          "type": "stream",
+          "deepLink": "https://tv.apple.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "glass-onion",
+      "slug": "glass-onion",
+      "title": "Glass Onion",
+      "aliases": [
+        "glass onion a knives out mystery",
+        "knives out 2"
+      ],
+      "type": "movie",
+      "year": 2022,
+      "runtimeMin": 140,
+      "languages": [
+        "English"
+      ],
+      "originalLanguage": "English",
+      "genres": [
+        "Mystery",
+        "Crime",
+        "Comedy"
+      ],
+      "cast": [
+        "Daniel Craig",
+        "Edward Norton",
+        "Janelle Monae",
+        "Kate Hudson"
+      ],
+      "director": "Rian Johnson",
+      "synopsis": "A billionaire gathers old friends for a mystery game on a private island. The detective among them discovers that the real puzzle is far less playful.",
+      "tmdbRating": 7.0,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#615484",
+        "#222039"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good",
+        "Mind-bender"
+      ],
+      "providers": [
+        {
+          "providerId": "jiohotstar",
+          "type": "stream",
+          "deepLink": "https://www.hotstar.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "dune",
+      "slug": "dune",
+      "title": "Dune",
+      "aliases": [
+        "dune part one",
+        "dune 1"
+      ],
+      "type": "movie",
+      "year": 2021,
+      "runtimeMin": 155,
+      "languages": [
+        "English"
+      ],
+      "originalLanguage": "English",
+      "genres": [
+        "Science Fiction",
+        "Adventure",
+        "Drama"
+      ],
+      "cast": [
+        "Timothee Chalamet",
+        "Rebecca Ferguson",
+        "Oscar Isaac",
+        "Josh Brolin"
+      ],
+      "director": "Denis Villeneuve",
+      "synopsis": "A young heir travels to a desert planet at the centre of an imperial struggle. Survival demands an alliance with the people who know its sands.",
+      "tmdbRating": 7.8,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#8D4839",
+        "#261A25"
+      ],
+      "moods": [
+        "Mind-bender"
+      ],
+      "providers": [
+        {
+          "providerId": "lionsgate-play",
+          "type": "stream",
+          "deepLink": "https://www.lionsgateplay.com/"
+        }
+      ]
+    },
+    {
+      "id": "dune-part-two",
+      "slug": "dune-part-two",
+      "title": "Dune: Part Two",
+      "aliases": [
+        "dune 2",
+        "dune two"
+      ],
+      "type": "movie",
+      "year": 2024,
+      "runtimeMin": 167,
+      "languages": [
+        "English"
+      ],
+      "originalLanguage": "English",
+      "genres": [
+        "Science Fiction",
+        "Adventure",
+        "Drama"
+      ],
+      "cast": [
+        "Timothee Chalamet",
+        "Zendaya",
+        "Rebecca Ferguson",
+        "Javier Bardem"
+      ],
+      "director": "Denis Villeneuve",
+      "synopsis": "An exiled heir joins the desert resistance while visions of a terrible future grow stronger. Love and power pull his choices in different directions.",
+      "tmdbRating": 8.2,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F587D",
+        "#181E2D"
+      ],
+      "moods": [
+        "Mind-bender"
+      ],
+      "providers": [
+        {
+          "providerId": "netflix",
+          "type": "stream",
+          "deepLink": "https://www.netflix.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "everything-everywhere-all-at-once",
+      "slug": "everything-everywhere-all-at-once",
+      "title": "Everything Everywhere All at Once",
+      "aliases": [
+        "everything everywhere",
+        "eeaao"
+      ],
+      "type": "movie",
+      "year": 2022,
+      "runtimeMin": 140,
+      "languages": [
+        "English"
+      ],
+      "originalLanguage": "English",
+      "genres": [
+        "Science Fiction",
+        "Comedy",
+        "Drama"
+      ],
+      "cast": [
+        "Michelle Yeoh",
+        "Stephanie Hsu",
+        "Ke Huy Quan",
+        "Jamie Lee Curtis"
+      ],
+      "director": "Daniel Kwan and Daniel Scheinert",
+      "synopsis": "A laundromat owner is pulled into a chaotic struggle across alternate lives. The fate of everything comes back to a deeply ordinary family relationship.",
+      "tmdbRating": 7.8,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#713C4B",
+        "#151C30"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good",
+        "Mind-bender"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "the-martian",
+      "slug": "the-martian",
+      "title": "The Martian",
+      "aliases": [
+        "martian"
+      ],
+      "type": "movie",
+      "year": 2015,
+      "runtimeMin": 144,
+      "languages": [
+        "English"
+      ],
+      "originalLanguage": "English",
+      "genres": [
+        "Science Fiction",
+        "Adventure",
+        "Drama"
+      ],
+      "cast": [
+        "Matt Damon",
+        "Jessica Chastain",
+        "Chiwetel Ejiofor",
+        "Jeff Daniels"
+      ],
+      "director": "Ridley Scott",
+      "synopsis": "An astronaut is stranded on Mars with dwindling supplies. Ingenuity and a stubborn sense of humour become his tools for getting home.",
+      "tmdbRating": 7.7,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#996036",
+        "#302236"
+      ],
+      "moods": [
+        "Mind-bender"
+      ],
+      "providers": [
+        {
+          "providerId": "apple-tv",
+          "type": "stream",
+          "deepLink": "https://tv.apple.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "arrival",
+      "slug": "arrival",
+      "title": "Arrival",
+      "aliases": [
+        "arrival aliens"
+      ],
+      "type": "movie",
+      "year": 2016,
+      "runtimeMin": 116,
+      "languages": [
+        "English"
+      ],
+      "originalLanguage": "English",
+      "genres": [
+        "Science Fiction",
+        "Drama",
+        "Mystery"
+      ],
+      "cast": [
+        "Amy Adams",
+        "Jeremy Renner",
+        "Forest Whitaker",
+        "Michael Stuhlbarg"
+      ],
+      "director": "Denis Villeneuve",
+      "synopsis": "A linguist is asked to communicate with mysterious visitors. Learning their language changes how she understands both the crisis and her own life.",
+      "tmdbRating": 7.6,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F6E69",
+        "#142434"
+      ],
+      "moods": [
+        "Mind-bender"
+      ],
+      "providers": [
+        {
+          "providerId": "jiohotstar",
+          "type": "stream",
+          "deepLink": "https://www.hotstar.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "get-out",
+      "slug": "get-out",
+      "title": "Get Out",
+      "aliases": [
+        "getout"
+      ],
+      "type": "movie",
+      "year": 2017,
+      "runtimeMin": 104,
+      "languages": [
+        "English"
+      ],
+      "originalLanguage": "English",
+      "genres": [
+        "Horror",
+        "Thriller",
+        "Mystery"
+      ],
+      "cast": [
+        "Daniel Kaluuya",
+        "Allison Williams",
+        "Bradley Whitford",
+        "Catherine Keener"
+      ],
+      "director": "Jordan Peele",
+      "synopsis": "A weekend meeting his girlfriend's family leaves a young man increasingly uneasy. Polite conversation masks something far more threatening.",
+      "tmdbRating": 7.6,
+      "certification": "A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#615484",
+        "#222039"
+      ],
+      "moods": [
+        "Edge-of-seat",
+        "Mind-bender"
+      ],
+      "providers": [
+        {
+          "providerId": "lionsgate-play",
+          "type": "stream",
+          "deepLink": "https://www.lionsgateplay.com/"
+        }
+      ]
+    },
+    {
+      "id": "stranger-things",
+      "slug": "stranger-things",
+      "title": "Stranger Things",
+      "aliases": [
+        "strangerthings"
+      ],
+      "type": "series",
+      "year": 2016,
+      "seasons": 4,
+      "languages": [
+        "English"
+      ],
+      "originalLanguage": "English",
+      "genres": [
+        "Science Fiction",
+        "Horror",
+        "Drama"
+      ],
+      "cast": [
+        "Millie Bobby Brown",
+        "Finn Wolfhard",
+        "Winona Ryder",
+        "David Harbour"
+      ],
+      "director": "Matt Duffer and Ross Duffer",
+      "synopsis": "A child's disappearance unsettles a small town. His friends encounter secret experiments and a frightening world alongside their own.",
+      "tmdbRating": 8.6,
+      "certification": "A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#8D4839",
+        "#261A25"
+      ],
+      "moods": [
+        "Edge-of-seat",
+        "Mind-bender"
+      ],
+      "providers": [
+        {
+          "providerId": "netflix",
+          "type": "stream",
+          "deepLink": "https://www.netflix.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "ted-lasso",
+      "slug": "ted-lasso",
+      "title": "Ted Lasso",
+      "aliases": [
+        "tedlaso",
+        "ted lasso football"
+      ],
+      "type": "series",
+      "year": 2020,
+      "seasons": 3,
+      "languages": [
+        "English"
+      ],
+      "originalLanguage": "English",
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Sport"
+      ],
+      "cast": [
+        "Jason Sudeikis",
+        "Hannah Waddingham",
+        "Brett Goldstein",
+        "Juno Temple"
+      ],
+      "director": "Tom Marshall",
+      "synopsis": "An American coach takes charge of an English football team despite knowing little about the sport. His optimism challenges a club accustomed to disappointment.",
+      "tmdbRating": 8.4,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F587D",
+        "#181E2D"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good"
+      ],
+      "providers": [
+        {
+          "providerId": "apple-tv",
+          "type": "stream",
+          "deepLink": "https://tv.apple.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "manjummel-boys",
+      "slug": "manjummel-boys",
+      "title": "Manjummel Boys",
+      "aliases": [
+        "manjumel boys",
+        "manjummal boys"
+      ],
+      "type": "movie",
+      "year": 2024,
+      "runtimeMin": 135,
+      "languages": [
+        "Malayalam"
+      ],
+      "originalLanguage": "Malayalam",
+      "genres": [
+        "Thriller",
+        "Adventure",
+        "Drama"
+      ],
+      "cast": [
+        "Soubin Shahir",
+        "Sreenath Bhasi",
+        "Balu Varghese",
+        "Ganapathi"
+      ],
+      "director": "Chidambaram",
+      "synopsis": "A friends' holiday takes a terrifying turn inside a restricted cave. Refusing to abandon one of their own becomes an extraordinary test of trust.",
+      "tmdbRating": 7.8,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#713C4B",
+        "#151C30"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "jiohotstar",
+          "type": "stream",
+          "deepLink": "https://www.hotstar.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "kumbalangi-nights",
+      "slug": "kumbalangi-nights",
+      "title": "Kumbalangi Nights",
+      "aliases": [
+        "kumbalangi",
+        "kumbalangi nights malayalam"
+      ],
+      "type": "movie",
+      "year": 2019,
+      "runtimeMin": 135,
+      "languages": [
+        "Malayalam"
+      ],
+      "originalLanguage": "Malayalam",
+      "genres": [
+        "Drama",
+        "Romance",
+        "Comedy"
+      ],
+      "cast": [
+        "Shane Nigam",
+        "Soubin Shahir",
+        "Fahadh Faasil",
+        "Sreenath Bhasi"
+      ],
+      "director": "Madhu C. Narayanan",
+      "synopsis": "Four brothers share an uneasy home by the backwaters. New relationships force them to reconsider what it means to be a family.",
+      "tmdbRating": 8.0,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#996036",
+        "#302236"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "drishyam-2-malayalam",
+      "slug": "drishyam-2-malayalam",
+      "title": "Drishyam 2 (Malayalam)",
+      "aliases": [
+        "drishyam 2 malayalam",
+        "drishyam malayalam",
+        "drishyam two malayalam"
+      ],
+      "type": "movie",
+      "year": 2021,
+      "runtimeMin": 153,
+      "languages": [
+        "Malayalam"
+      ],
+      "originalLanguage": "Malayalam",
+      "genres": [
+        "Crime",
+        "Thriller",
+        "Drama"
+      ],
+      "cast": [
+        "Mohanlal",
+        "Meena",
+        "Ansiba Hassan",
+        "Esther Anil"
+      ],
+      "director": "Jeethu Joseph",
+      "synopsis": "A cinema owner tries to keep his family beyond the reach of an old investigation. The past resurfaces through people who have not stopped watching.",
+      "tmdbRating": 7.6,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F6E69",
+        "#142434"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "netflix",
+          "type": "stream",
+          "deepLink": "https://www.netflix.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "joji",
+      "slug": "joji",
+      "title": "Joji",
+      "aliases": [
+        "jojy"
+      ],
+      "type": "movie",
+      "year": 2021,
+      "runtimeMin": 113,
+      "languages": [
+        "Malayalam"
+      ],
+      "originalLanguage": "Malayalam",
+      "genres": [
+        "Crime",
+        "Thriller",
+        "Drama"
+      ],
+      "cast": [
+        "Fahadh Faasil",
+        "Baburaj",
+        "Shammi Thilakan",
+        "Unnimaya Prasad"
+      ],
+      "director": "Dileesh Pothan",
+      "synopsis": "The youngest son of a domineering family dreams of a larger share of its wealth. A sudden illness creates an opening for his dangerous ambitions.",
+      "tmdbRating": 7.4,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#615484",
+        "#222039"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "sonyliv",
+          "type": "stream",
+          "deepLink": "https://www.sonyliv.com/"
+        }
+      ]
+    },
+    {
+      "id": "anjaam-pathiraa",
+      "slug": "anjaam-pathiraa",
+      "title": "Anjaam Pathiraa",
+      "aliases": [
+        "anjam pathira",
+        "anjaam pathira",
+        "anjam pathiraa"
+      ],
+      "type": "movie",
+      "year": 2020,
+      "runtimeMin": 144,
+      "languages": [
+        "Malayalam"
+      ],
+      "originalLanguage": "Malayalam",
+      "genres": [
+        "Crime",
+        "Thriller",
+        "Mystery"
+      ],
+      "cast": [
+        "Kunchacko Boban",
+        "Unnimaya Prasad",
+        "Sharaf U Dheen",
+        "Jinu Joseph"
+      ],
+      "director": "Midhun Manuel Thomas",
+      "synopsis": "A criminologist helps police investigate a string of killings targeting officers. Each clue suggests someone is carefully directing the hunt.",
+      "tmdbRating": 7.7,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#8D4839",
+        "#261A25"
+      ],
+      "moods": [
+        "Edge-of-seat",
+        "Mind-bender"
+      ],
+      "providers": [
+        {
+          "providerId": "jiohotstar",
+          "type": "stream",
+          "deepLink": "https://www.hotstar.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "iratta",
+      "slug": "iratta",
+      "title": "Iratta",
+      "aliases": [
+        "iratta malayalam",
+        "irata"
+      ],
+      "type": "movie",
+      "year": 2023,
+      "runtimeMin": 110,
+      "languages": [
+        "Malayalam"
+      ],
+      "originalLanguage": "Malayalam",
+      "genres": [
+        "Crime",
+        "Thriller",
+        "Drama"
+      ],
+      "cast": [
+        "Joju George",
+        "Anjali",
+        "Srinda",
+        "Arya Salim"
+      ],
+      "director": "Rohit M. G. Krishnan",
+      "synopsis": "A police officer's death brings his estranged twin into a tense investigation. Conflicting accounts expose a painful shared history.",
+      "tmdbRating": 7.0,
+      "certification": "A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F587D",
+        "#181E2D"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "aavesham",
+      "slug": "aavesham",
+      "title": "Aavesham",
+      "aliases": [
+        "avesham",
+        "aavesam"
+      ],
+      "type": "movie",
+      "year": 2024,
+      "runtimeMin": 158,
+      "languages": [
+        "Malayalam"
+      ],
+      "originalLanguage": "Malayalam",
+      "genres": [
+        "Action",
+        "Comedy"
+      ],
+      "cast": [
+        "Fahadh Faasil",
+        "Sajin Gopu",
+        "Hipzster",
+        "Mithun Jai Shankar"
+      ],
+      "director": "Jithu Madhavan",
+      "synopsis": "College newcomers seek protection from a flamboyant local gangster. His enthusiastic friendship becomes an adventure they cannot easily control.",
+      "tmdbRating": 7.4,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#713C4B",
+        "#151C30"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good",
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "premam",
+      "slug": "premam",
+      "title": "Premam",
+      "aliases": [
+        "premam malayalam"
+      ],
+      "type": "movie",
+      "year": 2015,
+      "runtimeMin": 157,
+      "languages": [
+        "Malayalam"
+      ],
+      "originalLanguage": "Malayalam",
+      "genres": [
+        "Romance",
+        "Comedy",
+        "Drama"
+      ],
+      "cast": [
+        "Nivin Pauly",
+        "Sai Pallavi",
+        "Madonna Sebastian",
+        "Anupama Parameswaran"
+      ],
+      "director": "Alphonse Puthren",
+      "synopsis": "A young man's understanding of love changes through three chapters of his life. Friends, heartbreak and chance encounters carry him toward adulthood.",
+      "tmdbRating": 7.4,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#996036",
+        "#302236"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good"
+      ],
+      "providers": [
+        {
+          "providerId": "sonyliv",
+          "type": "stream",
+          "deepLink": "https://www.sonyliv.com/"
+        }
+      ]
+    },
+    {
+      "id": "jailer",
+      "slug": "jailer",
+      "title": "Jailer",
+      "aliases": [
+        "jailor",
+        "jailer tamil"
+      ],
+      "type": "movie",
+      "year": 2023,
+      "runtimeMin": 168,
+      "languages": [
+        "Tamil"
+      ],
+      "originalLanguage": "Tamil",
+      "genres": [
+        "Action",
+        "Thriller",
+        "Comedy"
+      ],
+      "cast": [
+        "Rajinikanth",
+        "Vinayakan",
+        "Ramya Krishnan",
+        "Vasanth Ravi"
+      ],
+      "director": "Nelson Dilipkumar",
+      "synopsis": "A retired jailer faces a violent threat to his family. His quiet domestic routine gives way to skills his neighbours never imagined.",
+      "tmdbRating": 6.7,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F6E69",
+        "#142434"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good",
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "super-deluxe",
+      "slug": "super-deluxe",
+      "title": "Super Deluxe",
+      "aliases": [
+        "superdeluxe"
+      ],
+      "type": "movie",
+      "year": 2019,
+      "runtimeMin": 176,
+      "languages": [
+        "Tamil"
+      ],
+      "originalLanguage": "Tamil",
+      "genres": [
+        "Crime",
+        "Drama",
+        "Thriller"
+      ],
+      "cast": [
+        "Vijay Sethupathi",
+        "Fahadh Faasil",
+        "Samantha Ruth Prabhu",
+        "Ramya Krishnan"
+      ],
+      "director": "Thiagarajan Kumararaja",
+      "synopsis": "Several people stumble into crises involving family, secrecy and survival. Their intersecting stories push ordinary judgments into uncomfortable territory.",
+      "tmdbRating": 7.7,
+      "certification": "A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#615484",
+        "#222039"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "netflix",
+          "type": "stream",
+          "deepLink": "https://www.netflix.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "vikram",
+      "slug": "vikram",
+      "title": "Vikram",
+      "aliases": [
+        "vikram tamil"
+      ],
+      "type": "movie",
+      "year": 2022,
+      "runtimeMin": 174,
+      "languages": [
+        "Tamil"
+      ],
+      "originalLanguage": "Tamil",
+      "genres": [
+        "Action",
+        "Crime",
+        "Thriller"
+      ],
+      "cast": [
+        "Kamal Haasan",
+        "Vijay Sethupathi",
+        "Fahadh Faasil",
+        "Narain"
+      ],
+      "director": "Lokesh Kanagaraj",
+      "synopsis": "An investigator traces a series of masked killings. The trail leads into a drug war and a man whose past has been carefully hidden.",
+      "tmdbRating": 7.6,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#8D4839",
+        "#261A25"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "sun-nxt",
+          "type": "stream",
+          "deepLink": "https://www.sunnxt.com/"
+        }
+      ]
+    },
+    {
+      "id": "kaithi",
+      "slug": "kaithi",
+      "title": "Kaithi",
+      "aliases": [
+        "kaidi",
+        "kaithi tamil"
+      ],
+      "type": "movie",
+      "year": 2019,
+      "runtimeMin": 145,
+      "languages": [
+        "Tamil"
+      ],
+      "originalLanguage": "Tamil",
+      "genres": [
+        "Action",
+        "Crime",
+        "Thriller"
+      ],
+      "cast": [
+        "Karthi",
+        "Narain",
+        "Arjun Das",
+        "George Maryan"
+      ],
+      "director": "Lokesh Kanagaraj",
+      "synopsis": "A newly released prisoner wants only to meet his daughter. One dangerous night forces him to help police survive a relentless pursuit.",
+      "tmdbRating": 7.5,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F587D",
+        "#181E2D"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "jiohotstar",
+          "type": "stream",
+          "deepLink": "https://www.hotstar.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "soorarai-pottru",
+      "slug": "soorarai-pottru",
+      "title": "Soorarai Pottru",
+      "aliases": [
+        "soorarai potru",
+        "soorari pottru"
+      ],
+      "type": "movie",
+      "year": 2020,
+      "runtimeMin": 149,
+      "languages": [
+        "Tamil"
+      ],
+      "originalLanguage": "Tamil",
+      "genres": [
+        "Drama"
+      ],
+      "cast": [
+        "Suriya",
+        "Aparna Balamurali",
+        "Paresh Rawal",
+        "Urvashi"
+      ],
+      "director": "Sudha Kongara",
+      "synopsis": "A former air force officer dreams of making flying affordable. Building an airline means taking on entrenched power and repeated failure.",
+      "tmdbRating": 7.8,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#713C4B",
+        "#151C30"
+      ],
+      "moods": [
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "jai-bhim",
+      "slug": "jai-bhim",
+      "title": "Jai Bhim",
+      "aliases": [
+        "jaibhim",
+        "jai bheem"
+      ],
+      "type": "movie",
+      "year": 2021,
+      "runtimeMin": 164,
+      "languages": [
+        "Tamil"
+      ],
+      "originalLanguage": "Tamil",
+      "genres": [
+        "Crime",
+        "Drama"
+      ],
+      "cast": [
+        "Suriya",
+        "Lijomol Jose",
+        "Manikandan",
+        "Prakash Raj"
+      ],
+      "director": "T. J. Gnanavel",
+      "synopsis": "A lawyer takes up the case of a missing tribal man. A family's search for answers exposes abuse hidden behind official records.",
+      "tmdbRating": 7.5,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#996036",
+        "#302236"
+      ],
+      "moods": [
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "netflix",
+          "type": "stream",
+          "deepLink": "https://www.netflix.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "96",
+      "slug": "96",
+      "title": "96",
+      "aliases": [
+        "ninety six",
+        "96 tamil"
+      ],
+      "type": "movie",
+      "year": 2018,
+      "runtimeMin": 158,
+      "languages": [
+        "Tamil"
+      ],
+      "originalLanguage": "Tamil",
+      "genres": [
+        "Romance",
+        "Drama"
+      ],
+      "cast": [
+        "Vijay Sethupathi",
+        "Trisha Krishnan",
+        "Devadarshini",
+        "Bagavathi Perumal"
+      ],
+      "director": "C. Prem Kumar",
+      "synopsis": "Two former classmates meet at a school reunion after years apart. A night of conversation revisits the feelings they never resolved.",
+      "tmdbRating": 7.6,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F6E69",
+        "#142434"
+      ],
+      "moods": [
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "sun-nxt",
+          "type": "stream",
+          "deepLink": "https://www.sunnxt.com/"
+        }
+      ]
+    },
+    {
+      "id": "rrr",
+      "slug": "rrr",
+      "title": "RRR",
+      "aliases": [
+        "rrr movie",
+        "rajamouli rrr"
+      ],
+      "type": "movie",
+      "year": 2022,
+      "runtimeMin": 182,
+      "languages": [
+        "Telugu"
+      ],
+      "originalLanguage": "Telugu",
+      "genres": [
+        "Action",
+        "Adventure",
+        "Drama"
+      ],
+      "cast": [
+        "N. T. Rama Rao Jr.",
+        "Ram Charan",
+        "Alia Bhatt",
+        "Ajay Devgn"
+      ],
+      "director": "S. S. Rajamouli",
+      "synopsis": "Two men form an intense friendship while pursuing hidden missions under colonial rule. Their loyalties collide in a larger struggle for freedom.",
+      "tmdbRating": 7.7,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#615484",
+        "#222039"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "netflix",
+          "type": "stream",
+          "deepLink": "https://www.netflix.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "pushpa-the-rise",
+      "slug": "pushpa-the-rise",
+      "title": "Pushpa: The Rise",
+      "aliases": [
+        "pushpa",
+        "pushpa 1",
+        "pushpa the rise"
+      ],
+      "type": "movie",
+      "year": 2021,
+      "runtimeMin": 179,
+      "languages": [
+        "Telugu"
+      ],
+      "originalLanguage": "Telugu",
+      "genres": [
+        "Action",
+        "Crime",
+        "Drama"
+      ],
+      "cast": [
+        "Allu Arjun",
+        "Rashmika Mandanna",
+        "Fahadh Faasil",
+        "Sunil"
+      ],
+      "director": "Sukumar",
+      "synopsis": "A labourer enters the red sandalwood smuggling trade. His refusal to accept humiliation drives a dangerous climb through its hierarchy.",
+      "tmdbRating": 7.1,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#8D4839",
+        "#261A25"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "baahubali-2-the-conclusion",
+      "slug": "baahubali-2-the-conclusion",
+      "title": "Baahubali 2: The Conclusion",
+      "aliases": [
+        "bahubali 2",
+        "baahubali two",
+        "bahubali"
+      ],
+      "type": "movie",
+      "year": 2017,
+      "runtimeMin": 167,
+      "languages": [
+        "Telugu"
+      ],
+      "originalLanguage": "Telugu",
+      "genres": [
+        "Action",
+        "Adventure",
+        "Fantasy"
+      ],
+      "cast": [
+        "Prabhas",
+        "Rana Daggubati",
+        "Anushka Shetty",
+        "Ramya Krishnan"
+      ],
+      "director": "S. S. Rajamouli",
+      "synopsis": "The story of a betrayed prince reveals the origins of a kingdom's conflict. His heir must decide what justice and leadership demand.",
+      "tmdbRating": 7.4,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F587D",
+        "#181E2D"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "aha",
+          "type": "stream",
+          "deepLink": "https://www.aha.video/"
+        }
+      ]
+    },
+    {
+      "id": "jersey",
+      "slug": "jersey",
+      "title": "Jersey",
+      "aliases": [
+        "jersey telugu"
+      ],
+      "type": "movie",
+      "year": 2019,
+      "runtimeMin": 160,
+      "languages": [
+        "Telugu"
+      ],
+      "originalLanguage": "Telugu",
+      "genres": [
+        "Drama",
+        "Sport",
+        "Family"
+      ],
+      "cast": [
+        "Nani",
+        "Shraddha Srinath",
+        "Sathyaraj",
+        "Ronit Kamra"
+      ],
+      "director": "Gowtam Tinnanuri",
+      "synopsis": "A former cricketer considers returning to the game after years away. His son's faith offers a reason to risk failure again.",
+      "tmdbRating": 8.0,
+      "certification": "U",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#713C4B",
+        "#151C30"
+      ],
+      "moods": [
+        "Family",
+        "Feel-good"
+      ],
+      "providers": [
+        {
+          "providerId": "jiohotstar",
+          "type": "stream",
+          "deepLink": "https://www.hotstar.com/in/"
+        },
+        {
+          "providerId": "mx-player",
+          "type": "free",
+          "deepLink": "https://www.mxplayer.in/"
+        }
+      ]
+    },
+    {
+      "id": "sita-ramam",
+      "slug": "sita-ramam",
+      "title": "Sita Ramam",
+      "aliases": [
+        "seetha ramam",
+        "sitaramam"
+      ],
+      "type": "movie",
+      "year": 2022,
+      "runtimeMin": 163,
+      "languages": [
+        "Telugu"
+      ],
+      "originalLanguage": "Telugu",
+      "genres": [
+        "Romance",
+        "Drama"
+      ],
+      "cast": [
+        "Dulquer Salmaan",
+        "Mrunal Thakur",
+        "Rashmika Mandanna",
+        "Sumanth"
+      ],
+      "director": "Hanu Raghavapudi",
+      "synopsis": "A soldier's correspondence grows into an unlikely romance. Years later, an undelivered letter sends someone else searching for their story.",
+      "tmdbRating": 7.8,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#996036",
+        "#302236"
+      ],
+      "moods": [
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "netflix",
+          "type": "stream",
+          "deepLink": "https://www.netflix.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "mahanati",
+      "slug": "mahanati",
+      "title": "Mahanati",
+      "aliases": [
+        "maha nati",
+        "savitri"
+      ],
+      "type": "movie",
+      "year": 2018,
+      "runtimeMin": 177,
+      "languages": [
+        "Telugu"
+      ],
+      "originalLanguage": "Telugu",
+      "genres": [
+        "Drama",
+        "History"
+      ],
+      "cast": [
+        "Keerthy Suresh",
+        "Dulquer Salmaan",
+        "Samantha Ruth Prabhu",
+        "Vijay Deverakonda"
+      ],
+      "director": "Nag Ashwin",
+      "synopsis": "A reporter investigates the life of a celebrated film star. Her research traces extraordinary talent alongside the personal costs of fame.",
+      "tmdbRating": 7.6,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F6E69",
+        "#142434"
+      ],
+      "moods": [
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "hit-the-first-case",
+      "slug": "hit-the-first-case",
+      "title": "HIT: The First Case",
+      "aliases": [
+        "hit",
+        "hit telugu",
+        "hit first case"
+      ],
+      "type": "movie",
+      "year": 2020,
+      "runtimeMin": 126,
+      "languages": [
+        "Telugu"
+      ],
+      "originalLanguage": "Telugu",
+      "genres": [
+        "Crime",
+        "Thriller",
+        "Mystery"
+      ],
+      "cast": [
+        "Vishwak Sen",
+        "Ruhani Sharma",
+        "Murali Sharma",
+        "Brahmaji"
+      ],
+      "director": "Sailesh Kolanu",
+      "synopsis": "An investigator dealing with trauma searches for a missing woman. The case becomes personal as those close to him are drawn into danger.",
+      "tmdbRating": 6.9,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#615484",
+        "#222039"
+      ],
+      "moods": [
+        "Edge-of-seat",
+        "Mind-bender"
+      ],
+      "providers": [
+        {
+          "providerId": "aha",
+          "type": "stream",
+          "deepLink": "https://www.aha.video/"
+        }
+      ]
+    },
+    {
+      "id": "kantara",
+      "slug": "kantara",
+      "title": "Kantara",
+      "aliases": [
+        "kaantara",
+        "kantara kannada"
+      ],
+      "type": "movie",
+      "year": 2022,
+      "runtimeMin": 148,
+      "languages": [
+        "Kannada"
+      ],
+      "originalLanguage": "Kannada",
+      "genres": [
+        "Action",
+        "Drama",
+        "Fantasy"
+      ],
+      "cast": [
+        "Rishab Shetty",
+        "Sapthami Gowda",
+        "Kishore",
+        "Achyuth Kumar"
+      ],
+      "director": "Rishab Shetty",
+      "synopsis": "A village's relationship with its forest is threatened by competing claims to the land. An impulsive young man is drawn into a conflict rooted in tradition.",
+      "tmdbRating": 7.2,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#8D4839",
+        "#261A25"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "k-g-f-chapter-1",
+      "slug": "k-g-f-chapter-1",
+      "title": "K.G.F: Chapter 1",
+      "aliases": [
+        "kgf",
+        "kgf 1",
+        "kgf chapter one"
+      ],
+      "type": "movie",
+      "year": 2018,
+      "runtimeMin": 156,
+      "languages": [
+        "Kannada"
+      ],
+      "originalLanguage": "Kannada",
+      "genres": [
+        "Action",
+        "Crime",
+        "Drama"
+      ],
+      "cast": [
+        "Yash",
+        "Srinidhi Shetty",
+        "Anant Nag",
+        "Ramachandra Raju"
+      ],
+      "director": "Prashanth Neel",
+      "synopsis": "A street fighter seeks power in a brutal gold-mining empire. Inside the mines, his ambitions collide with the suffering of its workers.",
+      "tmdbRating": 7.4,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F587D",
+        "#181E2D"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "jiohotstar",
+          "type": "stream",
+          "deepLink": "https://www.hotstar.com/in/"
+        }
+      ]
+    },
+    {
+      "id": "777-charlie",
+      "slug": "777-charlie",
+      "title": "777 Charlie",
+      "aliases": [
+        "charlie",
+        "777charlie"
+      ],
+      "type": "movie",
+      "year": 2022,
+      "runtimeMin": 164,
+      "languages": [
+        "Kannada"
+      ],
+      "originalLanguage": "Kannada",
+      "genres": [
+        "Adventure",
+        "Drama",
+        "Family"
+      ],
+      "cast": [
+        "Rakshit Shetty",
+        "Sangeetha Sringeri",
+        "Raj B. Shetty",
+        "Danish Sait"
+      ],
+      "director": "Kiranraj K.",
+      "synopsis": "A lonely man's routine is interrupted by an energetic dog. Their bond leads them on a journey that changes how he relates to the world.",
+      "tmdbRating": 7.6,
+      "certification": "U",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#713C4B",
+        "#151C30"
+      ],
+      "moods": [
+        "Family",
+        "Feel-good"
+      ],
+      "providers": [
+        {
+          "providerId": "zee5",
+          "type": "stream",
+          "deepLink": "https://www.zee5.com/"
+        }
+      ]
+    },
+    {
+      "id": "praktan",
+      "slug": "praktan",
+      "title": "Praktan",
+      "aliases": [
+        "prakton"
+      ],
+      "type": "movie",
+      "year": 2016,
+      "runtimeMin": 142,
+      "languages": [
+        "Bengali"
+      ],
+      "originalLanguage": "Bengali",
+      "genres": [
+        "Drama",
+        "Romance"
+      ],
+      "cast": [
+        "Prosenjit Chatterjee",
+        "Rituparna Sengupta",
+        "Aparajita Adhya",
+        "Soumitra Chatterjee"
+      ],
+      "director": "Nandita Roy and Shiboprosad Mukherjee",
+      "synopsis": "A train journey brings a woman into contact with her former husband's present life. Shared memories make room for a different understanding of their past.",
+      "tmdbRating": 6.8,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#996036",
+        "#302236"
+      ],
+      "moods": [
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "zee5",
+          "type": "stream",
+          "deepLink": "https://www.zee5.com/"
+        }
+      ]
+    },
+    {
+      "id": "belaseshe",
+      "slug": "belaseshe",
+      "title": "Belaseshe",
+      "aliases": [
+        "bela seshe",
+        "belashese"
+      ],
+      "type": "movie",
+      "year": 2015,
+      "runtimeMin": 141,
+      "languages": [
+        "Bengali"
+      ],
+      "originalLanguage": "Bengali",
+      "genres": [
+        "Drama",
+        "Family"
+      ],
+      "cast": [
+        "Soumitra Chatterjee",
+        "Swatilekha Sengupta",
+        "Rituparna Sengupta",
+        "Monami Ghosh"
+      ],
+      "director": "Nandita Roy and Shiboprosad Mukherjee",
+      "synopsis": "An elderly couple's unexpected announcement unsettles their adult children. The family must reconsider what a lifetime together really means.",
+      "tmdbRating": 7.2,
+      "certification": "U",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F6E69",
+        "#142434"
+      ],
+      "moods": [
+        "Family",
+        "Feel-good"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/"
+        }
+      ]
+    },
+    {
+      "id": "vinci-da",
+      "slug": "vinci-da",
+      "title": "Vinci Da",
+      "aliases": [
+        "vinci da",
+        "vincida"
+      ],
+      "type": "movie",
+      "year": 2019,
+      "runtimeMin": 117,
+      "languages": [
+        "Bengali"
+      ],
+      "originalLanguage": "Bengali",
+      "genres": [
+        "Crime",
+        "Thriller"
+      ],
+      "cast": [
+        "Rudranil Ghosh",
+        "Ritwick Chakraborty",
+        "Sohini Sarkar",
+        "Anirban Bhattacharya"
+      ],
+      "director": "Srijit Mukherji",
+      "synopsis": "A struggling makeup artist is approached by a man with a disturbing mission. His craft becomes entangled with crimes he can no longer ignore.",
+      "tmdbRating": 7.0,
+      "certification": "A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#615484",
+        "#222039"
+      ],
+      "moods": [
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "sonyliv",
+          "type": "stream",
+          "deepLink": "https://www.sonyliv.com/"
+        }
+      ]
+    },
+    {
+      "id": "sairat",
+      "slug": "sairat",
+      "title": "Sairat",
+      "aliases": [
+        "sairaat"
+      ],
+      "type": "movie",
+      "year": 2016,
+      "runtimeMin": 174,
+      "languages": [
+        "Marathi"
+      ],
+      "originalLanguage": "Marathi",
+      "genres": [
+        "Romance",
+        "Drama"
+      ],
+      "cast": [
+        "Rinku Rajguru",
+        "Akash Thosar",
+        "Tanaji Galgunde",
+        "Arbaz Shaikh"
+      ],
+      "director": "Nagraj Manjule",
+      "synopsis": "Two teenagers fall in love across a deeply enforced social divide. Leaving home promises freedom but cannot erase the forces pursuing them.",
+      "tmdbRating": 7.5,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#8D4839",
+        "#261A25"
+      ],
+      "moods": [
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "zee5",
+          "type": "stream",
+          "deepLink": "https://www.zee5.com/"
+        }
+      ]
+    },
+    {
+      "id": "court",
+      "slug": "court",
+      "title": "Court",
+      "aliases": [
+        "court marathi"
+      ],
+      "type": "movie",
+      "year": 2015,
+      "runtimeMin": 116,
+      "languages": [
+        "Marathi"
+      ],
+      "originalLanguage": "Marathi",
+      "genres": [
+        "Drama"
+      ],
+      "cast": [
+        "Vira Sathidar",
+        "Vivek Gomber",
+        "Geetanjali Kulkarni",
+        "Pradeep Joshi"
+      ],
+      "director": "Chaitanya Tamhane",
+      "synopsis": "A folk singer is accused of encouraging a worker's death. His trial reveals the routines and prejudices of the people moving through the legal system.",
+      "tmdbRating": 6.9,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#3F587D",
+        "#181E2D"
+      ],
+      "moods": [
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "netflix",
+          "type": "stream",
+          "deepLink": "https://www.netflix.com/in/"
+        }
+      ]
+    }
+  ]
+}
