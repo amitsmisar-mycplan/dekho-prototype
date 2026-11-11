@@ -1,0 +1,1 @@
+export default function Loading() { return <div className="page-content" role="status" aria-label="Loading page"><div className="skeleton" style={{ height: 100, borderRadius: 16, marginBottom: 24 }}/><div className="skeleton" style={{ height: 295, borderRadius: 20 }}/></div>; }
