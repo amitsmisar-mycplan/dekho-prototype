@@ -3,60 +3,70 @@
     "id": "netflix",
     "name": "Netflix",
     "color": "#FF7384",
-    "homepageUrl": "https://www.netflix.com/in/"
+    "homepageUrl": "https://www.netflix.com/in/",
+    "verifiedAt": null
   },
   {
     "id": "prime-video",
     "name": "Prime Video",
     "color": "#65CFFF",
-    "homepageUrl": "https://www.primevideo.com/"
+    "homepageUrl": "https://www.primevideo.com/",
+    "verifiedAt": null
   },
   {
     "id": "jiohotstar",
     "name": "JioHotstar",
     "color": "#C5A1FF",
-    "homepageUrl": "https://www.hotstar.com/in/"
+    "homepageUrl": "https://www.hotstar.com/in/",
+    "verifiedAt": null
   },
   {
     "id": "sonyliv",
     "name": "SonyLIV",
     "color": "#EDC66C",
-    "homepageUrl": "https://www.sonyliv.com/"
+    "homepageUrl": "https://www.sonyliv.com/",
+    "verifiedAt": null
   },
   {
     "id": "zee5",
     "name": "ZEE5",
     "color": "#E6B4F7",
-    "homepageUrl": "https://www.zee5.com/"
+    "homepageUrl": "https://www.zee5.com/",
+    "verifiedAt": null
   },
   {
     "id": "aha",
     "name": "Aha",
     "color": "#FFA878",
-    "homepageUrl": "https://www.aha.video/"
+    "homepageUrl": "https://www.aha.video/",
+    "verifiedAt": null
   },
   {
     "id": "sun-nxt",
     "name": "Sun NXT",
     "color": "#FF87A4",
-    "homepageUrl": "https://www.sunnxt.com/"
+    "homepageUrl": "https://www.sunnxt.com/",
+    "verifiedAt": null
   },
   {
     "id": "mx-player",
     "name": "MX Player",
     "color": "#71C6FF",
-    "homepageUrl": "https://www.mxplayer.in/"
+    "homepageUrl": "https://www.mxplayer.in/",
+    "verifiedAt": null
   },
   {
     "id": "apple-tv",
     "name": "Apple TV+",
     "color": "#F5F3FA",
-    "homepageUrl": "https://tv.apple.com/in/"
+    "homepageUrl": "https://tv.apple.com/in/",
+    "verifiedAt": null
   },
   {
     "id": "lionsgate-play",
     "name": "Lionsgate Play",
     "color": "#9FE7C6",
-    "homepageUrl": "https://www.lionsgateplay.com/"
+    "homepageUrl": "https://www.lionsgateplay.com/",
+    "verifiedAt": null
   }
 ]

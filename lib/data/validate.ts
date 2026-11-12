@@ -10,6 +10,7 @@ function safeUrl(value: unknown): boolean {
   if (!text(value)) return false;
   try { const url = new URL(value); return url.protocol === 'https:' && !url.username && !url.password; } catch { return false; }
 }
+const verificationDate = (value: unknown) => value === null || (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value);
 const artwork = (value: unknown) => value === null || (typeof value === 'string' && /^\/[a-zA-Z0-9_-]+\.(jpg|png|webp)$/.test(value));
 export function parseProviders(input: unknown): Provider[] {
   requireValue(Array.isArray(input), 'providers must be an array');
@@ -18,6 +19,7 @@ export function parseProviders(input: unknown): Provider[] {
     requireValue(record(item), 'provider must be an object');
     requireValue(text(item.id) && !ids.has(item.id), 'provider ids must be unique');
     ids.add(item.id);
+    requireValue(verificationDate(item.verifiedAt), `provider ${item.id} verifiedAt`);
     requireValue(text(item.name) && typeof item.color === 'string' && /^#[a-f\d]{6}$/i.test(item.color) && safeUrl(item.homepageUrl), `provider ${item.id}`);
   }
   return structuredClone(input) as Provider[];
@@ -44,6 +46,7 @@ export function parseCatalog(input: unknown, providers: readonly Provider[]): Ca
     const offers = new Set<string>();
     for (const offer of title.providers) {
       requireValue(record(offer) && providers.some((p) => p.id === offer.providerId) && ['stream', 'rent', 'buy', 'free'].includes(String(offer.type)), `${title.id} provider reference/offer type`);
+      requireValue(verificationDate(offer.verifiedAt), `${title.id} offer verifiedAt`);
       requireValue(offer.deepLink === undefined || safeUrl(offer.deepLink), `${title.id} unsafe provider link`);
       requireValue(offer.priceInr === undefined || (typeof offer.priceInr === 'number' && Number.isFinite(offer.priceInr) && offer.priceInr >= 0), `${title.id} price`);
       requireValue(!['rent', 'buy'].includes(String(offer.type)) || typeof offer.priceInr === 'number', `${title.id} paid offer price missing`);

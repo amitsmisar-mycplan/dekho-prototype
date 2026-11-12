@@ -3,8 +3,8 @@ export type Language = typeof languages[number];
 export const moods = ['Laugh', 'Edge-of-seat', 'Family', 'Feel-good', 'Mind-bender', 'Drama night'] as const;
 export type Mood = typeof moods[number];
 export type OfferType = 'stream' | 'rent' | 'buy' | 'free';
-export interface Provider { id: string; name: string; color: string; homepageUrl: string }
-export interface Offer { providerId: string; type: OfferType; priceInr?: number; deepLink?: string }
+export interface Provider { id: string; name: string; color: string; homepageUrl: string; verifiedAt: string | null }
+export interface Offer { providerId: string; type: OfferType; priceInr?: number; deepLink?: string; verifiedAt: string | null }
 export interface Title {
   id: string;
   slug: string;

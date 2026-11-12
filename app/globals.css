@@ -8,6 +8,8 @@
   --teal:#21D4C4;
   --text:#F5F3FA;
   --muted:#9C97AD;
+  --nav-height:70px;
+  --nav-gap:16px;
   --radius-card:16px;
   --radius-sheet:28px;
   --glass-blur:20px;
@@ -125,7 +127,7 @@ p {
   isolation:isolate;
 }
 .app-scroll {
-  padding-bottom:102px;
+  padding-bottom:calc(var(--nav-height) + var(--nav-gap) + env(safe-area-inset-bottom, 0px));
 }
 .app-header {
   height:80px;
@@ -164,10 +166,10 @@ p {
 .bottom-nav {
   position:fixed;
   z-index:30;
-  bottom:max(14px,env(safe-area-inset-bottom));
+  bottom:calc(var(--nav-gap) + env(safe-area-inset-bottom, 0px));
   left:16px;
   right:16px;
-  height:70px;
+  height:var(--nav-height);
   display:flex;
   align-items:center;
   justify-content:space-around;
@@ -986,7 +988,7 @@ footer a {
   }
   .bottom-nav {
     position:absolute;
-    bottom:15px;
+    bottom:calc(var(--nav-gap) + env(safe-area-inset-bottom, 0px));
     left:12px;
     right:12px;
   }
@@ -1111,3 +1113,5 @@ footer a {
 .catalog-similar>a>svg { margin-left:auto; flex-shrink:0; }
 
 .poster strong { max-width:100%; overflow-wrap:anywhere; }
+
+.availability-message { color:var(--marigold); font-size:12px; line-height:1.6; margin:12px 0; }

@@ -46,7 +46,8 @@ export function similarity(source: Title, candidate: Title): SimilarTitle {
   const sharedCast = source.cast.filter((name) => candidate.cast.includes(name));
   const peopleScore = 0.5 * Number(sameDirector) + 0.5 * overlap(source.cast, candidate.cast);
   const sameRatingBand = Math.floor(source.tmdbRating) === Math.floor(candidate.tmdbRating);
-  const score = 0.4 * genreScore + 0.25 * languageScore + 0.25 * peopleScore + 0.1 * Number(sameRatingBand);
+  const weightedScore = 0.4 * genreScore + 0.25 * languageScore + 0.25 * peopleScore + 0.1 * Number(sameRatingBand);
+  const score = genreScore === 0 ? Math.min(weightedScore, 0.35) : weightedScore;
   const sharedGenres = source.genres.filter((genre) => candidate.genres.includes(genre));
   const sharedLanguage = source.languages.find((language) => candidate.languages.includes(language));
   const reasons: string[] = [];
@@ -83,7 +84,7 @@ export class JsonDataSource implements DataSource {
   async getSimilar(id: string, limit = 8): Promise<SimilarTitle[]> {
     const source = this.catalog.titles.find((title) => title.id === id);
     if (!source) return [];
-    return structuredClone(this.catalog.titles.filter((title) => title.id !== id).map((title) => similarity(source, title))
+    return structuredClone(this.catalog.titles.filter((title) => title.id !== id && title.genres.some((genre) => source.genres.includes(genre))).map((title) => similarity(source, title))
       .filter((item) => item.score > 0).sort((a, b) => b.score - a.score || stableOrder(a.title, b.title)).slice(0, limitCount(limit)));
   }
   async getProviders(id: string, userServices: readonly string[] = []): Promise<ProviderOffer[]> {
@@ -107,3 +108,10 @@ export class JsonDataSource implements DataSource {
   }
 }
 export const dataSource: DataSource = new JsonDataSource();
+
+/** A selected service may offer a rental; do not claim it is absent in that case. */
+export function getAvailabilityMessage(offers: readonly ProviderOffer[], selectedServices: readonly Provider[]): string | null {
+  if (!selectedServices.length || offers.some((offer) => selectedServices.some((service) => service.id === offer.providerId))) return null;
+  const streaming = [...new Set(offers.filter((offer) => offer.type === 'stream').map((offer) => offer.provider.name))];
+  return `Not on ${selectedServices.map((service) => service.name).join(', ')} · ${streaming.length ? `streaming on ${streaming.join(', ')}` : 'no streaming offer listed'}`;
+}
