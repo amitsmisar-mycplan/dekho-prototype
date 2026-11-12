@@ -7,6 +7,13 @@ export type State = {
   onboardingComplete: boolean;
   hydrated: boolean;
   shortlist: string[];
+  shortlistOpen: boolean;
+  pendingSwap: string | null;
+  openShortlist: (open: boolean) => void;
+  requestShortlist: (id: string) => 'added' | 'exists' | 'full';
+  swapShortlist: (oldId: string) => void;
+  cancelSwap: () => void;
+  reorderShortlist: (ids: string[]) => void;
   watchlist: string[];
   recentSearches: string[];
   personalRatings: Record<string, { score: -1 | 1 | 2; take: string }>;
@@ -21,7 +28,13 @@ export type State = {
   toggleShortlist: (id: string) => void;
 };
 // Exported factory lets tests exercise real persistence without a browser or added test libraries.
-export const createPrototypeStore = (storage?: StateStorage) => create<State>()(persist((set) => ({
+export const createPrototypeStore = (storage?: StateStorage) => create<State>()(persist((set, get) => ({
+  shortlistOpen: false, pendingSwap: null,
+  openShortlist: (open) => set({ shortlistOpen: open, ...(!open ? { pendingSwap: null } : {}) }),
+  cancelSwap: () => set({ pendingSwap: null }),
+  requestShortlist: (id) => { const s = get(); if (s.shortlist.includes(id)) return 'exists'; if (s.shortlist.length >= 4) { set({ pendingSwap: id, shortlistOpen: true }); return 'full'; } set({ shortlist: [...s.shortlist, id] }); return 'added'; },
+  swapShortlist: (oldId) => set((s) => !s.pendingSwap || !s.shortlist.includes(oldId) || s.shortlist.includes(s.pendingSwap) ? {} : { shortlist: s.shortlist.map((id) => id === oldId ? s.pendingSwap! : id), pendingSwap: null }),
+  reorderShortlist: (ids) => set((s) => ids.length === s.shortlist.length && new Set(ids).size === ids.length && ids.every((id) => s.shortlist.includes(id)) ? { shortlist: ids } : {}),
   prefs: defaultPreferences(), onboardingComplete: false, hydrated: false, shortlist: [], watchlist: [], recentSearches: [], personalRatings: {},
   rateTitle: (id, score, take) => set((s) => ({ personalRatings: { ...s.personalRatings, [id]: { score, take: take.trim().slice(0, 160) } } })),
   toggleWatchlist: (id) => set((s) => ({ watchlist: s.watchlist.includes(id) ? s.watchlist.filter((v) => v !== id) : [...s.watchlist, id] })),
@@ -30,7 +43,13 @@ export const createPrototypeStore = (storage?: StateStorage) => create<State>()(
   clearSearches: () => set({ recentSearches: [] }),
   completeOnboarding: (prefs) => set({ prefs: normalizePreferences(prefs), onboardingComplete: true }),
   updatePreferences: (prefs) => set({ prefs: normalizePreferences(prefs) }),
-  resetOnboarding: () => set({ prefs: defaultPreferences(), onboardingComplete: false }),
+  resetOnboarding: () => set({ shortlistOpen: false, pendingSwap: null,
+  openShortlist: (open) => set({ shortlistOpen: open, ...(!open ? { pendingSwap: null } : {}) }),
+  cancelSwap: () => set({ pendingSwap: null }),
+  requestShortlist: (id) => { const s = get(); if (s.shortlist.includes(id)) return 'exists'; if (s.shortlist.length >= 4) { set({ pendingSwap: id, shortlistOpen: true }); return 'full'; } set({ shortlist: [...s.shortlist, id] }); return 'added'; },
+  swapShortlist: (oldId) => set((s) => !s.pendingSwap || !s.shortlist.includes(oldId) || s.shortlist.includes(s.pendingSwap) ? {} : { shortlist: s.shortlist.map((id) => id === oldId ? s.pendingSwap! : id), pendingSwap: null }),
+  reorderShortlist: (ids) => set((s) => ids.length === s.shortlist.length && new Set(ids).size === ids.length && ids.every((id) => s.shortlist.includes(id)) ? { shortlist: ids } : {}),
+  prefs: defaultPreferences(), onboardingComplete: false }),
   toggleShortlist: (id) => set((s) => ({ shortlist: s.shortlist.includes(id) ? s.shortlist.filter((x) => x !== id) : s.shortlist.length < 4 ? [...s.shortlist, id] : s.shortlist })),
 }), {
   name: 'dekho-prototype-v0',

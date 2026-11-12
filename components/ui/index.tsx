@@ -1,5 +1,5 @@
 'use client';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion, useDragControls } from 'motion/react';
 import { ArrowRight, Check, Plus, X } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import { GeneratedPoster } from '@/components/poster/GeneratedPoster';
@@ -35,13 +35,16 @@ export function SectionHeader({ eyebrow, title, action, onAction }: {
 export function AvatarStack({ names = ['AM', 'NK', 'SR'] }: {
     names?: string[];
 }) { return <div className="avatars" role="img" aria-label={names.join(', ')}>{names.map((name, i) => <span key={`${name}-${i}`} style={{ '--avatar-index': i } as CSSProperties}>{name}</span>)}</div>; }
-export function Sheet({ open, onClose, title, children }: {
+let activeSheetCount = 0;
+export function Sheet({ open, onClose, title, children, fullScreen = false }: {
     open: boolean;
+    fullScreen?: boolean;
     onClose: () => void;
     title: string;
     children: ReactNode;
 }) {
     const reduced = useReducedMotion();
+    const dragControls = useDragControls();
     const id = useId();
     const ref = useRef<HTMLDivElement>(null);
     const [portal, setPortal] = useState<HTMLElement | null>(null);
@@ -50,6 +53,7 @@ export function Sheet({ open, onClose, title, children }: {
         if (!open || !portal)
             return;
         const backgrounds = Array.from(document.querySelectorAll<HTMLElement>('.app-scroll, .bottom-nav'));
+        activeSheetCount++;
         backgrounds.forEach((element) => { element.inert = true; });
         const previous = document.activeElement as HTMLElement | null;
         const timer = setTimeout(() => ref.current?.focus(), 0);
@@ -57,7 +61,7 @@ export function Sheet({ open, onClose, title, children }: {
             if (event.key === 'Escape')
                 onClose();
             if (event.key === 'Tab') {
-                const nodes = ref.current?.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input, [tabindex="0"]');
+                const nodes = ref.current?.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input, textarea, select, [tabindex="0"]');
                 if (!nodes?.length) {
                     event.preventDefault();
                     return;
@@ -74,12 +78,12 @@ export function Sheet({ open, onClose, title, children }: {
             }
         };
         document.addEventListener('keydown', handler);
-        return () => { clearTimeout(timer); document.removeEventListener('keydown', handler); backgrounds.forEach((element) => { element.inert = false; }); previous?.focus(); };
+        return () => { clearTimeout(timer); document.removeEventListener('keydown', handler); activeSheetCount--; backgrounds.forEach((element) => { element.inert = activeSheetCount > 0; }); if (!activeSheetCount) previous?.focus(); };
     }, [open, onClose, portal]);
     if (!portal)
         return null;
-    return createPortal(<AnimatePresence>{open && <div className="sheet-layer"><motion.div className="sheet-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}/><motion.div ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby={id} className="sheet" initial={{ y: reduced ? 0 : '100%' }} animate={{ y: 0 }} exit={{ y: reduced ? 0 : '100%', opacity: 0 }} transition={reduced ? { duration: 0 } : { type: 'spring', damping: 30, stiffness: 300 }} drag="y" dragConstraints={{ top: 0, bottom: 0 }} dragElastic={{ top: 0, bottom: .5 }} onDragEnd={(_, info) => { if (info.offset.y > 90 || info.velocity.y > 500)
-        onClose(); }}><div className="sheet-handle"/><div className="sheet-heading"><h2 id={id}>{title}</h2><button className="icon-button" onClick={onClose} aria-label="Close sheet"><X size={20}/></button></div>{children}</motion.div></div>}</AnimatePresence>, portal);
+    return createPortal(<AnimatePresence>{open && <div className="sheet-layer"><motion.div className="sheet-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}/><motion.div ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby={id} className={`sheet ${fullScreen ? 'sheet-fullscreen' : ''}`} initial={{ y: reduced ? 0 : '100%' }} animate={{ y: 0 }} exit={{ y: reduced ? 0 : '100%', opacity: 0 }} transition={reduced ? { duration: 0 } : { type: 'spring', damping: 30, stiffness: 300 }} drag="y" dragListener={false} dragControls={dragControls} dragConstraints={{ top: 0, bottom: 0 }} dragElastic={{ top: 0, bottom: .5 }} onDragEnd={(_, info) => { if (info.offset.y > 90 || info.velocity.y > 500)
+        onClose(); }}><div className="sheet-handle" onPointerDown={(event) => dragControls.start(event)}/><div className="sheet-heading"><h2 id={id}>{title}</h2><button className="icon-button" onClick={onClose} aria-label="Close sheet"><X size={20}/></button></div>{children}</motion.div></div>}</AnimatePresence>, portal);
 }
 export function Toast({ message, onClose }: {
     message: string;

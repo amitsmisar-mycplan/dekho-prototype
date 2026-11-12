@@ -1,16 +1,23 @@
+import { dataSource } from '../data';
+import { defaultPollName, parseSnapshot, type PollSnapshot } from './share';
+export { encodePoll, decodePoll, pollPath, defaultPollName, deadlineFor } from './share';
+export type { PollSnapshot } from './share';
 export interface OpenPollSummary { id: string; votes: number; expectedVoters: number; deadline: string }
-export interface Poll { id: string; titleIds: string[]; votes: Record<string, string>; deadline: string; expectedVoters: number }
+export interface Poll extends PollSnapshot { votes: Record<string, string>; expectedVoters: number }
 export interface PollStore {
-  createPoll(input: Omit<Poll, 'id' | 'votes'>): Promise<Poll>;
+  createPoll(input: Omit<Poll, 'id' | 'votes' | 'name' | 'note'> & { name?: string; note?: string }): Promise<Poll>;
+  importPoll(snapshot: PollSnapshot): Promise<Poll>;
   getPoll(id: string): Promise<Poll | null>;
   castVote(id: string, voterId: string, titleId: string): Promise<void>;
   getResults(id: string): Promise<Record<string, number>>;
   subscribe(listener: () => void): () => void;
 }
 const key = 'dekho-polls-v0';
+/** Nano ID's URL-safe alphabet; a byte mask is uniform because the alphabet has 64 symbols. */
+export function nanoid8() { const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-'; return Array.from(crypto.getRandomValues(new Uint8Array(8)), (byte) => alphabet[byte & 63]).join(''); }
 function read(): Poll[] {
   if (typeof localStorage === 'undefined') return [];
-  try { const value: unknown = JSON.parse(localStorage.getItem(key) ?? '[]'); return Array.isArray(value) ? value.filter((p): p is Poll => p && typeof p.id === 'string' && Array.isArray(p.titleIds) && p.titleIds.every((id: unknown) => typeof id === 'string') && p.votes && typeof p.votes === 'object' && typeof p.deadline === 'string' && Number.isFinite(Date.parse(p.deadline)) && Number.isFinite(p.expectedVoters)) : []; } catch { return []; }
+  try { const value: unknown = JSON.parse(localStorage.getItem(key) ?? '[]'); return Array.isArray(value) ? value.filter((p): p is Poll => p && typeof p.id === 'string' && Array.isArray(p.titleIds) && p.titleIds.every((id: unknown) => typeof id === 'string') && p.votes && typeof p.votes === 'object' && typeof p.deadline === 'string' && Number.isFinite(Date.parse(p.deadline)) && Number.isFinite(p.expectedVoters)).map((p) => ({ ...p, name: typeof p.name === 'string' ? p.name : 'Movie night', note: typeof p.note === 'string' ? p.note : '' })) : []; } catch { return []; }
 }
 function write(polls: Poll[]) {
   localStorage.setItem(key, JSON.stringify(polls));
@@ -19,9 +26,20 @@ function write(polls: Poll[]) {
 }
 export const pollStore: PollStore = {
   async createPoll(input) {
-    const titleIds = [...new Set(input.titleIds)];
-    if (titleIds.length < 2 || titleIds.length > 4 || !Number.isFinite(Date.parse(input.deadline))) throw new Error('A poll needs two to four titles and a deadline.');
-    const poll: Poll = { ...input, titleIds, id: crypto.randomUUID(), votes: {} }; write([...read(), poll]); return poll;
+    const titleIds = [...new Set(input.titleIds)]; const existing = read();
+    let id = nanoid8(); for (let attempt = 0; existing.some((p) => p.id === id); attempt++) { if (attempt >= 16) throw new Error('Could not allocate a poll link. Try again.'); id = nanoid8(); }
+    const snapshot = parseSnapshot({ ...input, id, titleIds, name: input.name?.trim() || defaultPollName(), note: input.note?.trim() || '' });
+    if (!snapshot || !Number.isInteger(input.expectedVoters) || input.expectedVoters < 0 || Date.parse(snapshot.deadline) <= Date.now()) throw new Error('Choose two to four picks and a future deadline.');
+    const catalog = await dataSource.listTitles();
+    if (titleIds.some((id) => !catalog.some((t) => t.id === id))) throw new Error('Choose catalog titles for this poll.');
+    const poll: Poll = { ...snapshot, expectedVoters: input.expectedVoters, votes: {} }; write([...read(), poll]); return poll;
+  },
+  async importPoll(snapshot) {
+    const valid = parseSnapshot(snapshot); if (!valid) throw new Error('This poll link is incomplete.');
+    const existing = read(); const found = existing.find((p) => p.id === valid.id); if (found) return found;
+    const catalog = await dataSource.listTitles(); if (valid.titleIds.some((id) => !catalog.some((t) => t.id === id))) throw new Error('A poll title is unavailable.');
+    const latest = read(); const imported = latest.find((p) => p.id === valid.id); if (imported) return imported;
+    const poll: Poll = { ...valid, expectedVoters: 0, votes: {} }; write([...latest, poll]); return poll;
   },
   async getPoll(id) { return read().find((p) => p.id === id) ?? null; },
   async castVote(id, voterId, titleId) {
