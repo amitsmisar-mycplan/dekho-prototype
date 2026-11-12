@@ -14,8 +14,8 @@ export function ShortlistButton({ title, compact = false, hero = false }: { titl
   const added = shortlist.includes(title.id);
   useEffect(() => { if (!flight) return; const timer = setTimeout(() => setFlight(null), 800); return () => clearTimeout(timer); }, [flight]);
   return <><button className={`button shortlist-action ${compact ? 'quick-add' : 'button-primary'} ${hero ? 'hero-shortlist' : ''}`} aria-label={compact ? `${added ? 'Remove' : 'Shortlist'} ${title.title}` : undefined} aria-pressed={added} onClick={(event) => {
-    if (!added && shortlist.length >= 4) { setNotice('Shortlist full. Remove a pick from the tray first.'); return; }
-    usePrototype.getState().toggleShortlist(title.id); setNotice(added ? 'Removed.' : 'Added to shortlist.');
+    if (!added && usePrototype.getState().requestShortlist(title.id) === 'full') { setNotice('4 is plenty, yaar'); return; }
+    if (added) usePrototype.getState().toggleShortlist(title.id); setNotice(added ? 'Removed.' : 'Added to shortlist.');
     if (!added) {
       track('shortlist_add', { titleId: title.id, source: hero ? 'hero' : 'title' });
       const destination = document.querySelector('[data-shortlist-target] .nav-icon');
