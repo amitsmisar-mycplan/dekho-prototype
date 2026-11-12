@@ -12,9 +12,9 @@ export function uniqueMotifs(titles: PosterTitle[]): OgMotif[] {
 // The centered WhatsApp square spans x=285..915. Every poster is inside it.
 export function posterSlots(count: number) {
   return Array.from({ length: count }, (_, i) => ({
-    left: count === 3 && i === 2 ? 384 : 291 + (i % 2) * 186,
-    top: count === 2 ? 187 : 45 + Math.floor(i / 2) * 280,
-    width: 170, height: 255,
+    left: count === 3 && i === 2 ? 399 : 291 + (i % 2) * 216,
+    top: count === 2 ? 165 : 9 + Math.floor(i / 2) * 312,
+    width: 200, height: 300,
   }));
 }
 export function pollNameLockup(name: string) {
@@ -24,7 +24,7 @@ export function pollNameLockup(name: string) {
     const score = Math.max(...pair.map(lineUnits));
     if (score < cost) { lines = pair; cost = score; }
   }
-  return { lines, fontSize: Math.min(52, 430 / Math.max(...lines.map(lineUnits)) * .9) };
+  return { lines, fontSize: Math.min(52, 390 / Math.max(...lines.map(lineUnits)) * .9) };
 }
 export function deadlineLabel(deadline: string) {
   return `Closes ${new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: '2-digit', hour12: true }).format(new Date(deadline)).toLowerCase()}`;

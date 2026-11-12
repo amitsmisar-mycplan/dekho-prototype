@@ -24,11 +24,10 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
   return new ImageResponse(
     <div style={{ display: 'flex', width: '100%', height: '100%', background: brand.colors.bg, color: brand.colors.text, fontFamily: 'Inter', position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', width: 760, height: 760, left: -150, top: -65, borderRadius: 380, background: 'radial-gradient(circle, #21465099, #0B0A1000)' }}/>
-      <div style={{ position: 'absolute', left: 70, top: 72, width: 145, height: 486, borderLeft: '1px solid #F5F3FA20', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: 24, color: brand.colors.muted, fontSize: 14, letterSpacing: 4 }}><div style={{ display: 'flex', marginBottom: 16 }}>ONE NIGHT.</div><div style={{ display: 'flex', marginBottom: 16 }}>GREAT PICKS.</div><div style={{ display: 'flex' }}>YOUR CALL.</div></div>
       {titles.map((title, index) => {
         const slot = slots[index], fit = fitTitle(title.title, 252, 28, 45);
         return <div key={title.id} style={{ display: 'flex', position: 'absolute', ...slot, transform: `rotate(${titles.length === 4 ? 0 : (index - (titles.length - 1) / 2) * 2}deg)`, borderRadius: 14, overflow: 'hidden', border: '1px solid #F5F3FA50', boxShadow: '0 10px 24px #0007' }}>
-          <div style={{ display: 'flex', width: 300, height: 450, transform: 'scale(.5666667)', transformOrigin: 'top left', flexShrink: 0 }}>
+          <div style={{ display: 'flex', width: 300, height: 450, transform: `scale(${slot.width / 300})`, transformOrigin: 'top left', flexShrink: 0 }}>
             <GeneratedPosterSvg title={title} motifOverride={motifs[index]} definitionId={`poll-${index}`} showTypography={false}/>
             <div style={{ display: 'flex', flexDirection: 'column', position: 'absolute', left: 24, right: 24, bottom: 65, fontFamily: 'Bricolage Grotesque', fontWeight: 800, fontSize: fit.fontSize, lineHeight: 1.05, letterSpacing: -1.5 }}>
               {fit.lines.map((line, i) => <div style={{ display: 'flex' }} key={i}>{line}</div>)}
@@ -37,7 +36,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
           </div>
         </div>;
       })}
-      <div style={{ display: 'flex', flexDirection: 'column', position: 'absolute', left: 687, top: 48, width: 465, height: 534, justifyContent: 'center' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', position: 'absolute', left: 740, top: 48, width: 420, height: 534, justifyContent: 'center' }}>
         <div style={{ display: 'flex', fontFamily: 'Bricolage Grotesque', fontWeight: 800, fontSize: 42, marginBottom: 28 }}>{brand.name}<span style={{ color: brand.colors.marigold }}>.</span></div>
         <div style={{ display: 'flex', flexDirection: 'column', fontFamily: 'Bricolage Grotesque', fontSize: name.fontSize, fontWeight: 800, lineHeight: 1.05, marginBottom: 22 }}>
           {name.lines.map((line, i) => <div key={i} style={{ display: 'flex', whiteSpace: 'nowrap' }}>{line}</div>)}
