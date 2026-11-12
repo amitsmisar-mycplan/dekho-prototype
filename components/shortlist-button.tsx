@@ -23,6 +23,6 @@ export function ShortlistButton({ title, compact = false, hero = false }: { titl
     }
   }}>{added ? <Check size={18}/> : <Plus size={18}/>} {!compact && (added ? 'Shortlisted' : hero ? 'Shortlist' : 'Add to shortlist')}</button>
     <span className={notice.includes('full') ? 'shortlist-full' : 'sr-only'} role="status">{notice}</span>
-    {flight && createPortal(<motion.div className="tray-flight" aria-hidden="true" initial={{ x: flight.x, y: flight.y, scale: 1, opacity: 1 }} animate={{ x: flight.toX, y: flight.toY, scale: .25, opacity: .2 }} transition={{ duration: .65, ease: [.25, .1, .3, 1] }} onAnimationComplete={() => setFlight(null)}><PosterCard title={title.title} palette={title.palette} posterPath={title.posterPath}/></motion.div>, document.body)}
+    {flight && createPortal(<motion.div className="tray-flight" aria-hidden="true" initial={{ x: flight.x, y: flight.y, scale: 1, opacity: 1 }} animate={{ x: flight.toX, y: flight.toY, scale: .25, opacity: .2 }} transition={{ duration: .65, ease: [.25, .1, .3, 1] }} onAnimationComplete={() => setFlight(null)}><PosterCard catalogTitle={title} title={title.title} palette={title.palette} posterPath={title.posterPath}/></motion.div>, document.body)}
   </>;
 }

@@ -1,5 +1,5 @@
 'use client';
-import Image from 'next/image';
+import { CatalogArtwork } from '@/components/poster/CatalogArtwork';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
@@ -18,7 +18,7 @@ export function HomeScreen({ titles, providers }: { titles: Title[]; providers: 
   const prefs = usePrototype((s) => s.prefs); const reduced = useReducedMotion();
   const [hello, setHello] = useState('Kya plan hai?'); const [index, setIndex] = useState(0); const [paused, setPaused] = useState(false);
   const [mood, setMood] = useState<Mood | null>(null); const [picks, setPicks] = useState<Title[] | null>(null); const [moodError, setMoodError] = useState(false);
-  const [toast, setToast] = useState(''); const [poll, setPoll] = useState<OpenPollSummary | null>(null); const [failedBackdrop, setFailedBackdrop] = useState('');
+  const [toast, setToast] = useState(''); const [poll, setPoll] = useState<OpenPollSummary | null>(null);
   const { hero, included, eligible, trending } = homeSelections(titles, prefs);
   const selected = hero[index % Math.max(hero.length, 1)]; const heroKey = hero.map((t) => t.id).join('|');
   const swipe = useRef<{ x: number; y: number } | null>(null); const suppressClick = useRef(false);
@@ -48,8 +48,7 @@ export function HomeScreen({ titles, providers }: { titles: Title[]; providers: 
     {selected ? <section className="hero-carousel" aria-roledescription="carousel" aria-label="Tonight’s picks" onFocusCapture={() => setPaused(true)}>
       <div className="hero-feature" style={{ '--hero-a': selected.palette[0], '--hero-b': selected.palette[1] } as CSSProperties} onPointerDown={(event) => { swipe.current = { x: event.clientX, y: event.clientY }; suppressClick.current = false; }} onPointerUp={(event) => { if (!swipe.current) return; const dx = event.clientX - swipe.current.x, dy = event.clientY - swipe.current.y; if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { suppressClick.current = true; setPaused(true); advance(dx < 0 ? 1 : -1); } swipe.current = null; }} onPointerCancel={() => { swipe.current = null; }} onClickCapture={(event) => { if (suppressClick.current) { event.preventDefault(); event.stopPropagation(); suppressClick.current = false; } }}>
         <PosterLink title={selected} className="hero-poster-link"><motion.div key={selected.id} data-poster initial={{ opacity: reduced ? 1 : .6 }} animate={{ opacity: 1 }} className="hero-scene">
-          {selected.backdropPath && failedBackdrop !== selected.backdropPath && <Image src={`https://image.tmdb.org/t/p/w780${selected.backdropPath}`} alt="" fill unoptimized sizes="390px" onError={() => setFailedBackdrop(selected.backdropPath!)}/>}
-          <div className="feature-sun"/><div className="feature-shade"/><span className="feature-tag"><Sparkles size={12}/> TONIGHT’S CONTENDER</span><div className="feature-copy"><p>{selected.originalLanguage} · {selected.year} · {selected.type === 'series' ? 'Series' : `${selected.runtimeMin} min`}</p><h2>{selected.title}</h2><p className="feature-because">{prefs.freeOnly ? 'No subscription needed' : prefs.services.length ? offerLabel(selected, providers, prefs).text : 'A little inspiration to start'} · {selected.genres[0].toLowerCase()}</p><span className="feature-action">Take a closer look <ArrowRight size={16}/></span></div>
+          <CatalogArtwork title={selected} variant="backdrop"/><div className="feature-shade"/><span className="feature-tag"><Sparkles size={12}/> TONIGHT’S CONTENDER</span><div className="feature-copy"><p>{selected.originalLanguage} · {selected.year} · {selected.type === 'series' ? 'Series' : `${selected.runtimeMin} min`}</p><h2>{selected.title}</h2><p className="feature-because">{prefs.freeOnly ? 'No subscription needed' : prefs.services.length ? offerLabel(selected, providers, prefs).text : 'A little inspiration to start'} · {selected.genres[0].toLowerCase()}</p><span className="feature-action">Take a closer look <ArrowRight size={16}/></span></div>
         </motion.div></PosterLink>
         <ShortlistButton title={selected} hero/>
       </div>
