@@ -32,7 +32,7 @@ export function PosterCard({ title, eyebrow = 'A little movie magic', palette = 
     if (loading)
         return <div className="poster skeleton" role="status" aria-label="Loading poster"/>;
     return <div className="poster" style={{ '--poster-a': palette[0], '--poster-b': palette[1] } as CSSProperties}>
-    <div className="poster-orbit" aria-hidden="true"/><span className="poster-eyebrow">{eyebrow}</span><strong>{title}</strong><span className="poster-caption">TONIGHT’S POSSIBILITY</span>
+    <div className="poster-orbit" aria-hidden="true"/><span className="poster-eyebrow">{eyebrow}</span><strong>{title}</strong>
     {showImage && <Image className="poster-image" src={`https://image.tmdb.org/t/p/w500${posterPath}`} alt={`${title} poster`} fill sizes="(min-width: 768px) 160px, 45vw" unoptimized onError={() => setFailedPath(posterPath)}/>}
     {onAdd && <button className={`poster-add ${selected ? 'added' : ''}`} aria-label={`${selected ? 'Remove' : 'Add'} ${title} ${selected ? 'from' : 'to'} shortlist`} aria-pressed={selected} onClick={onAdd}>{selected ? <Check size={18}/> : <Plus size={18}/>}</button>}
   </div>;

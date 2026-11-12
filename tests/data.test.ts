@@ -9,13 +9,13 @@ async function fixture() {
   return { catalog: { ...metadata, titles: await dataSource.listTitles() }, providers: await dataSource.listProviders() };
 }
 describe('catalog integrity', () => {
-  it('contains 60 unique titles, 10 providers and all eight languages', async () => {
+  it('contains 68 unique titles, 10 providers and all eight languages', async () => {
     const titles = await dataSource.listTitles();
-    expect(titles).toHaveLength(60);
-    expect(new Set(titles.map((t) => t.id)).size).toBe(60);
-    expect(new Set(titles.map((t) => t.slug)).size).toBe(60);
+    expect(titles).toHaveLength(68);
+    expect(new Set(titles.map((t) => t.id)).size).toBe(68);
+    expect(new Set(titles.map((t) => t.slug)).size).toBe(68);
     expect(await dataSource.listProviders()).toHaveLength(10);
-    expect(Object.fromEntries(['Hindi', 'English', 'Malayalam', 'Tamil', 'Telugu', 'Kannada', 'Bengali', 'Marathi'].map((language) => [language, titles.filter((t) => t.originalLanguage === language).length]))).toEqual({ Hindi: 18, English: 12, Malayalam: 8, Tamil: 7, Telugu: 7, Kannada: 3, Bengali: 3, Marathi: 2 });
+    expect(Object.fromEntries(['Hindi', 'English', 'Malayalam', 'Tamil', 'Telugu', 'Kannada', 'Bengali', 'Marathi'].map((language) => [language, titles.filter((t) => t.originalLanguage === language).length]))).toEqual({ Hindi: 26, English: 12, Malayalam: 8, Tamil: 7, Telugu: 7, Kannada: 3, Bengali: 3, Marathi: 2 });
     expect((await dataSource.getCatalogInfo()).illustrative).toBe(true);
     expect(titles.some((t) => t.type === 'series')).toBe(true);
   });

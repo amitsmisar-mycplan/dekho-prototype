@@ -148,3 +148,18 @@ Free-only is persisted and applied to Home, mood picks, Search and the catalog l
 Trending is a static editorial list. The conditional glass poll banner reads `getOpenPoll()` through `lib/polls`; that P3 seam returns null, so no fabricated poll is shown. Poll storage, creation, voting and live subscriptions remain future work. Posters use palette artwork unless TMDb paths have been seeded. No dependencies or backend were added.
 
 P3 validation: lint, strict typecheck, all 42 tests and production build pass. Added tests cover included-service versus rental access, free-only filtering and migration, deterministic hero/trending choices, people grouping, greetings, recent-search persistence and shortlist limits. Browser verification covers mobile Home, mood picks into the shortlist, alias search, people results, saved recents and poster navigation. User preferences are preserved during review.
+
+
+## P4 — title decisions and Home polish
+
+Open `/t/drishyam-2`: **More like this** pins “Original Malayalam version” first. The Malayalam page derives the reverse Hindi remake link from the same `remakeOf` field. Other recommendations respect the default service toggle; the pinned version is a labelled exception. Turn the toggle off to see up to eight explainable matches. Similarity numbers remain confined to the lab.
+
+With Netflix, Prime Video and SonyLIV saved, `/t/vikram` demonstrates “Not on your apps · streaming on Sun NXT”. `/t/oppenheimer` demonstrates Stream/Rent/Buy and INR prices; Prime rentals are explicitly extra. Watch buttons open a new tab and log `watch_click`. Provider-homepage fallbacks are disclosed.
+
+The compact hero, TMDb score ring, group score, watch rows and recommendations come before the expandable synopsis, cast initials and personal take. Sticky shortlist/watchlist/share actions sit above navigation. Shortlist additions fly to the tray unless reduced motion is enabled. Watchlist and personal thumbs/takes persist locally. Group support means the percentage of valid votes choosing this title among local polls containing it; it is never inferred from the personal rating. With no votes it displays “No group votes yet”. The local PollStore now implements the adapter contract with BroadcastChannel notifications; poll creation/voting screens and the open-poll banner remain future work.
+
+Share uses Web Share when available. Cancelling does nothing; unsupported/failed sharing exposes a WhatsApp link. `/t/[slug]/opengraph-image` renders a 1200×630 PNG with poster/palette, title and provider. Set `NEXT_PUBLIC_SITE_URL` to the deployment origin before a public build. Localhost links are local previews and are not reachable by friends on other devices.
+
+Home has a + Shortlist hero action, icon/accent mood chips, larger contrast-safe eyebrows and a greeting above the hero. The availability disclaimer is retained in the footer and watch section. Eight illustrative Hindi free-tier titles were added (MX Player/ZEE5), so default Hindi/English free-only preferences have five hero picks and populated rails. See the appended availability checklist; existing provider assignments were not changed. Other language combinations can still have fewer or no matches.
+
+Artwork import was skipped because `.env.local` and its TMDb key were absent. All artwork remains the existing palette fallback; cast circles are initials, not fetched photos. No new dependencies. P4 checks: lint, typecheck, 49 tests and production build. Browser verification covers remake pin/filter, shortlist badge, watchlist persistence and mobile layout; the generated OG PNG is checked separately at runtime.

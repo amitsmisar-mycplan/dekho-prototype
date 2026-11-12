@@ -290,7 +290,8 @@
           "deepLink": "https://www.primevideo.com/",
           "verifiedAt": null
         }
-      ]
+      ],
+      "remakeOf": "drishyam-2-malayalam"
     },
     {
       "id": "the-family-man",
@@ -2903,6 +2904,362 @@
           "providerId": "netflix",
           "type": "stream",
           "deepLink": "https://www.netflix.com/in/",
+          "verifiedAt": null
+        }
+      ]
+    },
+    {
+      "id": "chintu-ka-birthday",
+      "slug": "chintu-ka-birthday",
+      "title": "Chintu Ka Birthday",
+      "aliases": [],
+      "type": "movie",
+      "year": 2020,
+      "runtimeMin": 83,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Drama",
+        "Comedy"
+      ],
+      "cast": [
+        "Vinay Pathak",
+        "Tillotama Shome",
+        "Seema Pahwa",
+        "Vedant Chibber"
+      ],
+      "director": "Devanshu Singh, Satyanshu Singh",
+      "synopsis": "A family stranded in Iraq tries to make a small birthday feel ordinary while the world outside interrupts.",
+      "tmdbRating": 7.0,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#70413F",
+        "#1B3042"
+      ],
+      "moods": [
+        "Family",
+        "Feel-good",
+        "Laugh"
+      ],
+      "providers": [
+        {
+          "providerId": "mx-player",
+          "type": "free",
+          "verifiedAt": null
+        }
+      ]
+    },
+    {
+      "id": "ramprasad-ki-tehrvi",
+      "slug": "ramprasad-ki-tehrvi",
+      "title": "Ramprasad Ki Tehrvi",
+      "aliases": [],
+      "type": "movie",
+      "year": 2021,
+      "runtimeMin": 106,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Drama",
+        "Comedy"
+      ],
+      "cast": [
+        "Naseeruddin Shah",
+        "Supriya Pathak",
+        "Konkona Sen Sharma",
+        "Vinay Pathak"
+      ],
+      "director": "Seema Pahwa",
+      "synopsis": "Relatives reunite after a death, bringing old grudges and unexpected tenderness into a crowded family home.",
+      "tmdbRating": 7.1,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#70413F",
+        "#1B3042"
+      ],
+      "moods": [
+        "Family",
+        "Laugh",
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "zee5",
+          "type": "free",
+          "verifiedAt": null
+        }
+      ]
+    },
+    {
+      "id": "qarib-qarib-singlle",
+      "slug": "qarib-qarib-singlle",
+      "title": "Qarib Qarib Singlle",
+      "aliases": [],
+      "type": "movie",
+      "year": 2017,
+      "runtimeMin": 125,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Romance",
+        "Comedy"
+      ],
+      "cast": [
+        "Irrfan Khan",
+        "Parvathy Thiruvothu",
+        "Neha Dhupia",
+        "Brijendra Kala"
+      ],
+      "director": "Tanuja Chandra",
+      "synopsis": "Two strangers take an impulsive trip through past romances and find their own rhythms slowly changing.",
+      "tmdbRating": 7.2,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#70413F",
+        "#1B3042"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good"
+      ],
+      "providers": [
+        {
+          "providerId": "mx-player",
+          "type": "free",
+          "verifiedAt": null
+        }
+      ]
+    },
+    {
+      "id": "bareilly-ki-barfi",
+      "slug": "bareilly-ki-barfi",
+      "title": "Bareilly Ki Barfi",
+      "aliases": [],
+      "type": "movie",
+      "year": 2017,
+      "runtimeMin": 123,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Romance",
+        "Comedy"
+      ],
+      "cast": [
+        "Kriti Sanon",
+        "Ayushmann Khurrana",
+        "Rajkummar Rao",
+        "Pankaj Tripathi"
+      ],
+      "director": "Ashwiny Iyer Tiwari",
+      "synopsis": "A young woman searches for the writer who seems to understand her, setting off a tangled small-town romance.",
+      "tmdbRating": 7.3,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#70413F",
+        "#1B3042"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good",
+        "Family"
+      ],
+      "providers": [
+        {
+          "providerId": "zee5",
+          "type": "free",
+          "verifiedAt": null
+        }
+      ]
+    },
+    {
+      "id": "nil-battey-sannata",
+      "slug": "nil-battey-sannata",
+      "title": "Nil Battey Sannata",
+      "aliases": [],
+      "type": "movie",
+      "year": 2016,
+      "runtimeMin": 100,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Drama",
+        "Family"
+      ],
+      "cast": [
+        "Swara Bhasker",
+        "Ria Shukla",
+        "Ratna Pathak Shah",
+        "Pankaj Tripathi"
+      ],
+      "director": "Ashwiny Iyer Tiwari",
+      "synopsis": "A mother returns to the classroom to challenge her daughter’s belief that their future is already decided.",
+      "tmdbRating": 7.4,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#70413F",
+        "#1B3042"
+      ],
+      "moods": [
+        "Family",
+        "Feel-good"
+      ],
+      "providers": [
+        {
+          "providerId": "mx-player",
+          "type": "free",
+          "verifiedAt": null
+        }
+      ]
+    },
+    {
+      "id": "mukkabaaz",
+      "slug": "mukkabaaz",
+      "title": "Mukkabaaz",
+      "aliases": [],
+      "type": "movie",
+      "year": 2018,
+      "runtimeMin": 145,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Drama",
+        "Sport"
+      ],
+      "cast": [
+        "Vineet Kumar Singh",
+        "Zoya Hussain",
+        "Jimmy Shergill",
+        "Ravi Kishan"
+      ],
+      "director": "Anurag Kashyap",
+      "synopsis": "An aspiring boxer fights for a place in the ring while love and local power complicate every step.",
+      "tmdbRating": 7.5,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#70413F",
+        "#1B3042"
+      ],
+      "moods": [
+        "Edge-of-seat",
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "zee5",
+          "type": "free",
+          "verifiedAt": null
+        }
+      ]
+    },
+    {
+      "id": "trapped",
+      "slug": "trapped",
+      "title": "Trapped",
+      "aliases": [],
+      "type": "movie",
+      "year": 2017,
+      "runtimeMin": 102,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Thriller",
+        "Drama"
+      ],
+      "cast": [
+        "Rajkummar Rao",
+        "Geetanjali Thapa",
+        "Khushboo Upadhyay",
+        "Shiladitya Sen"
+      ],
+      "director": "Vikramaditya Motwane",
+      "synopsis": "Locked inside a high-rise apartment without supplies, a man must turn an ordinary room into a survival plan.",
+      "tmdbRating": 7.6,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#70413F",
+        "#1B3042"
+      ],
+      "moods": [
+        "Edge-of-seat",
+        "Mind-bender"
+      ],
+      "providers": [
+        {
+          "providerId": "mx-player",
+          "type": "free",
+          "verifiedAt": null
+        }
+      ]
+    },
+    {
+      "id": "axone",
+      "slug": "axone",
+      "title": "Axone",
+      "aliases": [],
+      "type": "movie",
+      "year": 2019,
+      "runtimeMin": 96,
+      "languages": [
+        "Hindi"
+      ],
+      "originalLanguage": "Hindi",
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "cast": [
+        "Sayani Gupta",
+        "Lin Laishram",
+        "Tenzin Dalha",
+        "Dolly Ahluwalia"
+      ],
+      "director": "Nicholas Kharkongor",
+      "synopsis": "Friends in Delhi attempt to cook a wedding feast, navigating neighbours, friendship and a day of escalating mishaps.",
+      "tmdbRating": 7.7,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#70413F",
+        "#1B3042"
+      ],
+      "moods": [
+        "Laugh",
+        "Family",
+        "Feel-good"
+      ],
+      "providers": [
+        {
+          "providerId": "zee5",
+          "type": "free",
           "verifiedAt": null
         }
       ]
