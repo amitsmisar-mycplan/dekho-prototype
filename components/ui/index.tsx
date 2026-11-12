@@ -2,7 +2,9 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, Check, Plus, X } from 'lucide-react';
 import { createPortal } from 'react-dom';
-import Image from 'next/image';
+import { GeneratedPoster } from '@/components/poster/GeneratedPoster';
+import { CatalogArtwork } from '@/components/poster/CatalogArtwork';
+import type { Title } from '@/lib/data';
 import { useEffect, useId, useRef, useState, type ButtonHTMLAttributes, type CSSProperties, type ReactNode } from 'react';
 export function Button({ variant = 'primary', children, className = '', ...props }: ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: 'primary' | 'secondary' | 'ghost';
@@ -15,27 +17,14 @@ export function Chip({ selected = false, children, ...props }: ButtonHTMLAttribu
 export function ProviderChip({ name, color = 'var(--text)' }: { name: string; color?: string }) {
     return <span className="provider" style={{ color }}>{name}</span>;
 }
-export function PosterCard({ title, eyebrow = 'A little movie magic', palette = ['#733842', '#202337'], selected, onAdd, loading = false, posterPath = null }: {
-    title: string;
-    posterPath?: string | null;
-    eyebrow?: string;
-    palette?: [
-        string,
-        string
-    ];
-    selected?: boolean;
-    onAdd?: () => void;
-    loading?: boolean;
+export function PosterCard({ title, palette = ['#733842', '#202337'], catalogTitle, selected, onAdd, loading = false }: {
+    title: string; catalogTitle?: Title; posterPath?: string | null; eyebrow?: string; palette?: [string, string]; selected?: boolean; onAdd?: () => void; loading?: boolean;
 }) {
-    const [failedPath, setFailedPath] = useState<string | null>(null);
-    const showImage = Boolean(posterPath && posterPath !== failedPath && /^\/[a-zA-Z0-9_-]+\.(jpg|png|webp)$/.test(posterPath));
-    if (loading)
-        return <div className="poster skeleton" role="status" aria-label="Loading poster"/>;
-    return <div className="poster" style={{ '--poster-a': palette[0], '--poster-b': palette[1] } as CSSProperties}>
-    <div className="poster-orbit" aria-hidden="true"/><span className="poster-eyebrow">{eyebrow}</span><strong>{title}</strong>
-    {showImage && <Image className="poster-image" src={`https://image.tmdb.org/t/p/w500${posterPath}`} alt={`${title} poster`} fill sizes="(min-width: 768px) 160px, 45vw" unoptimized onError={() => setFailedPath(posterPath)}/>}
-    {onAdd && <button className={`poster-add ${selected ? 'added' : ''}`} aria-label={`${selected ? 'Remove' : 'Add'} ${title} ${selected ? 'from' : 'to'} shortlist`} aria-pressed={selected} onClick={onAdd}>{selected ? <Check size={18}/> : <Plus size={18}/>}</button>}
-  </div>;
+    if (loading) return <div className="poster skeleton" role="status" aria-label="Loading poster"/>;
+    return <div className="poster generated-poster-shell">
+      {catalogTitle ? <CatalogArtwork title={catalogTitle}/> : <GeneratedPoster title={{ id: title.toLowerCase().replace(/\s+/g, '-'), title, palette, type: 'movie', genres: ['Drama'], moods: ['Feel-good'], originalLanguage: 'Hindi', year: 0 }}/>}
+      {onAdd && <button className={`poster-add ${selected ? 'added' : ''}`} aria-label={`${selected ? 'Remove' : 'Add'} ${title} ${selected ? 'from' : 'to'} shortlist`} aria-pressed={selected} onClick={onAdd}>{selected ? <Check size={18}/> : <Plus size={18}/>}</button>}
+    </div>;
 }
 export function SectionHeader({ eyebrow, title, action, onAction }: {
     eyebrow?: string;
