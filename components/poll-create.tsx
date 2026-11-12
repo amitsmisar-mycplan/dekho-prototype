@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Copy, MessageCircle, ArrowLeft } from 'lucide-react';
+import { voterIdentity } from '@/lib/polls/identity';
 import { usePrototype } from '@/lib/store';
 import { pollStore, defaultPollName, deadlineFor, pollPath, type Poll } from '@/lib/polls';
 import { track } from '@/lib/analytics';
@@ -19,7 +20,7 @@ export function PollCreate({ titles }: { titles: Title[] }) {
     try {
       const cutoff = deadlineFor(choice, new Date(), custom);
       if (!name.trim() || !Number.isFinite(cutoff.getTime()) || cutoff.getTime() <= Date.now()) throw new Error('Give the poll a name and a future deadline.');
-      const poll = created.current ?? await pollStore.createPoll({ titleIds: picks.map((p) => p.id), name, note, deadline: cutoff.toISOString(), expectedVoters: 0 });
+      const poll = created.current ?? await pollStore.createPoll({ titleIds: picks.map((p) => p.id), creator: { id: voterIdentity().id, name: usePrototype.getState().prefs.name?.trim() || 'Your friend' }, name, note, deadline: cutoff.toISOString(), expectedVoters: 0 });
       if (!created.current) track('poll_create', { pollId: poll.id, titleIds: poll.titleIds });
       created.current = poll;
       const link = `${window.location.origin}${pollPath(poll)}`;
@@ -39,7 +40,7 @@ export function PollCreate({ titles }: { titles: Title[] }) {
       <label className="field-label" htmlFor="poll-name">Poll name</label><input id="poll-name" maxLength={80} value={name} onChange={(e) => setName(e.target.value)} required/>
       <fieldset><legend>When do we decide?</legend><div className="deadline-chips">{[['30', '30 min'], ['60', '1 hr'], ['tonight', 'Tonight 9 pm'], ['custom', 'Custom']].map(([value, label]) => <button key={value} type="button" aria-pressed={choice === value} onClick={() => setChoice(value)}>{label}</button>)}</div>{choice === 'custom' && <><label htmlFor="poll-deadline" className="field-label">Custom deadline</label><input id="poll-deadline" type="datetime-local" value={custom} onChange={(e) => setCustom(e.target.value)}/></>}{!validDate && <p className="field-error">Choose a time that’s still ahead of us.</p>}</fieldset>
       <label className="field-label" htmlFor="poll-note">A little note <span>(optional)</span></label><textarea id="poll-note" value={note} maxLength={240} rows={2} onChange={(e) => setNote(e.target.value)} placeholder="Snacks are sorted. You choose the film."/>
-      <section className="poll-live-preview" aria-label="Live voter preview"><p className="eyebrow">YOUR FRIENDS WILL SEE</p><h2>{name.trim() || 'Movie night'}</h2>{note && <p>{note}</p>}<small>{validDate ? `Closes ${deadline.toLocaleString('en-IN', { weekday: 'short', hour: 'numeric', minute: '2-digit' })}` : 'Choose a deadline'}</small><div className="poll-preview-grid">{picks.map((title) => <PosterCard key={title.id} title={title.title} catalogTitle={title}/>)}</div><p>Pick one. No app. No signup.</p></section>
+      <section className="poll-live-preview" aria-label="Live voter preview"><p className="eyebrow">YOUR FRIENDS WILL SEE</p><h2>{name.trim() || 'Movie night'}</h2>{note && <p>{note}</p>}<small>{validDate ? `Closes ${deadline.toLocaleString('en-IN', { weekday: 'short', hour: 'numeric', minute: '2-digit' })}` : 'Choose a deadline'}</small><div className="poll-preview-grid">{picks.map((title) => <PosterCard key={title.id} title={title.title} catalogTitle={title}/>)}</div><p>Thumbs up or down. No app. No signup.</p></section>
       <p className="prototype-note">Prototype: votes sync across tabs on this device. Cross-device totals need the future backend. Localhost links work only on this computer.</p>
       {error && <p role="alert" className="field-error">{error}</p>}<div className="poll-create-actions"><button className="button button-primary" disabled={busy || !name.trim() || !validDate} onClick={() => void create('whatsapp')}><MessageCircle size={18}/>{busy ? 'Creating your poll…' : 'Send to WhatsApp'}</button><button className="button button-secondary" disabled={busy || !name.trim() || !validDate} onClick={() => void create('copy')}><Copy size={18}/>Copy link</button></div>{busy && <div className="skeleton poll-saving" role="status" aria-label="Creating poll"/>}
     </>}

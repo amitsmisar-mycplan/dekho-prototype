@@ -1,0 +1,1 @@
+export default function PublicPollLayout({ children }: { children: React.ReactNode }) { return <><div className="desktop-wall" aria-hidden="true">{Array.from({ length: 18 }, (_, i) => <div className={`wall-tile wall-${i % 6}`} key={i}/>)}</div><main className="public-poll-shell">{children}</main></>; }

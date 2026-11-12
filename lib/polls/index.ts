@@ -1,14 +1,17 @@
-import { dataSource } from '../data';
+import { scorePoll, type Ballot, type Rating } from './results';
 import { defaultPollName, parseSnapshot, type PollSnapshot } from './share';
 export { encodePoll, decodePoll, pollPath, defaultPollName, deadlineFor } from './share';
 export type { PollSnapshot } from './share';
 export interface OpenPollSummary { id: string; votes: number; expectedVoters: number; deadline: string }
-export interface Poll extends PollSnapshot { votes: Record<string, string>; expectedVoters: number }
+export interface Poll extends PollSnapshot { votes: Record<string, string>; expectedVoters: number; ballots?: Record<string, Ballot>; closedAt?: string }
 export interface PollStore {
-  createPoll(input: Omit<Poll, 'id' | 'votes' | 'name' | 'note'> & { name?: string; note?: string }): Promise<Poll>;
-  importPoll(snapshot: PollSnapshot): Promise<Poll>;
+  createPoll(input: Omit<Poll, 'id' | 'votes' | 'name' | 'note' | 'ballots' | 'closedAt'> & { name?: string; note?: string }): Promise<Poll>;
+  importPoll(snapshot: PollSnapshot, allowedTitleIds?: string[]): Promise<Poll>;
   getPoll(id: string): Promise<Poll | null>;
   castVote(id: string, voterId: string, titleId: string): Promise<void>;
+  rateTitle(id: string, voterId: string, name: string, titleId: string, rating: Rating): Promise<void>;
+  closePoll(id: string, creatorId: string): Promise<void>;
+  getStreak(id: string): Promise<number>;
   getResults(id: string): Promise<Record<string, number>>;
   subscribe(listener: () => void): () => void;
 }
@@ -30,24 +33,42 @@ export const pollStore: PollStore = {
     let id = nanoid8(); for (let attempt = 0; existing.some((p) => p.id === id); attempt++) { if (attempt >= 16) throw new Error('Could not allocate a poll link. Try again.'); id = nanoid8(); }
     const snapshot = parseSnapshot({ ...input, id, titleIds, name: input.name?.trim() || defaultPollName(), note: input.note?.trim() || '' });
     if (!snapshot || !Number.isInteger(input.expectedVoters) || input.expectedVoters < 0 || Date.parse(snapshot.deadline) <= Date.now()) throw new Error('Choose two to four picks and a future deadline.');
-    const catalog = await dataSource.listTitles();
+    const catalog = await (await import('../data')).dataSource.listTitles();
     if (titleIds.some((id) => !catalog.some((t) => t.id === id))) throw new Error('Choose catalog titles for this poll.');
     const poll: Poll = { ...snapshot, expectedVoters: input.expectedVoters, votes: {} }; write([...read(), poll]); return poll;
   },
-  async importPoll(snapshot) {
+  async importPoll(snapshot, allowedTitleIds) {
     const valid = parseSnapshot(snapshot); if (!valid) throw new Error('This poll link is incomplete.');
     const existing = read(); const found = existing.find((p) => p.id === valid.id); if (found) return found;
-    const catalog = await dataSource.listTitles(); if (valid.titleIds.some((id) => !catalog.some((t) => t.id === id))) throw new Error('A poll title is unavailable.');
+    const allowed = allowedTitleIds ?? (await (await import('../data')).dataSource.listTitles()).map((t) => t.id); if (valid.titleIds.some((id) => !allowed.includes(id))) throw new Error('A poll title is unavailable.');
     const latest = read(); const imported = latest.find((p) => p.id === valid.id); if (imported) return imported;
     const poll: Poll = { ...valid, expectedVoters: 0, votes: {} }; write([...latest, poll]); return poll;
   },
   async getPoll(id) { return read().find((p) => p.id === id) ?? null; },
   async castVote(id, voterId, titleId) {
     const polls = read(), poll = polls.find((p) => p.id === id);
-    if (!poll || !poll.titleIds.includes(titleId) || !voterId || Date.parse(poll.deadline) <= Date.now()) throw new Error('This vote cannot be cast.');
+    if (!poll || !poll.titleIds.includes(titleId) || !voterId || poll.closedAt || Date.parse(poll.deadline) <= Date.now()) throw new Error('This vote cannot be cast.');
     poll.votes[voterId] = titleId; write(polls);
   },
-  async getResults(id) { const poll = await this.getPoll(id); return poll ? Object.fromEntries(poll.titleIds.map((titleId) => [titleId, Object.values(poll.votes).filter((v) => v === titleId).length])) : {}; },
+  async rateTitle(id, voterId, name, titleId, rating) {
+    const polls = read(), poll = polls.find((p) => p.id === id);
+    if (!poll || poll.closedAt || Date.parse(poll.deadline) <= Date.now()) throw new Error('Voting is closed.');
+    if (!/^[A-Za-z0-9_-]{1,64}$/.test(voterId) || ['__proto__', 'constructor', 'prototype'].includes(voterId) || !name.trim() || name.trim().length > 40 || !poll.titleIds.includes(titleId) || ![-1, 1].includes(rating.score) || typeof rating.take !== 'string' || rating.take.length > 80) throw new Error('Add a first name and a take of up to 80 characters.');
+    const ballots = poll.ballots ?? {}; const old = Object.hasOwn(ballots, voterId) ? ballots[voterId] : undefined;
+    poll.ballots = { ...ballots, [voterId]: { name: name.trim(), ratings: { ...old?.ratings, [titleId]: { score: rating.score, take: rating.take.trim() } } } };
+    delete poll.votes[voterId]; write(polls);
+  },
+  async closePoll(id, creatorId) {
+    const polls = read(), poll = polls.find((p) => p.id === id);
+    if (!poll?.creator || poll.creator.id !== creatorId) throw new Error('Only the creator can call it.');
+    if (!poll.closedAt) { poll.closedAt = new Date().toISOString(); write(polls); }
+  },
+  async getStreak(id) {
+    const polls = read(), current = polls.find((p) => p.id === id); if (!current?.creator) return 0;
+    const names = new Set(Object.values(current.ballots ?? {}).map((b) => b.name.trim().toLowerCase()));
+    return polls.filter((p) => p.creator?.id === current.creator!.id && (p.closedAt || Date.parse(p.deadline) <= Date.now()) && Object.values(p.ballots ?? {}).some((b) => names.has(b.name.trim().toLowerCase()))).length;
+  },
+  async getResults(id) { const poll = await this.getPoll(id); return poll ? Object.fromEntries(poll.titleIds.map((titleId) => [titleId, scorePoll(poll).find((r) => r.id === titleId)?.score ?? 0])) : {}; },
   subscribe(listener) {
     if (typeof window === 'undefined') return () => {};
     const channel = typeof BroadcastChannel === 'undefined' ? null : new BroadcastChannel(key);
@@ -61,5 +82,7 @@ export async function getOpenPoll(): Promise<OpenPollSummary | null> { return nu
 export async function getGroupRating(titleId: string): Promise<{ percent: number; votes: number } | null> {
   const polls = read().filter((p) => p.titleIds.includes(titleId));
   const votes = polls.flatMap((p) => Object.values(p.votes).filter((v) => p.titleIds.includes(v)));
-  return votes.length ? { percent: Math.round(votes.filter((v) => v === titleId).length / votes.length * 100), votes: votes.length } : null;
+  const ratings = polls.flatMap((p) => Object.values(p.ballots ?? {}).flatMap((b) => b.ratings[titleId] ? [b.ratings[titleId]] : []));
+  const count = votes.length + ratings.length;
+  return count ? { percent: Math.round((votes.filter((v) => v === titleId).length + ratings.filter((r) => r.score === 1).length) / count * 100), votes: count } : null;
 }
