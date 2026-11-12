@@ -1,4 +1,4 @@
-import { scorePoll, type Ballot, type Rating } from './results';
+import { normalizeBallot, scorePoll, type Ballot, type Rating } from './results';
 import { defaultPollName, parseSnapshot, type PollSnapshot } from './share';
 export { encodePoll, decodePoll, pollPath, defaultPollName, deadlineFor } from './share';
 export type { PollSnapshot } from './share';
@@ -10,6 +10,7 @@ export interface PollStore {
   getPoll(id: string): Promise<Poll | null>;
   castVote(id: string, voterId: string, titleId: string): Promise<void>;
   rateTitle(id: string, voterId: string, name: string, titleId: string, rating: Rating): Promise<void>;
+  setTake(id: string, voterId: string, take: string): Promise<void>;
   closePoll(id: string, creatorId: string): Promise<void>;
   getStreak(id: string): Promise<number>;
   getResults(id: string): Promise<Record<string, number>>;
@@ -20,7 +21,7 @@ const key = 'dekho-polls-v0';
 export function nanoid8() { const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-'; return Array.from(crypto.getRandomValues(new Uint8Array(8)), (byte) => alphabet[byte & 63]).join(''); }
 function read(): Poll[] {
   if (typeof localStorage === 'undefined') return [];
-  try { const value: unknown = JSON.parse(localStorage.getItem(key) ?? '[]'); return Array.isArray(value) ? value.filter((p): p is Poll => p && typeof p.id === 'string' && Array.isArray(p.titleIds) && p.titleIds.every((id: unknown) => typeof id === 'string') && p.votes && typeof p.votes === 'object' && typeof p.deadline === 'string' && Number.isFinite(Date.parse(p.deadline)) && Number.isFinite(p.expectedVoters)).map((p) => ({ ...p, name: typeof p.name === 'string' ? p.name : 'Movie night', note: typeof p.note === 'string' ? p.note : '' })) : []; } catch { return []; }
+  try { const value: unknown = JSON.parse(localStorage.getItem(key) ?? '[]'); return Array.isArray(value) ? value.filter((p): p is Poll => p && typeof p.id === 'string' && Array.isArray(p.titleIds) && p.titleIds.every((id: unknown) => typeof id === 'string') && p.votes && typeof p.votes === 'object' && typeof p.deadline === 'string' && Number.isFinite(Date.parse(p.deadline)) && Number.isFinite(p.expectedVoters)).map((p) => ({ ...p, name: typeof p.name === 'string' ? p.name : 'Movie night', note: typeof p.note === 'string' ? p.note : '', ...(p.ballots ? { ballots: Object.fromEntries(Object.entries(p.ballots).map(([id, b]) => [id, normalizeBallot(b)])) } : {}) })) : []; } catch { return []; }
 }
 function write(polls: Poll[]) {
   localStorage.setItem(key, JSON.stringify(polls));
@@ -53,10 +54,16 @@ export const pollStore: PollStore = {
   async rateTitle(id, voterId, name, titleId, rating) {
     const polls = read(), poll = polls.find((p) => p.id === id);
     if (!poll || poll.closedAt || Date.parse(poll.deadline) <= Date.now()) throw new Error('Voting is closed.');
-    if (!/^[A-Za-z0-9_-]{1,64}$/.test(voterId) || ['__proto__', 'constructor', 'prototype'].includes(voterId) || !name.trim() || name.trim().length > 40 || !poll.titleIds.includes(titleId) || ![-1, 1].includes(rating.score) || typeof rating.take !== 'string' || rating.take.length > 80) throw new Error('Add a first name and a take of up to 80 characters.');
+    if (!/^[A-Za-z0-9_-]{1,64}$/.test(voterId) || ['__proto__', 'constructor', 'prototype'].includes(voterId) || !name.trim() || name.trim().length > 40 || !poll.titleIds.includes(titleId) || ![-1, 1].includes(rating.score) || (rating.take !== undefined && (typeof rating.take !== 'string' || rating.take.length > 80))) throw new Error('Add a first name and a take of up to 80 characters.');
     const ballots = poll.ballots ?? {}; const old = Object.hasOwn(ballots, voterId) ? ballots[voterId] : undefined;
-    poll.ballots = { ...ballots, [voterId]: { name: name.trim(), ratings: { ...old?.ratings, [titleId]: { score: rating.score, take: rating.take.trim() } } } };
+    poll.ballots = { ...ballots, [voterId]: { name: name.trim(), take: old?.take ?? rating.take?.trim() ?? '', ratings: { ...old?.ratings, [titleId]: { score: rating.score } } } };
     delete poll.votes[voterId]; write(polls);
+  },
+  async setTake(id, voterId, take) {
+    const polls = read(), poll = polls.find((p) => p.id === id), ballot = poll?.ballots?.[voterId];
+    if (!poll || poll.closedAt || Date.parse(poll.deadline) <= Date.now()) throw new Error('Voting is closed.');
+    if (!ballot || !poll.titleIds.every((id) => ballot.ratings[id]) || typeof take !== 'string' || take.length > 80) throw new Error('Vote on every pick first, then add up to 80 characters.');
+    ballot.take = take.trim(); write(polls);
   },
   async closePoll(id, creatorId) {
     const polls = read(), poll = polls.find((p) => p.id === id);

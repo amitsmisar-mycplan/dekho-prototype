@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, X, Flame, Share2 } from 'lucide-react';
 import type { Poll } from '@/lib/polls';
-import type { scorePoll } from '@/lib/polls/results';
+import { yesSummary, type scorePoll } from '@/lib/polls/results';
 import { resultCard, encodeResult, type ResultCard } from '@/lib/polls/result-card';
 import type { PollOption } from './poll-room';
 import { track } from '@/lib/analytics';
@@ -37,7 +37,7 @@ export default function WinnerReveal({ poll, options, winner, scores, streak, on
   const link = typeof window === 'undefined' ? '' : `${window.location.origin}/p/${poll.id}/result?result=${payload}`;
   return <dialog ref={overlay} className={`winner-reveal ${phase}`} onCancel={(e) => { e.preventDefault(); onClose(); }} aria-label={`Tonight: ${winner.title}`}><canvas ref={canvas} className="winner-confetti" aria-hidden="true"/><div className="winner-inner"><button ref={closeButton} className="winner-close" aria-label="Close winner reveal" onClick={onClose}><X size={22}/></button>
     {phase === 'drumroll' ? <div className="drumroll"><div/><p>And tonight goes to…</p></div> : <>
-      <p className="eyebrow">THE GROUP HAS SPOKEN</p><div className="winner-poster">{winner.poster}</div><h1>Tonight:<br/>{winner.title}</h1><p className="winner-score">{winnerScore.up} up · {winnerScore.down} down · net {winnerScore.score > 0 ? '+' : ''}{winnerScore.score}</p>
+      <p className="eyebrow">THE GROUP HAS SPOKEN</p><div className="winner-poster">{winner.poster}</div><h1>Tonight:<br/>{winner.title}</h1><p className="winner-score">{yesSummary(winnerScore.up, winnerScore.down)}</p>
       {winner.provider && <a className="winner-watch" style={{ background: winner.provider.color }} href={winner.provider.url} target="_blank" rel="noopener noreferrer" onClick={() => track('watch_click', { titleId: winner.id, provider: winner.provider!.name, pollId: poll.id })}>Watch on {winner.provider.name}<ArrowUpRight size={19}/></a>}
       <p className="vote-fineprint">Availability is illustrative.{winner.provider?.type === 'rent' || winner.provider?.type === 'buy' ? ' Separate payment may apply.' : ''}</p>
       {streak > 1 && <p className="group-streak"><Flame size={20}/>{streak} movie nights picked together</p>}

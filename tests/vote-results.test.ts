@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { pollStore, decodePoll, encodePoll, getGroupRating } from '../lib/polls';
-import { scorePoll, voterCount, countdown } from '../lib/polls/results';
+import { scorePoll, voterCount, countdown, yesSummary, normalizeBallot } from '../lib/polls/results';
 import { resultCard, encodeResult, decodeResult, parseResult } from '../lib/polls/result-card';
 import { voterIdentity, saveVoterName } from '../lib/polls/identity';
 function storage() { const values = new Map<string, string>(); return { getItem: (key: string) => values.get(key) ?? null, setItem: (key: string, value: string) => { values.set(key, value); }, removeItem: (key: string) => { values.delete(key); } }; }
@@ -10,10 +10,13 @@ const create = (creator = 'creator01') => pollStore.createPoll({ titleIds: ['vik
 describe('per-title voting and results', () => {
   it('stores multiple opinions per voter and replaces an edited vote without double counting', async () => {
     const p = await create();
-    await pollStore.rateTitle(p.id, 'riya', 'Riya', 'vikram', { score: 1, take: 'Loved it' });
+    await pollStore.rateTitle(p.id, 'riya', 'Riya', 'vikram', { score: 1 });
     await pollStore.rateTitle(p.id, 'riya', 'Riya', 'kaithi', { score: -1, take: '' });
-    await pollStore.rateTitle(p.id, 'riya', 'Riya', 'vikram', { score: -1, take: 'Another night' });
+    await pollStore.rateTitle(p.id, 'riya', 'Riya', 'vikram', { score: -1 });
+    await pollStore.setTake(p.id, 'riya', 'Another night');
     const saved = (await pollStore.getPoll(p.id))!; expect(voterCount(saved)).toBe(1);
+    expect(saved.ballots?.riya.ratings.vikram).toEqual({ score: -1 });
+    expect(saved.ballots?.riya.take).toBe('Another night');
     expect(await pollStore.getResults(p.id)).toEqual({ vikram: -1, kaithi: -1 });
     expect(scorePoll(saved)[0].takes).toEqual([{ name: 'Riya', score: -1, take: 'Another night' }]);
     expect(await getGroupRating('vikram')).toEqual({ percent: 0, votes: 1 });
@@ -57,6 +60,21 @@ describe('per-title voting and results', () => {
     const card = resultCard((await pollStore.getPoll(p.id))!); expect(decodeResult(encodeResult(card))).toEqual(card);
     expect(parseResult({ ...card, rows: [{ ...card.rows[0], up: -1 }, card.rows[1]] })).toBeNull();
     expect(parseResult({ ...card, rows: [card.rows[0], card.rows[0]] })).toBeNull(); expect(decodeResult('not-json')).toBeNull();
+  });
+  it('allows one editable poll take only after every card is rated, and locks it on close', async () => {
+    const p = await create();
+    await pollStore.rateTitle(p.id, 'riya', 'Riya', 'vikram', { score: 1 });
+    await expect(pollStore.setTake(p.id, 'riya', 'Too soon')).rejects.toThrow();
+    await pollStore.rateTitle(p.id, 'riya', 'Riya', 'kaithi', { score: 1 });
+    await expect(pollStore.setTake(p.id, 'riya', 'x'.repeat(81))).rejects.toThrow();
+    await pollStore.setTake(p.id, 'riya', 'First'); await pollStore.setTake(p.id, 'riya', 'Updated');
+    const ballot = (await pollStore.getPoll(p.id))!.ballots!.riya;
+    expect(ballot.take).toBe('Updated'); expect(Object.values(ballot.ratings).every((r) => !('take' in r))).toBe(true);
+    await pollStore.closePoll(p.id, 'creator01'); await expect(pollStore.setTake(p.id, 'riya', 'Late')).rejects.toThrow();
+  });
+  it('migrates a legacy card take and uses plain-language winner counts', () => {
+    expect(normalizeBallot({ name: 'Riya', ratings: { vikram: { score: 1, take: 'Loved it' }, kaithi: { score: -1, take: 'Later' } } })).toEqual({ name: 'Riya', take: 'Loved it', ratings: { vikram: { score: 1 }, kaithi: { score: -1 } } });
+    expect(yesSummary(5, 0)).toBe('5 of 5 said yes'); expect(yesSummary(4, 1)).toBe('4 of 5 said yes · 1 said not tonight');
   });
   it('has a precise countdown and stops at zero', () => {
     expect(countdown('2030-01-01T01:01:01Z', Date.parse('2030-01-01T00:00:00Z'))).toBe('1h 1m 01s left');

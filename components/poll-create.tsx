@@ -20,7 +20,7 @@ export function PollCreate({ titles }: { titles: Title[] }) {
     try {
       const cutoff = deadlineFor(choice, new Date(), custom);
       if (!name.trim() || !Number.isFinite(cutoff.getTime()) || cutoff.getTime() <= Date.now()) throw new Error('Give the poll a name and a future deadline.');
-      const poll = created.current ?? await pollStore.createPoll({ titleIds: picks.map((p) => p.id), creator: { id: voterIdentity().id, name: usePrototype.getState().prefs.name?.trim() || 'Your friend' }, name, note, deadline: cutoff.toISOString(), expectedVoters: 0 });
+      const poll = created.current ?? await pollStore.createPoll({ titleIds: picks.map((p) => p.id), creator: { id: voterIdentity().id, name: usePrototype.getState().prefs.name?.trim() || 'A friend' }, name, note, deadline: cutoff.toISOString(), expectedVoters: 0 });
       if (!created.current) track('poll_create', { pollId: poll.id, titleIds: poll.titleIds });
       created.current = poll;
       const link = `${window.location.origin}${pollPath(poll)}`;
