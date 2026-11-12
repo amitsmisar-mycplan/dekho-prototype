@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dataSource, JsonDataSource, similarity, type Title } from '../lib/data';
+import { dataSource, JsonDataSource, similarity, getAvailabilityMessage, type Title } from '../lib/data';
 import { selectArtworkMatch, validImagePath, type TmdbCandidate } from '../scripts/tmdb-match';
 
 async function fixture() {
@@ -75,13 +75,29 @@ describe('explainable similarity', () => {
     const unrelated = { ...sameDirectorOnly, director: 'Other', languages: ['English'] as Title['languages'], genres: ['Animation'] };
     expect(similarity(source, unrelated).score).toBe(0);
   });
+  it('caps genre-free scores and excludes 96 from Vikram recommendations', async () => {
+    const vikram = (await dataSource.getTitle('vikram'))!;
+    const ninetySix = (await dataSource.getTitle('96'))!;
+    expect(similarity(vikram, ninetySix).score).toBe(0.35);
+    expect(similarity(vikram, { ...vikram, genres: ['Romance'] }).score).toBe(0.35);
+    const results = await dataSource.getSimilar('vikram', 5);
+    expect(results).toHaveLength(5);
+    expect(results.map((result) => result.title.id)).not.toContain('96');
+    expect(results.every((result) => result.title.genres.some((genre) => vikram.genres.includes(genre)))).toBe(true);
+  });
+  it('does not pad sparse recommendations with language-only matches', async () => {
+    const { catalog, providers } = await fixture();
+    const source = catalog.titles.find((title) => title.id === 'vikram')!;
+    const unrelated = catalog.titles.find((title) => title.id === '96')!;
+    expect(await new JsonDataSource({ ...catalog, titles: [source, unrelated] }, providers).getSimilar(source.id, 5)).toEqual([]);
+  });
   it('handles unknown titles and invalid limits without odd slices', async () => {
     expect(await dataSource.getSimilar('missing')).toEqual([]);
     for (const limit of [0, -1, NaN, Infinity]) expect(await dataSource.getSimilar('joji', limit)).toEqual([]);
     expect(await dataSource.getSimilar('joji', 2.9)).toHaveLength(2);
   });
-  it('provides three reproducible recommendation samples', async () => {
-    for (const slug of ['drishyam-2-malayalam', 'vikram', 'knives-out']) {
+  it('provides requested reproducible recommendation samples', async () => {
+    for (const slug of ['drishyam-2', 'drishyam-2-malayalam', 'vikram', 'knives-out', 'panchayat', '12th-fail']) {
       const title = await dataSource.getTitle(slug);
       const results = await dataSource.getSimilar(slug, 5);
       expect(results).toHaveLength(5);
@@ -90,6 +106,26 @@ describe('explainable similarity', () => {
   });
 });
 describe('providers and mood picks', () => {
+  it('keeps seeded provider records and every offer explicitly unverified', async () => {
+    expect((await dataSource.listProviders()).every((provider) => provider.verifiedAt === null)).toBe(true);
+    expect((await dataSource.listTitles()).every((title) => title.providers.every((offer) => offer.verifiedAt === null))).toBe(true);
+    const { catalog, providers } = await fixture();
+    catalog.titles[0].providers[0].verifiedAt = '2026-02-30';
+    expect(() => new JsonDataSource(catalog, providers)).toThrow('verifiedAt');
+    catalog.titles[0].providers[0].verifiedAt = '2026-11-11';
+    expect(() => new JsonDataSource(catalog, providers)).not.toThrow();
+  });
+  it('names unavailable selected services and the actual seeded streaming alternatives', async () => {
+    const providers = await dataSource.listProviders();
+    const netflix = providers.find((p) => p.id === 'netflix')!;
+    const prime = providers.find((p) => p.id === 'prime-video')!;
+    const offers = await dataSource.getProviders('panchayat', ['netflix']);
+    expect(getAvailabilityMessage(offers, [netflix])).toBe('Not on Netflix · streaming on Prime Video');
+    expect(getAvailabilityMessage(offers, [netflix, prime])).toBeNull();
+    expect(getAvailabilityMessage(offers, [])).toBeNull();
+    expect(getAvailabilityMessage([], [netflix])).toBe('Not on Netflix · no streaming offer listed');
+    expect(getAvailabilityMessage(await dataSource.getProviders('oppenheimer', [prime.id]), [prime])).toBeNull();
+  });
   it('sorts your services first and preserves rent/buy INR prices and offer types', async () => {
     const offers = await dataSource.getProviders('oppenheimer', ['prime-video']);
     expect(offers.map((o) => o.type)).toEqual(['rent', 'buy', 'stream']);
