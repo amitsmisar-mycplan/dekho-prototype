@@ -103,7 +103,7 @@ export class JsonDataSource implements DataSource {
     const isIncluded = (title: Title) => title.providers.some((offer) => (offer.type === 'stream' && services.includes(offer.providerId)) || offer.type === 'free');
     const languageMatch = (title: Title) => title.languages.some((language) => languages.includes(language));
     // Selected languages are a hard filter; included/free access ranks first, without hiding alternatives.
-    return structuredClone(this.catalog.titles.filter((title) => title.moods.includes(mood) && (!languages.length || languageMatch(title)))
+    return structuredClone(this.catalog.titles.filter((title) => title.moods.includes(mood) && (!prefs.freeOnly || title.providers.some((offer) => offer.type === 'free')) && (!languages.length || languageMatch(title)))
       .sort((a, b) => Number(isIncluded(b)) - Number(isIncluded(a)) || b.tmdbRating - a.tmdbRating || stableOrder(a, b)).slice(0, limitCount(limit)));
   }
 }

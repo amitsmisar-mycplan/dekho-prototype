@@ -1,4 +1,4 @@
-export interface Preferences { name: string; avatarId: string; services: string[]; languages: string[] }
+export interface Preferences { name: string; avatarId: string; services: string[]; languages: string[]; freeOnly: boolean }
 export const avatarOptions = [
   { id: 'sunset', label: 'Sunset', gradient: 'linear-gradient(135deg, #bc622d, #8b345c)' },
   { id: 'lagoon', label: 'Lagoon', gradient: 'linear-gradient(135deg, #24796e, #253d74)' },
@@ -9,7 +9,7 @@ export const avatarOptions = [
   { id: 'rose', label: 'Rose', gradient: 'linear-gradient(135deg, #a34753, #713d6d)' },
   { id: 'violet', label: 'Violet', gradient: 'linear-gradient(135deg, #80559c, #364e85)' },
 ] as const;
-export function defaultPreferences(): Preferences { return { name: '', avatarId: 'sunset', services: [], languages: ['Hindi', 'English'] }; }
+export function defaultPreferences(): Preferences { return { name: '', avatarId: 'sunset', services: [], languages: ['Hindi', 'English'], freeOnly: false }; }
 export function initials(name: string): string {
   const words = name.replace(/[^\p{L}\p{N}\s]/gu, ' ').trim().split(/\s+/).filter(Boolean);
   return words.length ? (Array.from(words[0])[0] + (words.length > 1 ? Array.from(words[words.length - 1])[0] : '')).toLocaleUpperCase() : 'YOU';
@@ -22,12 +22,12 @@ export function normalizePreferences(value: unknown): Preferences {
   return {
     name: typeof prefs.name === 'string' ? prefs.name.trim().slice(0, 40) : '',
     avatarId: avatarOptions.some((a) => a.id === prefs.avatarId) ? prefs.avatarId! : defaults.avatarId,
-    services: list(prefs.services, []), languages: list(prefs.languages, defaults.languages),
+    freeOnly: prefs.freeOnly === true, services: prefs.freeOnly === true ? [] : list(prefs.services, []), languages: list(prefs.languages, defaults.languages),
   };
 }
 export function resolveCatalogPreferences(prefs: Preferences, fallbackService: string, fallbackLanguage: string) {
   return {
-    services: prefs.services.length ? prefs.services : fallbackService ? [fallbackService] : [],
+    services: prefs.freeOnly ? [] : prefs.services.length ? prefs.services : fallbackService ? [fallbackService] : [],
     languages: prefs.languages.length ? prefs.languages : fallbackLanguage ? [fallbackLanguage] : [],
     savedServices: prefs.services.length > 0, savedLanguages: prefs.languages.length > 0,
   };

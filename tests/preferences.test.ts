@@ -14,17 +14,17 @@ describe('onboarding persistence', () => {
   });
   it('restores completion, name, avatar and preferences in a new store', async () => {
     const storage = memoryStorage(); const first = createPrototypeStore(storage);
-    first.getState().completeOnboarding({ name: '  Amit Misar  ', avatarId: 'lagoon', services: ['netflix', 'prime-video'], languages: ['Hindi', 'Malayalam'] });
+    first.getState().completeOnboarding({ freeOnly: false, name: '  Amit Misar  ', avatarId: 'lagoon', services: ['netflix', 'prime-video'], languages: ['Hindi', 'Malayalam'] });
     const returning = createPrototypeStore(storage);
     expect(returning.getState().onboardingComplete).toBe(false);
     await returning.persist.rehydrate();
     expect(returning.getState().onboardingComplete).toBe(true);
-    expect(returning.getState().prefs).toEqual({ name: 'Amit Misar', avatarId: 'lagoon', services: ['netflix', 'prime-video'], languages: ['Hindi', 'Malayalam'] });
+    expect(returning.getState().prefs).toEqual({ freeOnly: false, name: 'Amit Misar', avatarId: 'lagoon', services: ['netflix', 'prime-video'], languages: ['Hindi', 'Malayalam'] });
     expect(returning.getState().hydrated).toBe(false); // Transient UI readiness is never persisted.
   });
   it('supports skipping the name and empty preferences without forcing defaults back', async () => {
     const storage = memoryStorage(); const store = createPrototypeStore(storage);
-    store.getState().completeOnboarding({ name: '', avatarId: 'berry', services: [], languages: [] });
+    store.getState().completeOnboarding({ freeOnly: false, name: '', avatarId: 'berry', services: [], languages: [] });
     const returning = createPrototypeStore(storage); await returning.persist.rehydrate();
     expect(returning.getState().prefs.name).toBe(''); expect(returning.getState().prefs.languages).toEqual([]);
     expect(returning.getState().onboardingComplete).toBe(true);
@@ -32,7 +32,7 @@ describe('onboarding persistence', () => {
   it('preserves P0/P1 lists and existing preferences while requiring first onboarding', async () => {
     const storage = memoryStorage(JSON.stringify({ state: { prefs: { name: 'Old friend', services: ['netflix'], languages: ['Tamil'] }, shortlist: ['After Hours'], watchlist: ['vikram'] }, version: 0 }));
     const store = createPrototypeStore(storage); await store.persist.rehydrate();
-    expect(store.getState().prefs).toEqual({ name: 'Old friend', avatarId: 'sunset', services: ['netflix'], languages: ['Tamil'] });
+    expect(store.getState().prefs).toEqual({ freeOnly: false, name: 'Old friend', avatarId: 'sunset', services: ['netflix'], languages: ['Tamil'] });
     expect(store.getState().onboardingComplete).toBe(false);
     expect(store.getState().shortlist).toEqual(['After Hours']); expect(store.getState().watchlist).toEqual(['vikram']);
   });
@@ -52,7 +52,7 @@ describe('onboarding persistence', () => {
   it('normalizes malformed saved values and keeps store actions callable', async () => {
     const storage = memoryStorage(JSON.stringify({ state: { prefs: { name: 5, services: [null, 'netflix', 'netflix'], languages: 'Hindi', avatarId: 'bogus' }, completeOnboarding: 'not a function' }, version: 0 }));
     const store = createPrototypeStore(storage); await store.persist.rehydrate();
-    expect(store.getState().prefs).toEqual({ name: '', services: ['netflix'], languages: ['Hindi', 'English'], avatarId: 'sunset' });
+    expect(store.getState().prefs).toEqual({ freeOnly: false, name: '', services: ['netflix'], languages: ['Hindi', 'English'], avatarId: 'sunset' });
     expect(typeof store.getState().completeOnboarding).toBe('function');
     expect(normalizePreferences(null)).toEqual(defaultPreferences());
   });
