@@ -1,4 +1,4 @@
-# Movie-night prototype — P0 + P1
+# Movie-night prototype — P0 + P1 + P2
 
 Next.js 15 App Router, strict TypeScript, React 19, Tailwind CSS v4, motion, Zustand, lucide-react and canvas-confetti. Bricolage Grotesque, Inter and Mukta are loaded through next/font.
 
@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000. Visit `/kit` to review the complete component gallery. Choose mood chips, tap + on sample posters, open Shortlist in the navigation, drag the sheet closed, and trigger a toast. Refresh to verify the shortlist persists. The first-visit splash lasts 900ms; clear the `dekho-splash-seen` localStorage key to replay it. Reduced-motion users skip it.
+Open http://localhost:3000. New devices see the splash, then `/welcome`; finish or skip the optional name before continuing. Visit `/kit` to review the complete component gallery. Choose mood chips, tap + on sample posters, open Shortlist in the navigation, drag the sheet closed, and trigger a toast. Refresh to verify the shortlist persists. The first-visit splash lasts 900ms; clear the `dekho-splash-seen` localStorage key to replay it. Reduced-motion users skip it.
 
 `/` is the foundation preview; `/search` and `/me` are explicitly labelled future-feature states. Desktop shows a centred 390px-wide phone (844px tall when space allows) over a drifting abstract poster wall. Smaller desktop windows shorten the frame; mobile fills the screen.
 
@@ -29,7 +29,7 @@ Original CSS illustration and gradient poster placeholders only. P0 introduced n
 
 Components are in `components/ui/index.tsx`: Button, Chip, ProviderChip, PosterCard, Sheet, Toast, SectionHeader and AvatarStack. Sheets trap keyboard focus, support Escape/backdrop/close-button dismissal, and restore focus. The app shell becomes inert for the shortlist modal. Reduced motion disables springs, drift, shimmer and press scaling. Provider colours are lightened for readable text on dark surfaces.
 
-No remote is configured, so this checkout has no pull request or deployment. No credentials or external services are needed for P0.
+The repository is connected to GitHub. Local previews need no credentials or external services; deployment is separate from pushing a branch.
 
 ## P0 verification
 
@@ -108,3 +108,28 @@ In `/kit/catalog`, choose Panchayat and Netflix, then **Show matches**: the lab 
 The scroll container now reserves the nav height plus its floating gap and the device safe-area inset, sharing the same CSS tokens as the nav. This keeps the final item clear on both mobile and the desktop phone frame.
 
 Pre-merge validation: all 24 tests, lint, typecheck and production build pass. Browser checks confirmed the missing-service message and final footer item clearing the nav at 390px and 1280px. The safe-area inset is included in both nav position and scroll padding. The catalog selector also resets when a linked title changes, preventing stale dropdown values.
+
+
+## P2 — onboarding and saved preferences
+
+### Review the flow
+
+1. Open `/` or `/welcome` on a fresh device. After the first-visit splash, choose any of the ten services; an empty selection is allowed.
+2. Continue to language selection. Hindi and English are preselected for a fresh setup. Choose any mix, or deselect everything for no language preference.
+3. Continue to the optional name and eight initial-based gradient avatars. Finish, or **Skip for now** to leave the name empty. A one-second “Ready. Chalo, kya dekhein?” screen leads to Home. Reduced-motion users get static transitions and the same readable completion screen.
+4. Visit `/me` to see the saved name/avatar, services and languages. **Edit services** opens `/welcome?edit=services` with only steps 1–2. Saving returns to `/me`; name/avatar and saved lists remain unchanged. Back on the first edit step cancels without saving.
+5. Open `/kit/catalog`. Nonempty saved services replace the service dropdown, and nonempty saved languages filter search results and recommendations. Multiple selected services are supported. Each empty preference independently exposes a fallback dropdown; selecting a fallback does not overwrite saved preferences. An explicitly inspected title can still be outside your preferred languages.
+
+Preferences and an `onboardingComplete` flag live in the existing `dekho-prototype-v0` Zustand localStorage record. Explicit hydration prevents first-render redirects from misreading returning users. Old P0/P1 records keep their lists and preferences, gain the default avatar, and go through onboarding once. Completed users opening `/welcome` are returned to Home; the explicit edit link is the exception.
+
+### Reset and replay
+
+Go to `/me` → **Reset onboarding**. This clears only the onboarding completion flag and preferences, restores Hindi + English defaults, clears the splash marker, and reloads `/welcome`. **Shortlist and watchlist are preserved.** The button is also the recommended way to replay the splash; clearing all site data is unnecessary. During incomplete setup, a reload starts again at step one; draft changes are committed only on completion or **Save preferences**.
+
+### Analytics and validation
+
+`track()` logs `onboarding_step` (step number and setup/edit mode), `onboarding_complete` (service/language IDs, avatar ID and whether the name was skipped), and `preferences_edit`. The name itself is not included in analytics. This remains a console-only adapter.
+
+All 34 tests, lint, strict typecheck and production build pass. Added persistence tests exercise real Zustand storage, restoration, old-record compatibility, skipping, edit/reset preservation, malformed values and per-field catalog fallback priority. Browser walkthroughs at 390px verified all three steps, default language selections, avatar/name persistence after reload, the one-second finish screen, returning-user bypass, two-step editing, fallback dropdowns, optional name skipping and reset. Saved Hindi/Malayalam preferences produced 26 catalog results; an empty-language Tamil fallback produced seven. No browser errors/warnings were reported. Desktop phone framing was also inspected. Reduced motion is implemented, but OS-level reduced-motion emulation was not part of this pass.
+
+The preview remains local. Catalog availability/prices/ratings remain illustrative; accounts, polling and the full search/title experience remain later-phase work. The catalog lab now runs its data-source calls on the client to apply local preferences without introducing a backend or putting saved preferences into shareable URLs.
