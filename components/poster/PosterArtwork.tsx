@@ -1,8 +1,9 @@
+import type { OgMotif } from '@/lib/polls/og';
 import { posterDesign, fitTitle, type PosterTitle } from '@/lib/poster-art';
-export type PosterArtProps = { title: PosterTitle; variant?: 'poster' | 'backdrop'; serviceColor?: string; serviceName?: string; showTypography?: boolean; renderedWidth?: number };
+export type PosterArtProps = { title: PosterTitle; variant?: 'poster' | 'backdrop'; serviceColor?: string; serviceName?: string; showTypography?: boolean; renderedWidth?: number; motifOverride?: OgMotif };
 /** Hook-free renderer also used by the server-generated social card. */
-export function GeneratedPosterSvg({ title, variant = 'poster', serviceColor, serviceName, definitionId: id, showTypography = true, renderedWidth }: PosterArtProps & { definitionId: string }) {
-  const design = posterDesign(title); const wide = variant === 'backdrop';
+export function GeneratedPosterSvg({ title, variant = 'poster', serviceColor, serviceName, definitionId: id, showTypography = true, renderedWidth, motifOverride }: PosterArtProps & { definitionId: string }) {
+  const design = posterDesign(title); if (motifOverride) design.motif = motifOverride; const wide = variant === 'backdrop';
   const w = wide ? 800 : 300, h = 450;
   const minimum = !wide && renderedWidth ? 18 * w / renderedWidth : 18;
   const { lines, fontSize, widths } = fitTitle(title.title, wide ? 270 : 252, minimum, wide ? 34 : Math.max(49, minimum));
