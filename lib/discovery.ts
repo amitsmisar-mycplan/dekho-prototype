@@ -17,7 +17,7 @@ export function homeSelections(titles: Title[], prefs: Preferences) {
   const priority = (title: Title) => { const index = featuredIds.indexOf(title.id); return index === -1 ? 100 : index; };
   const pool = prefs.freeOnly || prefs.services.length ? included : eligible;
   const hero = [...pool].sort((a, b) => priority(a) - priority(b) || b.tmdbRating - a.tmdbRating || a.id.localeCompare(b.id)).slice(0, 5);
-  const trending = featuredIds.map((id) => eligible.find((t) => t.id === id)).filter((t): t is Title => Boolean(t));
+  const trending = prefs.freeOnly ? [...eligible].sort((a, b) => b.tmdbRating - a.tmdbRating).slice(0, 8) : featuredIds.map((id) => eligible.find((t) => t.id === id)).filter((t): t is Title => Boolean(t));
   return { eligible, included, hero, trending };
 }
 export function greeting(name: string, date: Date) {

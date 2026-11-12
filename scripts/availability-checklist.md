@@ -66,3 +66,18 @@ For each row, hand-correct providers and offer types, add a source URL, and ente
 | 58 | Vinci Da (2019 · Bengali) | `vinci-da` | SonyLIV — stream | Not verified | |
 | 59 | Sairat (2016 · Marathi) | `sairat` | ZEE5 — stream | Not verified | |
 | 60 | Court (2015 · Marathi) | `court` | Netflix — stream | Not verified | |
+
+## P4 illustrative free-tier additions
+
+These eight assignments are prototype fixtures, not verified free-tier availability.
+
+| # | Title (year · language) | Title ID | Seeded providers / offer types | Verified at | Corrections / source |
+| --- | --- | --- | --- | --- | --- |
+| 61 | Chintu Ka Birthday (2020 · Hindi) | `chintu-ka-birthday` | MX Player — free | Not verified | |
+| 62 | Ramprasad Ki Tehrvi (2021 · Hindi) | `ramprasad-ki-tehrvi` | ZEE5 — free | Not verified | |
+| 63 | Qarib Qarib Singlle (2017 · Hindi) | `qarib-qarib-singlle` | MX Player — free | Not verified | |
+| 64 | Bareilly Ki Barfi (2017 · Hindi) | `bareilly-ki-barfi` | ZEE5 — free | Not verified | |
+| 65 | Nil Battey Sannata (2016 · Hindi) | `nil-battey-sannata` | MX Player — free | Not verified | |
+| 66 | Mukkabaaz (2018 · Hindi) | `mukkabaaz` | ZEE5 — free | Not verified | |
+| 67 | Trapped (2017 · Hindi) | `trapped` | MX Player — free | Not verified | |
+| 68 | Axone (2019 · Hindi) | `axone` | ZEE5 — free | Not verified | |

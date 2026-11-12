@@ -10,6 +10,8 @@ export interface Title {
   slug: string;
   title: string;
   aliases: string[];
+  /** ID of the original; reverse links are derived, not circular. */
+  remakeOf?: string;
   type: 'movie' | 'series';
   year: number;
   runtimeMin?: number;

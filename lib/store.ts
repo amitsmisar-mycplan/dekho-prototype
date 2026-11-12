@@ -9,6 +9,9 @@ export type State = {
   shortlist: string[];
   watchlist: string[];
   recentSearches: string[];
+  personalRatings: Record<string, { score: -1 | 1 | 2; take: string }>;
+  rateTitle: (id: string, score: -1 | 1 | 2, take: string) => void;
+  toggleWatchlist: (id: string) => void;
   setShortlist: (ids: string[]) => void;
   rememberSearch: (query: string) => void;
   clearSearches: () => void;
@@ -19,7 +22,9 @@ export type State = {
 };
 // Exported factory lets tests exercise real persistence without a browser or added test libraries.
 export const createPrototypeStore = (storage?: StateStorage) => create<State>()(persist((set) => ({
-  prefs: defaultPreferences(), onboardingComplete: false, hydrated: false, shortlist: [], watchlist: [], recentSearches: [],
+  prefs: defaultPreferences(), onboardingComplete: false, hydrated: false, shortlist: [], watchlist: [], recentSearches: [], personalRatings: {},
+  rateTitle: (id, score, take) => set((s) => ({ personalRatings: { ...s.personalRatings, [id]: { score, take: take.trim().slice(0, 160) } } })),
+  toggleWatchlist: (id) => set((s) => ({ watchlist: s.watchlist.includes(id) ? s.watchlist.filter((v) => v !== id) : [...s.watchlist, id] })),
   setShortlist: (ids) => set({ shortlist: [...new Set(ids)].slice(0, 4) }),
   rememberSearch: (query) => { const value = query.trim().slice(0, 160); if (value) set((s) => ({ recentSearches: [value, ...s.recentSearches.filter((q) => q.toLowerCase() !== value.toLowerCase())].slice(0, 6) })); },
   clearSearches: () => set({ recentSearches: [] }),
@@ -31,11 +36,12 @@ export const createPrototypeStore = (storage?: StateStorage) => create<State>()(
   name: 'dekho-prototype-v0',
   storage: createJSONStorage(() => storage ?? localStorage),
   skipHydration: true,
-  partialize: (state) => ({ prefs: state.prefs, onboardingComplete: state.onboardingComplete, shortlist: state.shortlist, watchlist: state.watchlist, recentSearches: state.recentSearches }),
+  partialize: (state) => ({ prefs: state.prefs, onboardingComplete: state.onboardingComplete, shortlist: state.shortlist, watchlist: state.watchlist, recentSearches: state.recentSearches, personalRatings: state.personalRatings }),
   merge: (persisted, current) => {
     const old = (persisted && typeof persisted === 'object' ? persisted : {}) as Partial<State>;
     const strings = (value: unknown) => Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : [];
-    return { ...current, prefs: normalizePreferences(old.prefs), onboardingComplete: old.onboardingComplete === true, shortlist: strings(old.shortlist).slice(0, 4), watchlist: strings(old.watchlist), recentSearches: strings(old.recentSearches).slice(0, 6) };
+    const ratings = Object.fromEntries(Object.entries(old.personalRatings ?? {}).filter(([, value]) => value && [-1, 1, 2].includes(value.score) && typeof value.take === 'string').map(([id, value]) => [id, { score: value.score, take: value.take.slice(0, 160) }]));
+    return { ...current, personalRatings: ratings, prefs: normalizePreferences(old.prefs), onboardingComplete: old.onboardingComplete === true, shortlist: strings(old.shortlist).slice(0, 4), watchlist: strings(old.watchlist), recentSearches: strings(old.recentSearches).slice(0, 6) };
   },
 }));
 export const usePrototype = createPrototypeStore();

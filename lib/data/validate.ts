@@ -54,5 +54,8 @@ export function parseCatalog(input: unknown, providers: readonly Provider[]): Ca
       requireValue(!offers.has(key), `${title.id} duplicate offer`); offers.add(key);
     }
   }
+  for (const title of input.titles as Record<string, unknown>[]) {
+    requireValue(title.remakeOf === undefined || (typeof title.remakeOf === 'string' && title.remakeOf !== title.id && ids.has(title.remakeOf)), `${title.id} remake reference`);
+  }
   return structuredClone(input) as unknown as CatalogData;
 }
