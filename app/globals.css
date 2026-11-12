@@ -1185,7 +1185,6 @@ footer a {
 .movie-rail>.movie-card { flex:0 0 142px; width:142px; scroll-snap-align:start; }
 .movie-card a { display:block; }
 .movie-card .poster strong { font-size:27px; }
-.movie-name { display:block; margin:10px 0 7px; font-size:11px; font-weight:600; line-height:1.4; }
 .offer-label { display:inline-flex; align-items:center; font-size:9px; color:var(--muted); border:1px solid var(--border); padding:6px 8px; border-radius:7px; line-height:1.5; max-width:100%; }
 .offer-label.on-service { color:var(--teal); border-color:#21d4c42b; background:#21d4c409; }
 .mood-row { display:flex; gap:8px; overflow:auto; padding:0 24px 8px; scrollbar-width:none; }
@@ -1355,10 +1354,14 @@ footer a {
 .title-backdrop { opacity:.75; }
 .poster-atlas { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 12px; margin-top:24px; }
 .poster-atlas>div { min-width:0; }
-.poster-atlas p { margin:8px 0 0; color:var(--muted); font-size:11px; line-height:1.4; }
 .poster-atlas a { display:block; border-radius:16px; }
 .poster-atlas a:active { transform:scale(.96); }
 @media(prefers-reduced-motion:reduce) { .poster-atlas a:active { transform:none; } }
 .hero-scene>.generated-art-backdrop { mask-image:linear-gradient(#000 65%,transparent); }
 /* Leave the title-page identity readable over the shared backdrop composition. */
 .title-backdrop .generated-art-backdrop { mask-image:linear-gradient(90deg,transparent 0%,transparent 40%,#000 65%); }
+.generated-art-wrap { width:100%; height:100%; }
+.generated-art-wrap-backdrop { height:auto; aspect-ratio:16/9; }
+.hero-scene>.generated-art-wrap-backdrop { position:absolute; inset:0 0 auto; width:100%; height:auto; mask-image:linear-gradient(#000 65%,transparent); }
+.poster-atlas { row-gap:12px; }
+.movie-card>.offer-label { margin-top:8px; }

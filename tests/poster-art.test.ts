@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { createElement } from 'react';
 import { dataSource } from '../lib/data';
-import { posterDesign, posterSeed, titleLockup } from '../lib/poster-art';
+import { posterDesign, posterSeed, titleLockup, fitTitle, lineUnits } from '../lib/poster-art';
 import { GeneratedPoster } from '../components/poster/GeneratedPoster';
 describe('generated key art', () => {
   it('is deterministic with distinct seeds for all 68 titles and all blob centres inside the canvas', async () => {
@@ -41,5 +41,38 @@ describe('generated key art', () => {
     const html = renderToStaticMarkup(createElement('div', null, createElement(GeneratedPoster, { title }), createElement(GeneratedPoster, { title })));
     const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
     expect(new Set(ids).size).toBe(ids.length);
+  });
+});
+
+
+describe('poster variety and responsive title fitting', () => {
+  it('has no same-genre anchor/hue collision in any row of six', async () => {
+    const titles = await dataSource.listTitles();
+    const genres = [...new Set(titles.map((t) => t.genres[0]))];
+    for (const genre of genres) {
+      const group = titles.filter((t) => t.genres[0] === genre);
+      const keys = group.map((title) => { const d = posterDesign(title); return `${d.anchor}:${d.hueBucket}`; });
+      // Global uniqueness within each genre also covers every six-card row, regardless of rail ordering.
+      expect(new Set(keys).size, genre).toBe(keys.length);
+      for (let start = 0; start < keys.length; start++) { const row = keys.slice(start, start + 6); expect(new Set(row).size).toBe(row.length); }
+    }
+    const designs = titles.map(posterDesign);
+    expect(new Set(designs.map((d) => d.family)).size).toBe(5);
+    expect(new Set(designs.map((d) => d.anchor)).size).toBe(4);
+    expect(designs.every((d) => d.scale >= .8 && d.scale <= 1.3 && d.tilt >= -20 && d.tilt <= 20 && Math.abs(d.hueShift) <= 35)).toBe(true);
+    expect(designs.every((d) => d.palette.every((color) => /^#[0-9a-f]{6}$/i.test(color)))).toBe(true);
+  });
+  it.each(['The Family Man', 'Manjummel Boys', 'Everything Everywhere All at Once'])('fits %s at rail size without losing words', (title) => {
+    const fit = fitTitle(title, 252, 18 * 300 / 138);
+    expect(fit.fontSize * 138 / 300).toBeGreaterThanOrEqual(18);
+    expect(fit.lines.length).toBeLessThanOrEqual(3);
+    expect(fit.lines.join(' ')).toBe(title);
+    expect(fit.widths.every((width) => width <= 252)).toBe(true);
+  });
+  it('ellipsizes oversized titles rather than adding a fourth line or shrinking below the minimum', () => {
+    const title = 'Supercalifragilisticexpialidocious '.repeat(10).trim();
+    const fit = fitTitle(title, 252, 38);
+    expect(fit.fontSize).toBe(38); expect(fit.lines).toHaveLength(3);
+    expect(fit.lines.every((line) => line.endsWith('…') && lineUnits(line) * fit.fontSize <= 252)).toBe(true);
   });
 });
