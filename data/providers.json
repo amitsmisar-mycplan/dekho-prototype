@@ -1,0 +1,62 @@
+[
+  {
+    "id": "netflix",
+    "name": "Netflix",
+    "color": "#FF7384",
+    "homepageUrl": "https://www.netflix.com/in/"
+  },
+  {
+    "id": "prime-video",
+    "name": "Prime Video",
+    "color": "#65CFFF",
+    "homepageUrl": "https://www.primevideo.com/"
+  },
+  {
+    "id": "jiohotstar",
+    "name": "JioHotstar",
+    "color": "#C5A1FF",
+    "homepageUrl": "https://www.hotstar.com/in/"
+  },
+  {
+    "id": "sonyliv",
+    "name": "SonyLIV",
+    "color": "#EDC66C",
+    "homepageUrl": "https://www.sonyliv.com/"
+  },
+  {
+    "id": "zee5",
+    "name": "ZEE5",
+    "color": "#E6B4F7",
+    "homepageUrl": "https://www.zee5.com/"
+  },
+  {
+    "id": "aha",
+    "name": "Aha",
+    "color": "#FFA878",
+    "homepageUrl": "https://www.aha.video/"
+  },
+  {
+    "id": "sun-nxt",
+    "name": "Sun NXT",
+    "color": "#FF87A4",
+    "homepageUrl": "https://www.sunnxt.com/"
+  },
+  {
+    "id": "mx-player",
+    "name": "MX Player",
+    "color": "#71C6FF",
+    "homepageUrl": "https://www.mxplayer.in/"
+  },
+  {
+    "id": "apple-tv",
+    "name": "Apple TV+",
+    "color": "#F5F3FA",
+    "homepageUrl": "https://tv.apple.com/in/"
+  },
+  {
+    "id": "lionsgate-play",
+    "name": "Lionsgate Play",
+    "color": "#9FE7C6",
+    "homepageUrl": "https://www.lionsgateplay.com/"
+  }
+]
