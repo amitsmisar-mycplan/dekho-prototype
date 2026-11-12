@@ -36,7 +36,7 @@ export interface CatalogData {
   titles: Title[];
 }
 export type CatalogInfo = Omit<CatalogData, 'titles'> & { titleCount: number };
-export interface UserPrefs { services?: readonly string[]; languages?: readonly string[] }
+export interface UserPrefs { freeOnly?: boolean; services?: readonly string[]; languages?: readonly string[] }
 export interface SimilarTitle { title: Title; score: number; because: string }
 export interface ProviderOffer extends Offer { provider: Provider; deepLink: string; onYourServices: boolean }
 export interface DataSource {

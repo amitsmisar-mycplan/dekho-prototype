@@ -1,4 +1,4 @@
-# Movie-night prototype — P0 + P1 + P2
+# Movie-night prototype — P0 + P1 + P2 + P3
 
 Next.js 15 App Router, strict TypeScript, React 19, Tailwind CSS v4, motion, Zustand, lucide-react and canvas-confetti. Bricolage Grotesque, Inter and Mukta are loaded through next/font.
 
@@ -11,7 +11,7 @@ npm run dev
 
 Open http://localhost:3000. New devices see the splash, then `/welcome`; finish or skip the optional name before continuing. Visit `/kit` to review the complete component gallery. Choose mood chips, tap + on sample posters, open Shortlist in the navigation, drag the sheet closed, and trigger a toast. Refresh to verify the shortlist persists. The first-visit splash lasts 900ms; clear the `dekho-splash-seen` localStorage key to replay it. Reduced-motion users skip it.
 
-`/` is the foundation preview; `/search` and `/me` are explicitly labelled future-feature states. Desktop shows a centred 390px-wide phone (844px tall when space allows) over a drifting abstract poster wall. Smaller desktop windows shorten the frame; mobile fills the screen.
+`/` is personalized Home, `/search` searches titles and people, and `/me` manages saved preferences. Desktop shows a centred 390px-wide phone (844px tall when space allows) over a drifting abstract poster wall. Smaller desktop windows shorten the frame; mobile fills the screen.
 
 ## Validation
 
@@ -39,7 +39,7 @@ A PostCSS override patches the Next.js 15 transitive dependency without upgradin
 
 ## P1 — seeded catalog and data layer
 
-Open `/kit/catalog` (also linked near the top of `/kit`). Search `panchayath`, `lapata ladies`, `Fahadh Faasil` or `Timothée Chalamet`. Select a title, choose a service, and press **Show matches** to inspect the five recommendations and offer ordering. This is a development review surface; `/search`, onboarding and the full title screen remain later tasks.
+Open `/kit/catalog` (also linked near the top of `/kit`). Search `panchayath`, `lapata ladies`, `Fahadh Faasil` or `Timothée Chalamet`. Select a title, choose a service, and press **Show matches** to inspect the five recommendations and offer ordering. This is a development review surface; Home and Search now provide the primary discovery experience.
 
 The catalog has exactly 60 real title identities: 18 Hindi, 12 English, 8 Malayalam, 7 Tamil, 7 Telugu, 3 Kannada, 3 Bengali and 2 Marathi. All 10 requested providers are present. Original synopses and manually seeded metadata are included; ratings, certifications, availability, prices and season counts are **illustrative snapshots, not verified current facts**. Language arrays only assert the original language. Series director credits use a representative lead director. Homepages are fallback links, not title-specific deep links. No availability was scraped or fetched.
 
@@ -117,7 +117,7 @@ Pre-merge validation: all 24 tests, lint, typecheck and production build pass. B
 1. Open `/` or `/welcome` on a fresh device. After the first-visit splash, choose any of the ten services; an empty selection is allowed.
 2. Continue to language selection. Hindi and English are preselected for a fresh setup. Choose any mix, or deselect everything for no language preference.
 3. Continue to the optional name and eight initial-based gradient avatars. Finish, or **Skip for now** to leave the name empty. A one-second “Ready. Chalo, kya dekhein?” screen leads to Home. Reduced-motion users get static transitions and the same readable completion screen.
-4. Visit `/me` to see the saved name/avatar, services and languages. **Edit services** opens `/welcome?edit=services` with only steps 1–2. Saving returns to `/me`; name/avatar and saved lists remain unchanged. Back on the first edit step cancels without saving.
+4. Visit `/me` to see the saved name/avatar, services and languages. **Edit services** opens `/welcome?edit=services` with only steps 1–2. Saving returns to `/me`; name/avatar and saved lists remain unchanged. Cancel on the first edit step leaves without saving.
 5. Open `/kit/catalog`. Nonempty saved services replace the service dropdown, and nonempty saved languages filter search results and recommendations. Multiple selected services are supported. Each empty preference independently exposes a fallback dropdown; selecting a fallback does not overwrite saved preferences. An explicitly inspected title can still be outside your preferred languages.
 
 Preferences and an `onboardingComplete` flag live in the existing `dekho-prototype-v0` Zustand localStorage record. Explicit hydration prevents first-render redirects from misreading returning users. Old P0/P1 records keep their lists and preferences, gain the default avatar, and go through onboarding once. Completed users opening `/welcome` are returned to Home; the explicit edit link is the exception.
@@ -132,4 +132,19 @@ Go to `/me` → **Reset onboarding**. This clears only the onboarding completion
 
 All 34 tests, lint, strict typecheck and production build pass. Added persistence tests exercise real Zustand storage, restoration, old-record compatibility, skipping, edit/reset preservation, malformed values and per-field catalog fallback priority. Browser walkthroughs at 390px verified all three steps, default language selections, avatar/name persistence after reload, the one-second finish screen, returning-user bypass, two-step editing, fallback dropdowns, optional name skipping and reset. Saved Hindi/Malayalam preferences produced 26 catalog results; an empty-language Tamil fallback produced seven. No browser errors/warnings were reported. Desktop phone framing was also inspected. Reduced motion is implemented, but OS-level reduced-motion emulation was not part of this pass.
 
-The preview remains local. Catalog availability/prices/ratings remain illustrative; accounts, polling and the full search/title experience remain later-phase work. The catalog lab now runs its data-source calls on the client to apply local preferences without introducing a backend or putting saved preferences into shareable URLs.
+The preview remains local. Catalog availability/prices/ratings remain illustrative; accounts, polling and the full title experience remain later-phase work. The catalog lab now runs its data-source calls on the client to apply local preferences without introducing a backend or putting saved preferences into shareable URLs.
+
+
+## P3 — Home and Search
+
+- `/`: greeting uses device-local day/time and your first name. Five eligible hero picks advance every six seconds, with swipe, previous/next and pause controls. Reduced motion disables autoplay and poster motion. Rails snap horizontally and show actual seeded provider labels; rentals never count as subscription access.
+- Tap **Laugh**, **Edge-of-seat**, **Family**, **Feel-good** or **Mind-bender** for up to four picks from `getMoodPicks`. **Put these to the group** replaces the shortlist, capped at four. Open **Shortlist** to inspect/remove titles.
+- `/search`: autofocus, 120ms debounce, title and people groups, alternate spelling support and six persisted recent searches. Try `panchayath`, `Fahadh`, or an unmatched phrase. Search spans languages so an explicit title request is not hidden by preferred-language filters.
+- Tap any catalog poster to open `/t/[slug]` with a shared poster transition. This is a P4 placeholder with synopsis, seeded availability and shortlist controls.
+- `/me` → **Edit services**: reordered provider tiles, selected brand wash, family/phone-plan hint and **None yet, show me free stuff**. Free-only clears subscriptions; choosing a provider clears free-only. Save after the language step. Name/avatar remain unchanged. `/me` → **Reset onboarding** replays all three steps.
+
+Free-only is persisted and applied to Home, mood picks, Search and the catalog lab. It also overrides any stale service dropdown URL. The unmodified seed has only one free title (Jersey, Telugu), so some language/mood combinations show an honest empty state and fewer than five hero picks. Availability corrections belong in the existing checklist, not invented discovery results.
+
+Trending is a static editorial list. The conditional glass poll banner reads `getOpenPoll()` through `lib/polls`; that P3 seam returns null, so no fabricated poll is shown. Poll storage, creation, voting and live subscriptions remain future work. Posters use palette artwork unless TMDb paths have been seeded. No dependencies or backend were added.
+
+P3 validation: lint, strict typecheck, all 42 tests and production build pass. Added tests cover included-service versus rental access, free-only filtering and migration, deterministic hero/trending choices, people grouping, greetings, recent-search persistence and shortlist limits. Browser verification covers mobile Home, mood picks into the shortlist, alias search, people results, saved recents and poster navigation. User preferences are preserved during review.
