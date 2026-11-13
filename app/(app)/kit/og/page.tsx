@@ -1,4 +1,5 @@
 
+import { checkinCopy as c } from '@/.generated/copy/checkin';
 import { formatCopy } from '@/lib/copy';
 import { kitCopy } from '@/.generated/copy/kit';
 import { brand } from '@/lib/brand';
@@ -15,5 +16,10 @@ export default function OgKitPage() {
         <span aria-hidden="true" style={{ position: 'absolute', pointerEvents: 'none', top: 0, bottom: 0, left: '23.75%', width: '52.5%', border: '1px dashed #21D4C4' }}/>
       </a></section>;
     })}
+    <h2 style={{marginTop:40}}>{formatCopy(c.verdictPreviews)}</h2>
+    {(['loved','liked','split'] as const).map(mood=><section key={mood} style={{marginTop:28}}><h3>{formatCopy(c[mood==='loved'?'previewLoved':mood==='liked'?'previewLiked':'previewSplit'])}</h3>{(['wide','story'] as const).map(format=>{const src=`/p/verdict1/verdict-image?preview=${mood}&format=${format}`;return <a key={format} href={src} target="_blank" rel="noreferrer" style={{display:'block',marginTop:12}}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={src} width={format==='wide'?1200:1080} height={format==='wide'?630:1920} alt={formatCopy(c.previewAlt,{mood,format})} style={{width:'100%',height:'auto',borderRadius:12}}/>
+    </a>;})}</section>)}
   </div>;
 }

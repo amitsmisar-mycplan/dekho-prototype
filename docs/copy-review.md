@@ -8,6 +8,22 @@ Placeholders such as `{p1}`, `{group}`, `{count}` and `{winner}` are runtime val
 
 | Screen | Key | Indian English | Hinglish |
 | --- | --- | --- | --- |
+| checkin | lovedHeadline | {group} loved | {group} loved |
+| checkin | likedHeadline | {group} liked | {group} liked |
+| checkin | splitHeadline | {group} were split on | {group} were split on |
+| checkin | lovedStat | {count} of {total} loved it | {count} of {total} loved it |
+| checkin | likedStat | {count} of {total} liked it | {count} of {total} liked it |
+| checkin | splitStat | {count} of {total} liked it | {count} of {total} liked it |
+| checkin | whatNext | What next? | What next? |
+| checkin | voteNext | Vote on the next one | Vote on the next one |
+| checkin | attributedTake | “{take}” — {name} | “{take}” — {name} |
+| checkin | verdictPreviews | Post-watch verdict cards | Post-watch verdict cards |
+| checkin | previewLoved | Loved | Loved |
+| checkin | previewLiked | Liked | Liked |
+| checkin | previewSplit | Split | Split |
+| checkin | previewAlt | {mood} verdict card — {format} | {mood} verdict card — {format} |
+| checkin | wideFormat | Wide | Wide |
+| checkin | storyFormat | Story | Story |
 | checkin | question | Did you watch {title}? | Did you watch {title}? |
 | checkin | yes | Yes | Yes |
 | checkin | later | Not yet | Not yet |

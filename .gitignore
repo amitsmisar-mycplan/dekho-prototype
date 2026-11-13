@@ -7,3 +7,10 @@ out/
 .DS_Store
 .env.local
 .generated/
+# Local Supabase CLI state/config; keep SQL migrations tracked.
+supabase/.temp/
+supabase/.branches/
+supabase/.cache/
+supabase/.env*
+supabase/config.toml
+.supabase/
