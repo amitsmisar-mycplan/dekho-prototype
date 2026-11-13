@@ -1,0 +1,40 @@
+'use client';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { ThumbsDown, ThumbsUp, Heart } from 'lucide-react';
+import { formatCopy } from '@/lib/copy';
+import { checkinCopy as c } from '@/.generated/copy/checkin';
+import { getCheckinPolls, getCheckins, saveCheckin, pollStore, type Poll } from '@/lib/polls';
+import { checkinDue, verdict, winnerId, type Checkin, type CheckinInput } from '@/lib/polls/checkins';
+import { voterIdentity } from '@/lib/polls/identity';
+import { dataSource, type Title } from '@/lib/data';
+import { track } from '@/lib/analytics';
+const t = (key: keyof typeof c, params = {}) => formatCopy(c[key], params);
+export function WatchCheckin({ poll, title, rows, onSave, demo=false }: { poll: Poll; title: Title; rows: Checkin[]; onSave: () => void; demo?: boolean }) {
+ const [yes,setYes]=useState(false),[rating,setRating]=useState<CheckinInput['rating']>(null),[take,setTake]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState('');
+ const shown=useRef(false);const due=checkinDue(poll,voterIdentity().id,rows,Date.now(),demo);
+ useEffect(()=>{if(due&&!shown.current){shown.current=true;track('checkin_shown',{pollId:poll.id,titleId:title.id});}},[due,poll.id,title.id]);
+ async function save(watched: boolean|null) { if(busy)return;setBusy(true);setError('');try {await saveCheckin(poll.id,{watched,rating:watched?rating:null,take:watched?take:''});track('checkin_done',{pollId:poll.id,watched,rating:watched?rating:null});onSave();}catch{setError(t('error'));}finally{setBusy(false);} }
+ if(!due)return null;
+ return <section className="watch-checkin"><p className="eyebrow">{poll.groupName||poll.name}</p><h2>{t('question',{title:title.title})}</h2>{!yes?<div className="checkin-actions"><button className="button button-primary" disabled={busy} onClick={()=>setYes(true)}>{t('yes')}</button><button className="button button-secondary" disabled={busy} onClick={()=>void save(null)}>{t('later')}</button><button className="button button-secondary" disabled={busy} onClick={()=>void save(false)}>{t('skipped')}</button></div>:<><fieldset><legend>{t('rating')}</legend><div className="checkin-actions">{([[-1,'down',ThumbsDown],[1,'up',ThumbsUp],[2,'loved',Heart]] as const).map(([value,label,Icon])=><button key={value} className="button button-secondary" aria-pressed={rating===value} onClick={()=>setRating(value)}><Icon size={18}/>{t(label)}</button>)}</div></fieldset><label htmlFor={`checkin-${poll.id}`}>{t('take')}</label><input id={`checkin-${poll.id}`} maxLength={80} value={take} onChange={e=>setTake(e.target.value)}/><button className="button button-primary" disabled={busy||rating===null} onClick={()=>void save(true)}>{t(busy?'saving':'save')}</button></>}{error&&<p role="alert">{error}</p>}{busy&&<div className="skeleton checkin-loading" aria-label={t('saving')}/>}</section>;
+}
+export function HomeCheckins({ titles }: { titles: Title[] }) {
+ const [items,setItems]=useState<{poll:Poll;rows:Checkin[]}[]|null>(null),[error,setError]=useState(false),[demo,setDemo]=useState(false);
+ const refresh=useCallback(async()=>{try{const polls=await getCheckinPolls();const next=await Promise.all(polls.map(async poll=>({poll,rows:await getCheckins(poll.id)})));setItems(next);setError(false);}catch{setError(true);}},[]);
+ useEffect(()=>{setDemo(new URLSearchParams(location.search).get('demo')==='1');void refresh();const off=pollStore.subscribe(()=>void refresh());const timer=setInterval(()=>void refresh(),60_000);return()=>{off();clearInterval(timer);};},[refresh]);
+ if(error)return <section className="watch-checkin"><p role="alert">{t('error')}</p><button className="button button-secondary" onClick={()=>void refresh()}>{t('retry')}</button></section>;
+ if(!items)return <div className="skeleton checkin-loading" role="status" aria-label={t('loading')}/>;
+ const ratings=Object.fromEntries(titles.map(x=>[x.id,x.tmdbRating]));
+ return <>{items.map(({poll,rows})=>{const title=titles.find(x=>x.id===winnerId(poll,ratings));return title?<WatchCheckin key={poll.id} poll={poll} rows={rows} title={title} demo={demo} onSave={()=>void refresh()}/>:null;})}</>;
+}
+export default function GroupVerdict({poll,demo=false}: {poll:Poll;demo?:boolean}) {
+ const [rows,setRows]=useState<Checkin[]|null>(null),[title,setTitle]=useState<Title|null>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false),[shared,setShared]=useState(false),[downloads,setDownloads]=useState<string[]>([]);
+ const router=useRouter(),urls=useRef<string[]>([]),files=useRef<File[]>([]);
+ const refresh=useCallback(async()=>{try{const [values,titles]=await Promise.all([getCheckins(poll.id),dataSource.listTitles()]);setRows(values);setTitle(titles.find(x=>x.id===winnerId(poll,Object.fromEntries(titles.map(x=>[x.id,x.tmdbRating]))))??null);setError('');}catch{setError(t('error'));}},[poll]);
+ useEffect(()=>{void refresh();const off=pollStore.subscribe(()=>void refresh());return off;},[refresh]);
+ useEffect(()=>{const all=urls.current;return()=>all.forEach(u=>URL.revokeObjectURL(u));},[]);
+ const summary=rows?verdict(poll,rows):null;
+ async function share(){if(!summary||!title||busy)return;setBusy(true);setError('');try{const card={pollId:poll.id,titleId:title.id,group:poll.groupName||poll.name,total:summary.total,watched:summary.watched,loved:summary.loved,take:summary.takes[0]?.take??''};const blobs=await Promise.all(['wide','story'].map(async format=>{const r=await fetch(`/p/${poll.id}/verdict-image?format=${format}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(card)});if(!r.ok)throw Error();return r.blob();}));urls.current.forEach(u=>URL.revokeObjectURL(u));urls.current=blobs.map(b=>URL.createObjectURL(b));setDownloads(urls.current);files.current=blobs.map((b,i)=>new File([b],i?'verdict-story.png':'verdict.png',{type:'image/png'}));if(navigator.canShare?.({files:files.current})){await navigator.share({files:files.current,title:t('verdict')});setShared(true);track('verdict_share',{pollId:poll.id,method:'files'});}}catch(e){if(!(e instanceof Error&&e.name==='AbortError'))setError(t('error'));}finally{setBusy(false);}}
+ async function next(){if(!title)return;setBusy(true);try{const picks=await dataSource.getSimilar(title.id,3);const {usePrototype}=await import('@/lib/store');await usePrototype.persist.rehydrate();usePrototype.getState().setShortlist(picks.map(p=>p.title.id));track('next_poll_start',{pollId:poll.id,titleId:title.id});router.push(`/poll/new?group=${encodeURIComponent(poll.groupName??'')}`);}catch{setError(t('nextError'));}finally{setBusy(false);}}
+ return <section className="group-verdict"><h2>{t('verdict')}</h2>{error&&<><p role="alert">{error}</p><button className="button button-secondary" onClick={()=>void refresh()}>{t('retry')}</button></>}{!rows&&!error&&<div className="skeleton checkin-loading" aria-label={t('loading')}/>}{rows&&title&&<WatchCheckin poll={poll} rows={rows} title={title} demo={demo} onSave={()=>void refresh()}/>} {summary&&rows&&(rows.length?<><p className="verdict-summary">{t('summary',summary)}</p>{summary.takes.map(r=><blockquote key={r.device}>{r.take}<cite>{r.name}</cite></blockquote>)}<button className="button button-primary" disabled={busy} onClick={()=>void share()}>{t(busy?'prepare':'share')}</button>{downloads.length>0&&<div className="result-downloads"><p>{t('ready')}</p>{downloads.map((url,i)=><a key={url} href={url} download={i?'verdict-story.png':'verdict.png'} onClick={()=>{setShared(true);track('verdict_share',{pollId:poll.id,method:'download'});}}>{t(i?'story':'wide')}</a>)}<a target="_blank" rel="noopener noreferrer" href={`https://wa.me/?text=${encodeURIComponent(`${t('shareSummary',{group:poll.groupName||poll.name,...summary})}. ${t('nextTag')} ${location.origin}/p/${poll.id}/result`)}`} onClick={()=>{setShared(true);track('verdict_share',{pollId:poll.id,method:'whatsapp'});}}>{t('whatsapp')}</a></div>}{shared&&<button className="button button-primary" disabled={busy} onClick={()=>void next()}>{t('next')}</button>}</>:<p className="muted">{t('empty')}</p>)}</section>;
+}

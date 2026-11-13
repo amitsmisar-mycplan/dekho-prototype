@@ -19,7 +19,7 @@ describe('per-title voting and results', () => {
     expect(saved.ballots?.riya.take).toBe('Another night');
     expect(await pollStore.getResults(p.id)).toEqual({ vikram: -1, kaithi: -1 });
     expect(scorePoll(saved)[0].takes).toEqual([{ name: 'Riya', score: -1, take: 'Another night' }]);
-    expect(await getGroupRating('vikram')).toEqual({ percent: 0, votes: 1 });
+    expect(await getGroupRating('vikram')).toBeNull(); // Poll preferences are not post-watch ratings.
   });
   it('uses net thumbs then TMDb, with stable option order for equal ratings', async () => {
     const p = await create();

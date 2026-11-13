@@ -12,6 +12,7 @@ async function adapter(): Promise<PollStore> {
 export const pollStore: PollStore = {
   createPoll: async (input) => (await adapter()).createPoll(input),
   importPoll: async (snapshot, ids) => (await adapter()).importPoll(snapshot, ids),
+  getVotedPolls: async () => (await adapter()).getVotedPolls(),
   getMyPolls: async () => (await adapter()).getMyPolls(),
   getPoll: async (id) => (await adapter()).getPoll(id),
   castVote: async (id, voter, title) => (await adapter()).castVote(id, voter, title),
@@ -28,3 +29,7 @@ export const pollStore: PollStore = {
 };
 export async function getOpenPoll(): Promise<OpenPollSummary | null> { return null; }
 export async function getGroupRating(id: string) { return cloudPollsEnabled ? (await import('./supabase')).getCloudGroupRating(id) : (await import('./local')).getGroupRating(id); }
+
+export async function getCheckinPolls() { return (await import('./checkin-store')).getCheckinPolls(); }
+export async function getCheckins(id: string) { return (await import('./checkin-store')).getCheckins(id); }
+export async function saveCheckin(id: string, input: import('./checkins').CheckinInput) { return (await import('./checkin-store')).saveCheckin(id, input); }

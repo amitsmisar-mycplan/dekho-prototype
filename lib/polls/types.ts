@@ -6,6 +6,7 @@ export interface PollStore {
   createPoll(input: Omit<Poll, 'id' | 'votes' | 'name' | 'note' | 'ballots' | 'closedAt'> & { name?: string; note?: string }): Promise<Poll>;
   importPoll(snapshot: PollSnapshot, allowedTitleIds?: string[]): Promise<Poll>;
   getMyPolls(): Promise<Poll[]>;
+  getVotedPolls(): Promise<Poll[]>;
   getPoll(id: string): Promise<Poll | null>;
   castVote(id: string, voterId: string, titleId: string): Promise<void>;
   rateTitle(id: string, voterId: string, name: string, titleId: string, rating: Rating): Promise<void>;

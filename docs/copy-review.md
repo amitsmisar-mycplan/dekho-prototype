@@ -8,6 +8,37 @@ Placeholders such as `{p1}`, `{group}`, `{count}` and `{winner}` are runtime val
 
 | Screen | Key | Indian English | Hinglish |
 | --- | --- | --- | --- |
+| checkin | question | Did you watch {title}? | Did you watch {title}? |
+| checkin | yes | Yes | Yes |
+| checkin | later | Not yet | Not yet |
+| checkin | skipped | Skipped it | Skipped it |
+| checkin | down | Thumbs down | Thumbs down |
+| checkin | up | Thumbs up | Thumbs up |
+| checkin | loved | Loved it | Loved it |
+| checkin | take | One line about the film (optional) | One line about the film (optional) |
+| checkin | save | Save check-in | Save check-in |
+| checkin | saving | Saving your check-in | Saving your check-in |
+| checkin | thanks | Your check-in is saved. | Your check-in is saved. |
+| checkin | verdict | Group verdict | Group verdict |
+| checkin | summary | {watched} of {total} watched · {loved} loved it | {watched} of {total} watched · {loved} loved it |
+| checkin | shareSummary | {group}: {loved} of {total} loved it | {group}: {loved} of {total} loved it |
+| checkin | share | Share the verdict | Share the verdict |
+| checkin | next | Pick the next one | Pick the next one |
+| checkin | nextTag | What next? Vote on tonight’s picks | What next? Vote on tonight’s picks |
+| checkin | group | Your group | Your group |
+| checkin | error | Could not load or save check-ins. Please try again. | Could not load or save check-ins. Please try again. |
+| checkin | retry | Try again | Try again |
+| checkin | loading | Loading check-ins | Loading check-ins |
+| checkin | empty | The group has not checked in yet. | The group has not checked in yet. |
+| checkin | prepare | Making your verdict cards | Making your verdict cards |
+| checkin | wide | Download 1200 × 630 | Download 1200 × 630 |
+| checkin | story | Download 1080 × 1920 | Download 1080 × 1920 |
+| checkin | whatsapp | Share verdict on WhatsApp | Share verdict on WhatsApp |
+| checkin | ready | Cards ready. Download an image to attach, or share the link. | Cards ready. Download an image to attach, or share the link. |
+| checkin | invalid | A valid group verdict is required. | A valid group verdict is required. |
+| checkin | rating | How was it? | How was it? |
+| checkin | close | Close | Close |
+| checkin | nextError | Could not find the next picks. Please try again. | Could not find the next picks. Please try again. |
 | common | good_company_great_stories | GOOD COMPANY. GREAT STORIES. | GOOD COMPANY. GREAT STORIES. |
 | common | a_small_screen_a_big_night | A SMALL SCREEN. A BIG NIGHT. | A SMALL SCREEN. A BIG NIGHT. |
 | common | separator | . | . |
@@ -664,9 +695,9 @@ Placeholders such as `{p1}`, `{group}`, `{count}` and `{winner}` are runtime val
 | title | you_have_this | You have this | You have this |
 | title | in_india | in India | in India |
 | title | where_to_watch | Where to watch  | Where to watch  |
-| title | no_group_votes_yet | No group votes yet | No group votes yet |
-| title | group_votes_unavailable | Group votes unavailable | Group votes unavailable |
-| title | value_picked_this_value_votes | {p1}% picked this · {p2} votes | {p1}% picked this · {p2} votes |
+| title | no_group_votes_yet | No post-watch ratings yet | No post-watch ratings yet |
+| title | group_votes_unavailable | Group ratings unavailable | Group ratings unavailable |
+| title | value_picked_this_value_votes | {p1}% liked it · {p2} ratings | {p1}% liked it · {p2} ratings |
 | title | your_groups | Your groups | Your groups |
 | title | illustrative_score_10 | Illustrative score / 10 | Illustrative score / 10 |
 | title | tmdb | TMDb | TMDb |

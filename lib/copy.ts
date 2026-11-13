@@ -2650,16 +2650,16 @@ export const titleCopy = {
     "hinglish": "Where to watch "
   },
   "no_group_votes_yet": {
-    "indianEnglish": "No group votes yet",
-    "hinglish": "No group votes yet"
+    "indianEnglish": "No post-watch ratings yet",
+    "hinglish": "No post-watch ratings yet"
   },
   "group_votes_unavailable": {
-    "indianEnglish": "Group votes unavailable",
-    "hinglish": "Group votes unavailable"
+    "indianEnglish": "Group ratings unavailable",
+    "hinglish": "Group ratings unavailable"
   },
   "value_picked_this_value_votes": {
-    "indianEnglish": "{p1}% picked this · {p2} votes",
-    "hinglish": "{p1}% picked this · {p2} votes"
+    "indianEnglish": "{p1}% liked it · {p2} ratings",
+    "hinglish": "{p1}% liked it · {p2} ratings"
   },
   "your_groups": {
     "indianEnglish": "Your groups",
@@ -3058,7 +3058,133 @@ export const labelsCopy = {
     "hinglish": "Drama night"
   }
 } as const;
-export const copy = { common: commonCopy, kit: kitCopy, shortlist: shortlistCopy, home: homeCopy, welcome: welcomeCopy, pollCreate: pollCreateCopy, voter: voterCopy, artwork: artworkCopy, profile: profileCopy, search: searchCopy, results: resultsCopy, title: titleCopy, shareCard: shareCardCopy, install: installCopy, catalog: catalogCopy, pollErrors: pollErrorsCopy, brand: brandCopy, labels: labelsCopy } as const;
+export const checkinCopy = {
+  "question": {
+    "indianEnglish": "Did you watch {title}?",
+    "hinglish": "Did you watch {title}?"
+  },
+  "yes": {
+    "indianEnglish": "Yes",
+    "hinglish": "Yes"
+  },
+  "later": {
+    "indianEnglish": "Not yet",
+    "hinglish": "Not yet"
+  },
+  "skipped": {
+    "indianEnglish": "Skipped it",
+    "hinglish": "Skipped it"
+  },
+  "down": {
+    "indianEnglish": "Thumbs down",
+    "hinglish": "Thumbs down"
+  },
+  "up": {
+    "indianEnglish": "Thumbs up",
+    "hinglish": "Thumbs up"
+  },
+  "loved": {
+    "indianEnglish": "Loved it",
+    "hinglish": "Loved it"
+  },
+  "take": {
+    "indianEnglish": "One line about the film (optional)",
+    "hinglish": "One line about the film (optional)"
+  },
+  "save": {
+    "indianEnglish": "Save check-in",
+    "hinglish": "Save check-in"
+  },
+  "saving": {
+    "indianEnglish": "Saving your check-in",
+    "hinglish": "Saving your check-in"
+  },
+  "thanks": {
+    "indianEnglish": "Your check-in is saved.",
+    "hinglish": "Your check-in is saved."
+  },
+  "verdict": {
+    "indianEnglish": "Group verdict",
+    "hinglish": "Group verdict"
+  },
+  "summary": {
+    "indianEnglish": "{watched} of {total} watched · {loved} loved it",
+    "hinglish": "{watched} of {total} watched · {loved} loved it"
+  },
+  "shareSummary": {
+    "indianEnglish": "{group}: {loved} of {total} loved it",
+    "hinglish": "{group}: {loved} of {total} loved it"
+  },
+  "share": {
+    "indianEnglish": "Share the verdict",
+    "hinglish": "Share the verdict"
+  },
+  "next": {
+    "indianEnglish": "Pick the next one",
+    "hinglish": "Pick the next one"
+  },
+  "nextTag": {
+    "indianEnglish": "What next? Vote on tonight’s picks",
+    "hinglish": "What next? Vote on tonight’s picks"
+  },
+  "group": {
+    "indianEnglish": "Your group",
+    "hinglish": "Your group"
+  },
+  "error": {
+    "indianEnglish": "Could not load or save check-ins. Please try again.",
+    "hinglish": "Could not load or save check-ins. Please try again."
+  },
+  "retry": {
+    "indianEnglish": "Try again",
+    "hinglish": "Try again"
+  },
+  "loading": {
+    "indianEnglish": "Loading check-ins",
+    "hinglish": "Loading check-ins"
+  },
+  "empty": {
+    "indianEnglish": "The group has not checked in yet.",
+    "hinglish": "The group has not checked in yet."
+  },
+  "prepare": {
+    "indianEnglish": "Making your verdict cards",
+    "hinglish": "Making your verdict cards"
+  },
+  "wide": {
+    "indianEnglish": "Download 1200 × 630",
+    "hinglish": "Download 1200 × 630"
+  },
+  "story": {
+    "indianEnglish": "Download 1080 × 1920",
+    "hinglish": "Download 1080 × 1920"
+  },
+  "whatsapp": {
+    "indianEnglish": "Share verdict on WhatsApp",
+    "hinglish": "Share verdict on WhatsApp"
+  },
+  "ready": {
+    "indianEnglish": "Cards ready. Download an image to attach, or share the link.",
+    "hinglish": "Cards ready. Download an image to attach, or share the link."
+  },
+  "invalid": {
+    "indianEnglish": "A valid group verdict is required.",
+    "hinglish": "A valid group verdict is required."
+  },
+  "rating": {
+    "indianEnglish": "How was it?",
+    "hinglish": "How was it?"
+  },
+  "close": {
+    "indianEnglish": "Close",
+    "hinglish": "Close"
+  },
+  "nextError": {
+    "indianEnglish": "Could not find the next picks. Please try again.",
+    "hinglish": "Could not find the next picks. Please try again."
+  }
+} as const;
+export const copy = { checkin: checkinCopy, common: commonCopy, kit: kitCopy, shortlist: shortlistCopy, home: homeCopy, welcome: welcomeCopy, pollCreate: pollCreateCopy, voter: voterCopy, artwork: artworkCopy, profile: profileCopy, search: searchCopy, results: resultsCopy, title: titleCopy, shareCard: shareCardCopy, install: installCopy, catalog: catalogCopy, pollErrors: pollErrorsCopy, brand: brandCopy, labels: labelsCopy } as const;
 export type CopyScreen = keyof typeof copy;
 export function formatCopy(line: CopyLine, params: Record<string, unknown> = {}, tone: Tone = 'indianEnglish'): string { return line[tone].replace(/\{(\w+)\}/g, (placeholder, name: string) => Object.hasOwn(params, name) ? String(params[name]) : placeholder); }
 /** Convenience for tests/tools; UI imports the specific screen to enable tree shaking. */

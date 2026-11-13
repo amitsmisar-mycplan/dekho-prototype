@@ -57,7 +57,7 @@ describe('group rating from local poll votes', () => {
     expect(await getGroupRating('vikram')).toBeNull();
     const listener = vi.fn(), unsubscribe = pollStore.subscribe(listener);
     await pollStore.castVote(poll.id, 'a', 'vikram'); await pollStore.castVote(poll.id, 'b', 'kaithi');
-    expect(await getGroupRating('vikram')).toEqual({ percent: 50, votes: 2 });
+    expect(await getGroupRating('vikram')).toBeNull(); // Pre-watch votes do not imply watched ratings.
     expect(await getGroupRating('panchayat')).toBeNull();
     expect(await pollStore.getResults(poll.id)).toEqual({ vikram: 1, kaithi: 1 });
     expect(listener).toHaveBeenCalledTimes(2); unsubscribe();

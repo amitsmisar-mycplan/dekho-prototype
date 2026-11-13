@@ -36,6 +36,7 @@ export const localPollStore: PollStore = {
     const latest = read(); const imported = latest.find((p) => p.id === valid.id); if (imported) return imported;
     const poll: Poll = { ...valid, expectedVoters: 0, votes: {} }; write([...latest, poll]); return poll;
   },
+  async getVotedPolls() { const me=voterIdentity().id; return read().filter(p=>p.ballots?.[me]||p.votes[me]); },
   async getMyPolls() { const me = voterIdentity().id; return read().filter((p) => p.creator?.id === me).reverse(); },
   async getPoll(id) { return read().find((p) => p.id === id) ?? null; },
   async castVote(id, voterId, titleId) {
@@ -78,9 +79,5 @@ export const localPollStore: PollStore = {
 /** No fake open poll banner until the poll-screen phase exists. */
 export async function getOpenPoll(): Promise<OpenPollSummary | null> { return null; }
 export async function getGroupRating(titleId: string): Promise<{ percent: number; votes: number } | null> {
-  const polls = read().filter((p) => p.titleIds.includes(titleId));
-  const votes = polls.flatMap((p) => Object.values(p.votes).filter((v) => p.titleIds.includes(v)));
-  const ratings = polls.flatMap((p) => Object.values(p.ballots ?? {}).flatMap((b) => b.ratings[titleId] ? [b.ratings[titleId]] : []));
-  const count = votes.length + ratings.length;
-  return count ? { percent: Math.round((votes.filter((v) => v === titleId).length + ratings.filter((r) => r.score === 1).length) / count * 100), votes: count } : null;
+  return (await import('./checkin-store')).localCheckinRating(titleId, (await localPollStore.getVotedPolls()).map(p=>p.id));
 }
