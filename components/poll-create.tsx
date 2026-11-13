@@ -19,6 +19,7 @@ export function PollCreate({ titles }: { titles: Title[] }) {
   const tone = useTone();
   const savedGroups = usePrototype((s) => s.groupNames);
   const [groupName, setGroupName] = useState(''), [remoteGroups, setRemoteGroups] = useState<string[]>([]);
+  useEffect(() => { setGroupName(new URLSearchParams(location.search).get('group')?.slice(0,60) ?? ''); }, []);
   const groups = recentGroups([...savedGroups, ...remoteGroups]);
   useEffect(() => { let active = true; void pollStore.getMyPolls().then((polls) => { if (active) setRemoteGroups(polls.map((p) => p.groupName ?? '')); }).catch(() => {}); return () => { active = false; }; }, []);
   const savedCreator = usePrototype((s) => usableCreatorName(s.prefs.name));

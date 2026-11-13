@@ -15,6 +15,7 @@ import { countdown, scorePoll, voterCount, type Rating } from '@/lib/polls/resul
 import { track } from '@/lib/analytics';
 import { cloudPollsEnabled, usableCreatorName } from '@/lib/polls/config';
 import { useBrand } from '@/lib/use-brand';
+const GroupVerdict = dynamic(() => import('./watch-checkin'), { ssr: false });
 const WinnerReveal = dynamic(() => import('./winner-reveal'), { ssr: false });
 export interface PollOption { id: string; title: string; language: string; runtime: string; rating: number; provider: { name: string; color: string; url: string; type: string } | null; poster: ReactNode }
 export function PollRoom({ id, snapshot, options, result = false, demo = false }: { id: string; snapshot: PollSnapshot | null; options: PollOption[]; result?: boolean; demo?: boolean }) {
@@ -83,6 +84,7 @@ export function PollRoom({ id, snapshot, options, result = false, demo = false }
     {closed && !winner && <section className="vote-empty"><h2>{formatCopy(voterCopy['no_votes_this_time'])}</h2><p>{formatCopy(voterCopy['no_winner_to_call_start_a_fresh_night'])}</p><Link prefetch={false} className="button button-primary" href="/">{formatCopy(voterCopy['pick_another_night'])}</Link></section>}
     {closed && winner && <section className="settled-winner"><h2>{formatCopy(voterCopy['tonight'])}{winner.title}</h2><div className="settled-poster">{winner.poster}</div><button className="button button-primary" onClick={() => setDismissed(false)}>{formatCopy(voterCopy['show_the_winner'])}</button>{scores[0].takes.map((take, i) => <blockquote key={i}>{formatCopy(voterCopy['separator_3'])}{take.take}{formatCopy(voterCopy['separator_2'])}<cite>{take.name}</cite></blockquote>)}</section>}
     {streak > 1 && <p className="group-streak"><Flame size={21}/>{formatCopy(resultsCopy['group_streak'], { group: poll.groupName || formatCopy(voterCopy['your_group']), count: streak })}</p>}
+    {result && closed && winner && <GroupVerdict poll={poll} demo={demo}/>}
     {demo && !cloudPollsEnabled && !closed && <button className="button button-secondary demo-friends" disabled={simulating || !ready} onClick={simulate}>{simulating ? formatCopy(voterCopy['friends_are_voting']) : formatCopy(voterCopy['simulate_friends'])}</button>}
     <p className="vote-notice" role="status">{notice}</p>
     {!result && <a className="text-action" href={resultsLink}>{formatCopy(voterCopy['see_results'])}<ArrowUpRight size={15}/></a>}

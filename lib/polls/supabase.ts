@@ -34,7 +34,7 @@ export function createSupabasePollStore(client: SupabaseClient, realtime = typeo
     if (!listeners.size || channels.has(id)) return;
     const channel = client.channel(`poll:${id}`, { config: { private: false } });
     channels.set(id, channel);
-    channel.on('broadcast', { event: 'votes' }, emit).on('broadcast', { event: 'takes' }, emit).on('broadcast', { event: 'polls' }, emit)
+    channel.on('broadcast', { event: 'votes' }, emit).on('broadcast', { event: 'takes' }, emit).on('broadcast', { event: 'polls' }, emit).on('broadcast', { event: 'checkins' }, emit)
       .subscribe((status) => { if (status === 'SUBSCRIBED') emit(); });
   }
   async function rpc(name: string, args: Record<string, unknown>) {
@@ -44,6 +44,7 @@ export function createSupabasePollStore(client: SupabaseClient, realtime = typeo
   }
   function own(id: string) { if (id !== selfDeviceAlias) throw new Error(formatCopy(pollErrorsCopy['simulated_voters_are_available_in_local_demo_mode_only'])); }
   const store: PollStore = {
+    async getVotedPolls() { const rows: unknown[] = await rpc('my_checkin_polls', {}); return rows.flatMap(r=>{const p=parseCloudPoll(r);if(p)watch(p.id);return p?[p]:[];}); },
     async getMyPolls() {
       const rows = await rpc('my_polls', {});
       if (!Array.isArray(rows)) throw new Error(formatCopy(pollErrorsCopy['your_polls_could_not_be_loaded']));

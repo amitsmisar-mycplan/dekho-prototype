@@ -1,4 +1,5 @@
 'use client';
+import { HomeCheckins } from './watch-checkin';
 import { toneForLanguages, formatCopy } from '@/lib/copy';
 import { homeCopy } from '@/.generated/copy/home';
 import { labelsCopy } from '@/.generated/copy/labels';
@@ -51,6 +52,7 @@ export function HomeScreen({ titles, providers }: { titles: Title[]; providers: 
   }
   const rail = (name: string, items: Title[], eyebrow?: string) => <section className="discovery-section" key={name}><SectionHeader title={name} eyebrow={eyebrow}/>{items.length ? <LazyRail><div className="movie-rail">{items.map((title) => <TitleCard key={title.id} title={title} providers={providers} prefs={prefs}/>)}</div></LazyRail> : <div className="rail-empty"><p>{formatCopy(homeCopy['no_picks_here_just_yet_try_another_language'])}</p><Link href="/welcome?edit=services">{formatCopy(homeCopy['edit_your_preferences'])}<ArrowRight size={14}/></Link></div>}</section>;
   return <div className="tonight-home"><div className="tonight-greeting"><div><p className="eyebrow">{formatCopy(homeCopy['less_scrolling_more_cinema'])}</p><h1>{hello}</h1></div><Link className="icon-button" href="/search" aria-label={formatCopy(homeCopy['search_titles'])}><Search size={21}/></Link></div>
+    <HomeCheckins titles={titles}/>
     {selected ? <section className="hero-carousel" aria-roledescription="carousel" aria-label={formatCopy(homeCopy['tonight_s_picks'])} onFocusCapture={() => setPaused(true)}>
       <div className="hero-feature" style={{ '--hero-a': selected.palette[0], '--hero-b': selected.palette[1] } as CSSProperties} onPointerDown={(event) => { swipe.current = { x: event.clientX, y: event.clientY }; suppressClick.current = false; }} onPointerUp={(event) => { if (!swipe.current) return; const dx = event.clientX - swipe.current.x, dy = event.clientY - swipe.current.y; if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { suppressClick.current = true; setPaused(true); advance(dx < 0 ? 1 : -1); } swipe.current = null; }} onPointerCancel={() => { swipe.current = null; }} onClickCapture={(event) => { if (suppressClick.current) { event.preventDefault(); event.stopPropagation(); suppressClick.current = false; } }}>
         <PosterLink title={selected} className="hero-poster-link"><motion.div key={selected.id} data-poster initial={{ opacity: reduced ? 1 : .6 }} animate={{ opacity: 1 }} className="hero-scene">
