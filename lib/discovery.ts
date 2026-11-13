@@ -1,3 +1,6 @@
+
+import { type Tone, formatCopy } from '@/lib/copy';
+import { homeCopy } from '@/.generated/copy/home';
 import { normalizeSearch, type Provider, type Title } from './data';
 import type { Preferences } from './preferences';
 export function hasFreeOffer(title: Title) { return title.providers.some((offer) => offer.type === 'free'); }
@@ -8,7 +11,7 @@ export function offerLabel(title: Title, providers: readonly Provider[], prefs: 
   const free = title.providers.find((o) => o.type === 'free');
   const offer = prefs.freeOnly ? free : own ?? title.providers.find((o) => o.type === 'stream') ?? free ?? title.providers[0];
   const provider = providers.find((p) => p.id === offer?.providerId);
-  return { provider, included: !prefs.freeOnly && Boolean(own), text: !offer ? 'No offer listed' : prefs.freeOnly || offer.type === 'free' ? `Free on ${provider?.name ?? offer.providerId}` : own ? `On your ${provider?.name ?? offer.providerId}` : `${provider?.name ?? offer.providerId}${offer.type === 'rent' || offer.type === 'buy' ? ` · ${offer.type}` : ''}` };
+  return { provider, included: !prefs.freeOnly && Boolean(own), text: !offer ? formatCopy(homeCopy['no_offer_listed']) : prefs.freeOnly || offer.type === 'free' ? formatCopy(homeCopy['free_on_value'], { p1: provider?.name ?? offer.providerId }) : own ? formatCopy(homeCopy['on_your_value'], { p1: provider?.name ?? offer.providerId }) : `${provider?.name ?? offer.providerId}${offer.type === 'rent' || offer.type === 'buy' ? ` · ${offer.type}` : ''}` };
 }
 const featuredIds = ['laapataa-ladies', 'manjummel-boys', 'vikram', 'panchayat', '12th-fail', 'aavesham', 'knives-out', 'rrr', 'jailer', 'severance'];
 export function homeSelections(titles: Title[], prefs: Preferences) {
@@ -20,10 +23,10 @@ export function homeSelections(titles: Title[], prefs: Preferences) {
   const trending = prefs.freeOnly ? [...eligible].sort((a, b) => b.tmdbRating - a.tmdbRating).slice(0, 8) : featuredIds.map((id) => eligible.find((t) => t.id === id)).filter((t): t is Title => Boolean(t));
   return { eligible, included, hero, trending };
 }
-export function greeting(name: string, date: Date) {
+export function greeting(name: string, date: Date, tone: Tone = 'indianEnglish') {
   const hour = date.getHours();
-  const time = hour < 5 ? 'late night' : hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : hour < 20 ? 'evening' : 'night';
-  return `${date.toLocaleDateString('en-IN', { weekday: 'long' })} ${time}${name.trim() ? `, ${name.trim().split(/\s+/)[0]}` : ''}. Kya plan hai?`;
+  const time = hour < 5 ? formatCopy(homeCopy['late_night']) : hour < 12 ? formatCopy(homeCopy['morning']) : hour < 17 ? formatCopy(homeCopy['afternoon']) : hour < 20 ? formatCopy(homeCopy['evening']) : formatCopy(homeCopy['night']);
+  return formatCopy(homeCopy['value_valuevalue_kya_plan_hai'], { p1: date.toLocaleDateString('en-IN', { weekday: 'long' }), p2: time, p3: name.trim() ? `, ${name.trim().split(/\s+/)[0]}` : '' }, tone);
 }
 export interface PersonMatch { name: string; titles: Title[]; role: string }
 export function peopleMatches(titles: Title[], query: string): PersonMatch[] {
@@ -33,7 +36,7 @@ export function peopleMatches(titles: Title[], query: string): PersonMatch[] {
   for (const title of titles) for (const name of [...title.cast, title.director]) {
     const normalized = normalizeSearch(name);
     if (!tokens.every((token) => normalized.includes(token))) continue;
-    const match = found.get(name) ?? { name, titles: [], role: name === title.director ? 'Director' : 'Cast' };
+    const match = found.get(name) ?? { name, titles: [], role: name === title.director ? formatCopy(homeCopy['director']) : formatCopy(homeCopy['cast']) };
     if (!match.titles.some((t) => t.id === title.id)) match.titles.push(title);
     found.set(name, match);
   }

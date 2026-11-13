@@ -1,3 +1,6 @@
+
+import { formatCopy } from '@/lib/copy';
+import { catalogCopy } from '@/.generated/copy/catalog';
 import catalogJson from '../../data/catalog.json';
 import providersJson from '../../data/providers.json';
 import { parseCatalog, parseProviders } from './validate';
@@ -51,11 +54,11 @@ export function similarity(source: Title, candidate: Title): SimilarTitle {
   const sharedGenres = source.genres.filter((genre) => candidate.genres.includes(genre));
   const sharedLanguage = source.languages.find((language) => candidate.languages.includes(language));
   const reasons: string[] = [];
-  if (sameDirector) reasons.push('Same director');
-  if (sharedCast.length) reasons.push(`With ${sharedCast[0]}`);
+  if (sameDirector) reasons.push(formatCopy(catalogCopy['same_director']));
+  if (sharedCast.length) reasons.push(formatCopy(catalogCopy['with_value'], { p1: sharedCast[0] }));
   if (sharedLanguage || sharedGenres.length) reasons.push([sharedLanguage, sharedGenres.slice(0, 2).join(' / ').toLowerCase()].filter(Boolean).join(' '));
-  if (sameRatingBand) reasons.push('Similar rating band');
-  return { title: candidate, score: Number(score.toFixed(6)), because: reasons.join(' · ') || 'A different direction to explore' };
+  if (sameRatingBand) reasons.push(formatCopy(catalogCopy['similar_rating_band']));
+  return { title: candidate, score: Number(score.toFixed(6)), because: reasons.join(' · ') || formatCopy(catalogCopy['a_different_direction_to_explore']) };
 }
 const stableOrder = (a: Title, b: Title) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 function limitCount(value: number): number { return Number.isFinite(value) ? Math.max(0, Math.floor(value)) : 0; }
@@ -113,5 +116,5 @@ export const dataSource: DataSource = new JsonDataSource();
 export function getAvailabilityMessage(offers: readonly ProviderOffer[], selectedServices: readonly Provider[]): string | null {
   if (!selectedServices.length || offers.some((offer) => selectedServices.some((service) => service.id === offer.providerId))) return null;
   const streaming = [...new Set(offers.filter((offer) => offer.type === 'stream').map((offer) => offer.provider.name))];
-  return `Not on ${selectedServices.map((service) => service.name).join(', ')} · ${streaming.length ? `streaming on ${streaming.join(', ')}` : 'no streaming offer listed'}`;
+  return formatCopy(catalogCopy['not_on_value_value'], { p1: selectedServices.map((service) => service.name).join(', '), p2: streaming.length ? formatCopy(catalogCopy['streaming_on_value'], { p1: streaming.join(', ') }) : formatCopy(catalogCopy['no_streaming_offer_listed']) });
 }
