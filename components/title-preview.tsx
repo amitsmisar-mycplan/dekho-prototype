@@ -1,4 +1,5 @@
 'use client';
+import { useCopy } from '@/lib/use-copy';
 import { formatCopy } from '@/lib/copy';
 import { titleCopy } from '@/.generated/copy/title';
 import { commonCopy } from '@/.generated/copy/common';
@@ -21,6 +22,7 @@ import { useBrand } from '@/lib/use-brand';
 import { initials } from '@/lib/preferences';
 const offerGroups: { type: OfferType; label: string }[] = [{ type: 'stream', label: formatCopy(titleCopy['stream']) }, { type: 'rent', label: formatCopy(titleCopy['rent']) }, { type: 'buy', label: formatCopy(titleCopy['buy']) }, { type: 'free', label: formatCopy(titleCopy['free']) }];
 export function TitlePreview({ title, providers, offers, similar, versions }: { title: Title; providers: Provider[]; offers: ProviderOffer[]; similar: SimilarTitle[]; versions: Title[] }) {
+  const formatCopy = useCopy();
   const brand = useBrand();
   const router = useRouter(); const [deckOpen, setDeckOpen] = useState(false); const shortlist = usePrototype((s) => s.shortlist);
   const prefs = usePrototype((s) => s.prefs); const watchlist = usePrototype((s) => s.watchlist); const rating = usePrototype((s) => s.personalRatings[title.id]);
@@ -29,7 +31,7 @@ export function TitlePreview({ title, providers, offers, similar, versions }: { 
   const [group, setGroup] = useState<{ percent: number; votes: number } | null>(null); const [take, setTake] = useState(rating?.take ?? ''); const [notice, setNotice] = useState(''); const [shareUrl, setShareUrl] = useState(''); const [shareFallback, setShareFallback] = useState(false);
   const recommended = titleRecommendations(title, similar, versions, prefs, onlyServices); const unavailable = titleAvailabilityMessage(offers, prefs.services);
   useEffect(() => { track('title_view', { titleId: title.id }); let active = true; const update = () => { getGroupRating(title.id).then((value) => { if (active) { setGroup(value); setGroupError(false); } }).catch(() => { if (active) setGroupError(true); }); }; update(); const unsubscribe = pollStore.subscribe(update); return () => { active = false; unsubscribe(); }; }, [title.id]);
-  useEffect(() => { setShareUrl(whatsappShareUrl(formatCopy(titleCopy['value_tonight_on_value'], { p1: title.title, p2: brand.name }), `${window.location.origin}/t/${title.slug}`)); }, [title.slug, title.title, brand.name]);
+  useEffect(() => { setShareUrl(whatsappShareUrl(formatCopy(titleCopy['value_tonight_on_value'], { p1: title.title, p2: brand.name }), `${window.location.origin}/t/${title.slug}`)); }, [title.slug, title.title, brand.name, formatCopy]);
   async function share() {
     const url = `${window.location.origin}/t/${title.slug}`;
     if (navigator.share) {

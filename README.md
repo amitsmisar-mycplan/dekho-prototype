@@ -349,3 +349,31 @@ Validation: lint, strict typecheck, **103 tests**, and production build pass. Li
 Lint, typecheck, **104 tests** and production build pass. Browser checks cover all six preview images, exact output dimensions, long-content rendering and the 390px kit with no overflow. See `docs/p10-verdict-wide-screenshot.png` and `docs/p10-verdict-story.png`.
 
 The redacted credential audit is in `docs/p10-security-audit.md`. No service-role key, database password or PostgreSQL connection string was detected in the audited tracked history. Local environment and Supabase CLI config/state are ignored. The user applied SQL in the Dashboard as postgres; the agent used only the public anon key in ignored `.env.local` for API verification, never a migration credential.
+
+## P7c — Voice and moments
+
+Read `docs/voice.md` for the friend-with-a-plan voice, the serious-copy boundaries, and the adaptations of the supplied ten-row starter table. `lib/copy.ts` remains the only authored copy source. `docs/copy-review.md` now exports every entry with **Context**, Indian English and Hinglish; `docs/voice-examples.md` compares 15 representative changes.
+
+`lib/copy/moments.ts` picks three greeting and three poll-share variants for Friday evening, weekday night, weekend afternoon, late night and an everyday fallback. Boundaries use browser-local time. Each channel rotates separately in sessionStorage (memory fallback if blocked); identical templates are avoided even across context boundaries. Home changes on another visit or a new time context, not on each minute/render. Unknown users and image routes remain Indian English; saved Hindi enables Roman Hinglish in client screens and explicit WhatsApp drafts. No messages are sent by this change.
+
+Plain actions, prices, privacy and deletion copy are retained. Errors avoid jokes, including the supplied direct Hindi vote-failure translation. An offline status now explains that a connection is needed to load films and send votes. Shimmer remains the loading treatment. Waiting counts and late-voter winners are real values; tie text describes the existing TMDb tie-break, not a non-existent coin toss. A post-watch prompt does not assume yesterday.
+
+The wide verdict card puts the attributed take directly beneath the main stat, removes the redundant watched footer and vertical dividers, and keeps **Vote on the next one** on one line. `/kit/og` exercises the same endpoint for all three verdict variants; the story layout retains its two-take presentation. Previews are fixtures; live shares use actual check-ins.
+
+Demo: set English only in `/welcome?edit=services`, visit Home twice for different context lines, then try an empty Shortlist, Search with no matches and `/me` with no saved films. Add Hindi and repeat. Open a poll to see the creator invitation, real progress bar, waiting/tie copy; visit a finished poll from a nonvoting browser to see the late-voter line. Use `/?demo=1` for the post-watch prompt. Open `/kit/og` and click a wide image to review the new layout. The clock must be in the relevant time window for timed lines; unit tests cover all boundaries without changing the machine clock.
+
+Validation: lint, strict typecheck, **108 tests** and production build pass. An isolated 390px cloud browser walkthrough verified rotating Friday greetings, both voices, empty shortlist/search/profile states, offline status, real waiting counts, tie/late-voter wording, a simulated vote failure, winner copy and the wide card. Test polls were labelled and closed. Screenshots are `docs/p7c-home-english.png`, `docs/p7c-home-hinglish.png`, `docs/p7c-search-hinglish.png`, and `docs/p7c-verdict-wide.png`. No new backend or content fixtures were added outside the existing kit; no catalogue data or credentials changed. Voter First Load JS is 122 KB; the earlier sub-120 KB goal remains unmet, and no new Lighthouse score is claimed.
+
+### Deployment font fix
+
+App fonts are bundled WOFF2 assets loaded by `next/font/local`. This avoids the Next 15 Google-font loader's build-time URL-extension parsing failure seen on Vercel. Bricolage Grotesque, Inter, Mukta, their CSS variables, and the existing social-card TTFs are retained. Font sources, coverage and licences are documented in `public/fonts/README.md`; no app dependency was added.
+
+Validation passed: lint, typecheck, 108 tests, and a cold production build after moving the old `.next` directory aside, with Node HTTP/HTTPS/fetch/TLS network calls blocked. Browser checks loaded display weight 800, Inter 400 and Mukta 400/600 without Google font requests or runtime errors. A hosted Vercel deployment has not yet been verified by this local check.
+
+### Saved tie-break toss
+
+Run the full `supabase/migrations/004_poll_toss.sql` in Supabase SQL Editor as postgres after 003. It adds `toss` and `winner_id`, a creator-only `toss_poll` RPC, and updates check-ins to use the recorded winner. No credentials need to be changed.
+
+To demo: create a two-title poll, give both titles a thumbs up on the voter page, then open its results on the creator device. Tap **Toss**. The coin flips for one second and the normal reveal opens; reduced-motion skips the flip/delay. Reload or open the link on another device: the same winner remains. A toss closes voting and cannot be repeated. Once any check-in exists, the winner cannot be changed. Without a toss, the existing TMDb tie-break still applies. Local demo mode supports the same flow without SQL.
+
+`docs/copy-review-top40.md` is the focused review sheet; `node scripts/export-copy-top40.mjs` regenerates its 40 rows (save reviewer comments first).

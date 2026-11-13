@@ -1,6 +1,8 @@
 'use client';
+import { useCopy } from '@/lib/use-copy';
+import { browserRotation, momentAt } from '@/lib/copy/moments';
 import { HomeCheckins } from './watch-checkin';
-import { toneForLanguages, formatCopy } from '@/lib/copy';
+import { toneForLanguages } from '@/lib/copy';
 import { homeCopy } from '@/.generated/copy/home';
 import { labelsCopy } from '@/.generated/copy/labels';
 import { commonCopy } from '@/.generated/copy/common';
@@ -22,6 +24,7 @@ import { TitleCard } from '@/components/title-card';
 import { PosterLink } from '@/components/poster-transition';
 const moodItems: { name: Mood; icon: typeof Laugh; color: string }[] = [{ name: 'Laugh', icon: Laugh, color: '#FFCA66' }, { name: 'Edge-of-seat', icon: Zap, color: '#FF88A8' }, { name: 'Family', icon: Users, color: '#7DDAFF' }, { name: 'Feel-good', icon: Heart, color: '#7EE0B9' }, { name: 'Mind-bender', icon: Brain, color: '#C6AAFF' }];
 export function HomeScreen({ titles, providers }: { titles: Title[]; providers: Provider[] }) {
+  const formatCopy = useCopy();
   const prefs = usePrototype((s) => s.prefs); const reduced = useReducedMotion();
   const [hello, setHello] = useState(() => greeting(prefs.name, new Date(), toneForLanguages(prefs.languages))); const [index, setIndex] = useState(0); const [paused, setPaused] = useState(false);
   const [mood, setMood] = useState<Mood | null>(null); const [picks, setPicks] = useState<Title[] | null>(null); const [moodError, setMoodError] = useState(false);
@@ -30,7 +33,7 @@ export function HomeScreen({ titles, providers }: { titles: Title[]; providers: 
   const selected = hero[index % Math.max(hero.length, 1)]; const heroKey = hero.map((t) => t.id).join('|');
   const swipe = useRef<{ x: number; y: number } | null>(null); const suppressClick = useRef(false);
   const closeMood = useCallback(() => setMood(null), []); const closeToast = useCallback(() => setToast(''), []);
-  useEffect(() => { const update = () => setHello(greeting(prefs.name, new Date(), toneForLanguages(prefs.languages))); update(); const timer = setInterval(update, 60_000); return () => clearInterval(timer); }, [prefs.name, prefs.languages]);
+  useEffect(() => { let previous = ''; const update = () => { const date = new Date(), moment = momentAt(date); if (moment === previous) return; previous = moment; setHello(greeting(prefs.name, date, toneForLanguages(prefs.languages), browserRotation())); }; update(); const timer = setInterval(update, 60_000); return () => clearInterval(timer); }, [prefs.name, prefs.languages]);
   useEffect(() => { let active = true; getOpenPoll().then((p) => { if (active) setPoll(p); }); return () => { active = false; }; }, []);
   useEffect(() => {
     if (reduced || paused || mood || hero.length < 2) return;

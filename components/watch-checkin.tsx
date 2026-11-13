@@ -2,15 +2,16 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ThumbsDown, ThumbsUp, Heart } from 'lucide-react';
-import { formatCopy } from '@/lib/copy';
+import { useCopy } from '@/lib/use-copy';
 import { checkinCopy as c } from '@/.generated/copy/checkin';
 import { getCheckinPolls, getCheckins, saveCheckin, pollStore, type Poll } from '@/lib/polls';
 import { checkinDue, verdict, winnerId, type Checkin, type CheckinInput } from '@/lib/polls/checkins';
 import { voterIdentity } from '@/lib/polls/identity';
 import { dataSource, type Title } from '@/lib/data';
 import { track } from '@/lib/analytics';
-const t = (key: keyof typeof c, params = {}) => formatCopy(c[key], params);
+function useCheckinCopy() { const format=useCopy(); return useCallback((key:keyof typeof c,params:Record<string,unknown>={})=>format(c[key],params),[format]); }
 export function WatchCheckin({ poll, title, rows, onSave, demo=false }: { poll: Poll; title: Title; rows: Checkin[]; onSave: () => void; demo?: boolean }) {
+ const t=useCheckinCopy();
  const [yes,setYes]=useState(false),[rating,setRating]=useState<CheckinInput['rating']>(null),[take,setTake]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState('');
  const shown=useRef(false);const due=checkinDue(poll,voterIdentity().id,rows,Date.now(),demo);
  useEffect(()=>{if(due&&!shown.current){shown.current=true;track('checkin_shown',{pollId:poll.id,titleId:title.id});}},[due,poll.id,title.id]);
@@ -19,6 +20,7 @@ export function WatchCheckin({ poll, title, rows, onSave, demo=false }: { poll: 
  return <section className="watch-checkin"><p className="eyebrow">{poll.groupName||poll.name}</p><h2>{t('question',{title:title.title})}</h2>{!yes?<div className="checkin-actions"><button className="button button-primary" disabled={busy} onClick={()=>setYes(true)}>{t('yes')}</button><button className="button button-secondary" disabled={busy} onClick={()=>void save(null)}>{t('later')}</button><button className="button button-secondary" disabled={busy} onClick={()=>void save(false)}>{t('skipped')}</button></div>:<><fieldset><legend>{t('rating')}</legend><div className="checkin-actions">{([[-1,'down',ThumbsDown],[1,'up',ThumbsUp],[2,'loved',Heart]] as const).map(([value,label,Icon])=><button key={value} className="button button-secondary" aria-pressed={rating===value} onClick={()=>setRating(value)}><Icon size={18}/>{t(label)}</button>)}</div></fieldset><label htmlFor={`checkin-${poll.id}`}>{t('take')}</label><input id={`checkin-${poll.id}`} maxLength={80} value={take} onChange={e=>setTake(e.target.value)}/><button className="button button-primary" disabled={busy||rating===null} onClick={()=>void save(true)}>{t(busy?'saving':'save')}</button></>}{error&&<p role="alert">{error}</p>}{busy&&<div className="skeleton checkin-loading" aria-label={t('saving')}/>}</section>;
 }
 export function HomeCheckins({ titles }: { titles: Title[] }) {
+ const t=useCheckinCopy();
  const [items,setItems]=useState<{poll:Poll;rows:Checkin[]}[]|null>(null),[error,setError]=useState(false),[demo,setDemo]=useState(false);
  const refresh=useCallback(async()=>{try{const polls=await getCheckinPolls();const next=await Promise.all(polls.map(async poll=>({poll,rows:await getCheckins(poll.id)})));setItems(next);setError(false);}catch{setError(true);}},[]);
  useEffect(()=>{setDemo(new URLSearchParams(location.search).get('demo')==='1');void refresh();const off=pollStore.subscribe(()=>void refresh());const timer=setInterval(()=>void refresh(),60_000);return()=>{off();clearInterval(timer);};},[refresh]);
@@ -28,9 +30,10 @@ export function HomeCheckins({ titles }: { titles: Title[] }) {
  return <>{items.map(({poll,rows})=>{const title=titles.find(x=>x.id===winnerId(poll,ratings));return title?<WatchCheckin key={poll.id} poll={poll} rows={rows} title={title} demo={demo} onSave={()=>void refresh()}/>:null;})}</>;
 }
 export default function GroupVerdict({poll,demo=false}: {poll:Poll;demo?:boolean}) {
+ const t=useCheckinCopy();
  const [rows,setRows]=useState<Checkin[]|null>(null),[title,setTitle]=useState<Title|null>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false),[shared,setShared]=useState(false),[downloads,setDownloads]=useState<string[]>([]);
  const router=useRouter(),urls=useRef<string[]>([]),files=useRef<File[]>([]);
- const refresh=useCallback(async()=>{try{const [values,titles]=await Promise.all([getCheckins(poll.id),dataSource.listTitles()]);setRows(values);setTitle(titles.find(x=>x.id===winnerId(poll,Object.fromEntries(titles.map(x=>[x.id,x.tmdbRating]))))??null);setError('');}catch{setError(t('error'));}},[poll]);
+ const refresh=useCallback(async()=>{try{const [values,titles]=await Promise.all([getCheckins(poll.id),dataSource.listTitles()]);setRows(values);setTitle(titles.find(x=>x.id===winnerId(poll,Object.fromEntries(titles.map(x=>[x.id,x.tmdbRating]))))??null);setError('');}catch{setError(t('error'));}},[poll,t]);
  useEffect(()=>{void refresh();const off=pollStore.subscribe(()=>void refresh());return off;},[refresh]);
  useEffect(()=>{const all=urls.current;return()=>all.forEach(u=>URL.revokeObjectURL(u));},[]);
  const summary=rows?verdict(poll,rows):null;

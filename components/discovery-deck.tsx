@@ -1,4 +1,5 @@
 'use client';
+import { useCopy } from '@/lib/use-copy';
 import { useTone } from '@/lib/use-copy';
 import { formatCopy } from '@/lib/copy';
 import { shortlistCopy } from '@/.generated/copy/shortlist';
@@ -24,6 +25,7 @@ function DeckCard({ item, onChoice }: { item: SimilarTitle; onChoice: (action: D
   return <><div className="deck-stage"><motion.div className="deck-card" style={{ x, y, rotate: reduced ? 0 : rotate }} animate={controls} drag={!busy} dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }} dragElastic={.85} onDragEnd={(_, info) => { const action = deckIntent(info.offset.x, info.offset.y); if (action) void choose(action); }} transition={uiSpring}><PosterCard title={item.title.title} catalogTitle={item.title}/><motion.span className="deck-stamp stamp-add" style={{ opacity: addOpacity }} aria-hidden="true">{formatCopy(shortlistCopy['shortlist_2'])}</motion.span><motion.span className="deck-stamp stamp-skip" style={{ opacity: skipOpacity }} aria-hidden="true">{formatCopy(shortlistCopy['skip_2'])}</motion.span><motion.span className="deck-stamp stamp-save" style={{ opacity: saveOpacity }} aria-hidden="true">{formatCopy(shortlistCopy['watchlist_2'])}</motion.span></motion.div></div><h3 className="deck-title">{item.title.title}</h3><p className="deck-because">{item.because}</p><div className="deck-buttons"><button disabled={busy} onClick={() => void choose('skip')}><X size={22}/>{formatCopy(shortlistCopy['skip'])}</button><button disabled={busy} onClick={() => void choose('watchlist')}><Bookmark size={22}/>{formatCopy(shortlistCopy['watchlist'])}</button><button disabled={busy} onClick={() => void choose('add')}><Plus size={22}/>{formatCopy(shortlistCopy['shortlist'])}</button></div></>;
 }
 export function DiscoveryDeck({ items, onClose }: { items: SimilarTitle[]; onClose: () => void }) {
+  const formatCopy = useCopy();
   const tone = useTone();
   const [index, setIndex] = useState(0); const shortlist = usePrototype((s) => s.shortlist); const [message, setMessage] = useState('');
   const item = items.slice(index).find((entry) => !shortlist.includes(entry.title.id)); const full = shortlist.length >= 4;

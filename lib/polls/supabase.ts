@@ -69,6 +69,7 @@ export function createSupabasePollStore(client: SupabaseClient, realtime = typeo
     async castVote(id, voterId, titleId) { return store.rateTitle(id, voterId, formatCopy(pollErrorsCopy['voter']), titleId, { score: 1 }); },
     async rateTitle(id, voterId, name, titleId, rating) { own(voterId); await rpc('vote_on_poll', { p_id: id, p_title_id: titleId, p_voter_name: name, p_value: rating.score }); emit(); },
     async setTake(id, voterId, take) { own(voterId); await rpc('take_on_poll', { p_id: id, p_text: take }); emit(); },
+    async tossPoll(id, creatorId) { own(creatorId); const poll = parseCloudPoll(await rpc('toss_poll', { p_id: id })); if (!poll) throw cloudError({}); emit(); return poll; },
     async closePoll(id, creatorId) { own(creatorId); await rpc('close_poll', { p_id: id }); emit(); },
     async getStreak(id) { return Number(await rpc('poll_streak', { p_id: id })) || 0; },
     async getResults(id) { const poll = await store.getPoll(id); return poll ? Object.fromEntries(scorePoll(poll).map((r) => [r.id, r.score])) : {}; },

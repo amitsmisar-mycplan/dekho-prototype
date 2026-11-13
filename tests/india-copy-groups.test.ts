@@ -11,13 +11,13 @@ import type { Poll } from '../lib/polls/types';
 const hindi = /[\u0900-\u097f]|\b(kya|dekhein|yaar|paisa|vasool|chalo|bas|apna|timepass|adda|kuch|bhi|thoda|abhi|baaki|dil|khush)\b/i;
 describe('India copy contract', () => {
  it('selects Hinglish only when Hindi is among viewing languages', () => { expect(toneForLanguages([])).toBe('indianEnglish'); expect(toneForLanguages(['Tamil','English'])).toBe('indianEnglish'); expect(toneForLanguages(['Malayalam','Hindi'])).toBe('hinglish'); });
- it('keeps Indian English Hindi-free and allows at most one distinct Hinglish entry per screen', () => {
+ it('keeps Indian English Hindi-free with Roman Hinglish and context for every string', () => {
   for (const entries of Object.values(copy)) {
-   expect(Object.values(entries).filter(v=>v.hinglish!==v.indianEnglish).length).toBeLessThanOrEqual(1);
+   for(const line of Object.values(entries)){expect(line.context?.length).toBeGreaterThan(5);expect(line.hinglish).not.toMatch(/[\u0900-\u097f]/);}
    for(const line of Object.values(entries)){expect(line.indianEnglish).not.toMatch(hindi);expect(line.indianEnglish).not.toMatch(/binge-worthy|date night|\bcouch\b|snacks are sorted|y'all|\bawesome\b|\bTV shows?\b/i);expect(line.hinglish.match(/\{\w+\}/g)??[]).toEqual(line.indianEnglish.match(/\{\w+\}/g)??[]);}
   }
  });
- it('formats group share text with one emoji and preserves supplied content as text', () => { const line=text('pollCreate','value_vote_for_tonight_s_picture_value',{p1:'College gang',p2:'https://example.test/p/abcd1234'}); expect(line).toContain('College gang, vote');expect(line.match(/\p{Extended_Pictographic}/gu)).toHaveLength(1);expect(text('profile','group_summary',{group:'<Flatmates>',count:4,nights:'movie nights',winner:'Aavesham'})).toBe('<Flatmates> · 4 movie nights · last: Aavesham'); });
+ it('formats group share text with at most one emoji and preserves supplied content as text', () => { const line=text('pollCreate','value_vote_for_tonight_s_picture_value',{p1:'College gang',p2:'https://example.test/p/abcd1234'}); expect(line).toContain('College gang, vote');expect(line.match(/\p{Extended_Pictographic}/gu)??[]).toHaveLength(0);expect(text('profile','group_summary',{group:'<Flatmates>',count:4,nights:'movie nights',winner:'Aavesham'})).toBe('<Flatmates> · 4 movie nights · last: Aavesham'); });
  it('has no literal JSX prose, labels, alt text or placeholders outside the copy catalogue', () => {
   const files:string[]=[];const walk=(dir:string)=>{for(const e of readdirSync(dir,{withFileTypes:true})){ if(e.isDirectory()) walk(path.join(dir,e.name)); else if(e.name.endsWith('.tsx')) files.push(path.join(dir,e.name)); }};walk('components');walk('app');
   const violations:string[]=[];for(const file of files){const sf=ts.createSourceFile(file,readFileSync(file,'utf8'),ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);const visit=(node:ts.Node)=>{if(ts.isJsxText(node)&&node.text.trim())violations.push(file+': '+node.text.trim());if(ts.isJsxAttribute(node)&&['aria-label','alt','placeholder','title','eyebrow'].includes(node.name.getText(sf))&&node.initializer&&ts.isStringLiteral(node.initializer)&&node.initializer.text.trim())violations.push(file+': '+node.initializer.text);ts.forEachChild(node,visit);};visit(sf);}expect(violations).toEqual([]);

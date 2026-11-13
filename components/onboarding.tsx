@@ -1,5 +1,6 @@
 'use client';
-import { toneForLanguages, formatCopy } from '@/lib/copy';
+import { useCopy } from '@/lib/use-copy';
+import { toneForLanguages } from '@/lib/copy';
 import { welcomeCopy } from '@/.generated/copy/welcome';
 
 import { uiSpring } from '@/lib/motion';
@@ -18,6 +19,7 @@ export function Onboarding({ providers, languages, edit }: { providers: Provider
   const editing = edit && completed;
   const [draft, setDraft] = useState<Preferences>(() => ({ ...saved, services: [...saved.services], languages: [...saved.languages] }));
   const tone = toneForLanguages(draft.languages);
+  const formatCopy = useCopy(tone);
   const [step, setStep] = useState(0); const [celebrating, setCelebrating] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null); const lastTracked = useRef('');
   const count = editing ? 2 : 3;

@@ -1502,3 +1502,10 @@ a.text-action,a.wordmark { display:inline-flex; align-items:center; }
 .group-verdict blockquote { border-left: 2px solid var(--teal); padding-left: 12px; margin: 18px 0; }
 .group-verdict cite { display: block; color: var(--muted); font-size: 13px; margin-top: 5px; }
 .verdict-summary { color: var(--teal); font-size: 20px; margin: 16px 0; }
+.connection-status { margin: 12px 16px; padding: 12px 16px; border-radius: 12px; background: #252130; color: var(--text); font-size: 14px; line-height: 1.5; border: 1px solid #9C97AD66; }
+
+/* The saved toss chooses the winner; this coin is presentation only. */
+.toss-overlay { position: fixed; inset: 0; z-index: 200; background: #0b0a10ed; display: flex; flex-direction: column; gap: 24px; align-items: center; justify-content: center; }
+.toss-coin { width: 96px; height: 96px; border-radius: 50%; border: 6px double #ffe3a7; background: linear-gradient(135deg,#ffdb81,#ffb627,#ae6507); box-shadow: 0 0 70px #ffb62750; animation: toss-flip 1s ease-in-out both; }
+@keyframes toss-flip { 0% { transform: translateY(40px) rotateY(0); } 50% { transform: translateY(-70px) rotateY(540deg); } 100% { transform: translateY(0) rotateY(1080deg); } }
+@media (prefers-reduced-motion: reduce) { .toss-coin { animation: none; } }
