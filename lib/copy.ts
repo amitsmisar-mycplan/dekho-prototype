@@ -3059,6 +3059,23 @@ export const labelsCopy = {
   }
 } as const;
 export const checkinCopy = {
+"lovedHeadline": {"indianEnglish": "{group} loved", "hinglish": "{group} loved"},
+"likedHeadline": {"indianEnglish": "{group} liked", "hinglish": "{group} liked"},
+"splitHeadline": {"indianEnglish": "{group} were split on", "hinglish": "{group} were split on"},
+"lovedStat": {"indianEnglish": "{count} of {total} loved it", "hinglish": "{count} of {total} loved it"},
+"likedStat": {"indianEnglish": "{count} of {total} liked it", "hinglish": "{count} of {total} liked it"},
+"splitStat": {"indianEnglish": "{count} of {total} liked it", "hinglish": "{count} of {total} liked it"},
+"whatNext": {"indianEnglish": "What next?", "hinglish": "What next?"},
+"voteNext": {"indianEnglish": "Vote on the next one", "hinglish": "Vote on the next one"},
+"attributedTake": {"indianEnglish": "“{take}” — {name}", "hinglish": "“{take}” — {name}"},
+"verdictPreviews": {"indianEnglish": "Post-watch verdict cards", "hinglish": "Post-watch verdict cards"},
+"previewLoved": {"indianEnglish": "Loved", "hinglish": "Loved"},
+"previewLiked": {"indianEnglish": "Liked", "hinglish": "Liked"},
+"previewSplit": {"indianEnglish": "Split", "hinglish": "Split"},
+"previewAlt": {"indianEnglish": "{mood} verdict card — {format}", "hinglish": "{mood} verdict card — {format}"},
+"wideFormat": {"indianEnglish": "Wide", "hinglish": "Wide"},
+"storyFormat": {"indianEnglish": "Story", "hinglish": "Story"},
+
   "question": {
     "indianEnglish": "Did you watch {title}?",
     "hinglish": "Did you watch {title}?"
