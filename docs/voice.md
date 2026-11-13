@@ -39,7 +39,7 @@ A per-tab sessionStorage counter rotates sequentially through each context/chann
 
 - Friday uses the supplied “anything is fine” / “kuch bhi” observation, with the user's name when present.
 - Waiting uses the actual voter count. It does not invent how many people saw a message.
-- A tie says the higher TMDb rating decides; it never offers a coin toss the UI cannot perform.
+- A tie offers a real creator-only toss, saved once for everyone. Without a toss, the higher TMDb rating remains the fallback. Use British/Indian spelling: favourite, colour, cancelled.
 - Late-voter copy uses the actual winner and appears only for a device that did not vote.
 - Check-ins say “Watched {title}?” rather than “last night”: the six-hour prompt may happen the same day.
 - Never translate a group's name, a film title or a person's take. Keep the title/name visibly distinct from product copy.

@@ -1,3 +1,4 @@
+import { tossOrder } from '@/lib/polls/results';
 
 import { formatCopy } from '@/lib/copy';
 import { shareCardCopy } from '@/.generated/copy/shareCard';
@@ -19,7 +20,7 @@ async function render(request: Request, context: Context, card: ReturnType<typeo
   const { id } = await context.params;
   if (!card || card.poll.id !== id || !card.rows.some((r) => r.up || r.down)) return new Response(formatCopy(shareCardCopy['a_completed_result_is_required']), { status: 400 });
   const catalog = await dataSource.listTitles(); if (card.rows.some((r) => !catalog.some((t) => t.id === r.id))) return new Response(formatCopy(shareCardCopy['unknown_title_2']), { status: 404 });
-  const rows = [...card.rows].sort((a, b) => (b.up - b.down) - (a.up - a.down) || catalog.find((t) => t.id === b.id)!.tmdbRating - catalog.find((t) => t.id === a.id)!.tmdbRating || card.poll.titleIds.indexOf(a.id) - card.poll.titleIds.indexOf(b.id));
+  const rows = [...card.rows].sort((a, b) => (b.up - b.down) - (a.up - a.down) || tossOrder(card.poll, a.id, b.id) || catalog.find((t) => t.id === b.id)!.tmdbRating - catalog.find((t) => t.id === a.id)!.tmdbRating || card.poll.titleIds.indexOf(a.id) - card.poll.titleIds.indexOf(b.id));
   const winner = catalog.find((t) => t.id === rows[0].id)!, story = new URL(request.url).searchParams.get('format') === 'story';
   const width = story ? 1080 : 1200, height = story ? 1920 : 630, posterW = story ? 360 : 280, fit = fitTitle(winner.title, 252, 18, 45), takes = rows[0].takes.slice(0, story ? 6 : 3);
   return new ImageResponse(<div style={{ display: 'flex', flexDirection: story ? 'column' : 'row', width, height, padding: story ? '65px 70px' : '40px 45px', background: 'radial-gradient(circle at 20% 30%, #213C43, #0B0A10 65%)', color: brand.colors.text, fontFamily: 'Inter', gap: story ? 28 : 45 }}>

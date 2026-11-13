@@ -369,3 +369,11 @@ Validation: lint, strict typecheck, **108 tests** and production build pass. An 
 App fonts are bundled WOFF2 assets loaded by `next/font/local`. This avoids the Next 15 Google-font loader's build-time URL-extension parsing failure seen on Vercel. Bricolage Grotesque, Inter, Mukta, their CSS variables, and the existing social-card TTFs are retained. Font sources, coverage and licences are documented in `public/fonts/README.md`; no app dependency was added.
 
 Validation passed: lint, typecheck, 108 tests, and a cold production build after moving the old `.next` directory aside, with Node HTTP/HTTPS/fetch/TLS network calls blocked. Browser checks loaded display weight 800, Inter 400 and Mukta 400/600 without Google font requests or runtime errors. A hosted Vercel deployment has not yet been verified by this local check.
+
+### Saved tie-break toss
+
+Run the full `supabase/migrations/004_poll_toss.sql` in Supabase SQL Editor as postgres after 003. It adds `toss` and `winner_id`, a creator-only `toss_poll` RPC, and updates check-ins to use the recorded winner. No credentials need to be changed.
+
+To demo: create a two-title poll, give both titles a thumbs up on the voter page, then open its results on the creator device. Tap **Toss**. The coin flips for one second and the normal reveal opens; reduced-motion skips the flip/delay. Reload or open the link on another device: the same winner remains. A toss closes voting and cannot be repeated. Once any check-in exists, the winner cannot be changed. Without a toss, the existing TMDb tie-break still applies. Local demo mode supports the same flow without SQL.
+
+`docs/copy-review-top40.md` is the focused review sheet; `node scripts/export-copy-top40.mjs` regenerates its 40 rows (save reviewer comments first).

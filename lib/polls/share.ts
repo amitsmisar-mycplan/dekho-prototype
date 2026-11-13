@@ -2,7 +2,7 @@
 import { formatCopy } from '@/lib/copy';
 import { pollCreateCopy } from '@/.generated/copy/pollCreate';
 import { cloudPollsEnabled } from './config';
-export interface PollSnapshot { id: string; name: string; note: string; titleIds: string[]; deadline: string; groupName?: string; createdAt?: string; creator?: { id: string; name: string } }
+export interface PollSnapshot { toss?: boolean; winnerId?: string; id: string; name: string; note: string; titleIds: string[]; deadline: string; groupName?: string; createdAt?: string; creator?: { id: string; name: string } }
 export function parseSnapshot(value: unknown): PollSnapshot | null {
   if (!value || typeof value !== 'object') return null;
   const p = value as Partial<PollSnapshot>;
@@ -10,10 +10,12 @@ export function parseSnapshot(value: unknown): PollSnapshot | null {
   if (p.groupName !== undefined && (typeof p.groupName !== 'string' || p.groupName.length > 60)) return null;
   if (p.createdAt !== undefined && (typeof p.createdAt !== 'string' || !Number.isFinite(Date.parse(p.createdAt)))) return null;
   if (p.creator !== undefined && (!p.creator || typeof p.creator.id !== 'string' || !/^[A-Za-z0-9_-]{8,64}$/.test(p.creator.id) || typeof p.creator.name !== 'string' || !p.creator.name.trim() || p.creator.name.length > 40)) return null;
-  return { ...(p.groupName !== undefined ? { groupName: p.groupName.trim().replace(/\s+/g, ' ') } : {}), ...(p.createdAt ? { createdAt: p.createdAt } : {}), ...(p.creator ? { creator: p.creator } : {}), id: p.id, name: p.name.trim(), note: p.note, titleIds: p.titleIds, deadline: new Date(p.deadline).toISOString() };
+  if (p.toss !== undefined && typeof p.toss !== 'boolean') return null;
+  if (p.toss && (typeof p.winnerId !== 'string' || !p.titleIds.includes(p.winnerId))) return null;
+  return { ...(p.toss ? { toss: true, winnerId: p.winnerId } : {}), ...(p.groupName !== undefined ? { groupName: p.groupName.trim().replace(/\s+/g, ' ') } : {}), ...(p.createdAt ? { createdAt: p.createdAt } : {}), ...(p.creator ? { creator: p.creator } : {}), id: p.id, name: p.name.trim(), note: p.note, titleIds: p.titleIds, deadline: new Date(p.deadline).toISOString() };
 }
 export function encodePoll(poll: PollSnapshot) {
-  const bytes = new TextEncoder().encode(JSON.stringify({ id: poll.id, name: poll.name, ...(poll.groupName !== undefined ? { groupName: poll.groupName } : {}), ...(poll.createdAt ? { createdAt: poll.createdAt } : {}), note: poll.note, titleIds: poll.titleIds, deadline: poll.deadline, ...(poll.creator ? { creator: poll.creator } : {}) }));
+  const bytes = new TextEncoder().encode(JSON.stringify({ ...(poll.toss ? { toss: true, winnerId: poll.winnerId } : {}), id: poll.id, name: poll.name, ...(poll.groupName !== undefined ? { groupName: poll.groupName } : {}), ...(poll.createdAt ? { createdAt: poll.createdAt } : {}), note: poll.note, titleIds: poll.titleIds, deadline: poll.deadline, ...(poll.creator ? { creator: poll.creator } : {}) }));
   return btoa(Array.from(bytes, (b) => String.fromCharCode(b)).join('')).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 export function decodePoll(encoded: string | undefined, id: string): PollSnapshot | null {

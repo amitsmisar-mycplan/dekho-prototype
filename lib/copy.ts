@@ -991,8 +991,8 @@ export const kitCopy = {
     "context": "Developer kit · friday movie night"
   },
   "1200_630_open_an_image_for_full_size_the_outline_marks_the_center": {
-    "indianEnglish": " · 1200 × 630. Open an image for full size. The outline marks the centered square crop; all posters stay inside it. Deadlines use India time.",
-    "hinglish": " · 1200 × 630. Open an image for full size. The outline marks the centered square crop; all posters stay inside it. Deadlines use India time.",
+    "indianEnglish": " · 1200 × 630. Open an image for full size. The outline marks the centred square crop; all posters stay inside it. Deadlines use India time.",
+    "hinglish": " · 1200 × 630. Open an image for full size. The outline marks the centred square crop; all posters stay inside it. Deadlines use India time.",
     "context": "Developer kit · 1200 630 open an image for full size the outline marks the center"
   },
   "poll_share_cards": {
@@ -1275,8 +1275,8 @@ export const homeCopy = {
     "context": "Home · the picks didn t load close this sheet and give it another try"
   },
   "a_few_contenders_for_the_group": {
-    "indianEnglish": "One mood. A few ways to start a debate.",
-    "hinglish": "Mood ek. Debate ke options ready.",
+    "indianEnglish": "Mood set. Now for the debate.",
+    "hinglish": "Mood set. Ab bas debate baaki hai.",
     "context": "Home mood sheet · supporting line; up to four picks"
   },
   "value_sorted": {
@@ -1845,7 +1845,7 @@ export const pollCreateCopy = {
   },
   "your_picks_their_vote_sorted": {
     "indianEnglish": "You made a shortlist. That already counts as planning.",
-    "hinglish": "Shortlist bana li. Planning toh ho gayi.",
+    "hinglish": "Shortlist ban gayi. Itna planning toh kaafi hai.",
     "context": "Poll creation · subtitle"
   },
   "ask_the_group": {
@@ -2101,8 +2101,8 @@ export const voterCopy = {
     "context": "Voter / live results · open voter view"
   },
   "most_up_minus_down_wins_ties_go_to_the_higher_tmdb_rating": {
-    "indianEnglish": "Most up minus down wins. Ties go to the higher TMDb rating.",
-    "hinglish": "Most up minus down wins. Ties go to the higher TMDb rating.",
+    "indianEnglish": "Most up minus down wins. The creator can toss a tie; otherwise, the higher TMDb rating decides.",
+    "hinglish": "Most up minus down wins. The creator can toss a tie; otherwise, the higher TMDb rating decides.",
     "context": "Voter / live results · most up minus down wins ties go to the higher tmdb rating"
   },
   "who_voted": {
@@ -2336,9 +2336,9 @@ export const voterCopy = {
     "context": "Results · open poll with votes; count is live, read status is playful not telemetry"
   },
   "tie_line": {
-    "indianEnglish": "It’s a tie. The higher TMDb rating gets the final say.",
-    "hinglish": "Tie ho gaya. Higher TMDb rating se decision hoga.",
-    "context": "Results · equal top net scores; actual tie-break unchanged"
+    "indianEnglish": "It's a tie. Toss for it?",
+    "hinglish": "Tie ho gaya. Toss karein?",
+    "context": "Results · equal top net scores before a creator toss; button appears only before any check-in"
   },
   "late_line": {
     "indianEnglish": "Bit late. The group went with {title}.",
@@ -2349,6 +2349,26 @@ export const voterCopy = {
     "indianEnglish": "{count} of {total} voted. Your call.",
     "hinglish": "{count} of {total} voted. Ab tumhari choice.",
     "context": "Voter · sticky progress; Done stays disabled until every card has a vote"
+  },
+  "toss": {
+    "indianEnglish": "Toss",
+    "hinglish": "Toss",
+    "context": "voter: creator tie-break action/status. Toss is saved once for all voters."
+  },
+  "tossing": {
+    "indianEnglish": "Tossing…",
+    "hinglish": "Tossing…",
+    "context": "voter: creator tie-break action/status. Toss is saved once for all voters."
+  },
+  "toss_saved": {
+    "indianEnglish": "Decided by toss",
+    "hinglish": "Decided by toss",
+    "context": "voter: creator tie-break action/status. Toss is saved once for all voters."
+  },
+  "toss_failed": {
+    "indianEnglish": "Could not toss. Check your connection and try again.",
+    "hinglish": "Could not toss. Check your connection and try again.",
+    "context": "voter: creator tie-break action/status. Toss is saved once for all voters."
   }
 } as const;
 export const artworkCopy = {
@@ -2530,8 +2550,8 @@ export const profileCopy = {
     "context": "Me · empty watchlist description"
   },
   "for_another_good_night": {
-    "indianEnglish": "Your future plans need a film or two.",
-    "hinglish": "Future plans ke liye do films rakh lo.",
+    "indianEnglish": "Empty watchlist. What about next weekend?",
+    "hinglish": "Watchlist khaali hai. Agle weekend ka kya?",
     "context": "Me · empty watchlist heading"
   },
   "remove": {

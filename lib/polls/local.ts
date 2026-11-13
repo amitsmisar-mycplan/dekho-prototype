@@ -4,7 +4,7 @@ import { formatCopy } from '@/lib/copy';
 import { pollErrorsCopy } from '@/.generated/copy/pollErrors';
 import { groupKey } from './groups';
 import { voterIdentity } from './identity';
-import { normalizeBallot, scorePoll } from './results';
+import { normalizeBallot, scorePoll, tiedWinnerIds } from './results';
 import { defaultPollName, parseSnapshot } from './share';
 import type { Poll, PollStore, OpenPollSummary } from './types';
 export type { PollSnapshot } from './share';
@@ -57,6 +57,18 @@ export const localPollStore: PollStore = {
     if (!poll || poll.closedAt || Date.parse(poll.deadline) <= Date.now()) throw new Error(formatCopy(pollErrorsCopy['voting_is_closed']));
     if (!ballot || !poll.titleIds.every((id) => ballot.ratings[id]) || typeof take !== 'string' || take.length > 80) throw new Error(formatCopy(pollErrorsCopy['vote_on_every_pick_first_then_add_up_to_80_characters']));
     ballot.take = take.trim(); write(polls);
+  },
+  async tossPoll(id, creatorId) {
+    const polls = read(), poll = polls.find(p => p.id === id);
+    if (!poll?.creator || poll.creator.id !== creatorId || voterIdentity().id !== creatorId) throw new Error(formatCopy(pollErrorsCopy.only_the_creator_can_call_it));
+    if (poll.toss) return poll;
+    const tied = tiedWinnerIds(poll);
+    const checkins = JSON.parse(localStorage.getItem('dekho-checkins-v1') || '{}');
+    if (tied.length < 2 || checkins[id]?.length) throw new Error(formatCopy(pollErrorsCopy.this_vote_cannot_be_cast));
+    poll.toss = true;
+    poll.winnerId = tied[Math.floor(Math.random() * tied.length)];
+    poll.closedAt ||= new Date().toISOString();
+    write(polls); return poll;
   },
   async closePoll(id, creatorId) {
     const polls = read(), poll = polls.find((p) => p.id === id);

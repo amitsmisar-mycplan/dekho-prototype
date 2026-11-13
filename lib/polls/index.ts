@@ -18,6 +18,7 @@ export const pollStore: PollStore = {
   castVote: async (id, voter, title) => (await adapter()).castVote(id, voter, title),
   rateTitle: async (id, voter, name, title, rating) => (await adapter()).rateTitle(id, voter, name, title, rating),
   setTake: async (id, voter, take) => (await adapter()).setTake(id, voter, take),
+  tossPoll: async (id, creator) => (await adapter()).tossPoll(id, creator),
   closePoll: async (id, creator) => (await adapter()).closePoll(id, creator),
   getStreak: async (id) => (await adapter()).getStreak(id),
   getResults: async (id) => (await adapter()).getResults(id),

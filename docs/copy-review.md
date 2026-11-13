@@ -282,7 +282,7 @@ Placeholders such as `{name}`, `{group}`, `{count}` and `{p1}` are runtime value
 | kit | open_value_title_og_image | Developer kit · open value title og image | Open {p1}-title OG image | Open {p1}-title OG image |
 | kit | titles | Developer kit · titles |  titles |  titles |
 | kit | friday_movie_night | Developer kit · friday movie night | Friday movie night | Friday movie night |
-| kit | 1200_630_open_an_image_for_full_size_the_outline_marks_the_center | Developer kit · 1200 630 open an image for full size the outline marks the center |  · 1200 × 630. Open an image for full size. The outline marks the centered square crop; all posters stay inside it. Deadlines use India time. |  · 1200 × 630. Open an image for full size. The outline marks the centered square crop; all posters stay inside it. Deadlines use India time. |
+| kit | 1200_630_open_an_image_for_full_size_the_outline_marks_the_center | Developer kit · 1200 630 open an image for full size the outline marks the center |  · 1200 × 630. Open an image for full size. The outline marks the centred square crop; all posters stay inside it. Deadlines use India time. |  · 1200 × 630. Open an image for full size. The outline marks the centred square crop; all posters stay inside it. Deadlines use India time. |
 | kit | poll_share_cards | Developer kit · poll share cards | Poll share cards | Poll share cards |
 | shortlist | review_shortlist | Shortlist / discovery deck · review shortlist | Review shortlist | Review shortlist |
 | shortlist | try_another_title_for_a_fresh_set_of_matches | Shortlist / discovery deck · try another title for a fresh set of matches | Try another title for a fresh set of matches. | Try another title for a fresh set of matches. |
@@ -338,7 +338,7 @@ Placeholders such as `{name}`, `{group}`, `{count}` and `{p1}` are runtime value
 | home | just | Home · just | Just  | Just  |
 | home | loading_pick | Home · loading pick | Loading pick | Loading pick |
 | home | the_picks_didn_t_load_close_this_sheet_and_give_it_another_try | Home · the picks didn t load close this sheet and give it another try | The picks didn’t load. Close this sheet and give it another try. | The picks didn’t load. Close this sheet and give it another try. |
-| home | a_few_contenders_for_the_group | Home mood sheet · supporting line; up to four picks | One mood. A few ways to start a debate. | Mood ek. Debate ke options ready. |
+| home | a_few_contenders_for_the_group | Home mood sheet · supporting line; up to four picks | Mood set. Now for the debate. | Mood set. Ab bas debate baaki hai. |
 | home | value_sorted | Home · value sorted | {p1}? Sorted. | {p1}? Sorted. |
 | home | tonight | Home · tonight | Tonight | Tonight |
 | home | voted_closes | Home · voted closes |  voted · closes  |  voted · closes  |
@@ -451,7 +451,7 @@ Placeholders such as `{name}`, `{group}`, `{count}` and `{p1}` are runtime value
 | pollCreate | find_tonight_s_picks | Poll creation · find tonight s picks | Find tonight’s picks | Find tonight’s picks |
 | pollCreate | add_2_4_catalog_titles_to_your_shortlist | Poll creation · add 2 4 catalog titles to your shortlist | Add 2–4 catalogue titles to your shortlist. | Add 2–4 catalogue titles to your shortlist. |
 | pollCreate | start_with_two_good_options | Poll creation · empty shortlist heading | A poll needs a little competition. | Poll hai. Thoda competition toh chahiye. |
-| pollCreate | your_picks_their_vote_sorted | Poll creation · subtitle | You made a shortlist. That already counts as planning. | Shortlist bana li. Planning toh ho gayi. |
+| pollCreate | your_picks_their_vote_sorted | Poll creation · subtitle | You made a shortlist. That already counts as planning. | Shortlist ban gayi. Itna planning toh kaafi hai. |
 | pollCreate | ask_the_group | Poll creation · ask the group | Ask the group. | Ask the group. |
 | pollCreate | less_debate_more_movie | Poll creation · less debate more movie | LESS DEBATE. MORE MOVIE. | LESS DEBATE. MORE MOVIE. |
 | pollCreate | tonight | Poll creation · tonight |  Tonight |  Tonight |
@@ -502,7 +502,7 @@ Placeholders such as `{name}`, `{group}`, `{count}` and `{p1}` are runtime value
 | voter | open_voter_view_and_copy_the_address | Voter / live results · open voter view and copy the address | Open voter view and copy the address. | Open voter view and copy the address. |
 | voter | voting_link_copied | Voter / live results · voting link copied | Voting link copied. | Voting link copied. |
 | voter | open_voter_view | Voter / live results · open voter view | Open voter view | Open voter view |
-| voter | most_up_minus_down_wins_ties_go_to_the_higher_tmdb_rating | Voter / live results · most up minus down wins ties go to the higher tmdb rating | Most up minus down wins. Ties go to the higher TMDb rating. | Most up minus down wins. Ties go to the higher TMDb rating. |
+| voter | most_up_minus_down_wins_ties_go_to_the_higher_tmdb_rating | Voter / live results · most up minus down wins ties go to the higher tmdb rating | Most up minus down wins. The creator can toss a tie; otherwise, the higher TMDb rating decides. | Most up minus down wins. The creator can toss a tie; otherwise, the higher TMDb rating decides. |
 | voter | who_voted | Voter / live results · who voted | Who voted | Who voted |
 | voter | net | Voter / live results · net | Net  | Net  |
 | voter | down | Voter / live results · down |  down |  down |
@@ -549,9 +549,13 @@ Placeholders such as `{name}`, `{group}`, `{count}` and `{p1}` are runtime value
 | voter | the_movie_night_couldn_t_load_check_your_connection_and_give_it_a | Poll · route error explanation | The movie night couldn’t load. Check your connection and try again. | The movie night couldn’t load. Check your connection and try again. |
 | voter | separator_5 | Voter / live results · separator 5 | ↻ | ↻ |
 | voter | waiting_count | Results · open poll with votes; count is live, read status is playful not telemetry | {count} voted. The rest left you on read. | {count} ne vote kiya. Baaki abhi “seen” pe hain. |
-| voter | tie_line | Results · equal top net scores; actual tie-break unchanged | It’s a tie. The higher TMDb rating gets the final say. | Tie ho gaya. Higher TMDb rating se decision hoga. |
+| voter | tie_line | Results · equal top net scores before a creator toss; button appears only before any check-in | It's a tie. Toss for it? | Tie ho gaya. Toss karein? |
 | voter | late_line | Closed voter page · shown only to a device with no vote | Bit late. The group went with {title}. | Late ho gaye. Group ne {title} chun li. |
 | voter | sticky_progress | Voter · sticky progress; Done stays disabled until every card has a vote | {count} of {total} voted. Your call. | {count} of {total} voted. Ab tumhari choice. |
+| voter | toss | voter: creator tie-break action/status. Toss is saved once for all voters. | Toss | Toss |
+| voter | tossing | voter: creator tie-break action/status. Toss is saved once for all voters. | Tossing… | Tossing… |
+| voter | toss_saved | voter: creator tie-break action/status. Toss is saved once for all voters. | Decided by toss | Decided by toss |
+| voter | toss_failed | voter: creator tie-break action/status. Toss is saved once for all voters. | Could not toss. Check your connection and try again. | Could not toss. Check your connection and try again. |
 | artwork | on_your_value | Generated artwork · on your value | On your {p1} | On your {p1} |
 | artwork | tonight | Generated artwork · tonight | TONIGHT | TONIGHT |
 | artwork | separator | Generated artwork · separator |  ·  |  ·  |
@@ -587,7 +591,7 @@ Placeholders such as `{name}`, `{group}`, `{count}` and `{p1}` are runtime value
 | profile | my_polls | Me · my polls | My polls | My polls |
 | profile | find_a_favourite | Me · find a favourite | Find a favourite  | Find a favourite  |
 | profile | save_a_title_when_it_catches_your_eye_it_ll_be_waiting_here | Me · empty watchlist description | Save the ones you keep saying you’ll watch. | Jo “kabhi dekhenge” bolte ho, yahan save kar lo. |
-| profile | for_another_good_night | Me · empty watchlist heading | Your future plans need a film or two. | Future plans ke liye do films rakh lo. |
+| profile | for_another_good_night | Me · empty watchlist heading | Empty watchlist. What about next weekend? | Watchlist khaali hai. Agle weekend ka kya? |
 | profile | remove | Me · remove | Remove | Remove |
 | profile | remove_value_from_watchlist | Me · remove value from watchlist | Remove {p1} from watchlist | Remove {p1} from watchlist |
 | profile | watchlist | Me · watchlist | Watchlist  | Watchlist  |

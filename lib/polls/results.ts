@@ -10,7 +10,7 @@ export function scorePoll(poll: Poll, ratings: Record<string, number> = {}) {
     const legacy = Object.entries(poll.votes).filter(([voter, title]) => title === id && !poll.ballots?.[voter]).length;
     const up = votes.filter((v) => v.score === 1).length + legacy, down = votes.filter((v) => v.score === -1).length;
     return { id, up, down, score: up - down, takes: Object.values(poll.ballots ?? {}).filter((b) => b.take).map((b) => ({ name: b.name, take: b.take!, score: b.ratings[id]?.score ?? 1 })), rating: ratings[id] ?? 0 };
-  }).sort((a, b) => b.score - a.score || b.rating - a.rating || poll.titleIds.indexOf(a.id) - poll.titleIds.indexOf(b.id));
+  }).sort((a, b) => b.score - a.score || tossOrder(poll, a.id, b.id) || b.rating - a.rating || poll.titleIds.indexOf(a.id) - poll.titleIds.indexOf(b.id));
 }
 export function voterCount(poll: Poll) { return new Set([...Object.keys(poll.votes), ...Object.keys(poll.ballots ?? {})]).size; }
 export function countdown(deadline: string, now: number) {
@@ -24,3 +24,7 @@ export function normalizeBallot(ballot: Ballot): Ballot {
   const take = ballot.take ?? Object.values(ballot.ratings).find((r) => r.take)?.take ?? '';
   return { name: ballot.name, take: take.slice(0, 80), ratings: Object.fromEntries(Object.entries(ballot.ratings).map(([id, rating]) => [id, { score: rating.score }])) };
 }
+
+/** Only breaks equal net scores; malformed snapshots cannot promote a losing title. */
+export function tossOrder(poll: { toss?: boolean; winnerId?: string }, a: string, b: string) { return poll.toss ? Number(b === poll.winnerId) - Number(a === poll.winnerId) : 0; }
+export function tiedWinnerIds(poll: Poll) { const rows = scorePoll(poll); return voterCount(poll) ? rows.filter(r => r.score === rows[0].score).map(r => r.id) : []; }
