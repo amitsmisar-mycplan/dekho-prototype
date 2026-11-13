@@ -1,3 +1,6 @@
+
+import { formatCopy } from '@/lib/copy';
+import { resultsCopy } from '@/.generated/copy/results';
 import type { Poll } from './index';
 export interface Rating { score: -1 | 1; take?: string }
 export interface Ballot { name: string; take?: string; ratings: Record<string, Rating> }
@@ -12,10 +15,10 @@ export function scorePoll(poll: Poll, ratings: Record<string, number> = {}) {
 export function voterCount(poll: Poll) { return new Set([...Object.keys(poll.votes), ...Object.keys(poll.ballots ?? {})]).size; }
 export function countdown(deadline: string, now: number) {
   const s = Math.max(0, Math.ceil((Date.parse(deadline) - now) / 1000));
-  return s ? `${Math.floor(s / 3600) ? `${Math.floor(s / 3600)}h ` : ''}${Math.floor(s % 3600 / 60)}m ${String(s % 60).padStart(2, '0')}s left` : 'Voting closed';
+  return s ? formatCopy(resultsCopy['valuevaluem_values_left'], { p1: Math.floor(s / 3600) ? formatCopy(resultsCopy['valueh'], { p1: Math.floor(s / 3600) }) : '', p2: Math.floor(s % 3600 / 60), p3: String(s % 60).padStart(2, '0') }) : formatCopy(resultsCopy['voting_closed']);
 }
 
-export function yesSummary(up: number, down: number) { return `${up} of ${up + down} said yes${down ? ` · ${down} said not tonight` : ''}`; }
+export function yesSummary(up: number, down: number) { return formatCopy(resultsCopy['value_of_value_said_yesvalue'], { p1: up, p2: up + down, p3: down ? formatCopy(resultsCopy['value_said_not_tonight'], { p1: down }) : '' }); }
 /** Retain the first legacy comment when migrating per-title takes to one poll take. */
 export function normalizeBallot(ballot: Ballot): Ballot {
   const take = ballot.take ?? Object.values(ballot.ratings).find((r) => r.take)?.take ?? '';

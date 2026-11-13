@@ -38,8 +38,8 @@ describe('home discovery', () => {
     expect(offerLabel((await dataSource.getTitle('jersey'))!, providers, { ...prefs, freeOnly: true }).text).toBe('Free on MX Player');
   });
   it('uses the device day/time and first name for greetings', () => {
-    expect(greeting('Amit Misar', new Date(2026, 10, 13, 21))).toBe('Friday night, Amit. Kya plan hai?');
-    expect(greeting('', new Date(2026, 10, 13, 9))).toBe('Friday morning. Kya plan hai?');
+    expect(greeting('Amit Misar', new Date(2026, 10, 13, 21), 'hinglish')).toBe('Friday night, Amit. Kya plan hai?');
+    expect(greeting('', new Date(2026, 10, 13, 9))).toBe('Friday morning. What shall we watch?');
   });
   it('leaves the open-poll stub empty without fabricated voters or deadlines', async () => { expect(await getOpenPoll()).toBeNull(); });
 });

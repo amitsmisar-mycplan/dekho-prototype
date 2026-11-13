@@ -6,7 +6,7 @@ import { voterIdentity, saveVoterName } from '../lib/polls/identity';
 function storage() { const values = new Map<string, string>(); return { getItem: (key: string) => values.get(key) ?? null, setItem: (key: string, value: string) => { values.set(key, value); }, removeItem: (key: string) => { values.delete(key); } }; }
 beforeEach(() => { vi.stubGlobal('localStorage', storage()); vi.stubGlobal('window', new EventTarget()); vi.stubGlobal('BroadcastChannel', undefined); });
 afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers(); });
-const create = (creator = 'creator01') => pollStore.createPoll({ titleIds: ['vikram', 'kaithi'], name: 'Friday movie night', note: '', creator: { id: creator, name: 'Amit' }, deadline: new Date(Date.now() + 3600000).toISOString(), expectedVoters: 0 });
+const create = (creator = 'creator01', groupName = 'College gang') => pollStore.createPoll({ titleIds: ['vikram', 'kaithi'], groupName, name: 'Friday movie night', note: '', creator: { id: creator, name: 'Amit' }, deadline: new Date(Date.now() + 3600000).toISOString(), expectedVoters: 0 });
 describe('per-title voting and results', () => {
   it('stores multiple opinions per voter and replaces an edited vote without double counting', async () => {
     const p = await create();
@@ -49,9 +49,9 @@ describe('per-title voting and results', () => {
     const before = voterIdentity(); expect(before.name).toBe(''); saveVoterName('  Riya  '); expect(voterIdentity()).toEqual({ id: before.id, name: 'Riya' });
     const p = await create(); const decoded = decodePoll(encodePoll(p), p.id)!; expect(decoded.creator?.name).toBe('Amit'); expect(decoded).not.toHaveProperty('ballots');
   });
-  it('counts completed shared nights only for the same creator and overlapping names', async () => {
-    const a = await create(), b = await create(), c = await create('other001'), d = await create();
-    for (const p of [a, b, c]) { await pollStore.rateTitle(p.id, `v-${p.id}`, p === b ? ' riya ' : 'Riya', 'vikram', { score: 1, take: '' }); await pollStore.closePoll(p.id, p.creator!.id); }
+  it('counts completed shared nights only for the same creator and named group, even with different voters', async () => {
+    const a = await create(), b = await create(), c = await create('other001'), d = await create('creator01', 'Flatmates');
+    for (const p of [a, b, c]) { await pollStore.rateTitle(p.id, `v-${p.id}`, p === b ? 'Kabir' : 'Riya', 'vikram', { score: 1, take: '' }); await pollStore.closePoll(p.id, p.creator!.id); }
     await pollStore.rateTitle(d.id, 'other', 'Meera', 'vikram', { score: 1, take: '' }); await pollStore.closePoll(d.id, d.creator!.id);
     expect(await pollStore.getStreak(b.id)).toBe(2);
   });

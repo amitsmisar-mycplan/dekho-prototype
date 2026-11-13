@@ -1485,3 +1485,8 @@ a.text-action,a.wordmark { display:inline-flex; align-items:center; }
 .rail-label-placeholder { height:33px; }
 .vote-countdown { flex-shrink:0; width:142px; min-height:36px; text-align:center; white-space:nowrap; }
 .prototype-note a,.vote-footer summary,.get-app { min-height:44px; display:inline-flex; align-items:center; }
+.group-chips { margin-top:12px; }
+.preview-group,.poll-group-name { color:var(--teal); font-size:14px; margin:12px 0; }
+.profile-group { padding:22px 0; border-bottom:1px solid var(--border); }
+.profile-group>h3 { font:700 24px var(--font-display),sans-serif; }
+.profile-group>.muted { font-size:13px; line-height:1.6; margin-top:8px; }

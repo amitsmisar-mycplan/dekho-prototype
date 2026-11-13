@@ -1,8 +1,11 @@
 'use client';
 import { create } from 'zustand';
 import { createJSONStorage, persist, type StateStorage } from 'zustand/middleware';
+import { recentGroups } from './polls/groups';
 import { defaultPreferences, normalizePreferences, type Preferences } from './preferences';
 export type State = {
+  groupNames: string[];
+  rememberGroup: (name: string) => void;
   prefs: Preferences;
   onboardingComplete: boolean;
   hydrated: boolean;
@@ -29,6 +32,7 @@ export type State = {
 };
 // Exported factory lets tests exercise real persistence without a browser or added test libraries.
 export const createPrototypeStore = (storage?: StateStorage) => create<State>()(persist((set, get) => ({
+  groupNames: [], rememberGroup: (name) => set((s) => ({ groupNames: recentGroups([name, ...s.groupNames]) })),
   shortlistOpen: false, pendingSwap: null,
   openShortlist: (open) => set({ shortlistOpen: open, ...(!open ? { pendingSwap: null } : {}) }),
   cancelSwap: () => set({ pendingSwap: null }),
@@ -55,12 +59,14 @@ export const createPrototypeStore = (storage?: StateStorage) => create<State>()(
   name: 'dekho-prototype-v0',
   storage: createJSONStorage(() => storage ?? localStorage),
   skipHydration: true,
-  partialize: (state) => ({ prefs: state.prefs, onboardingComplete: state.onboardingComplete, shortlist: state.shortlist, watchlist: state.watchlist, recentSearches: state.recentSearches, personalRatings: state.personalRatings }),
+  partialize: (state) => ({ groupNames: state.groupNames, prefs: state.prefs, onboardingComplete: state.onboardingComplete, shortlist: state.shortlist, watchlist: state.watchlist, recentSearches: state.recentSearches, personalRatings: state.personalRatings }),
   merge: (persisted, current) => {
     const old = (persisted && typeof persisted === 'object' ? persisted : {}) as Partial<State>;
     const strings = (value: unknown) => Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : [];
     const ratings = Object.fromEntries(Object.entries(old.personalRatings ?? {}).filter(([, value]) => value && [-1, 1, 2].includes(value.score) && typeof value.take === 'string').map(([id, value]) => [id, { score: value.score, take: value.take.slice(0, 160) }]));
-    return { ...current, personalRatings: ratings, prefs: normalizePreferences(old.prefs), onboardingComplete: old.onboardingComplete === true, shortlist: strings(old.shortlist).slice(0, 4), watchlist: strings(old.watchlist), recentSearches: strings(old.recentSearches).slice(0, 6) };
+    return { ...current, groupNames: recentGroups(strings(old.groupNames)), personalRatings: ratings, prefs: normalizePreferences(old.prefs), onboardingComplete: old.onboardingComplete === true, shortlist: strings(old.shortlist).slice(0, 4), watchlist: strings(old.watchlist), recentSearches: strings(old.recentSearches).slice(0, 6) };
   },
 }));
 export const usePrototype = createPrototypeStore();
+
+if (typeof window !== 'undefined') usePrototype.subscribe((state, previous) => { if (state.prefs !== previous.prefs) queueMicrotask(() => window.dispatchEvent(new Event('dekho-preferences-changed'))); });

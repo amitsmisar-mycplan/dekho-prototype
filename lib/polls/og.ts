@@ -1,3 +1,6 @@
+
+import { formatCopy } from '@/lib/copy';
+import { commonCopy } from '@/.generated/copy/common';
 import { lineUnits, posterDesign, type PosterTitle } from '@/lib/poster-art';
 export const ogMotifs = ['thriller', 'crime', 'comedy', 'drama', 'sci-fi', 'romance'] as const;
 export type OgMotif = typeof ogMotifs[number];
@@ -27,5 +30,5 @@ export function pollNameLockup(name: string) {
   return { lines, fontSize: Math.min(52, 390 / Math.max(...lines.map(lineUnits)) * .9) };
 }
 export function deadlineLabel(deadline: string) {
-  return `Closes ${new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: '2-digit', hour12: true }).format(new Date(deadline)).toLowerCase()}`;
+  return formatCopy(commonCopy['closes_value'], { p1: new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: '2-digit', hour12: true }).format(new Date(deadline)).toLowerCase() });
 }

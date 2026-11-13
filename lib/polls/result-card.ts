@@ -2,7 +2,7 @@ import { parseSnapshot, type PollSnapshot } from './share';
 import { scorePoll } from './results';
 import type { Poll } from './index';
 export interface ResultCard { poll: PollSnapshot; rows: { id: string; up: number; down: number; takes: { name: string; take: string }[] }[] }
-export function resultCard(poll: Poll): ResultCard { return { poll: { id: poll.id, name: poll.name, note: poll.note, titleIds: poll.titleIds, deadline: poll.deadline, creator: poll.creator }, rows: scorePoll(poll).map(({ id, up, down, takes }) => ({ id, up, down, takes: takes.map(({ name, take }) => ({ name, take })) })) }; }
+export function resultCard(poll: Poll): ResultCard { return { poll: { id: poll.id, name: poll.name, groupName: poll.groupName, createdAt: poll.createdAt, note: poll.note, titleIds: poll.titleIds, deadline: poll.deadline, creator: poll.creator }, rows: scorePoll(poll).map(({ id, up, down, takes }) => ({ id, up, down, takes: takes.map(({ name, take }) => ({ name, take })) })) }; }
 export function parseResult(value: unknown): ResultCard | null {
   if (!value || typeof value !== 'object') return null;
   const p = value as Partial<ResultCard>, poll = parseSnapshot(p.poll);

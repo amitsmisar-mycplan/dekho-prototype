@@ -1,14 +1,17 @@
+
+import { formatCopy } from '@/lib/copy';
+import { kitCopy } from '@/.generated/copy/kit';
 import { brand } from '@/lib/brand';
 import { encodePoll } from '@/lib/polls';
 export default function OgKitPage() {
-  return <div style={{ padding: '24px 16px' }}><h1 style={{ fontFamily: 'var(--font-display)', fontSize: 32 }}>Poll share cards</h1><p className="muted">{brand.name} · 1200 × 630. Open an image for full size. The outline marks the centered square crop; all posters stay inside it. Deadlines use India time.</p>
+  return <div style={{ padding: '24px 16px' }}><h1 style={{ fontFamily: 'var(--font-display)', fontSize: 32 }}>{formatCopy(kitCopy['poll_share_cards'])}</h1><p className="muted">{brand.name} {formatCopy(kitCopy['1200_630_open_an_image_for_full_size_the_outline_marks_the_center'])}</p>
     {[2, 3, 4].map((count) => {
-      const snapshot = { id: `ogdemo0${count}`, name: 'Friday movie night', note: '', titleIds: ['aavesham', 'kumbalangi-nights', 'the-family-man', 'pushpa-the-rise'].slice(0, count), deadline: '2030-01-04T15:30:00.000Z' };
+      const snapshot = { id: `ogdemo0${count}`, name: formatCopy(kitCopy['friday_movie_night']), note: '', titleIds: ['aavesham', 'kumbalangi-nights', 'the-family-man', 'pushpa-the-rise'].slice(0, count), deadline: '2030-01-04T15:30:00.000Z' };
       const src = `/p/${snapshot.id}/opengraph-image?poll=${encodePoll(snapshot)}`;
-      return <section key={count} style={{ marginTop: 32 }}><h2>{count} titles</h2><a href={src} target="_blank" rel="noreferrer" aria-label={`Open ${count}-title OG image`} style={{ display: 'block', position: 'relative', marginTop: 12 }}>
+      return <section key={count} style={{ marginTop: 32 }}><h2>{count} {formatCopy(kitCopy['titles'])}</h2><a href={src} target="_blank" rel="noreferrer" aria-label={formatCopy(kitCopy['open_value_title_og_image'], { p1: count })} style={{ display: 'block', position: 'relative', marginTop: 12 }}>
         {/* Native image intentionally exercises the actual ImageResponse endpoint. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} width={1200} height={630} alt={`${count} generated posters and Friday movie night poll details`} style={{ width: '100%', height: 'auto', borderRadius: 12 }}/>
+        <img src={src} width={1200} height={630} alt={formatCopy(kitCopy['value_generated_posters_and_friday_movie_night_poll_details'], { p1: count })} style={{ width: '100%', height: 'auto', borderRadius: 12 }}/>
         <span aria-hidden="true" style={{ position: 'absolute', pointerEvents: 'none', top: 0, bottom: 0, left: '23.75%', width: '52.5%', border: '1px dashed #21D4C4' }}/>
       </a></section>;
     })}

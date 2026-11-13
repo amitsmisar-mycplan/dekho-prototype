@@ -10,7 +10,12 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "seed:tmdb": "node --experimental-strip-types scripts/seed-tmdb.ts",
-    "verify:supabase": "node scripts/verify-supabase.mjs"
+    "verify:supabase": "node scripts/verify-supabase.mjs",
+    "predev": "node scripts/generate-copy-runtime.mjs",
+    "prebuild": "node scripts/generate-copy-runtime.mjs",
+    "pretypecheck": "node scripts/generate-copy-runtime.mjs",
+    "pretest": "node scripts/generate-copy-runtime.mjs",
+    "copy:review": "node scripts/export-copy-review.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.119.0",

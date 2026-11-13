@@ -3,7 +3,7 @@ import type { PollStore, OpenPollSummary } from './types';
 export type { Poll, PollStore, OpenPollSummary } from './types';
 export type { PollSnapshot } from './share';
 export { encodePoll, decodePoll, pollPath, defaultPollName, deadlineFor } from './share';
-export { nanoid8 } from './local';
+export { nanoid8 } from './id';
 export { pollMode } from './config';
 async function adapter(): Promise<PollStore> {
   return cloudPollsEnabled ? (await import('./supabase')).getCloudStore() : (await import('./local')).localPollStore;

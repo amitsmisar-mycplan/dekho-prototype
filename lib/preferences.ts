@@ -1,18 +1,21 @@
+import { formatCopy } from './copy';
+import { profileCopy } from '@/.generated/copy/profile';
+import { commonCopy } from '@/.generated/copy/common';
 export interface Preferences { name: string; avatarId: string; services: string[]; languages: string[]; freeOnly: boolean }
 export const avatarOptions = [
-  { id: 'sunset', label: 'Sunset', gradient: 'linear-gradient(135deg, #bc622d, #8b345c)' },
-  { id: 'lagoon', label: 'Lagoon', gradient: 'linear-gradient(135deg, #24796e, #253d74)' },
-  { id: 'berry', label: 'Berry', gradient: 'linear-gradient(135deg, #9e3d69, #593c88)' },
-  { id: 'amber', label: 'Amber', gradient: 'linear-gradient(135deg, #93611e, #72432b)' },
-  { id: 'midnight', label: 'Midnight', gradient: 'linear-gradient(135deg, #4b56a0, #3b295d)' },
-  { id: 'forest', label: 'Forest', gradient: 'linear-gradient(135deg, #477348, #244d61)' },
-  { id: 'rose', label: 'Rose', gradient: 'linear-gradient(135deg, #a34753, #713d6d)' },
-  { id: 'violet', label: 'Violet', gradient: 'linear-gradient(135deg, #80559c, #364e85)' },
+  { id: 'sunset', label: formatCopy(profileCopy['avatar_sunset']), gradient: 'linear-gradient(135deg, #bc622d, #8b345c)' },
+  { id: 'lagoon', label: formatCopy(profileCopy['avatar_lagoon']), gradient: 'linear-gradient(135deg, #24796e, #253d74)' },
+  { id: 'berry', label: formatCopy(profileCopy['avatar_berry']), gradient: 'linear-gradient(135deg, #9e3d69, #593c88)' },
+  { id: 'amber', label: formatCopy(profileCopy['avatar_amber']), gradient: 'linear-gradient(135deg, #93611e, #72432b)' },
+  { id: 'midnight', label: formatCopy(profileCopy['avatar_midnight']), gradient: 'linear-gradient(135deg, #4b56a0, #3b295d)' },
+  { id: 'forest', label: formatCopy(profileCopy['avatar_forest']), gradient: 'linear-gradient(135deg, #477348, #244d61)' },
+  { id: 'rose', label: formatCopy(profileCopy['avatar_rose']), gradient: 'linear-gradient(135deg, #a34753, #713d6d)' },
+  { id: 'violet', label: formatCopy(profileCopy['avatar_violet']), gradient: 'linear-gradient(135deg, #80559c, #364e85)' },
 ] as const;
 export function defaultPreferences(): Preferences { return { name: '', avatarId: 'sunset', services: [], languages: ['Hindi', 'English'], freeOnly: false }; }
 export function initials(name: string): string {
   const words = name.replace(/[^\p{L}\p{N}\s]/gu, ' ').trim().split(/\s+/).filter(Boolean);
-  return words.length ? (Array.from(words[0])[0] + (words.length > 1 ? Array.from(words[words.length - 1])[0] : '')).toLocaleUpperCase() : 'YOU';
+  return words.length ? (Array.from(words[0])[0] + (words.length > 1 ? Array.from(words[words.length - 1])[0] : '')).toLocaleUpperCase() : formatCopy(commonCopy['initials_fallback']);
 }
 export function normalizePreferences(value: unknown): Preferences {
   const defaults = defaultPreferences();

@@ -1,9 +1,12 @@
+
+import { formatCopy } from '@/lib/copy';
+import { titleCopy } from '@/.generated/copy/title';
 import type { ProviderOffer, SimilarTitle, Title } from './data';
 import type { Preferences } from './preferences';
 import { hasFreeOffer, onServices } from './discovery';
 export function versionLabel(source: Title, candidate: Title): string | null {
-  if (source.remakeOf === candidate.id) return `Original ${candidate.originalLanguage} version`;
-  if (candidate.remakeOf === source.id) return `${candidate.originalLanguage} remake`;
+  if (source.remakeOf === candidate.id) return formatCopy(titleCopy['original_value_version'], { p1: candidate.originalLanguage });
+  if (candidate.remakeOf === source.id) return formatCopy(titleCopy['value_remake'], { p1: candidate.originalLanguage });
   return null;
 }
 export function titleRecommendations(source: Title, similar: SimilarTitle[], versions: Title[], prefs: Preferences, onlyServices: boolean) {
@@ -16,6 +19,6 @@ export function titleRecommendations(source: Title, similar: SimilarTitle[], ver
 export function titleAvailabilityMessage(offers: ProviderOffer[], services: readonly string[]) {
   if (!services.length || offers.some((o) => services.includes(o.providerId) && o.type === 'stream')) return null;
   const names = [...new Set(offers.filter((o) => o.type === 'stream').map((o) => o.provider.name))];
-  return `Not on your apps · ${names.length ? `streaming on ${names.join(', ')}` : 'no subscription streaming listed'}`;
+  return formatCopy(titleCopy['not_on_your_apps_value'], { p1: names.length ? formatCopy(titleCopy['streaming_on_value'], { p1: names.join(', ') }) : formatCopy(titleCopy['no_subscription_streaming_listed']) });
 }
 export function whatsappShareUrl(text: string, url: string) { return `https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`; }

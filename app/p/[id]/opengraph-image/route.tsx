@@ -1,3 +1,6 @@
+
+import { formatCopy } from '@/lib/copy';
+import { shareCardCopy } from '@/.generated/copy/shareCard';
 import { ImageResponse } from 'next/og';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -17,10 +20,10 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
   const { id } = await params;
   const encoded = new URL(request.url).searchParams.get('poll') ?? undefined;
   const snapshot = id.startsWith('ogdemo') ? decodePoll(encoded, id) : await resolvePoll(id, encoded);
-  if (!snapshot) return new Response('A complete poll link is required.', { status: 400 });
+  if (!snapshot) return new Response(formatCopy(shareCardCopy['a_complete_poll_link_is_required']), { status: 400 });
   const catalog = await dataSource.listTitles();
   const found = snapshot.titleIds.map((id) => catalog.find((t) => t.id === id));
-  if (found.some((title) => !title)) return new Response('Unknown title.', { status: 404 });
+  if (found.some((title) => !title)) return new Response(formatCopy(shareCardCopy['unknown_title']), { status: 404 });
   const titles = found.map((title) => title!);
   const motifs = uniqueMotifs(titles), slots = posterSlots(titles.length), name = pollNameLockup(snapshot.name);
   return new ImageResponse(
@@ -34,18 +37,18 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
             <div style={{ display: 'flex', flexDirection: 'column', position: 'absolute', left: 24, right: 24, bottom: 65, fontFamily: 'Bricolage Grotesque', fontWeight: 800, fontSize: fit.fontSize, lineHeight: 1.05, letterSpacing: -1.5 }}>
               {fit.lines.map((line, i) => <div style={{ display: 'flex' }} key={i}>{line}</div>)}
             </div>
-            <div style={{ display: 'flex', position: 'absolute', left: 24, bottom: 24, fontSize: 11, letterSpacing: 1 }}>{title.originalLanguage.toUpperCase()} · {title.year}</div>
+            <div style={{ display: 'flex', position: 'absolute', left: 24, bottom: 24, fontSize: 11, letterSpacing: 1 }}>{title.originalLanguage.toUpperCase()} {formatCopy(shareCardCopy['separator'])}{title.year}</div>
           </div>
         </div>;
       })}
       <div style={{ display: 'flex', flexDirection: 'column', position: 'absolute', left: 740, top: 48, width: 420, height: 534, justifyContent: 'center' }}>
-        <div style={{ display: 'flex', fontFamily: 'Bricolage Grotesque', fontWeight: 800, fontSize: 42, marginBottom: 28 }}>{brand.name}<span style={{ color: brand.colors.marigold }}>.</span></div>
+        <div style={{ display: 'flex', fontFamily: 'Bricolage Grotesque', fontWeight: 800, fontSize: 42, marginBottom: 28 }}>{brand.name}<span style={{ color: brand.colors.marigold }}>{formatCopy(shareCardCopy['separator_2'])}</span></div>
         <div style={{ display: 'flex', flexDirection: 'column', fontFamily: 'Bricolage Grotesque', fontSize: name.fontSize, fontWeight: 800, lineHeight: 1.05, marginBottom: 22 }}>
           {name.lines.map((line, i) => <div key={i} style={{ display: 'flex', whiteSpace: 'nowrap' }}>{line}</div>)}
         </div>
         <div style={{ display: 'flex', color: '#C9C4D6', fontSize: 20, lineHeight: 1.5, marginBottom: 24 }}>{titles.map((t) => t.title).join(' · ')}</div>
         <div style={{ display: 'flex', alignSelf: 'flex-start', background: '#21D4C419', border: '1px solid #21D4C460', color: brand.colors.teal, borderRadius: 24, padding: '10px 16px', fontWeight: 600, fontSize: 18, marginBottom: 24 }}>{deadlineLabel(snapshot.deadline)}</div>
-        <div style={{ display: 'flex', fontSize: 23, lineHeight: 1.4, flexDirection: 'column' }}><div style={{ display: 'flex' }}>Vote in 10 seconds,</div><div style={{ display: 'flex' }}>no app needed</div></div>
+        <div style={{ display: 'flex', fontSize: 23, lineHeight: 1.4, flexDirection: 'column' }}><div style={{ display: 'flex' }}>{formatCopy(shareCardCopy['vote_in_10_seconds'])}</div><div style={{ display: 'flex' }}>{formatCopy(shareCardCopy['no_app_needed'])}</div></div>
       </div>
     </div>, { width: 1200, height: 630, fonts: await fonts });
 }
