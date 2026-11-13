@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { dataSource } from '@/lib/data';
 import { decodePoll } from '@/lib/polls';
+import { resolvePoll } from '@/lib/polls/server';
 import { brand } from '@/lib/brand';
 import { fitTitle } from '@/lib/poster-art';
 import { deadlineLabel, pollNameLockup, posterSlots, uniqueMotifs } from '@/lib/polls/og';
@@ -14,7 +15,8 @@ const fonts = Promise.all([
 ].map(async ([name, file, weight]) => ({ name: String(name), data: await readFile(path.join(process.cwd(), 'public/fonts', String(file))), weight: weight as 400 | 600 | 800, style: 'normal' as const })));
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const snapshot = decodePoll(new URL(request.url).searchParams.get('poll') ?? undefined, id);
+  const encoded = new URL(request.url).searchParams.get('poll') ?? undefined;
+  const snapshot = id.startsWith('ogdemo') ? decodePoll(encoded, id) : await resolvePoll(id, encoded);
   if (!snapshot) return new Response('A complete poll link is required.', { status: 400 });
   const catalog = await dataSource.listTitles();
   const found = snapshot.titleIds.map((id) => catalog.find((t) => t.id === id));

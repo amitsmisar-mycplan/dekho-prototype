@@ -3,10 +3,8 @@ import { dataSource } from '@/lib/data';
 import { brand } from '@/lib/brand';
 import { fitTitle } from '@/lib/poster-art';
 import { GeneratedPosterSvg } from '@/components/poster/PosterArtwork';
-export const alt = 'Tonight’s movie pick';
-export const size = { width: 1200, height: 630 };
-export const contentType = 'image/png';
-export default async function OpenGraphImage({ params }: { params: Promise<{ slug: string }> }) {
+const size = { width: 1200, height: 630 };
+export async function GET(_request: Request, { params }: { params: Promise<{ slug: string }> }) {
   const title = await dataSource.getTitle((await params).slug);
   if (!title) return new Response('Title not found', { status: 404 });
   const lockup = fitTitle(title.title);
