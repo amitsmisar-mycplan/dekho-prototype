@@ -256,3 +256,41 @@ The P8 implementation includes the existing P6 voting/results commits because P6
 Implementation references: [Supabase database functions](https://supabase.com/docs/guides/database/functions) and [Realtime Broadcast](https://supabase.com/docs/guides/realtime/broadcast).
 
 Validation: lint, strict typecheck, 85 tests and production build pass. The voter route reports 117 KB First Load JS; Supabase is a separate lazy chunk downloaded when the cloud adapter initializes, so total cloud-session JavaScript is larger. After the manual migration, `npm run verify:supabase -- --quota` passed against the configured project: independent device votes and editable takes, public reads without private UUID disclosure, creator-only closure, complete-ballot/80-character guards, closed-poll write rejection, Realtime vote/take/closure delivery, and rejection of the twenty-first poll. The production voter/results routes also render the cloud poll from an ID-only URL, and its OG route returns a 1200×630 PNG. The check left twenty labelled, closed verification polls for optional manual cleanup. These are automated independent-client and route checks; a physical two-phone walkthrough remains the deployment acceptance check above.
+
+## P7 — profile and polish
+
+Open `/me` after onboarding. Edit your name and one of eight avatars, edit services/languages, browse or remove saved Watchlist titles, and open your own polls. **Open** and **Finished** groups use the same net-vote/TMDb tie-break as the result screen; finished polls show the winner or the honest no-votes state. Loading uses shimmer, failed history requests have a retry, and empty sections explain their next action.
+
+Apply `supabase/migrations/002_my_polls.sql` after `001_polls.sql`, using **SQL Editor → New query → Run as postgres**. The new `my_polls()` RPC accepts no device ID argument: it filters `creator_device_id` using the private request-header capability and returns safe read snapshots. The configured project has this migration applied. Live verification passed for owned history, exclusion of another device's history, anonymous empty history, private-ID protection, votes/takes, Realtime and creator closure. `npm run verify:supabase` now checks this RPC too.
+
+The brand selector reads both names from `lib/brand.ts` and changes interactive UI/share copy for this tester tab using sessionStorage. Reloads retain the selection; a fresh independent tab uses the deployment brand. Server metadata, OG cards and installed-app identity continue to use `NEXT_PUBLIC_BRAND`, so a tester switch does not rename other people's shared links. **Reset prototype** asks for confirmation and removes only this prototype's preferences, lists, searches, local polls, voter identity, private device capability, splash flag and tester brand. Shared database polls remain, but resetting loses this device's existing votes/creator controls. Unrelated origin storage is preserved.
+
+The polish pass adds route-specific skeletons, app/public-poll error boundaries, a designed missing-poll state and closed/no-votes handling. Page/sheet/shared-poster transitions use one spring. Reduced motion disables carousel auto-advance, card tilt and confetti/reveal motion. Visible keyboard focus and 44px touch targets are enforced. Generated art has accessible image labels; image elements have alt text. Stale future-phase copy, seeded/debug labels and legacy placeholder profile names are removed from user routes; the lab remains at `/kit`.
+
+`/manifest.webmanifest` supplies standalone install metadata, theme colour and generated 192/512px PNG icons, including a maskable icon; iOS gets a 180px icon and standalone metadata. Test **Add to Home Screen** on the HTTPS deployment. This adds install presentation, not offline voting or a service-worker cache: live polls still need a connection. Actual OS installation on a physical phone was not available in this browser environment.
+
+### Mobile verification
+
+Lighthouse **13.6.0**, production build on localhost, mobile simulated throttling (4× CPU), isolated Chrome profile with completed onboarding, cold page audits. The voter audit used a real open Supabase poll. The audited final run had no accessibility failures and CLS **0** on all three routes:
+
+| Route | Performance | Accessibility |
+| --- | ---: | ---: |
+| `/` | 91 | 100 |
+| `/t/aavesham` | 100 | 100 |
+| `/p/[id]` | 100 | 100 |
+
+Results and exact throttling/metrics are saved in `docs/audits/mobile-summary.json`. Scores vary by hardware and deployment latency; these are local lab measurements, not field performance guarantees. Home improved from 68 by deferring offscreen SVG rails, disabling speculative poster-route prefetch and avoiding unnecessary Devanagari font preloads. Sized placeholders and an initial personalized greeting avoid content shifts.
+
+To repeat without adding audit tools to the app stack:
+
+```sh
+npm install --prefix /tmp/dekho-audit --no-save lighthouse chrome-launcher puppeteer-core
+npm run build
+npm run start -- --port 3001
+# In another terminal; use a real, open test poll ID:
+AUDIT_POLL_ID=YOUR_POLL_ID node scripts/audit-mobile.mjs
+```
+
+Use `AUDIT_ORIGIN` for another deployment, `LIGHTHOUSE_TOOLS_DIR` for another tool directory, and `CHROME_PATH` if Chrome is not auto-discovered. The script modifies only its disposable browser profile and writes a credential-free summary, never raw network headers.
+
+Lint, strict typecheck, 90 tests and production build pass. Isolated 390×844 interaction checks covered profile editing, avatar selection, saved Watchlist, creator history, brand persistence, history network failure/retry, missing/closed poll states, reduced-motion carousel/deck/reveal, manifest/icon sizes and confirmed reset. Eight route layouts had no horizontal overflow, missing image alt text or undersized visible action targets. Screenshots: `docs/p7-profile.png`, `docs/p7-missing-poll.png`, `docs/p7-closed-poll.png`, `docs/p7-finished-poll.png`. The labelled audit polls are closed and can be removed manually. No catalog data changed. The existing Home open-poll banner remains a stub; availability remains illustrative.

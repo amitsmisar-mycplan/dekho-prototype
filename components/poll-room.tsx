@@ -2,16 +2,17 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { ThumbsUp, ThumbsDown, Flame, ArrowUpRight, Copy } from 'lucide-react';
+import { Clapperboard, ThumbsUp, ThumbsDown, Flame, ArrowUpRight, Copy } from 'lucide-react';
 import { pollStore, pollPath, type PollSnapshot, type Poll } from '@/lib/polls';
 import { voterIdentity, saveVoterName } from '@/lib/polls/identity';
 import { countdown, scorePoll, voterCount, type Rating } from '@/lib/polls/results';
 import { track } from '@/lib/analytics';
-import { cloudPollsEnabled } from '@/lib/polls/config';
-import { brand } from '@/lib/brand';
+import { cloudPollsEnabled, usableCreatorName } from '@/lib/polls/config';
+import { useBrand } from '@/lib/use-brand';
 const WinnerReveal = dynamic(() => import('./winner-reveal'), { ssr: false });
 export interface PollOption { id: string; title: string; language: string; runtime: string; rating: number; provider: { name: string; color: string; url: string; type: string } | null; poster: ReactNode }
 export function PollRoom({ id, snapshot, options, result = false, demo = false }: { id: string; snapshot: PollSnapshot | null; options: PollOption[]; result?: boolean; demo?: boolean }) {
+  const brand = useBrand();
   const [poll, setPoll] = useState<Poll | null>(snapshot ? { ...snapshot, votes: {}, expectedVoters: 0 } : null);
   const [ready, setReady] = useState(false), [notice, setNotice] = useState(''), [now, setNow] = useState(0), [identity, setIdentity] = useState({ id: '', name: '' });
   const [pending, setPending] = useState<{ titleId: string; rating: Rating } | null>(null), [name, setName] = useState(''), [take, setTake] = useState<string | null>(null);
@@ -32,7 +33,7 @@ export function PollRoom({ id, snapshot, options, result = false, demo = false }
   useEffect(() => { if (pending) dialog.current?.showModal(); else dialog.current?.close(); }, [pending]);
   const closed = Boolean(poll && (poll.closedAt || (now && now >= Date.parse(poll.deadline))));
   useEffect(() => { if (closed) void pollStore.getStreak(id).then(setStreak).catch(() => {}); }, [closed, id]);
-  if (!poll) return <div className="vote-page"><h1>{ready ? 'This link needs its picks.' : 'Getting the picks…'}</h1><p>{notice || 'Open the complete link your friend shared.'}</p><Link prefetch={false} href="/">Back to tonight</Link></div>;
+  if (!poll) return !ready ? <div className="vote-page loading-page" role="status" aria-label="Loading movie night"><div className="skeleton skeleton-heading"/><div className="loading-cards">{[0, 1].map((n) => <div className="skeleton" key={n}/>)}</div></div> : <div className="vote-page poll-missing"><div className="state-symbol" aria-hidden="true"><Clapperboard size={36}/></div><h1>{notice ? 'A little intermission.' : 'This night is off the reel.'}</h1><p>{notice ? 'We couldn’t load this poll. Check your connection and try again.' : 'That poll doesn’t exist here. Ask your friend for the latest link, or start a fresh movie night.'}</p>{notice && <button className="button button-primary" onClick={() => window.location.reload()}>Try again</button>}<Link prefetch={false} className="button button-secondary" href="/">Find tonight’s picks</Link></div>;
   const picks = poll.titleIds.flatMap((id) => options.find((o) => o.id === id) ?? []), scores = scorePoll(poll, Object.fromEntries(picks.map((p) => [p.id, p.rating])));
   const count = voterCount(poll), own = poll.ballots?.[identity.id], voted = Boolean(own), creator = poll.creator?.id === identity.id;
   const answered = picks.filter((p) => own?.ratings[p.id]).length, complete = answered === picks.length && picks.length > 0;
@@ -58,8 +59,8 @@ export function PollRoom({ id, snapshot, options, result = false, demo = false }
   }
   const voteLink = pollPath(poll), resultsLink = pollPath(poll, true);
   return <div className={`vote-page ${!result && !closed ? 'voting-page' : ''}`}>
-    <header className="vote-header"><Link prefetch={false} href="/" className="wordmark" aria-label={`${brand.name} home`}>{brand.name}<span>.</span></Link><span className="vote-countdown" role="timer">{closed ? 'Voting closed' : now ? countdown(poll.deadline, now) : 'Vote before the deadline'}</span></header>
-    <p className="vote-invite">{result || closed ? `${poll.creator?.name?.trim() || 'A friend'}’s group movie night` : `${poll.creator?.name?.trim() || 'A friend'} wants to watch something. Vote!`}</p><h1>{poll.name}</h1>{poll.note && <p className="muted">{poll.note}</p>}
+    <header className="vote-header"><Link prefetch={false} href="/" className="wordmark" aria-label={`${brand.name} home`}>{brand.name}<span>.</span></Link><span className="vote-countdown" role="timer">{closed ? 'Voting closed' : now ? countdown(poll.deadline, now) : 'Checking time…'}</span></header>
+    <p className="vote-invite">{result || closed ? `${usableCreatorName(poll.creator?.name) || 'A friend'}’s group movie night` : `${usableCreatorName(poll.creator?.name) || 'A friend'} wants to watch something. Vote!`}</p><h1>{poll.name}</h1>{poll.note && <p className="muted">{poll.note}</p>}
     {!result && !closed && <p className="vote-instruction">Thumbs up for yes. Down for not tonight.</p>}
     {(result || closed) && <section className="vote-race" aria-label="Live tally"><div className="vote-race-heading"><h2>{closed ? 'The group has spoken' : count ? 'The race is on' : 'Waiting for votes…'}</h2><span>{count} {count === 1 ? 'friend' : 'friends'}</span></div>
       {scores.map((s, i) => { const title = picks.find((p) => p.id === s.id); return <div className="race-row" key={s.id}><div><span>{title?.title}</span><strong>{s.up} up · {s.down} down</strong></div><div className="race-track"><div className={`race-fill race-${i}`} style={{ width: `${count ? s.up / count * 100 : 0}%` }}/></div><small>Net {s.score > 0 ? '+' : ''}{s.score}</small></div>; })}

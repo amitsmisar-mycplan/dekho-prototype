@@ -12,6 +12,7 @@ async function adapter(): Promise<PollStore> {
 export const pollStore: PollStore = {
   createPoll: async (input) => (await adapter()).createPoll(input),
   importPoll: async (snapshot, ids) => (await adapter()).importPoll(snapshot, ids),
+  getMyPolls: async () => (await adapter()).getMyPolls(),
   getPoll: async (id) => (await adapter()).getPoll(id),
   castVote: async (id, voter, title) => (await adapter()).castVote(id, voter, title),
   rateTitle: async (id, voter, name, title, rating) => (await adapter()).rateTitle(id, voter, name, title, rating),

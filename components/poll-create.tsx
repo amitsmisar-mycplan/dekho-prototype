@@ -8,10 +8,11 @@ import { voterIdentity } from '@/lib/polls/identity';
 import { usePrototype } from '@/lib/store';
 import { pollStore, defaultPollName, deadlineFor, pollPath, type Poll } from '@/lib/polls';
 import { track } from '@/lib/analytics';
-import { brand } from '@/lib/brand';
+import { useBrand } from '@/lib/use-brand';
 import type { Title } from '@/lib/data';
 import { PosterCard } from '@/components/ui';
 export function PollCreate({ titles }: { titles: Title[] }) {
+  const brand = useBrand();
   const savedCreator = usePrototype((s) => usableCreatorName(s.prefs.name));
   const [creatorName, setCreatorName] = useState('');
   const actualCreator = savedCreator || usableCreatorName(creatorName);

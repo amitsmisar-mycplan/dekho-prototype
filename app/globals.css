@@ -1430,3 +1430,58 @@ footer a {
 .winner-confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
 /* Compact ballots keep the decision controls beside each poster. */
 .voting-page{padding-bottom:calc(110px + env(safe-area-inset-bottom))}.vote-option{display:grid;grid-template-columns:72px minmax(0,1fr) 94px;align-items:center;gap:10px;padding:12px}.vote-poster{width:72px}.vote-option-copy{padding:0}.vote-option-copy h2{font-size:18px;margin-bottom:7px}.vote-option-copy p{font-size:11px;line-height:1.5;margin-bottom:5px}.vote-rating{font-size:17px;margin-top:7px}.vote-thumb-buttons{display:flex;gap:6px;margin:0}.vote-thumb-buttons button{width:44px;min-height:44px;padding:0;flex-shrink:0}.vote-options{gap:12px}.vote-bottom-bar{position:fixed;z-index:20;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,480px);display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 20px calc(14px + env(safe-area-inset-bottom));background:#16141ff5;backdrop-filter:blur(16px);border-top:1px solid #ffffff20}.vote-bottom-bar>span{font-size:14px}.vote-bottom-bar .button{min-width:130px}.poll-thoughts{margin:24px 0 12px}.poll-thoughts label{display:block;font-weight:600;margin-bottom:10px}.poll-thoughts label span,.poll-thoughts small{color:var(--muted);font-size:12px;font-weight:400}.poll-thoughts>div{display:flex;gap:8px}.poll-thoughts input{min-width:0;width:100%;font-size:16px}.poll-thoughts .button{padding:10px 14px}.poll-thoughts small{display:block;margin-top:7px}@media(max-width:359px){.vote-option{gap:7px;padding:10px;grid-template-columns:72px minmax(0,1fr) 44px}.vote-thumb-buttons{flex-direction:column}}
+
+/* Profile and shared states: reserve space, keep every action reachable. */
+.profile-page h1 { font-size:clamp(28px,8vw,38px); overflow-wrap:anywhere; }
+.profile-editor { margin-top:18px; padding:18px; background:var(--surface); border:1px solid var(--border); border-radius:18px; }
+.profile-editor label { display:block; font-size:13px; margin-bottom:10px; }
+.profile-editor input { width:100%; min-height:48px; padding:12px; font:inherit; color:var(--text); background:var(--bg); border:1px solid var(--border); border-radius:12px; }
+.profile-editor .avatar-options { margin:18px 0; }
+.profile-watchlist { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 14px; margin-top:20px; }
+.profile-watchlist .movie-card { width:100%; }
+.profile-empty { padding:26px 20px; background:linear-gradient(145deg,#211e2d,var(--surface)); border:1px solid var(--border); border-radius:20px; margin-top:18px; }
+.profile-empty>svg { color:var(--marigold); margin-bottom:16px; }
+.profile-empty h3 { font:700 22px var(--font-display),sans-serif; margin-bottom:10px; }
+.profile-empty p { color:var(--muted); font-size:14px; line-height:1.6; margin-bottom:20px; }
+.profile-poll-group { margin-top:24px; }
+.profile-poll-group>h3 { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.12em; }
+.profile-poll { display:flex; align-items:center; gap:12px; padding:18px 0; border-bottom:1px solid var(--border); min-height:92px; }
+.profile-poll>span:nth-child(2) { flex:1; min-width:0; }
+.profile-poll strong { display:block; font-size:15px; overflow-wrap:anywhere; }
+.profile-poll small { display:block; margin-top:6px; font-size:12px; line-height:1.5; color:var(--muted); }
+.poll-status-icon { flex-shrink:0; display:grid; place-items:center; width:42px; height:42px; border-radius:14px; background:#21d4c415; color:var(--teal); }
+.poll-status-icon.finished { color:var(--marigold); background:#ffb62715; }
+.profile-small-empty { margin:14px 0; font-size:13px; line-height:1.6; }
+.profile-poll-skeletons { min-height:220px; padding-top:20px; display:grid; gap:16px; }
+.profile-poll-skeletons>div { height:90px; border-radius:16px; }
+.brand-options { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+.brand-options [aria-pressed=true] { border-color:var(--teal); color:var(--teal); background:#21d4c414; }
+.profile-reset-actions { display:grid; gap:12px; margin-top:24px; }
+.profile-notice { min-height:24px; color:var(--teal); font-size:13px; }
+.loading-page { min-height:70dvh; }
+.skeleton-heading { height:64px; border-radius:14px; margin-bottom:24px; }
+.skeleton-hero { height:370px; border-radius:24px; margin-bottom:28px; }
+.skeleton-line { height:24px; width:65%; border-radius:8px; margin-bottom:20px; }
+.loading-cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.loading-cards>.skeleton { height:220px; border-radius:18px; }
+.loading-poll .loading-cards,.loading-profile .loading-cards,.loading-search .loading-cards { grid-template-columns:1fr; }
+.loading-poll .loading-cards>.skeleton,.loading-profile .loading-cards>.skeleton,.loading-search .loading-cards>.skeleton { height:126px; }
+.poll-missing { min-height:75dvh; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:22px; }
+.poll-missing h1 { font:800 40px/1.05 var(--font-display),sans-serif; }
+.poll-missing p { font-size:15px; color:var(--muted); line-height:1.7; }
+.state-symbol { display:grid; place-items:center; width:80px; height:80px; border-radius:26px; background:#ffb62712; color:var(--marigold); }
+.header-tagline { color:var(--muted); font-size:12px; }
+button,a,input,select,textarea,summary { -webkit-tap-highlight-color:transparent; }
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible { outline:3px solid var(--teal); outline-offset:4px; }
+button:not(.poster-add),a.text-action,a.wordmark { min-height:44px; }
+a.text-action,a.wordmark { display:inline-flex; align-items:center; }
+.poster-add { min-width:44px; min-height:44px; }
+.carousel-dots button { min-width:44px; min-height:44px; }
+.eyebrow,.feature-tag,.desktop-caption { font-size:11px; }
+.tonight-greeting h1 { min-height:70px; }
+.movie-rail,.profile-watchlist { content-visibility:auto; contain-intrinsic-size:auto 270px; }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.001ms!important; animation-iteration-count:1!important; transition-duration:.001ms!important; } .deck-card { rotate:0deg!important; } }
+.lazy-rail { min-height:260px; }
+.rail-label-placeholder { height:33px; }
+.vote-countdown { flex-shrink:0; width:142px; min-height:36px; text-align:center; white-space:nowrap; }
+.prototype-note a,.vote-footer summary,.get-app { min-height:44px; display:inline-flex; align-items:center; }

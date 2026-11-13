@@ -20,6 +20,10 @@ try {
   if (process.argv.includes('--probe')) process.exit(0);
   await rpc(host, 'create_poll', { p_id: pollId, p_name: 'P8 verification — safe to delete', p_note: 'Automated two-device adapter check.', p_creator_name: 'Verification host', p_title_ids: ['aavesham', 'drishyam-2'], p_deadline: new Date(Date.now() + 600000).toISOString() }); created = true;
   console.log(`Verification poll: ${pollId}`);
+  const mine = await rpc(host, 'my_polls', {}), theirs = await rpc(friend, 'my_polls', {}), publicList = await rpc(guest, 'my_polls', {});
+  assert(mine.some((p) => p.id === pollId) && !theirs.some((p) => p.id === pollId) && publicList.length === 0, 'My polls did not enforce private device ownership.');
+  assert(!JSON.stringify(mine).includes(hostId), 'My polls exposed a private identity.');
+  console.log('PASS: My polls returns only the requesting device’s polls, with safe aliases.');
   const own = await rpc(host, 'read_poll', { p_id: pollId }), other = await rpc(friend, 'read_poll', { p_id: pollId });
   assert(own.creator.id === 'this-device' && other.creator.id !== 'this-device', 'Creator ownership aliases failed.');
   assert(!JSON.stringify([own, other]).includes(hostId), 'A private device ID was exposed.');

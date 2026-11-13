@@ -1,3 +1,4 @@
+import { voterIdentity } from './identity';
 import { normalizeBallot, scorePoll } from './results';
 import { defaultPollName, parseSnapshot } from './share';
 import type { Poll, PollStore, OpenPollSummary } from './types';
@@ -31,6 +32,7 @@ export const localPollStore: PollStore = {
     const latest = read(); const imported = latest.find((p) => p.id === valid.id); if (imported) return imported;
     const poll: Poll = { ...valid, expectedVoters: 0, votes: {} }; write([...latest, poll]); return poll;
   },
+  async getMyPolls() { const me = voterIdentity().id; return read().filter((p) => p.creator?.id === me).reverse(); },
   async getPoll(id) { return read().find((p) => p.id === id) ?? null; },
   async castVote(id, voterId, titleId) {
     const polls = read(), poll = polls.find((p) => p.id === id);

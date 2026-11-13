@@ -1,4 +1,5 @@
 'use client';
+import { uiSpring } from '@/lib/motion';
 import { AnimatePresence, motion, useReducedMotion, useDragControls } from 'motion/react';
 import { ArrowRight, Check, Plus, X } from 'lucide-react';
 import { createPortal } from 'react-dom';
@@ -82,7 +83,7 @@ export function Sheet({ open, onClose, title, children, fullScreen = false }: {
     }, [open, onClose, portal]);
     if (!portal)
         return null;
-    return createPortal(<AnimatePresence>{open && <div className="sheet-layer"><motion.div className="sheet-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}/><motion.div ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby={id} className={`sheet ${fullScreen ? 'sheet-fullscreen' : ''}`} initial={{ y: reduced ? 0 : '100%' }} animate={{ y: 0 }} exit={{ y: reduced ? 0 : '100%', opacity: 0 }} transition={reduced ? { duration: 0 } : { type: 'spring', damping: 30, stiffness: 300 }} drag="y" dragListener={false} dragControls={dragControls} dragConstraints={{ top: 0, bottom: 0 }} dragElastic={{ top: 0, bottom: .5 }} onDragEnd={(_, info) => { if (info.offset.y > 90 || info.velocity.y > 500)
+    return createPortal(<AnimatePresence>{open && <div className="sheet-layer"><motion.div className="sheet-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}/><motion.div ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby={id} className={`sheet ${fullScreen ? 'sheet-fullscreen' : ''}`} initial={{ y: reduced ? 0 : '100%' }} animate={{ y: 0 }} exit={{ y: reduced ? 0 : '100%', opacity: 0 }} transition={reduced ? { duration: 0 } : uiSpring} drag="y" dragListener={false} dragControls={dragControls} dragConstraints={{ top: 0, bottom: 0 }} dragElastic={{ top: 0, bottom: .5 }} onDragEnd={(_, info) => { if (info.offset.y > 90 || info.velocity.y > 500)
         onClose(); }}><div className="sheet-handle" onPointerDown={(event) => dragControls.start(event)}/><div className="sheet-heading"><h2 id={id}>{title}</h2><button className="icon-button" onClick={onClose} aria-label="Close sheet"><X size={20}/></button></div>{children}</motion.div></div>}</AnimatePresence>, portal);
 }
 export function Toast({ message, onClose }: {
