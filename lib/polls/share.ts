@@ -1,3 +1,4 @@
+import { cloudPollsEnabled } from './config';
 export interface PollSnapshot { id: string; name: string; note: string; titleIds: string[]; deadline: string; creator?: { id: string; name: string } }
 export function parseSnapshot(value: unknown): PollSnapshot | null {
   if (!value || typeof value !== 'object') return null;
@@ -14,7 +15,7 @@ export function decodePoll(encoded: string | undefined, id: string): PollSnapsho
   if (!encoded || encoded.length > 3000) return null;
   try { const raw = atob(encoded.replace(/-/g, '+').replace(/_/g, '/')); const snapshot = parseSnapshot(JSON.parse(new TextDecoder().decode(Uint8Array.from(raw, (c) => c.charCodeAt(0))))); return snapshot?.id === id ? snapshot : null; } catch { return null; }
 }
-export function pollPath(poll: PollSnapshot, result = false) { return `/p/${poll.id}${result ? '/result' : ''}?poll=${encodePoll(poll)}`; }
+export function pollPath(poll: PollSnapshot, result = false) { return cloudPollsEnabled ? `/p/${poll.id}${result ? '/result' : ''}` : `/p/${poll.id}${result ? '/result' : ''}?poll=${encodePoll(poll)}`; }
 export function defaultPollName(now = new Date()) { return `${now.toLocaleDateString('en-IN', { weekday: 'long' })} movie night`; }
 export function deadlineFor(choice: string, now = new Date(), custom = '') {
   if (choice === 'custom') return new Date(custom);

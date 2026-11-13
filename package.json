@@ -9,9 +9,11 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "seed:tmdb": "node --experimental-strip-types scripts/seed-tmdb.ts"
+    "seed:tmdb": "node --experimental-strip-types scripts/seed-tmdb.ts",
+    "verify:supabase": "node scripts/verify-supabase.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.119.0",
     "@tailwindcss/postcss": "^4.1.0",
     "canvas-confetti": "^1.9.3",
     "lucide-react": "^0.468.0",
