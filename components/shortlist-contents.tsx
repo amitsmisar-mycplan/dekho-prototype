@@ -1,4 +1,5 @@
 'use client';
+import { useCopy } from '@/lib/use-copy';
 import { formatCopy } from '@/lib/copy';
 import { shortlistCopy } from '@/.generated/copy/shortlist';
 
@@ -24,6 +25,7 @@ function TrayCard({ id, title, index, count, pending, onNavigate }: { id: string
   </Reorder.Item>;
 }
 export function ShortlistContents({ ids, onNavigate }: { ids: string[]; onNavigate: () => void }) {
+  const formatCopy = useCopy();
   const [error, setError] = useState(false), [retry, setRetry] = useState(0);
   const [dismissed, setDismissed] = useState<string | null>(null);
   const [titles, setTitles] = useState<Title[]>([]); const pending = usePrototype((s) => s.pendingSwap);

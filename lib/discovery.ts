@@ -1,3 +1,4 @@
+import { momentLine, type RotationStorage } from './copy/moments';
 
 import { type Tone, formatCopy } from '@/lib/copy';
 import { homeCopy } from '@/.generated/copy/home';
@@ -23,10 +24,8 @@ export function homeSelections(titles: Title[], prefs: Preferences) {
   const trending = prefs.freeOnly ? [...eligible].sort((a, b) => b.tmdbRating - a.tmdbRating).slice(0, 8) : featuredIds.map((id) => eligible.find((t) => t.id === id)).filter((t): t is Title => Boolean(t));
   return { eligible, included, hero, trending };
 }
-export function greeting(name: string, date: Date, tone: Tone = 'indianEnglish') {
-  const hour = date.getHours();
-  const time = hour < 5 ? formatCopy(homeCopy['late_night']) : hour < 12 ? formatCopy(homeCopy['morning']) : hour < 17 ? formatCopy(homeCopy['afternoon']) : hour < 20 ? formatCopy(homeCopy['evening']) : formatCopy(homeCopy['night']);
-  return formatCopy(homeCopy['value_valuevalue_kya_plan_hai'], { p1: date.toLocaleDateString('en-IN', { weekday: 'long' }), p2: time, p3: name.trim() ? `, ${name.trim().split(/\s+/)[0]}` : '' }, tone);
+export function greeting(name: string, date: Date, tone: Tone = 'indianEnglish', storage?: RotationStorage) {
+  return momentLine('greeting',date,tone,{name:name.trim()?`${name.trim().split(/\s+/)[0]}, `:''},storage);
 }
 export interface PersonMatch { name: string; titles: Title[]; role: string }
 export function peopleMatches(titles: Title[], query: string): PersonMatch[] {

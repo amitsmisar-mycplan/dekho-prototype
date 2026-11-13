@@ -1,6 +1,6 @@
 'use client';
+import { useCopy } from '@/lib/use-copy';
 import { useTone } from '@/lib/use-copy';
-import { formatCopy } from '@/lib/copy';
 import { searchCopy } from '@/.generated/copy/search';
 import { commonCopy } from '@/.generated/copy/common';
 
@@ -14,6 +14,7 @@ import { track } from '@/lib/analytics';
 import { PosterCard } from '@/components/ui';
 import { PosterLink } from '@/components/poster-transition';
 export function SearchScreen({ titles, providers }: { titles: Title[]; providers: Provider[] }) {
+  const formatCopy = useCopy();
   const tone = useTone();
   const prefs = usePrototype((s) => s.prefs); const recents = usePrototype((s) => s.recentSearches);
   const [query, setQuery] = useState(''); const [result, setResult] = useState<{ query: string; titles: Title[]; freeOnly: boolean } | null>(null); const [error, setError] = useState(false);

@@ -1,6 +1,7 @@
 'use client';
+import { useCopy } from '@/lib/use-copy';
+import { momentLine, browserRotation } from '@/lib/copy/moments';
 import { useTone } from '@/lib/use-copy';
-import { formatCopy } from '@/lib/copy';
 import { pollCreateCopy } from '@/.generated/copy/pollCreate';
 
 import { useEffect, useRef, useState } from 'react';
@@ -16,6 +17,7 @@ import { normalizeGroupName, recentGroups } from '@/lib/polls/groups';
 import type { Title } from '@/lib/data';
 import { PosterCard } from '@/components/ui';
 export function PollCreate({ titles }: { titles: Title[] }) {
+  const formatCopy = useCopy();
   const tone = useTone();
   const savedGroups = usePrototype((s) => s.groupNames);
   const [groupName, setGroupName] = useState(''), [remoteGroups, setRemoteGroups] = useState<string[]>([]);
@@ -45,7 +47,7 @@ export function PollCreate({ titles }: { titles: Title[] }) {
       if (action === 'copy') {
         try { await navigator.clipboard.writeText(link); track('poll_share', { pollId: poll.id, method: 'copy' }); } catch { /* Waiting screen provides a selectable link if clipboard access is unavailable. */ }
       } else {
-        const message = formatCopy(pollCreateCopy['value_vote_for_tonight_s_picture_value'], { p1: poll.groupName, p2: link });
+        const message = momentLine('share',new Date(),tone,{group:poll.groupName||poll.name,link},browserRotation());
         const opened = window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
         if (opened) { opened.opener = null; track('poll_share', { pollId: poll.id, method: 'whatsapp' }); }
       }

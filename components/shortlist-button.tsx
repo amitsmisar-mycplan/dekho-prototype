@@ -1,5 +1,5 @@
 'use client';
-import { formatCopy } from '@/lib/copy';
+import { useCopy } from '@/lib/use-copy';
 import { shortlistCopy } from '@/.generated/copy/shortlist';
 
 import { useEffect, useState } from 'react';
@@ -11,6 +11,7 @@ import { track } from '@/lib/analytics';
 import type { Title } from '@/lib/data';
 import { PosterCard } from '@/components/ui';
 export function ShortlistButton({ title, compact = false, hero = false }: { title: Title; compact?: boolean; hero?: boolean }) {
+  const formatCopy = useCopy();
   const shortlist = usePrototype((s) => s.shortlist); const reduced = useReducedMotion();
   const [notice, setNotice] = useState('');
   const [flight, setFlight] = useState<{ x: number; y: number; toX: number; toY: number } | null>(null);

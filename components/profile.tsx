@@ -1,6 +1,6 @@
 'use client';
+import { useCopy } from '@/lib/use-copy';
 import { useTone } from '@/lib/use-copy';
-import { formatCopy } from '@/lib/copy';
 import { profileCopy } from '@/.generated/copy/profile';
 
 import Link from 'next/link';
@@ -19,6 +19,7 @@ import { usableCreatorName } from '@/lib/polls/config';
 import { ProviderChip, Button, Sheet } from '@/components/ui';
 import { TitleCard } from '@/components/title-card';
 export function Profile({ providers, titles }: { providers: Provider[]; titles: Title[] }) {
+  const formatCopy = useCopy();
   const tone = useTone();
   const prefs = usePrototype((s) => s.prefs), saved = usePrototype((s) => s.watchlist), brand = useBrand();
   const [editing, setEditing] = useState(false), [name, setName] = useState(usableCreatorName(prefs.name)), [avatarId, setAvatarId] = useState(prefs.avatarId);
@@ -30,7 +31,7 @@ export function Profile({ providers, titles }: { providers: Provider[]; titles: 
     const load = () => { void pollStore.getMyPolls().then((value) => { if (active) { setPolls(value); setError(''); } }).catch(() => { if (active) setError(formatCopy(profileCopy['your_movie_nights_couldn_t_load_check_your_connection_and_try_aga'])); }); };
     load(); const stop = pollStore.subscribe(load), timer = setInterval(() => setNow(Date.now()), 1000);
     return () => { active = false; stop(); clearInterval(timer); };
-  }, [reload]);
+  }, [reload, formatCopy]);
   const avatar = avatarOptions.find((a) => a.id === prefs.avatarId) ?? avatarOptions[0];
   const watchlist = saved.flatMap((id) => titles.find((t) => t.id === id) ?? []);
   const finished = (p: Poll) => Boolean(p.closedAt || Date.parse(p.deadline) <= now);

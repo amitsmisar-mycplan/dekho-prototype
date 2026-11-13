@@ -1,5 +1,5 @@
 'use client';
-import { formatCopy } from '@/lib/copy';
+import { useCopy } from '@/lib/use-copy';
 import { resultsCopy } from '@/.generated/copy/results';
 
 import { useEffect, useRef, useState } from 'react';
@@ -11,6 +11,7 @@ import type { PollOption } from './poll-room';
 import { track } from '@/lib/analytics';
 import { useBrand } from '@/lib/use-brand';
 export default function WinnerReveal({ poll, options, winner, scores, streak, onClose, sharedCard }: { poll: Poll; options: PollOption[]; winner: PollOption; scores: ReturnType<typeof scorePoll>; streak: number; onClose: () => void; sharedCard?: ResultCard }) {
+  const formatCopy = useCopy();
   const brand = useBrand();
   const [phase, setPhase] = useState<'drumroll' | 'winner'>('drumroll'), [busy, setBusy] = useState(false), [notice, setNotice] = useState(''), [downloads, setDownloads] = useState<{ wide: string; story: string } | null>(null);
   const canvas = useRef<HTMLCanvasElement>(null);

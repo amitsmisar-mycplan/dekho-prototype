@@ -1502,3 +1502,4 @@ a.text-action,a.wordmark { display:inline-flex; align-items:center; }
 .group-verdict blockquote { border-left: 2px solid var(--teal); padding-left: 12px; margin: 18px 0; }
 .group-verdict cite { display: block; color: var(--muted); font-size: 13px; margin-top: 5px; }
 .verdict-summary { color: var(--teal); font-size: 20px; margin: 16px 0; }
+.connection-status { margin: 12px 16px; padding: 12px 16px; border-radius: 12px; background: #252130; color: var(--text); font-size: 14px; line-height: 1.5; border: 1px solid #9C97AD66; }
