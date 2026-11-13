@@ -21,11 +21,13 @@ function TrayCard({ id, title, index, count, pending, onNavigate }: { id: string
   </Reorder.Item>;
 }
 export function ShortlistContents({ ids, onNavigate }: { ids: string[]; onNavigate: () => void }) {
+  const [error, setError] = useState(false), [retry, setRetry] = useState(0);
   const [dismissed, setDismissed] = useState<string | null>(null);
   const [titles, setTitles] = useState<Title[]>([]); const pending = usePrototype((s) => s.pendingSwap);
   const dismissToast = useCallback(() => setDismissed(pending), [pending]);
-  useEffect(() => { let active = true; dataSource.listTitles().then((items) => { if (active) setTitles(items); }); return () => { active = false; }; }, []);
+  useEffect(() => { let active = true; dataSource.listTitles().then((items) => { if (active) { setTitles(items); setError(false); } }).catch(() => { if (active) setError(true); }); return () => { active = false; }; }, [retry]);
   const valid = ids.every((id) => titles.some((t) => t.id === id));
+  if (error) return <div className="empty-state"><h3>Your picks need another take.</h3><p>We couldn’t load the shortlist.</p><Button onClick={() => { setError(false); setRetry((n) => n + 1); }}>Try again</Button></div>;
   return <><Toast message={pending && dismissed !== pending ? '4 is plenty, yaar' : ''} onClose={dismissToast}/>{pending ? <div className="swap-notice"><p role="status">4 is plenty, yaar</p><h3>Which pick should {titles.find((t) => t.id === pending)?.title ?? 'the new title'} replace?</h3><button className="text-action" onClick={() => usePrototype.getState().cancelSwap()}>Keep my four</button></div> : <p className="muted">Drag the grip to reorder. Swipe a card sideways to remove.</p>}
     <Reorder.Group axis="y" values={ids} onReorder={(items) => usePrototype.getState().reorderShortlist(items)} className="tray-cards">{ids.map((id, index) => <TrayCard key={id} id={id} title={titles.find((t) => t.id === id)} index={index} count={ids.length} pending={pending} onNavigate={onNavigate}/>)}</Reorder.Group>
     {!pending && <div className="tray-cta">{ids.length >= 2 && valid ? <Link className="button button-primary" href="/poll/new" onClick={onNavigate}>Ask the group</Link> : <Button disabled>Pick at least 2 titles</Button>}<p className="prototype-note">{!valid && titles.length ? 'Remove sample picks and choose catalog titles to start a poll.' : `${ids.length} of 4 picks. Everyone gets a say.`}</p></div>}

@@ -1,0 +1,137 @@
+[
+  {
+    "name": "home",
+    "route": "/",
+    "measuredAt": "2026-11-13T04:38:09.342Z",
+    "lighthouseVersion": "13.6.0",
+    "settings": {
+      "formFactor": "mobile",
+      "throttlingMethod": "simulate",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      }
+    },
+    "scores": {
+      "performance": 91,
+      "accessibility": 100
+    },
+    "metrics": {
+      "first-contentful-paint": {
+        "value": 904.2937,
+        "display": "0.9 s"
+      },
+      "largest-contentful-paint": {
+        "value": 3469.7342500000004,
+        "display": "3.5 s"
+      },
+      "total-blocking-time": {
+        "value": 25,
+        "display": "30 ms"
+      },
+      "cumulative-layout-shift": {
+        "value": 0,
+        "display": "0"
+      },
+      "speed-index": {
+        "value": 918.7125825702647,
+        "display": "0.9 s"
+      }
+    },
+    "accessibilityFailures": []
+  },
+  {
+    "name": "title",
+    "route": "/t/aavesham",
+    "measuredAt": "2026-11-13T04:38:15.205Z",
+    "lighthouseVersion": "13.6.0",
+    "settings": {
+      "formFactor": "mobile",
+      "throttlingMethod": "simulate",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      }
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100
+    },
+    "metrics": {
+      "first-contentful-paint": {
+        "value": 904.9203,
+        "display": "0.9 s"
+      },
+      "largest-contentful-paint": {
+        "value": 904.9203,
+        "display": "0.9 s"
+      },
+      "total-blocking-time": {
+        "value": 13.999999999999773,
+        "display": "10 ms"
+      },
+      "cumulative-layout-shift": {
+        "value": 0,
+        "display": "0"
+      },
+      "speed-index": {
+        "value": 987.3432303982224,
+        "display": "1.0 s"
+      }
+    },
+    "accessibilityFailures": []
+  },
+  {
+    "name": "voter",
+    "route": "/p/[id] (open poll)",
+    "measuredAt": "2026-11-13T04:38:21.116Z",
+    "lighthouseVersion": "13.6.0",
+    "settings": {
+      "formFactor": "mobile",
+      "throttlingMethod": "simulate",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      }
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100
+    },
+    "metrics": {
+      "first-contentful-paint": {
+        "value": 1357.5288,
+        "display": "1.4 s"
+      },
+      "largest-contentful-paint": {
+        "value": 1357.5288,
+        "display": "1.4 s"
+      },
+      "total-blocking-time": {
+        "value": 0,
+        "display": "0 ms"
+      },
+      "cumulative-layout-shift": {
+        "value": 0,
+        "display": "0"
+      },
+      "speed-index": {
+        "value": 1357.5288,
+        "display": "1.4 s"
+      }
+    },
+    "accessibilityFailures": []
+  }
+]

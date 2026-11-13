@@ -13,17 +13,19 @@ import { titleAvailabilityMessage, titleRecommendations, versionLabel, whatsappS
 import { getGroupRating, pollStore } from '@/lib/polls';
 import { usePrototype } from '@/lib/store';
 import { track } from '@/lib/analytics';
-import { brand } from '@/lib/brand';
+import { useBrand } from '@/lib/use-brand';
 import { initials } from '@/lib/preferences';
 const offerGroups: { type: OfferType; label: string }[] = [{ type: 'stream', label: 'Stream' }, { type: 'rent', label: 'Rent' }, { type: 'buy', label: 'Buy' }, { type: 'free', label: 'Free' }];
 export function TitlePreview({ title, providers, offers, similar, versions }: { title: Title; providers: Provider[]; offers: ProviderOffer[]; similar: SimilarTitle[]; versions: Title[] }) {
+  const brand = useBrand();
   const router = useRouter(); const [deckOpen, setDeckOpen] = useState(false); const shortlist = usePrototype((s) => s.shortlist);
   const prefs = usePrototype((s) => s.prefs); const watchlist = usePrototype((s) => s.watchlist); const rating = usePrototype((s) => s.personalRatings[title.id]);
   const [expanded, setExpanded] = useState(false); const [onlyServices, setOnlyServices] = useState(true);
+  const [groupError, setGroupError] = useState(false);
   const [group, setGroup] = useState<{ percent: number; votes: number } | null>(null); const [take, setTake] = useState(rating?.take ?? ''); const [notice, setNotice] = useState(''); const [shareUrl, setShareUrl] = useState(''); const [shareFallback, setShareFallback] = useState(false);
   const recommended = titleRecommendations(title, similar, versions, prefs, onlyServices); const unavailable = titleAvailabilityMessage(offers, prefs.services);
-  useEffect(() => { track('title_view', { titleId: title.id }); let active = true; const update = () => { getGroupRating(title.id).then((value) => { if (active) setGroup(value); }); }; update(); const unsubscribe = pollStore.subscribe(update); return () => { active = false; unsubscribe(); }; }, [title.id]);
-  useEffect(() => { setShareUrl(whatsappShareUrl(`${title.title} — tonight on ${brand.name}?`, `${window.location.origin}/t/${title.slug}`)); }, [title.slug, title.title]);
+  useEffect(() => { track('title_view', { titleId: title.id }); let active = true; const update = () => { getGroupRating(title.id).then((value) => { if (active) { setGroup(value); setGroupError(false); } }).catch(() => { if (active) setGroupError(true); }); }; update(); const unsubscribe = pollStore.subscribe(update); return () => { active = false; unsubscribe(); }; }, [title.id]);
+  useEffect(() => { setShareUrl(whatsappShareUrl(`${title.title} — tonight on ${brand.name}?`, `${window.location.origin}/t/${title.slug}`)); }, [title.slug, title.title, brand.name]);
   async function share() {
     const url = `${window.location.origin}/t/${title.slug}`;
     if (navigator.share) {
@@ -39,7 +41,7 @@ export function TitlePreview({ title, providers, offers, similar, versions }: { 
       <div className="title-identity"><DestinationPoster title={title}/><div><h1>{title.title}</h1><p className="title-meta">{title.year} · {title.runtimeMin ? `${title.runtimeMin} min` : `${title.seasons ?? 1} ${(title.seasons ?? 1) === 1 ? 'season' : 'seasons'}`} · {title.certification}<br/>{title.languages.join(' · ')}</p><div className="genre-chips">{title.genres.map((genre) => <span key={genre}>{genre}</span>)}</div></div></div>
     </section>
     <div className="title-body">
-      <section className="ratings-strip" aria-label="Ratings"><div className="tmdb-rating"><span className="rating-ring" style={{ '--rating': `${title.tmdbRating * 10}%` } as CSSProperties}><b>{title.tmdbRating.toFixed(1)}</b></span><div><strong>TMDb</strong><small>Illustrative score / 10</small></div></div><div className="group-rating">{group && <ThumbsUp size={17}/>}<strong>Your groups</strong><small>{group ? `${group.percent}% picked this · ${group.votes} votes` : 'No group votes yet'}</small></div></section>
+      <section className="ratings-strip" aria-label="Ratings"><div className="tmdb-rating"><span className="rating-ring" style={{ '--rating': `${title.tmdbRating * 10}%` } as CSSProperties}><b>{title.tmdbRating.toFixed(1)}</b></span><div><strong>TMDb</strong><small>Illustrative score / 10</small></div></div><div className="group-rating">{group && <ThumbsUp size={17}/>}<strong>Your groups</strong><small>{group ? `${group.percent}% picked this · ${group.votes} votes` : groupError ? 'Group votes unavailable' : 'No group votes yet'}</small></div></section>
       <section className="watch-section"><h2>Where to watch <span>in India</span></h2>{unavailable && <p className="unavailable-note">{unavailable}</p>}
         {offerGroups.map(({ type, label }) => { const rows = offers.filter((o) => o.type === type).sort((a, b) => Number(prefs.services.includes(b.providerId)) - Number(prefs.services.includes(a.providerId))); return rows.length ? <div className="offer-group" key={type}><h3>{label}</h3>{rows.map((offer) => <div className="watch-row" key={`${offer.providerId}-${type}`}><div><strong style={{ color: offer.provider.color }}>{offer.provider.name}</strong><div className="watch-row-meta">{prefs.services.includes(offer.providerId) && <span className="on-service">You have this</span>}<span>{type === 'free' ? 'Free tier' : offer.priceInr !== undefined ? `₹${offer.priceInr.toLocaleString('en-IN')}${type === 'rent' || type === 'buy' ? ' extra' : ''}` : 'Subscription'}</span></div></div><a style={{ background: offer.provider.color }} href={offer.deepLink} target="_blank" rel="noopener noreferrer" aria-label={`Watch on ${offer.provider.name} (${label}, opens in new tab)`} onClick={() => track('watch_click', { titleId: title.id, providerId: offer.providerId, offerType: type })}>Watch on {offer.provider.name}<ArrowUpRight size={14}/></a></div>)}</div> : null; })}
         <p className="availability-note">Availability is illustrative. Check price and access with the provider. Links may open the provider homepage.</p>

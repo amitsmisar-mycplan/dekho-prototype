@@ -7,7 +7,7 @@ import type { Poll, PollStore } from './types';
 import { nanoid8 } from './local';
 
 export function cloudError(error: { code?: string; message?: string }) {
-  if (error.code === 'PGRST202' || error.code === '42P01') return new Error('Supabase setup is incomplete. Run supabase/migrations/001_polls.sql in the SQL editor.');
+  if (error.code === 'PGRST202' || error.code === '42P01') return new Error('Supabase setup is incomplete. Run the pending SQL files in supabase/migrations in the SQL editor.');
   if (error.code === 'P0001' && error.message) return new Error(error.message);
   return new Error('Could not reach the poll service. Check the Supabase setup and try again.');
 }
@@ -37,6 +37,11 @@ export function createSupabasePollStore(client: SupabaseClient, realtime = typeo
   }
   function own(id: string) { if (id !== selfDeviceAlias) throw new Error('Simulated voters are available in local demo mode only.'); }
   const store: PollStore = {
+    async getMyPolls() {
+      const rows = await rpc('my_polls', {});
+      if (!Array.isArray(rows)) throw new Error('Your polls could not be loaded.');
+      return rows.flatMap((row) => { const poll = parseCloudPoll(row); if (poll) watch(poll.id); return poll ? [poll] : []; });
+    },
     async createPoll(input) {
       const creator = usableCreatorName(input.creator?.name);
       if (!creator) throw new Error('Your name helps friends know who’s asking.');

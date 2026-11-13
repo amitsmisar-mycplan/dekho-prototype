@@ -11,6 +11,11 @@ function mock() {
 }
 afterEach(() => { vi.useRealTimers(); vi.unstubAllGlobals(); vi.unstubAllEnvs(); vi.resetModules(); });
 describe('Supabase PollStore boundary', () => {
+  it('reads creator history through the capability-scoped RPC without accepting a device argument', async () => {
+    const { client, store } = mock(); client.rpc.mockResolvedValue({ data: [poll], error: null });
+    expect((await store.getMyPolls()).map((p) => p.id)).toEqual([poll.id]);
+    expect(client.rpc).toHaveBeenCalledWith('my_polls', {});
+  });
   it('reads ID-only polls and never imports a shared snapshot into the database', async () => {
     const { client, store } = mock();
     expect((await store.getPoll(poll.id))?.creator?.name).toBe('Amit');
@@ -40,7 +45,7 @@ describe('Supabase PollStore boundary', () => {
   });
   it('surfaces setup failures instead of silently creating local-only polls', async () => {
     const { client, store } = mock(); client.rpc.mockResolvedValue({ data: null, error: { code: 'PGRST202' } });
-    await expect(store.getPoll(poll.id)).rejects.toThrow('001_polls.sql');
+    await expect(store.getPoll(poll.id)).rejects.toThrow('supabase/migrations');
     expect(cloudError({ code: 'bad', message: 'private request data' }).message).not.toContain('private');
     await expect(store.createPoll({ ...poll, expectedVoters: 0, creator: { id: 'this-device', name: 'WatchTogether' } })).rejects.toThrow('name');
   });

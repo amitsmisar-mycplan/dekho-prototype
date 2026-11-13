@@ -2,6 +2,7 @@ import { dataSource } from '@/lib/data';
 import { GeneratedPosterSvg } from '@/components/poster/PosterArtwork';
 import type { PollOption } from '@/components/poll-room';
 export async function pollOptions(ids?: string[]): Promise<PollOption[]> {
+  if (!ids?.length) return [];
   const catalog = await dataSource.listTitles();
   return Promise.all(catalog.filter((t) => !ids || ids.includes(t.id)).map(async (t) => {
     const offers = await dataSource.getProviders(t.id), offer = offers.find((o) => o.type === 'stream' || o.type === 'free') ?? offers[0];

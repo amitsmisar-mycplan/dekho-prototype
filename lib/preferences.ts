@@ -20,7 +20,7 @@ export function normalizePreferences(value: unknown): Preferences {
   const prefs = value as Partial<Preferences>;
   const list = (input: unknown, fallback: string[]) => Array.isArray(input) ? [...new Set(input.filter((s): s is string => typeof s === 'string' && s.length > 0))] : fallback;
   return {
-    name: typeof prefs.name === 'string' ? prefs.name.trim().slice(0, 40) : '',
+    name: typeof prefs.name === 'string' && !['watchtogether', 'a friend', 'your friend'].includes(prefs.name.trim().toLowerCase()) ? prefs.name.trim().slice(0, 40) : '',
     avatarId: avatarOptions.some((a) => a.id === prefs.avatarId) ? prefs.avatarId! : defaults.avatarId,
     freeOnly: prefs.freeOnly === true, services: prefs.freeOnly === true ? [] : list(prefs.services, []), languages: list(prefs.languages, defaults.languages),
   };

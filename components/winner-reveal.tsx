@@ -6,8 +6,9 @@ import { yesSummary, type scorePoll } from '@/lib/polls/results';
 import { resultCard, encodeResult, type ResultCard } from '@/lib/polls/result-card';
 import type { PollOption } from './poll-room';
 import { track } from '@/lib/analytics';
-import { brand } from '@/lib/brand';
+import { useBrand } from '@/lib/use-brand';
 export default function WinnerReveal({ poll, options, winner, scores, streak, onClose, sharedCard }: { poll: Poll; options: PollOption[]; winner: PollOption; scores: ReturnType<typeof scorePoll>; streak: number; onClose: () => void; sharedCard?: ResultCard }) {
+  const brand = useBrand();
   const [phase, setPhase] = useState<'drumroll' | 'winner'>('drumroll'), [busy, setBusy] = useState(false), [notice, setNotice] = useState(''), [downloads, setDownloads] = useState<{ wide: string; story: string } | null>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const files = useRef<File[]>([]), urls = useRef<string[]>([]), closeButton = useRef<HTMLButtonElement>(null), overlay = useRef<HTMLDialogElement>(null);
@@ -20,7 +21,7 @@ export default function WinnerReveal({ poll, options, winner, scores, streak, on
     if (reduced) setPhase('winner');
     const timer = setTimeout(() => { setPhase('winner'); if (!reduced) void import('canvas-confetti').then(({ default: confetti }) => { if (active && canvas.current && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) { const burst = confetti.create(canvas.current, { resize: true }); stopConfetti = burst.reset; void burst({ particleCount: 90, spread: 75, origin: { y: .65 }, colors: [brand.colors.marigold, brand.colors.pink, brand.colors.teal], disableForReducedMotion: true }); } }); }, reduced ? 0 : 1100);
     return () => { active = false; clearTimeout(timer); stopConfetti?.(); createdUrls.forEach((url) => URL.revokeObjectURL(url)); };
-  }, [poll.id]);
+  }, [poll.id, brand.colors.marigold, brand.colors.pink, brand.colors.teal]);
   async function share() {
     setBusy(true); setNotice('');
     try {
