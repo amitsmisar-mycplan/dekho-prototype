@@ -34,8 +34,8 @@ describe('home discovery', () => {
     const prefs = { ...defaultPreferences(), services: ['prime-video'] };
     expect(offerLabel(panchayat, providers, prefs).text).toBe('On your Prime Video');
     expect(offerLabel(oppenheimer, providers, prefs).included).toBe(false);
-    expect(offerLabel(oppenheimer, providers, prefs).text).toBe('Netflix');
-    expect(offerLabel((await dataSource.getTitle('jersey'))!, providers, { ...prefs, freeOnly: true }).text).toBe('Free on MX Player');
+    expect(offerLabel(oppenheimer, providers, prefs).text).toBe('JioHotstar');
+    expect(offerLabel((await dataSource.getTitle('jersey'))!, providers, { ...prefs, freeOnly: true }).text).toBe('Free on JioHotstar');
   });
   it('uses the device day/time and first name for greetings', () => {
     expect(greeting('Amit Misar', new Date(2026, 10, 13, 21), 'hinglish')).toBe('Friday night, Amit. Kya plan hai?');

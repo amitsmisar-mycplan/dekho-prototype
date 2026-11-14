@@ -349,3 +349,16 @@ Validation: lint, strict typecheck, **103 tests**, and production build pass. Li
 Lint, typecheck, **104 tests** and production build pass. Browser checks cover all six preview images, exact output dimensions, long-content rendering and the 390px kit with no overflow. See `docs/p10-verdict-wide-screenshot.png` and `docs/p10-verdict-story.png`.
 
 The redacted credential audit is in `docs/p10-security-audit.md`. No service-role key, database password or PostgreSQL connection string was detected in the audited tracked history. Local environment and Supabase CLI config/state are ignored. The user applied SQL in the Dashboard as postgres; the agent used only the public anon key in ignored `.env.local` for API verification, never a migration credential.
+
+## Verified India availability (14 November 2026)
+
+The 55 dated rows in `scripts/availability-checklist-firstpass.md` are applied. Rows 31–43 retain their provider assignments, have null verification dates, show “Not yet verified” on title pages and are excluded from the hero. `docs/availability-changes.md` lists all 39 provider changes, before → after. Unlisted store/channel sources remain in `otherSources` for reference and are not rendered. Rental prices absent from the checklist are unknown, not ₹0.
+
+Run `supabase/migrations/005_availability_guard.sql` in the Supabase SQL Editor as postgres. It blocks new polls containing the four unavailable/rent-only titles, including requests from stale clients, without changing historical polls. Application-level validation enforces the same rule in both local and cloud stores.
+
+Demo routes:
+- `/welcome?edit=services`: select Hoichoi (Bengali affinity); `/t/vinci-da` shows Hoichoi.
+- `/t/rrr`: Netflix is explicitly a Hindi dub; ZEE5 is the original-language offer. Netflix alone does not put RRR in “On your services”.
+- `/t/article-15` and `/t/super-deluxe`: unavailable/rent-only states, Watchlist action, no watch button.
+- `/t/belaseshe`: pending verification note; it cannot enter the Home hero.
+- `/`: “Free tonight (with ads)” uses only ad-supported offers. Select free-only and Bengali to see the sparse/empty state; no paid titles are inserted.

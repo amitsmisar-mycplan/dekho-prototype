@@ -896,8 +896,8 @@ export const shortlistCopy = {
     "hinglish": "{p1} of 4 picks. Everyone gets a say."
   },
   "remove_sample_picks_and_choose_catalog_titles_to_start_a_poll": {
-    "indianEnglish": "Remove sample picks and choose catalogue titles to start a poll.",
-    "hinglish": "Remove sample picks and choose catalogue titles to start a poll."
+    "indianEnglish": "Remove unavailable picks before starting a poll.",
+    "hinglish": "Remove unavailable picks before starting a poll."
   },
   "pick_at_least_2_titles": {
     "indianEnglish": "Pick at least 2 titles",
@@ -1192,6 +1192,16 @@ export const homeCopy = {
   "night": {
     "indianEnglish": "night",
     "hinglish": "night"
+  },
+  "free_tonight_ads": {
+    "indianEnglish": "Free tonight (with ads)",
+    "hinglish": "Free tonight (with ads)",
+    "context": "home: verified availability information"
+  },
+  "free_sparse": {
+    "indianEnglish": "A small free selection tonight. Try another language for more picks.",
+    "hinglish": "A small free selection tonight. Try another language for more picks.",
+    "context": "home: verified availability information"
   }
 } as const;
 export const welcomeCopy = {
@@ -2744,6 +2754,36 @@ export const titleCopy = {
   "original_value_version": {
     "indianEnglish": "Original {p1} version",
     "hinglish": "Original {p1} version"
+  },
+  "not_verified": {
+    "indianEnglish": "Not yet verified",
+    "hinglish": "Not yet verified",
+    "context": "title: verified availability information"
+  },
+  "unavailable_now": {
+    "indianEnglish": "Not streaming in India right now",
+    "hinglish": "Not streaming in India right now",
+    "context": "title: verified availability information"
+  },
+  "rent_only": {
+    "indianEnglish": "Rent or buy only — not on any OTT app",
+    "hinglish": "Rent or buy only — not on any OTT app",
+    "context": "title: verified availability information"
+  },
+  "dub_language": {
+    "indianEnglish": "{language} dub",
+    "hinglish": "{language} dub",
+    "context": "title: verified availability information"
+  },
+  "free_ads": {
+    "indianEnglish": "Free with ads",
+    "hinglish": "Free with ads",
+    "context": "title: verified availability information"
+  },
+  "check_price": {
+    "indianEnglish": "Check price on provider",
+    "hinglish": "Check price on provider",
+    "context": "title: verified availability information"
   }
 } as const;
 export const shareCardCopy = {

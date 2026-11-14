@@ -13,7 +13,7 @@ import { usePrototype } from '@/lib/store';
 import { pollStore, defaultPollName, deadlineFor, pollPath, type Poll } from '@/lib/polls';
 import { track } from '@/lib/analytics';
 import { normalizeGroupName, recentGroups } from '@/lib/polls/groups';
-import type { Title } from '@/lib/data';
+import { canPickTonight, type Title } from '@/lib/data';
 import { PosterCard } from '@/components/ui';
 export function PollCreate({ titles }: { titles: Title[] }) {
   const tone = useTone();
@@ -25,7 +25,7 @@ export function PollCreate({ titles }: { titles: Title[] }) {
   const savedCreator = usePrototype((s) => usableCreatorName(s.prefs.name));
   const [creatorName, setCreatorName] = useState('');
   const actualCreator = savedCreator || usableCreatorName(creatorName);
-  const ids = usePrototype((s) => s.shortlist); const picks = ids.map((id) => titles.find((t) => t.id === id)).filter((t): t is Title => Boolean(t));
+  const ids = usePrototype((s) => s.shortlist); const picks = ids.map((id) => titles.find((t) => t.id === id && canPickTonight(t))).filter((t): t is Title => Boolean(t));
   const [name, setName] = useState(() => defaultPollName()); const [choice, setChoice] = useState('30'); const [custom, setCustom] = useState(''); const [note, setNote] = useState(''); const [busy, setBusy] = useState(false); const [error, setError] = useState('');
   const router = useRouter(), created = useRef<Poll | null>(null), creating = useRef(false);
   const deadline = deadlineFor(choice, new Date(), custom); const validDate = Number.isFinite(deadline.getTime()) && deadline.getTime() > Date.now();

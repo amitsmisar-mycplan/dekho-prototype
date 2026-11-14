@@ -1,3 +1,4 @@
+import { canPickTonight } from '../data/availability';
 import { nanoid8 } from './id';
 
 import { formatCopy } from '@/lib/copy';
@@ -26,13 +27,14 @@ export const localPollStore: PollStore = {
     const snapshot = parseSnapshot({ ...input, id, titleIds, name: input.name?.trim() || defaultPollName(), note: input.note?.trim() || '' });
     if (!snapshot || !Number.isInteger(input.expectedVoters) || input.expectedVoters < 0 || Date.parse(snapshot.deadline) <= Date.now()) throw new Error(formatCopy(pollErrorsCopy['choose_two_to_four_picks_and_a_future_deadline']));
     const catalog = await (await import('../data')).dataSource.listTitles();
-    if (titleIds.some((id) => !catalog.some((t) => t.id === id))) throw new Error(formatCopy(pollErrorsCopy['choose_catalog_titles_for_this_poll']));
+    if (titleIds.some((id) => !catalog.some((t) => t.id === id && canPickTonight(t)))) throw new Error(formatCopy(pollErrorsCopy['choose_catalog_titles_for_this_poll']));
     const poll: Poll = { ...snapshot, createdAt: new Date().toISOString(), expectedVoters: input.expectedVoters, votes: {} }; write([...read(), poll]); return poll;
   },
   async importPoll(snapshot, allowedTitleIds) {
     const valid = parseSnapshot(snapshot); if (!valid) throw new Error(formatCopy(pollErrorsCopy['this_poll_link_is_incomplete']));
     const existing = read(); const found = existing.find((p) => p.id === valid.id); if (found) return found;
-    const allowed = allowedTitleIds ?? (await (await import('../data')).dataSource.listTitles()).map((t) => t.id); if (valid.titleIds.some((id) => !allowed.includes(id))) throw new Error(formatCopy(pollErrorsCopy['a_poll_title_is_unavailable']));
+    const catalog = await (await import('../data')).dataSource.listTitles();
+    const allowed = catalog.filter(t => canPickTonight(t) && (!allowedTitleIds || allowedTitleIds.includes(t.id))).map(t => t.id); if (valid.titleIds.some((id) => !allowed.includes(id))) throw new Error(formatCopy(pollErrorsCopy['a_poll_title_is_unavailable']));
     const latest = read(); const imported = latest.find((p) => p.id === valid.id); if (imported) return imported;
     const poll: Poll = { ...valid, expectedVoters: 0, votes: {} }; write([...latest, poll]); return poll;
   },

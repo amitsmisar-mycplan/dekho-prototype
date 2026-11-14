@@ -49,9 +49,10 @@
           "providerId": "prime-video",
           "type": "stream",
           "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "scam-1992",
@@ -97,7 +98,22 @@
           "providerId": "sonyliv",
           "type": "stream",
           "deepLink": "https://www.sonyliv.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "sonyliv",
+          "type": "free",
+          "deepLink": "https://www.sonyliv.com/",
+          "verifiedAt": "2026-11-14",
+          "ads": true
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Vi Movies & TV",
+          "note": "Vi Movies & TV also lists it.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -144,9 +160,17 @@
           "providerId": "jiohotstar",
           "type": "stream",
           "deepLink": "https://www.hotstar.com/in/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "jiohotstar",
+          "type": "free",
+          "deepLink": "https://www.hotstar.com/in/",
+          "verifiedAt": "2026-11-14",
+          "ads": true
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "kota-factory",
@@ -191,9 +215,10 @@
           "providerId": "netflix",
           "type": "stream",
           "deepLink": "https://www.netflix.com/in/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "paatal-lok",
@@ -239,9 +264,10 @@
           "providerId": "prime-video",
           "type": "stream",
           "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "drishyam-2",
@@ -288,10 +314,18 @@
           "providerId": "prime-video",
           "type": "stream",
           "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         }
       ],
-      "remakeOf": "drishyam-2-malayalam"
+      "remakeOf": "drishyam-2-malayalam",
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Amazon MX Player",
+          "note": "Amazon MX Player ad-supported option also listed.",
+          "verifiedAt": "2026-11-14"
+        }
+      ]
     },
     {
       "id": "the-family-man",
@@ -339,9 +373,10 @@
           "providerId": "prime-video",
           "type": "stream",
           "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "laapataa-ladies",
@@ -388,9 +423,10 @@
           "providerId": "netflix",
           "type": "stream",
           "deepLink": "https://www.netflix.com/in/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "stree-2",
@@ -437,9 +473,10 @@
           "providerId": "prime-video",
           "type": "stream",
           "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "andhadhun",
@@ -484,10 +521,25 @@
       ],
       "providers": [
         {
-          "providerId": "jiohotstar",
+          "providerId": "prime-video",
           "type": "stream",
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "jiohotstar",
+          "type": "free",
           "deepLink": "https://www.hotstar.com/in/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14",
+          "ads": true
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Apple TV store",
+          "note": "Netflix not listed. Apple TV store rent/buy.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -532,10 +584,25 @@
       ],
       "providers": [
         {
-          "providerId": "prime-video",
+          "providerId": "netflix",
           "type": "stream",
-          "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "deepLink": "https://www.netflix.com/in/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "jiohotstar",
+          "type": "free",
+          "deepLink": "https://www.hotstar.com/in/",
+          "verifiedAt": "2026-11-14",
+          "ads": true
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Apple TV store",
+          "note": "Apple TV store rent/buy. Netflix page access inconsistent; catalogue trackers corroborate.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -584,7 +651,8 @@
           "deepLink": "https://www.netflix.com/in/",
           "verifiedAt": null
         }
-      ]
+      ],
+      "verifiedAt": null
     },
     {
       "id": "article-15",
@@ -624,14 +692,9 @@
       "moods": [
         "Edge-of-seat"
       ],
-      "providers": [
-        {
-          "providerId": "sonyliv",
-          "type": "stream",
-          "deepLink": "https://www.sonyliv.com/",
-          "verifiedAt": null
-        }
-      ]
+      "providers": [],
+      "verifiedAt": "2026-11-14",
+      "availability": "unavailable"
     },
     {
       "id": "badhaai-ho",
@@ -676,10 +739,19 @@
       ],
       "providers": [
         {
-          "providerId": "zee5",
-          "type": "stream",
-          "deepLink": "https://www.zee5.com/",
-          "verifiedAt": null
+          "providerId": "jiohotstar",
+          "type": "free",
+          "deepLink": "https://www.hotstar.com/in/",
+          "verifiedAt": "2026-11-14",
+          "ads": true
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Vi Movies & TV",
+          "note": "Neither ZEE5 nor Netflix listed. Vi Movies & TV also lists it.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -723,12 +795,13 @@
       ],
       "providers": [
         {
-          "providerId": "jiohotstar",
+          "providerId": "prime-video",
           "type": "stream",
-          "deepLink": "https://www.hotstar.com/in/",
-          "verifiedAt": null
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "piku",
@@ -772,10 +845,18 @@
       ],
       "providers": [
         {
-          "providerId": "prime-video",
+          "providerId": "sonyliv",
           "type": "stream",
-          "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "deepLink": "https://www.sonyliv.com/",
+          "verifiedAt": "2026-11-14"
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Apple TV store",
+          "note": "Official SonyLIV page; JustWatch India page is older. Apple TV store rent/buy.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -818,10 +899,25 @@
       ],
       "providers": [
         {
-          "providerId": "netflix",
+          "providerId": "prime-video",
           "type": "stream",
-          "deepLink": "https://www.netflix.com/in/",
-          "verifiedAt": null
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "jiohotstar",
+          "type": "free",
+          "deepLink": "https://www.hotstar.com/in/",
+          "verifiedAt": "2026-11-14",
+          "ads": true
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Vi Movies & TV",
+          "note": "Netflix not listed. Vi Movies & TV also lists it.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -871,7 +967,8 @@
           "deepLink": "https://www.sonyliv.com/",
           "verifiedAt": null
         }
-      ]
+      ],
+      "verifiedAt": null
     },
     {
       "id": "oppenheimer",
@@ -914,24 +1011,30 @@
       ],
       "providers": [
         {
-          "providerId": "netflix",
+          "providerId": "jiohotstar",
           "type": "stream",
-          "deepLink": "https://www.netflix.com/in/",
-          "verifiedAt": null
+          "deepLink": "https://www.hotstar.com/in/",
+          "verifiedAt": "2026-11-14"
         },
         {
           "providerId": "prime-video",
           "type": "rent",
-          "priceInr": 149,
           "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         },
         {
-          "providerId": "prime-video",
-          "type": "buy",
-          "priceInr": 499,
-          "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "providerId": "zee5",
+          "type": "rent",
+          "deepLink": "https://www.zee5.com/",
+          "verifiedAt": "2026-11-14"
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Apple TV store",
+          "note": "Netflix not listed. Apple TV store rent.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -978,9 +1081,10 @@
           "providerId": "apple-tv",
           "type": "stream",
           "deepLink": "https://tv.apple.com/in/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "knives-out",
@@ -1024,10 +1128,24 @@
       ],
       "providers": [
         {
-          "providerId": "apple-tv",
+          "providerId": "prime-video",
           "type": "stream",
-          "deepLink": "https://tv.apple.com/in/",
-          "verifiedAt": null
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "lionsgate-play",
+          "type": "stream",
+          "deepLink": "https://www.lionsgateplay.com/",
+          "verifiedAt": "2026-11-14"
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Apple TV store",
+          "note": "Not included in Apple TV+. Apple TV store rent/buy.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -1079,7 +1197,8 @@
           "deepLink": "https://www.hotstar.com/in/",
           "verifiedAt": null
         }
-      ]
+      ],
+      "verifiedAt": null
     },
     {
       "id": "dune",
@@ -1122,10 +1241,30 @@
       ],
       "providers": [
         {
-          "providerId": "lionsgate-play",
+          "providerId": "netflix",
           "type": "stream",
-          "deepLink": "https://www.lionsgateplay.com/",
-          "verifiedAt": null
+          "deepLink": "https://www.netflix.com/in/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "prime-video",
+          "type": "rent",
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Apple TV store",
+          "note": "Apple TV store rent/buy. Lionsgate Play result was a different Dune.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -1173,7 +1312,21 @@
           "providerId": "netflix",
           "type": "stream",
           "deepLink": "https://www.netflix.com/in/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "prime-video",
+          "type": "rent",
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Apple TV store",
+          "note": "JioHotstar not currently listed (first pass was wrong). Apple TV store rent/buy.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -1225,7 +1378,8 @@
           "deepLink": "https://www.primevideo.com/",
           "verifiedAt": null
         }
-      ]
+      ],
+      "verifiedAt": null
     },
     {
       "id": "the-martian",
@@ -1267,12 +1421,13 @@
       ],
       "providers": [
         {
-          "providerId": "apple-tv",
+          "providerId": "jiohotstar",
           "type": "stream",
-          "deepLink": "https://tv.apple.com/in/",
-          "verifiedAt": null
+          "deepLink": "https://www.hotstar.com/in/",
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "arrival",
@@ -1314,12 +1469,13 @@
       ],
       "providers": [
         {
-          "providerId": "jiohotstar",
+          "providerId": "lionsgate-play",
           "type": "stream",
-          "deepLink": "https://www.hotstar.com/in/",
-          "verifiedAt": null
+          "deepLink": "https://www.lionsgateplay.com/",
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "get-out",
@@ -1367,7 +1523,8 @@
           "deepLink": "https://www.lionsgateplay.com/",
           "verifiedAt": null
         }
-      ]
+      ],
+      "verifiedAt": null
     },
     {
       "id": "stranger-things",
@@ -1413,9 +1570,10 @@
           "providerId": "netflix",
           "type": "stream",
           "deepLink": "https://www.netflix.com/in/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "ted-lasso",
@@ -1462,9 +1620,10 @@
           "providerId": "apple-tv",
           "type": "stream",
           "deepLink": "https://tv.apple.com/in/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "manjummel-boys",
@@ -1510,9 +1669,10 @@
           "providerId": "jiohotstar",
           "type": "stream",
           "deepLink": "https://www.hotstar.com/in/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "kumbalangi-nights",
@@ -1559,7 +1719,15 @@
           "providerId": "prime-video",
           "type": "stream",
           "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Apple TV store",
+          "note": "Apple TV store rent/buy (store, not applied).",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -1610,7 +1778,8 @@
           "deepLink": "https://www.netflix.com/in/",
           "verifiedAt": null
         }
-      ]
+      ],
+      "verifiedAt": null
     },
     {
       "id": "joji",
@@ -1657,7 +1826,8 @@
           "deepLink": "https://www.sonyliv.com/",
           "verifiedAt": null
         }
-      ]
+      ],
+      "verifiedAt": null
     },
     {
       "id": "anjaam-pathiraa",
@@ -1702,10 +1872,18 @@
       ],
       "providers": [
         {
-          "providerId": "jiohotstar",
+          "providerId": "sun-nxt",
           "type": "stream",
-          "deepLink": "https://www.hotstar.com/in/",
-          "verifiedAt": null
+          "deepLink": "https://www.sunnxt.com/",
+          "verifiedAt": "2026-11-14"
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Vi Movies & TV",
+          "note": "Vi Movies & TV also lists it.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -1755,7 +1933,8 @@
           "deepLink": "https://www.primevideo.com/",
           "verifiedAt": null
         }
-      ]
+      ],
+      "verifiedAt": null
     },
     {
       "id": "aavesham",
@@ -1802,7 +1981,21 @@
           "providerId": "prime-video",
           "type": "stream",
           "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "prime-video",
+          "type": "rent",
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Vi Movies & TV",
+          "note": "Vi Movies & TV also lists it.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -1847,12 +2040,14 @@
       ],
       "providers": [
         {
-          "providerId": "sonyliv",
-          "type": "stream",
-          "deepLink": "https://www.sonyliv.com/",
-          "verifiedAt": null
+          "providerId": "jiohotstar",
+          "type": "free",
+          "deepLink": "https://www.hotstar.com/in/",
+          "verifiedAt": "2026-11-14",
+          "ads": true
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "jailer",
@@ -1900,7 +2095,28 @@
           "providerId": "prime-video",
           "type": "stream",
           "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "sun-nxt",
+          "type": "stream",
+          "deepLink": "https://www.sunnxt.com/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "mx-player",
+          "type": "free",
+          "deepLink": "https://www.mxplayer.in/",
+          "verifiedAt": "2026-11-14",
+          "ads": true
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Vi Movies & TV",
+          "note": "Verified against the Rajinikanth film. Vi Movies & TV also lists it.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -1942,12 +2158,14 @@
       "moods": [
         "Edge-of-seat"
       ],
-      "providers": [
+      "providers": [],
+      "verifiedAt": "2026-11-14",
+      "availability": "rentOnly",
+      "otherSources": [
         {
-          "providerId": "netflix",
-          "type": "stream",
-          "deepLink": "https://www.netflix.com/in/",
-          "verifiedAt": null
+          "name": "Apple TV store",
+          "note": "Apple TV store rent/buy only. Netflix not listed.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -1991,10 +2209,19 @@
       ],
       "providers": [
         {
-          "providerId": "sun-nxt",
-          "type": "stream",
-          "deepLink": "https://www.sunnxt.com/",
-          "verifiedAt": null
+          "providerId": "jiohotstar",
+          "type": "free",
+          "deepLink": "https://www.hotstar.com/in/",
+          "verifiedAt": "2026-11-14",
+          "ads": true
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Vi Movies & TV",
+          "note": "ZEE5 no longer listed. Vi Movies & TV lists it (not in our list).",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -2042,7 +2269,33 @@
           "providerId": "jiohotstar",
           "type": "stream",
           "deepLink": "https://www.hotstar.com/in/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "aha",
+          "type": "stream",
+          "deepLink": "https://www.aha.video/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "mx-player",
+          "type": "free",
+          "deepLink": "https://www.mxplayer.in/",
+          "verifiedAt": "2026-11-14",
+          "ads": true
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Vi Movies & TV",
+          "note": "Tamil playback per provider not confirmed. Vi Movies & TV, Amazon MX Player also list it.",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "name": "Amazon MX Player",
+          "note": "Tamil playback per provider not confirmed. Vi Movies & TV, Amazon MX Player also list it.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -2088,9 +2341,10 @@
           "providerId": "prime-video",
           "type": "stream",
           "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "jai-bhim",
@@ -2137,7 +2391,8 @@
           "deepLink": "https://www.netflix.com/in/",
           "verifiedAt": null
         }
-      ]
+      ],
+      "verifiedAt": null
     },
     {
       "id": "96",
@@ -2182,9 +2437,19 @@
           "providerId": "sun-nxt",
           "type": "stream",
           "deepLink": "https://www.sunnxt.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "sonyliv",
+          "type": "stream",
+          "deepLink": "https://www.sonyliv.com/",
+          "verifiedAt": "2026-11-14",
+          "languages": [
+            "Hindi"
+          ]
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "rrr",
@@ -2227,12 +2492,22 @@
       ],
       "providers": [
         {
+          "providerId": "zee5",
+          "type": "stream",
+          "deepLink": "https://www.zee5.com/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
           "providerId": "netflix",
           "type": "stream",
           "deepLink": "https://www.netflix.com/in/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14",
+          "languages": [
+            "Hindi"
+          ]
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "pushpa-the-rise",
@@ -2279,7 +2554,15 @@
           "providerId": "prime-video",
           "type": "stream",
           "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Amazon MX Player",
+          "note": "Telugu confirmed. Amazon MX Player ads listing, audio unconfirmed (not applied).",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -2325,12 +2608,23 @@
       ],
       "providers": [
         {
-          "providerId": "aha",
+          "providerId": "jiohotstar",
+          "type": "free",
+          "deepLink": "https://www.hotstar.com/in/",
+          "verifiedAt": "2026-11-14",
+          "ads": true
+        },
+        {
+          "providerId": "sonyliv",
           "type": "stream",
-          "deepLink": "https://www.aha.video/",
-          "verifiedAt": null
+          "deepLink": "https://www.sonyliv.com/",
+          "verifiedAt": "2026-11-14",
+          "languages": [
+            "Hindi"
+          ]
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "jersey",
@@ -2373,16 +2667,31 @@
       ],
       "providers": [
         {
-          "providerId": "jiohotstar",
+          "providerId": "zee5",
           "type": "stream",
-          "deepLink": "https://www.hotstar.com/in/",
-          "verifiedAt": null
+          "deepLink": "https://www.zee5.com/",
+          "verifiedAt": "2026-11-14"
         },
         {
-          "providerId": "mx-player",
+          "providerId": "sun-nxt",
+          "type": "stream",
+          "deepLink": "https://www.sunnxt.com/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "jiohotstar",
           "type": "free",
-          "deepLink": "https://www.mxplayer.in/",
-          "verifiedAt": null
+          "deepLink": "https://www.hotstar.com/in/",
+          "verifiedAt": "2026-11-14",
+          "ads": true
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Vi Movies & TV",
+          "note": "Vi Movies & TV also lists it (not in our provider list). MX Player not reconfirmed.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -2426,12 +2735,13 @@
       ],
       "providers": [
         {
-          "providerId": "netflix",
+          "providerId": "prime-video",
           "type": "stream",
-          "deepLink": "https://www.netflix.com/in/",
-          "verifiedAt": null
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "mahanati",
@@ -2476,9 +2786,10 @@
           "providerId": "prime-video",
           "type": "stream",
           "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "hit-the-first-case",
@@ -2528,7 +2839,8 @@
           "deepLink": "https://www.aha.video/",
           "verifiedAt": null
         }
-      ]
+      ],
+      "verifiedAt": null
     },
     {
       "id": "kantara",
@@ -2574,9 +2886,19 @@
           "providerId": "prime-video",
           "type": "stream",
           "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "netflix",
+          "type": "stream",
+          "deepLink": "https://www.netflix.com/in/",
+          "verifiedAt": "2026-11-14",
+          "languages": [
+            "Hindi"
+          ]
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "k-g-f-chapter-1",
@@ -2625,7 +2947,8 @@
           "deepLink": "https://www.hotstar.com/in/",
           "verifiedAt": null
         }
-      ]
+      ],
+      "verifiedAt": null
     },
     {
       "id": "777-charlie",
@@ -2669,12 +2992,22 @@
       ],
       "providers": [
         {
-          "providerId": "zee5",
+          "providerId": "jiohotstar",
           "type": "stream",
-          "deepLink": "https://www.zee5.com/",
-          "verifiedAt": null
+          "deepLink": "https://www.hotstar.com/in/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14",
+          "languages": [
+            "Hindi"
+          ]
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "praktan",
@@ -2713,14 +3046,9 @@
       "moods": [
         "Drama night"
       ],
-      "providers": [
-        {
-          "providerId": "zee5",
-          "type": "stream",
-          "deepLink": "https://www.zee5.com/",
-          "verifiedAt": null
-        }
-      ]
+      "providers": [],
+      "verifiedAt": "2026-11-14",
+      "availability": "unavailable"
     },
     {
       "id": "belaseshe",
@@ -2768,7 +3096,8 @@
           "deepLink": "https://www.primevideo.com/",
           "verifiedAt": null
         }
-      ]
+      ],
+      "verifiedAt": null
     },
     {
       "id": "vinci-da",
@@ -2810,12 +3139,13 @@
       ],
       "providers": [
         {
-          "providerId": "sonyliv",
+          "providerId": "hoichoi",
           "type": "stream",
-          "deepLink": "https://www.sonyliv.com/",
-          "verifiedAt": null
+          "deepLink": "https://www.hoichoi.tv",
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "sairat",
@@ -2859,7 +3189,15 @@
           "providerId": "zee5",
           "type": "stream",
           "deepLink": "https://www.zee5.com/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Apple TV store",
+          "note": "Marathi audio confirmed. Apple TV store rent/buy.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -2906,7 +3244,8 @@
           "deepLink": "https://www.netflix.com/in/",
           "verifiedAt": null
         }
-      ]
+      ],
+      "verifiedAt": null
     },
     {
       "id": "chintu-ka-birthday",
@@ -2947,11 +3286,13 @@
       ],
       "providers": [
         {
-          "providerId": "mx-player",
-          "type": "free",
-          "verifiedAt": null
+          "providerId": "zee5",
+          "type": "stream",
+          "deepLink": "https://www.zee5.com/",
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "ramprasad-ki-tehrvi",
@@ -2990,11 +3331,14 @@
         "Laugh",
         "Drama night"
       ],
-      "providers": [
+      "providers": [],
+      "verifiedAt": "2026-11-14",
+      "availability": "rentOnly",
+      "otherSources": [
         {
-          "providerId": "zee5",
-          "type": "free",
-          "verifiedAt": null
+          "name": "Apple TV store",
+          "note": "Apple TV store rent/buy only.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -3036,11 +3380,19 @@
       ],
       "providers": [
         {
-          "providerId": "mx-player",
-          "type": "free",
-          "verifiedAt": null
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "zee5",
+          "type": "stream",
+          "deepLink": "https://www.zee5.com/",
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "bareilly-ki-barfi",
@@ -3081,11 +3433,13 @@
       ],
       "providers": [
         {
-          "providerId": "zee5",
-          "type": "free",
-          "verifiedAt": null
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "nil-battey-sannata",
@@ -3125,9 +3479,18 @@
       ],
       "providers": [
         {
-          "providerId": "mx-player",
-          "type": "free",
-          "verifiedAt": null
+          "providerId": "zee5",
+          "type": "stream",
+          "deepLink": "https://www.zee5.com/",
+          "verifiedAt": "2026-11-14"
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Eros Now Select",
+          "note": "Not free. Also Eros Now Select channel.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -3170,8 +3533,17 @@
       "providers": [
         {
           "providerId": "zee5",
-          "type": "free",
-          "verifiedAt": null
+          "type": "stream",
+          "deepLink": "https://www.zee5.com/",
+          "verifiedAt": "2026-11-14"
+        }
+      ],
+      "verifiedAt": "2026-11-14",
+      "otherSources": [
+        {
+          "name": "Eros Now Select",
+          "note": "Not free. Also Eros Now Select channel.",
+          "verifiedAt": "2026-11-14"
         }
       ]
     },
@@ -3213,11 +3585,13 @@
       ],
       "providers": [
         {
-          "providerId": "mx-player",
-          "type": "free",
-          "verifiedAt": null
+          "providerId": "zee5",
+          "type": "stream",
+          "deepLink": "https://www.zee5.com/",
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     },
     {
       "id": "axone",
@@ -3258,11 +3632,13 @@
       ],
       "providers": [
         {
-          "providerId": "zee5",
-          "type": "free",
-          "verifiedAt": null
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "verifiedAt": "2026-11-14"
     }
   ]
 }

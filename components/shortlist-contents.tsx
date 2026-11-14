@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Reorder, motion, useDragControls, useReducedMotion } from 'motion/react';
 import { ArrowDown, ArrowUp, GripVertical, Trash2 } from 'lucide-react';
-import { dataSource, type Title } from '@/lib/data';
+import { dataSource, canPickTonight, type Title } from '@/lib/data';
 import { usePrototype } from '@/lib/store';
 import { Button, PosterCard, Toast } from '@/components/ui';
 import { track } from '@/lib/analytics';
@@ -29,7 +29,7 @@ export function ShortlistContents({ ids, onNavigate }: { ids: string[]; onNaviga
   const [titles, setTitles] = useState<Title[]>([]); const pending = usePrototype((s) => s.pendingSwap);
   const dismissToast = useCallback(() => setDismissed(pending), [pending]);
   useEffect(() => { let active = true; dataSource.listTitles().then((items) => { if (active) { setTitles(items); setError(false); } }).catch(() => { if (active) setError(true); }); return () => { active = false; }; }, [retry]);
-  const valid = ids.every((id) => titles.some((t) => t.id === id));
+  const valid = ids.every((id) => titles.some((t) => t.id === id && canPickTonight(t)));
   if (error) return <div className="empty-state"><h3>{formatCopy(shortlistCopy['your_picks_need_another_take'])}</h3><p>{formatCopy(shortlistCopy['we_couldn_t_load_the_shortlist'])}</p><Button onClick={() => { setError(false); setRetry((n) => n + 1); }}>{formatCopy(shortlistCopy['try_again'])}</Button></div>;
   return <><Toast message={pending && dismissed !== pending ? formatCopy(shortlistCopy['4_is_plenty_yaar']) : ''} onClose={dismissToast}/>{pending ? <div className="swap-notice"><p role="status">{formatCopy(shortlistCopy['4_is_plenty_yaar'])}</p><h3>{formatCopy(shortlistCopy['which_pick_should'])}{titles.find((t) => t.id === pending)?.title ?? formatCopy(shortlistCopy['the_new_title'])} {formatCopy(shortlistCopy['replace'])}</h3><button className="text-action" onClick={() => usePrototype.getState().cancelSwap()}>{formatCopy(shortlistCopy['keep_my_four'])}</button></div> : <p className="muted">{formatCopy(shortlistCopy['drag_the_grip_to_reorder_swipe_a_card_sideways_to_remove'])}</p>}
     <Reorder.Group axis="y" values={ids} onReorder={(items) => usePrototype.getState().reorderShortlist(items)} className="tray-cards">{ids.map((id, index) => <TrayCard key={id} id={id} title={titles.find((t) => t.id === id)} index={index} count={ids.length} pending={pending} onNavigate={onNavigate}/>)}</Reorder.Group>
