@@ -9,12 +9,12 @@ async function fixture() {
   return { catalog: { ...metadata, titles: await dataSource.listTitles() }, providers: await dataSource.listProviders() };
 }
 describe('catalog integrity', () => {
-  it('contains 68 unique titles, 10 providers and all eight languages', async () => {
+  it('contains 68 unique titles, 11 providers and all eight languages', async () => {
     const titles = await dataSource.listTitles();
     expect(titles).toHaveLength(68);
     expect(new Set(titles.map((t) => t.id)).size).toBe(68);
     expect(new Set(titles.map((t) => t.slug)).size).toBe(68);
-    expect(await dataSource.listProviders()).toHaveLength(10);
+    expect(await dataSource.listProviders()).toHaveLength(11);
     expect(Object.fromEntries(['Hindi', 'English', 'Malayalam', 'Tamil', 'Telugu', 'Kannada', 'Bengali', 'Marathi'].map((language) => [language, titles.filter((t) => t.originalLanguage === language).length]))).toEqual({ Hindi: 26, English: 12, Malayalam: 8, Tamil: 7, Telugu: 7, Kannada: 3, Bengali: 3, Marathi: 2 });
     expect((await dataSource.getCatalogInfo()).illustrative).toBe(true);
     expect(titles.some((t) => t.type === 'series')).toBe(true);
@@ -106,9 +106,9 @@ describe('explainable similarity', () => {
   });
 });
 describe('providers and mood picks', () => {
-  it('keeps seeded provider records and every offer explicitly unverified', async () => {
-    expect((await dataSource.listProviders()).every((provider) => provider.verifiedAt === null)).toBe(true);
-    expect((await dataSource.listTitles()).every((title) => title.providers.every((offer) => offer.verifiedAt === null))).toBe(true);
+  it('keeps pending titles unverified and validates real verification dates', async () => {
+    expect((await dataSource.listProviders()).find(p => p.id === 'hoichoi')?.verifiedAt).toBe('2026-11-14');
+    const titles = await dataSource.listTitles(); expect(titles.filter(t => t.verifiedAt === null)).toHaveLength(13); expect(titles.filter(t => t.verifiedAt === null).every(t => t.providers.every(o => o.verifiedAt === null))).toBe(true);
     const { catalog, providers } = await fixture();
     catalog.titles[0].providers[0].verifiedAt = '2026-02-30';
     expect(() => new JsonDataSource(catalog, providers)).toThrow('verifiedAt');
@@ -127,12 +127,14 @@ describe('providers and mood picks', () => {
     expect(getAvailabilityMessage(await dataSource.getProviders('oppenheimer', [prime.id]), [prime])).toBeNull();
   });
   it('sorts your services first and preserves rent/buy INR prices and offer types', async () => {
-    const offers = await dataSource.getProviders('oppenheimer', ['prime-video']);
-    expect(offers.map((o) => o.type)).toEqual(['rent', 'buy', 'stream']);
+    const { catalog, providers } = await fixture();
+    const film = catalog.titles.find(t => t.id === 'oppenheimer')!;
+    film.providers = [{ providerId: 'prime-video', type: 'rent', priceInr: 149, verifiedAt: null }, { providerId: 'prime-video', type: 'buy', priceInr: 499, verifiedAt: null }, { providerId: 'jiohotstar', type: 'stream', verifiedAt: null }];
+    const offers = await new JsonDataSource(catalog, providers).getProviders('oppenheimer', ['jiohotstar']);
+    expect(offers.map(o => o.type)).toEqual(['stream', 'rent', 'buy']);
     expect(offers[0].onYourServices).toBe(true);
-    expect(offers[0].priceInr).toBe(149);
-    expect(offers[1].priceInr).toBe(499);
-    expect(offers[2].onYourServices).toBe(false);
+    expect(offers[1].priceInr).toBe(149); expect(offers[2].priceInr).toBe(499);
+    expect(offers[1].onYourServices).toBe(false);
     expect((await dataSource.getProviders('jersey')).some((o) => o.type === 'free')).toBe(true);
     expect(await dataSource.getProviders('missing')).toEqual([]);
   });

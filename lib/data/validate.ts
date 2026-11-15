@@ -19,6 +19,7 @@ export function parseProviders(input: unknown): Provider[] {
     requireValue(record(item), 'provider must be an object');
     requireValue(text(item.id) && !ids.has(item.id), 'provider ids must be unique');
     ids.add(item.id);
+    requireValue(item.languageAffinity === undefined || (strings(item.languageAffinity) && item.languageAffinity.every(l => (languages as readonly string[]).includes(l))), `provider ${item.id} language affinity`);
     requireValue(verificationDate(item.verifiedAt), `provider ${item.id} verifiedAt`);
     requireValue(text(item.name) && typeof item.color === 'string' && /^#[a-f\d]{6}$/i.test(item.color) && safeUrl(item.homepageUrl), `provider ${item.id}`);
   }
@@ -42,14 +43,19 @@ export function parseCatalog(input: unknown, providers: readonly Provider[]): Ca
     requireValue(typeof title.tmdbRating === 'number' && Number.isFinite(title.tmdbRating) && title.tmdbRating >= 0 && title.tmdbRating <= 10, `${title.id} rating`);
     requireValue(artwork(title.posterPath) && artwork(title.backdropPath), `${title.id} artwork paths`);
     requireValue(strings(title.palette) && title.palette.length === 2 && title.palette.every((c) => /^#[a-f\d]{6}$/i.test(c)), `${title.id} palette`);
-    requireValue(Array.isArray(title.providers) && title.providers.length > 0, `${title.id} offers`);
+    requireValue(Array.isArray(title.providers), `${title.id} offers`);
+    requireValue(title.verifiedAt === undefined || verificationDate(title.verifiedAt), `${title.id} verifiedAt`);
+    requireValue(title.availability === undefined || ['unavailable', 'rentOnly'].includes(String(title.availability)), `${title.id} availability`);
+    requireValue(!title.availability || title.providers.length === 0, `${title.id} unavailable offers`);
+    requireValue(title.otherSources === undefined || (Array.isArray(title.otherSources) && title.otherSources.every(s => record(s) && text(s.name) && text(s.note) && verificationDate(s.verifiedAt))), `${title.id} other sources`);
     const offers = new Set<string>();
     for (const offer of title.providers) {
       requireValue(record(offer) && providers.some((p) => p.id === offer.providerId) && ['stream', 'rent', 'buy', 'free'].includes(String(offer.type)), `${title.id} provider reference/offer type`);
       requireValue(verificationDate(offer.verifiedAt), `${title.id} offer verifiedAt`);
       requireValue(offer.deepLink === undefined || safeUrl(offer.deepLink), `${title.id} unsafe provider link`);
       requireValue(offer.priceInr === undefined || (typeof offer.priceInr === 'number' && Number.isFinite(offer.priceInr) && offer.priceInr >= 0), `${title.id} price`);
-      requireValue(!['rent', 'buy'].includes(String(offer.type)) || typeof offer.priceInr === 'number', `${title.id} paid offer price missing`);
+      requireValue(offer.ads === undefined || (typeof offer.ads === 'boolean' && offer.type === 'free'), `${title.id} ads`);
+      requireValue(offer.languages === undefined || (strings(offer.languages) && offer.languages.length > 0 && offer.languages.every(l => (languages as readonly string[]).includes(l))), `${title.id} offer languages`);
       const key = `${offer.providerId}:${offer.type}`;
       requireValue(!offers.has(key), `${title.id} duplicate offer`); offers.add(key);
     }

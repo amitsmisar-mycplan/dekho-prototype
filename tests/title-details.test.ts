@@ -26,13 +26,13 @@ describe('title decisions', () => {
   });
   it('does not mistake a paid rental for an included streaming offer', async () => {
     const offers = await dataSource.getProviders('oppenheimer', ['prime-video']);
-    expect(titleAvailabilityMessage(offers, ['prime-video'])).toBe('Not on your apps · streaming on Netflix');
-    expect(titleAvailabilityMessage(offers, ['netflix'])).toBeNull();
+    expect(titleAvailabilityMessage(offers, ['prime-video'])).toBe('Not on your apps · streaming on JioHotstar');
+    expect(titleAvailabilityMessage(offers, ['jiohotstar'])).toBeNull();
   });
-  it('adds exactly eight unverified free titles on the requested tiers', async () => {
-    const free = (await dataSource.listTitles()).filter((t) => t.id !== 'jersey' && t.providers.some((o) => o.type === 'free'));
-    expect(free).toHaveLength(8);
-    expect(free.every((t) => t.providers.every((o) => o.verifiedAt === null && ['mx-player', 'zee5'].includes(o.providerId)))).toBe(true);
+  it('uses only confirmed ad-supported offers for free discovery', async () => {
+    const free = (await dataSource.listTitles()).filter(t => t.providers.some(o => o.ads));
+    expect(free).toHaveLength(12);
+    expect(free.every(t => t.providers.some(o => o.type === 'free' && o.ads === true && o.verifiedAt === '2026-11-14'))).toBe(true);
   });
   it('persists independent personal takes and watchlist selections', async () => {
     const saved = storage(), store = createPrototypeStore(saved);

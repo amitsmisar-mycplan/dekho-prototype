@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { motion, useAnimationControls, useMotionValue, useTransform, useReducedMotion } from 'motion/react';
 import { Bookmark, Plus, X } from 'lucide-react';
 import { Button, PosterCard, Sheet } from '@/components/ui';
-import type { SimilarTitle } from '@/lib/data';
+import { canPickTonight, type SimilarTitle } from '@/lib/data';
 import { usePrototype } from '@/lib/store';
 import { deckIntent, type DeckAction } from '@/lib/shortlist';
 import { track } from '@/lib/analytics';
@@ -26,7 +26,7 @@ function DeckCard({ item, onChoice }: { item: SimilarTitle; onChoice: (action: D
 export function DiscoveryDeck({ items, onClose }: { items: SimilarTitle[]; onClose: () => void }) {
   const tone = useTone();
   const [index, setIndex] = useState(0); const shortlist = usePrototype((s) => s.shortlist); const [message, setMessage] = useState('');
-  const item = items.slice(index).find((entry) => !shortlist.includes(entry.title.id)); const full = shortlist.length >= 4;
+  const item = items.slice(index).find((entry) => canPickTonight(entry.title) && !shortlist.includes(entry.title.id)); const full = shortlist.length >= 4;
   function choice(action: DeckAction) {
     if (!item) return;
     const state = usePrototype.getState();

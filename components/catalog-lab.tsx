@@ -1,4 +1,5 @@
 'use client';
+import { hasAdsOffer } from '@/lib/data/availability';
 import { formatCopy } from '@/lib/copy';
 import { kitCopy } from '@/.generated/copy/kit';
 import { commonCopy } from '@/.generated/copy/common';
@@ -18,9 +19,9 @@ async function loadCatalog(query: string, slug: string, services: string[], lang
     query.trim() ? dataSource.searchTitles(query) : dataSource.listTitles(), dataSource.getTitle(slug),
   ]);
   const matchesLanguage = (title: { languages: string[] }) => !languages.length || title.languages.some((l) => languages.includes(l));
-  const results = searched.filter(matchesLanguage).filter((t) => !freeOnly || t.providers.some((o) => o.type === 'free'));
+  const results = searched.filter(matchesLanguage).filter((t) => !freeOnly || hasAdsOffer(t));
   const [allSimilar, offers] = selected ? await Promise.all([dataSource.getSimilar(selected.id, 60), dataSource.getProviders(selected.id, services)]) : [[], []];
-  const similar = allSimilar.filter((r) => matchesLanguage(r.title) && (!freeOnly || r.title.providers.some((o) => o.type === 'free'))).slice(0, 5);
+  const similar = allSimilar.filter((r) => matchesLanguage(r.title) && (!freeOnly || hasAdsOffer(r.title))).slice(0, 5);
   return { info, allTitles, providers, results, selected, similar, offers };
 }
 export default function CatalogLab({ query, slug, service, language }: { query: string; slug: string; service: string; language: string }) {
@@ -41,7 +42,7 @@ export default function CatalogLab({ query, slug, service, language }: { query: 
   if (error) return <div className="page-content empty-state"><h2>{formatCopy(kitCopy['a_little_intermission'])}</h2><p>{formatCopy(kitCopy['the_catalog_couldn_t_load_your_preferences_are_still_saved'])}</p><button className="button button-primary" onClick={() => window.location.reload()}>{formatCopy(kitCopy['try_again'])}</button></div>;
   if (!loaded || loaded.key !== requestKey) return <div className="page-content" role="status" aria-label={formatCopy(kitCopy['loading_your_catalog'])}><div className="skeleton" style={{ height: 420, borderRadius: 20 }}/></div>;
   const { info, allTitles, providers, results, selected, similar, offers } = loaded.data;
-  const availabilityMessage = getAvailabilityMessage(offers, providers.filter((p) => effective.services.includes(p.id)));
+  const availabilityMessage = getAvailabilityMessage(offers, providers.filter((p) => effective.services.includes(p.id)), selected ?? undefined);
   return <div className="page-content catalog-lab">
     <Link className="text-action" href="/kit"><ArrowLeft size={16}/> {formatCopy(kitCopy['back_to_design_kit'])}</Link>
     <p className="eyebrow">{formatCopy(kitCopy['p1_catalog_lab'])}</p><h1>{formatCopy(kitCopy['good_picks'])}<br/>{formatCopy(kitCopy['clear_reasons'])}<span>{formatCopy(kitCopy['separator_2'])}</span></h1>

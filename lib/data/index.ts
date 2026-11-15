@@ -1,3 +1,5 @@
+import { canPickTonight, hasAdsOffer, hasOriginalAudio } from './availability';
+export { canPickTonight, hasAdsOffer, hasOriginalAudio, verifiedAvailability } from './availability';
 
 import { formatCopy } from '@/lib/copy';
 import { catalogCopy } from '@/.generated/copy/catalog';
@@ -87,7 +89,7 @@ export class JsonDataSource implements DataSource {
   async getSimilar(id: string, limit = 8): Promise<SimilarTitle[]> {
     const source = this.catalog.titles.find((title) => title.id === id);
     if (!source) return [];
-    return structuredClone(this.catalog.titles.filter((title) => title.id !== id && title.genres.some((genre) => source.genres.includes(genre))).map((title) => similarity(source, title))
+    return structuredClone(this.catalog.titles.filter((title) => title.id !== id && canPickTonight(title) && title.genres.some((genre) => source.genres.includes(genre))).map((title) => similarity(source, title))
       .filter((item) => item.score > 0).sort((a, b) => b.score - a.score || stableOrder(a.title, b.title)).slice(0, limitCount(limit)));
   }
   async getProviders(id: string, userServices: readonly string[] = []): Promise<ProviderOffer[]> {
@@ -95,25 +97,26 @@ export class JsonDataSource implements DataSource {
     if (!title) return [];
     const offers = title.providers.map((offer) => {
       const provider = this.providers.find((item) => item.id === offer.providerId)!;
-      return { ...offer, provider, deepLink: offer.deepLink ?? provider.homepageUrl, onYourServices: userServices.includes(provider.id) };
+      return { ...offer, provider, deepLink: offer.deepLink ?? provider.homepageUrl, onYourServices: offer.type === 'stream' && hasOriginalAudio(title, offer) && userServices.includes(provider.id) };
     });
     // Subscription membership never implies a rental or purchase is included.
     const typeOrder = { stream: 0, free: 1, rent: 2, buy: 3 };
-    return structuredClone(offers.sort((a, b) => Number(b.onYourServices) - Number(a.onYourServices) || typeOrder[a.type] - typeOrder[b.type] || a.provider.name.localeCompare(b.provider.name, 'en')));
+    return structuredClone(offers.sort((a, b) => Number(hasOriginalAudio(title, b)) - Number(hasOriginalAudio(title, a)) || Number(b.onYourServices) - Number(a.onYourServices) || typeOrder[a.type] - typeOrder[b.type] || a.provider.name.localeCompare(b.provider.name, 'en')));
   }
   async getMoodPicks(mood: Mood, prefs: UserPrefs = {}, limit = 4): Promise<Title[]> {
     const services = prefs.services ?? [], languages = prefs.languages ?? [];
-    const isIncluded = (title: Title) => title.providers.some((offer) => (offer.type === 'stream' && services.includes(offer.providerId)) || offer.type === 'free');
+    const isIncluded = (title: Title) => title.providers.some((offer) => hasOriginalAudio(title, offer) && ((offer.type === 'stream' && services.includes(offer.providerId)) || (offer.type === 'free' && offer.ads === true)));
     const languageMatch = (title: Title) => title.languages.some((language) => languages.includes(language));
     // Selected languages are a hard filter; included/free access ranks first, without hiding alternatives.
-    return structuredClone(this.catalog.titles.filter((title) => title.moods.includes(mood) && (!prefs.freeOnly || title.providers.some((offer) => offer.type === 'free')) && (!languages.length || languageMatch(title)))
+    return structuredClone(this.catalog.titles.filter((title) => canPickTonight(title) && title.moods.includes(mood) && (!prefs.freeOnly || hasAdsOffer(title)) && (!languages.length || languageMatch(title)))
       .sort((a, b) => Number(isIncluded(b)) - Number(isIncluded(a)) || b.tmdbRating - a.tmdbRating || stableOrder(a, b)).slice(0, limitCount(limit)));
   }
 }
 export const dataSource: DataSource = new JsonDataSource();
 
 /** A selected service may offer a rental; do not claim it is absent in that case. */
-export function getAvailabilityMessage(offers: readonly ProviderOffer[], selectedServices: readonly Provider[]): string | null {
+export function getAvailabilityMessage(offers: readonly ProviderOffer[], selectedServices: readonly Provider[], title?: Title): string | null {
+  offers = offers.filter(o => !title || hasOriginalAudio(title, o));
   if (!selectedServices.length || offers.some((offer) => selectedServices.some((service) => service.id === offer.providerId))) return null;
   const streaming = [...new Set(offers.filter((offer) => offer.type === 'stream').map((offer) => offer.provider.name))];
   return formatCopy(catalogCopy['not_on_value_value'], { p1: selectedServices.map((service) => service.name).join(', '), p2: streaming.length ? formatCopy(catalogCopy['streaming_on_value'], { p1: streaming.join(', ') }) : formatCopy(catalogCopy['no_streaming_offer_listed']) });

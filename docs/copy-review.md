@@ -277,7 +277,7 @@ Placeholders such as `{p1}`, `{group}`, `{count}` and `{winner}` are runtime val
 | shortlist | 4_is_plenty_yaar | Four picks are enough. | Four picks are enough. |
 | shortlist | remove | Remove | Remove |
 | shortlist | value_of_4_picks_everyone_gets_a_say | {p1} of 4 picks. Everyone gets a say. | {p1} of 4 picks. Everyone gets a say. |
-| shortlist | remove_sample_picks_and_choose_catalog_titles_to_start_a_poll | Remove sample picks and choose catalogue titles to start a poll. | Remove sample picks and choose catalogue titles to start a poll. |
+| shortlist | remove_sample_picks_and_choose_catalog_titles_to_start_a_poll | Remove unavailable picks before starting a poll. | Remove unavailable picks before starting a poll. |
 | shortlist | pick_at_least_2_titles | Pick at least 2 titles | Pick at least 2 titles |
 | shortlist | ask_the_group | Ask the group | Ask the group |
 | shortlist | drag_the_grip_to_reorder_swipe_a_card_sideways_to_remove | Drag the grip to reorder. Swipe a card sideways to remove. | Drag the grip to reorder. Swipe a card sideways to remove. |
@@ -351,6 +351,8 @@ Placeholders such as `{p1}`, `{group}`, `{count}` and `{winner}` are runtime val
 | home | afternoon | afternoon | afternoon |
 | home | evening | evening | evening |
 | home | night | night | night |
+| home | free_tonight_ads | Free tonight (with ads) | Free tonight (with ads) |
+| home | free_sparse | A small free selection tonight. Try another language for more picks. | A small free selection tonight. Try another language for more picks. |
 | welcome | 0 |  / 0 |  / 0 |
 | welcome | skip_for_now | Skip for now | Skip for now |
 | welcome | continue | Continue | Continue |
@@ -735,6 +737,12 @@ Placeholders such as `{p1}`, `{group}`, `{count}` and `{winner}` are runtime val
 | title | streaming_on_value | streaming on {p1} | streaming on {p1} |
 | title | value_remake | {p1} remake | {p1} remake |
 | title | original_value_version | Original {p1} version | Original {p1} version |
+| title | not_verified | Not yet verified | Not yet verified |
+| title | unavailable_now | Not streaming in India right now | Not streaming in India right now |
+| title | rent_only | Rent or buy only — not on any OTT app | Rent or buy only — not on any OTT app |
+| title | dub_language | {language} dub | {language} dub |
+| title | free_ads | Free with ads | Free with ads |
+| title | check_price | Check price on provider | Check price on provider |
 | shareCard | india_availability_is_illustrative | India · Availability is illustrative | India · Availability is illustrative |
 | shareCard | your_next_movie_night | your next movie night | your next movie night |
 | shareCard | on | on  | on  |

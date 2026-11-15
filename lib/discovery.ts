@@ -1,15 +1,16 @@
+import { canPickTonight, hasAdsOffer, hasOriginalAudio, verifiedAvailability } from './data/availability';
 
 import { type Tone, formatCopy } from '@/lib/copy';
 import { homeCopy } from '@/.generated/copy/home';
 import { normalizeSearch, type Provider, type Title } from './data';
 import type { Preferences } from './preferences';
-export function hasFreeOffer(title: Title) { return title.providers.some((offer) => offer.type === 'free'); }
-export function onServices(title: Title, services: readonly string[]) { return title.providers.some((offer) => offer.type === 'stream' && services.includes(offer.providerId)); }
-export function canDiscover(title: Title, prefs: Preferences) { return (!prefs.freeOnly || hasFreeOffer(title)) && (!prefs.languages.length || title.languages.some((l) => prefs.languages.includes(l))); }
+export function hasFreeOffer(title: Title) { return hasAdsOffer(title); }
+export function onServices(title: Title, services: readonly string[]) { return title.providers.some((offer) => offer.type === 'stream' && hasOriginalAudio(title, offer) && services.includes(offer.providerId)); }
+export function canDiscover(title: Title, prefs: Preferences) { return canPickTonight(title) && (!prefs.freeOnly || hasFreeOffer(title)) && (!prefs.languages.length || title.languages.some((l) => prefs.languages.includes(l))); }
 export function offerLabel(title: Title, providers: readonly Provider[], prefs: Preferences) {
-  const own = title.providers.find((o) => o.type === 'stream' && prefs.services.includes(o.providerId));
-  const free = title.providers.find((o) => o.type === 'free');
-  const offer = prefs.freeOnly ? free : own ?? title.providers.find((o) => o.type === 'stream') ?? free ?? title.providers[0];
+  const own = title.providers.find((o) => o.type === 'stream' && hasOriginalAudio(title, o) && prefs.services.includes(o.providerId));
+  const free = title.providers.find((o) => o.type === 'free' && o.ads === true && hasOriginalAudio(title, o));
+  const offer = prefs.freeOnly ? free : own ?? title.providers.find((o) => o.type === 'stream' && hasOriginalAudio(title, o)) ?? free ?? title.providers[0];
   const provider = providers.find((p) => p.id === offer?.providerId);
   return { provider, included: !prefs.freeOnly && Boolean(own), text: !offer ? formatCopy(homeCopy['no_offer_listed']) : prefs.freeOnly || offer.type === 'free' ? formatCopy(homeCopy['free_on_value'], { p1: provider?.name ?? offer.providerId }) : own ? formatCopy(homeCopy['on_your_value'], { p1: provider?.name ?? offer.providerId }) : `${provider?.name ?? offer.providerId}${offer.type === 'rent' || offer.type === 'buy' ? ` · ${offer.type}` : ''}` };
 }
@@ -19,9 +20,9 @@ export function homeSelections(titles: Title[], prefs: Preferences) {
   const included = eligible.filter((t) => prefs.freeOnly ? hasFreeOffer(t) : onServices(t, prefs.services));
   const priority = (title: Title) => { const index = featuredIds.indexOf(title.id); return index === -1 ? 100 : index; };
   const pool = prefs.freeOnly || prefs.services.length ? included : eligible;
-  const hero = [...pool].sort((a, b) => priority(a) - priority(b) || b.tmdbRating - a.tmdbRating || a.id.localeCompare(b.id)).slice(0, 5);
+  const hero = pool.filter(verifiedAvailability).sort((a, b) => priority(a) - priority(b) || b.tmdbRating - a.tmdbRating || a.id.localeCompare(b.id)).slice(0, 5);
   const trending = prefs.freeOnly ? [...eligible].sort((a, b) => b.tmdbRating - a.tmdbRating).slice(0, 8) : featuredIds.map((id) => eligible.find((t) => t.id === id)).filter((t): t is Title => Boolean(t));
-  return { eligible, included, hero, trending };
+  return { eligible, included, hero, trending, free: eligible.filter(hasAdsOffer) };
 }
 export function greeting(name: string, date: Date, tone: Tone = 'indianEnglish') {
   const hour = date.getHours();

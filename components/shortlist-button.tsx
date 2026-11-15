@@ -8,7 +8,7 @@ import { motion, useReducedMotion } from 'motion/react';
 import { Check, Plus } from 'lucide-react';
 import { usePrototype } from '@/lib/store';
 import { track } from '@/lib/analytics';
-import type { Title } from '@/lib/data';
+import { canPickTonight, type Title } from '@/lib/data';
 import { PosterCard } from '@/components/ui';
 export function ShortlistButton({ title, compact = false, hero = false }: { title: Title; compact?: boolean; hero?: boolean }) {
   const shortlist = usePrototype((s) => s.shortlist); const reduced = useReducedMotion();
@@ -16,6 +16,7 @@ export function ShortlistButton({ title, compact = false, hero = false }: { titl
   const [flight, setFlight] = useState<{ x: number; y: number; toX: number; toY: number } | null>(null);
   const added = shortlist.includes(title.id);
   useEffect(() => { if (!flight) return; const timer = setTimeout(() => setFlight(null), 800); return () => clearTimeout(timer); }, [flight]);
+  if (!canPickTonight(title)) return null;
   return <><button className={`button shortlist-action ${compact ? 'quick-add' : 'button-primary'} ${hero ? 'hero-shortlist' : ''}`} aria-label={compact ? `${added ? formatCopy(shortlistCopy['remove']) : formatCopy(shortlistCopy['shortlist'])} ${title.title}` : undefined} aria-pressed={added} onClick={(event) => {
     if (!added && usePrototype.getState().requestShortlist(title.id) === 'full') { setNotice(formatCopy(shortlistCopy['4_is_plenty_yaar'])); return; }
     if (added) usePrototype.getState().toggleShortlist(title.id); setNotice(added ? formatCopy(shortlistCopy['removed']) : formatCopy(shortlistCopy['added_to_shortlist']));

@@ -1,3 +1,4 @@
+import { canPickTonight } from '../data/availability';
 
 import { formatCopy } from '@/lib/copy';
 import { pollErrorsCopy } from '@/.generated/copy/pollErrors';
@@ -54,7 +55,7 @@ export function createSupabasePollStore(client: SupabaseClient, realtime = typeo
       const creator = usableCreatorName(input.creator?.name);
       if (!creator) throw new Error(formatCopy(pollErrorsCopy['your_name_helps_friends_know_who_s_asking']));
       const catalog = await (await import('../data')).dataSource.listTitles();
-      if (input.titleIds.some((id) => !catalog.some((t) => t.id === id))) throw new Error(formatCopy(pollErrorsCopy['choose_catalog_titles_for_this_poll']));
+      if (input.titleIds.some((id) => !catalog.some((t) => t.id === id && canPickTonight(t)))) throw new Error(formatCopy(pollErrorsCopy['choose_catalog_titles_for_this_poll']));
       for (let attempt = 0; attempt < 3; attempt++) {
         const id = nanoid8();
         const { data, error } = await client.rpc('create_poll', { p_id: id, p_name: input.name?.trim() ?? '', p_note: input.note ?? '', p_creator_name: creator, p_title_ids: input.titleIds, p_deadline: input.deadline, p_group_name: input.groupName ?? '' });
