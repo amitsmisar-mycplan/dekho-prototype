@@ -52,7 +52,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/tv-show/panchayat"
     },
     {
       "id": "scam-1992",
@@ -115,7 +116,8 @@
           "note": "Vi Movies & TV also lists it.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/tv-show/scam-1992"
     },
     {
       "id": "12th-fail",
@@ -170,7 +172,8 @@
           "ads": true
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/12th-fail"
     },
     {
       "id": "kota-factory",
@@ -218,7 +221,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/tv-show/kota-factory"
     },
     {
       "id": "paatal-lok",
@@ -267,7 +271,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/tv-show/paatal-lok"
     },
     {
       "id": "drishyam-2",
@@ -325,7 +330,8 @@
           "note": "Amazon MX Player ad-supported option also listed.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/drishyam-2-2022"
     },
     {
       "id": "the-family-man",
@@ -376,7 +382,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/tv-show/the-family-man"
     },
     {
       "id": "laapataa-ladies",
@@ -426,7 +433,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/laapataa-ladies"
     },
     {
       "id": "stree-2",
@@ -476,7 +484,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/stree-2"
     },
     {
       "id": "andhadhun",
@@ -541,7 +550,8 @@
           "note": "Netflix not listed. Apple TV store rent/buy.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/andhadhun"
     },
     {
       "id": "dangal",
@@ -604,7 +614,8 @@
           "note": "Apple TV store rent/buy. Netflix page access inconsistent; catalogue trackers corroborate.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/dangal"
     },
     {
       "id": "gully-boy",
@@ -649,10 +660,18 @@
           "providerId": "netflix",
           "type": "stream",
           "deepLink": "https://www.netflix.com/in/",
-          "verifiedAt": null
+          "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": null
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/gully-boy",
+      "otherSources": [
+        {
+          "name": "Apple TV store",
+          "note": "Apple TV store rent/buy.",
+          "verifiedAt": "2026-11-14"
+        }
+      ]
     },
     {
       "id": "article-15",
@@ -694,7 +713,8 @@
       ],
       "providers": [],
       "verifiedAt": "2026-11-14",
-      "availability": "unavailable"
+      "availability": "unavailable",
+      "sourceUrl": "https://www.justwatch.com/in/movie/article-15"
     },
     {
       "id": "badhaai-ho",
@@ -753,7 +773,8 @@
           "note": "Neither ZEE5 nor Netflix listed. Vi Movies & TV also lists it.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/badhaai-ho"
     },
     {
       "id": "tumbbad",
@@ -801,7 +822,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/tumbbad"
     },
     {
       "id": "piku",
@@ -858,7 +880,9 @@
           "note": "Official SonyLIV page; JustWatch India page is older. Apple TV store rent/buy.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/piku",
+      "availabilityNote": "check"
     },
     {
       "id": "masaan",
@@ -919,7 +943,8 @@
           "note": "Netflix not listed. Vi Movies & TV also lists it.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/masaan"
     },
     {
       "id": "darlings",
@@ -962,13 +987,14 @@
       ],
       "providers": [
         {
-          "providerId": "sonyliv",
+          "providerId": "netflix",
           "type": "stream",
-          "deepLink": "https://www.sonyliv.com/",
-          "verifiedAt": null
+          "deepLink": "https://www.netflix.com/in/",
+          "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": null
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/darlings"
     },
     {
       "id": "oppenheimer",
@@ -1036,7 +1062,8 @@
           "note": "Netflix not listed. Apple TV store rent.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/oppenheimer"
     },
     {
       "id": "severance",
@@ -1084,7 +1111,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/tv-show/severance/season-1"
     },
     {
       "id": "knives-out",
@@ -1147,7 +1175,8 @@
           "note": "Not included in Apple TV+. Apple TV store rent/buy.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/knives-out"
     },
     {
       "id": "glass-onion",
@@ -1192,13 +1221,14 @@
       ],
       "providers": [
         {
-          "providerId": "jiohotstar",
+          "providerId": "netflix",
           "type": "stream",
-          "deepLink": "https://www.hotstar.com/in/",
-          "verifiedAt": null
+          "deepLink": "https://www.netflix.com/in/",
+          "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": null
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/knives-out-2"
     },
     {
       "id": "dune",
@@ -1266,7 +1296,8 @@
           "note": "Apple TV store rent/buy. Lionsgate Play result was a different Dune.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/dune-2021"
     },
     {
       "id": "dune-part-two",
@@ -1328,7 +1359,8 @@
           "note": "JioHotstar not currently listed (first pass was wrong). Apple TV store rent/buy.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/dune-part-two"
     },
     {
       "id": "everything-everywhere-all-at-once",
@@ -1373,13 +1405,14 @@
       ],
       "providers": [
         {
-          "providerId": "prime-video",
+          "providerId": "sonyliv",
           "type": "stream",
-          "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "deepLink": "https://www.sonyliv.com/",
+          "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": null
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/everything-everywhere-all-at-once"
     },
     {
       "id": "the-martian",
@@ -1427,7 +1460,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/the-martian"
     },
     {
       "id": "arrival",
@@ -1475,7 +1509,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/arrival"
     },
     {
       "id": "get-out",
@@ -1518,13 +1553,26 @@
       ],
       "providers": [
         {
-          "providerId": "lionsgate-play",
+          "providerId": "jiohotstar",
           "type": "stream",
-          "deepLink": "https://www.lionsgateplay.com/",
-          "verifiedAt": null
+          "deepLink": "https://www.hotstar.com/in/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "zee5",
+          "type": "rent",
+          "deepLink": "https://www.zee5.com/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "prime-video",
+          "type": "rent",
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": null
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/get-out"
     },
     {
       "id": "stranger-things",
@@ -1573,7 +1621,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/tv-show/stranger-things"
     },
     {
       "id": "ted-lasso",
@@ -1623,7 +1672,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/tv-show/ted-lasso"
     },
     {
       "id": "manjummel-boys",
@@ -1672,7 +1722,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/manjummel-boys"
     },
     {
       "id": "kumbalangi-nights",
@@ -1729,7 +1780,8 @@
           "note": "Apple TV store rent/buy (store, not applied).",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/kumbalangi-nights"
     },
     {
       "id": "drishyam-2-malayalam",
@@ -1773,13 +1825,21 @@
       ],
       "providers": [
         {
-          "providerId": "netflix",
+          "providerId": "prime-video",
           "type": "stream",
-          "deepLink": "https://www.netflix.com/in/",
-          "verifiedAt": null
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "mx-player",
+          "type": "free",
+          "deepLink": "https://www.mxplayer.in/",
+          "verifiedAt": "2026-11-14",
+          "ads": true
         }
       ],
-      "verifiedAt": null
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/drishyam-2"
     },
     {
       "id": "joji",
@@ -1821,13 +1881,14 @@
       ],
       "providers": [
         {
-          "providerId": "sonyliv",
+          "providerId": "prime-video",
           "type": "stream",
-          "deepLink": "https://www.sonyliv.com/",
-          "verifiedAt": null
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": null
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/joji"
     },
     {
       "id": "anjaam-pathiraa",
@@ -1885,7 +1946,8 @@
           "note": "Vi Movies & TV also lists it.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/anjaam-pathiraa"
     },
     {
       "id": "iratta",
@@ -1928,13 +1990,14 @@
       ],
       "providers": [
         {
-          "providerId": "prime-video",
+          "providerId": "netflix",
           "type": "stream",
-          "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
+          "deepLink": "https://www.netflix.com/in/",
+          "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": null
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/iratta"
     },
     {
       "id": "aavesham",
@@ -1997,7 +2060,8 @@
           "note": "Vi Movies & TV also lists it.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/aavesham-2024"
     },
     {
       "id": "premam",
@@ -2047,7 +2111,8 @@
           "ads": true
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/premam"
     },
     {
       "id": "jailer",
@@ -2118,7 +2183,8 @@
           "note": "Verified against the Rajinikanth film. Vi Movies & TV also lists it.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/jailer"
     },
     {
       "id": "super-deluxe",
@@ -2167,7 +2233,8 @@
           "note": "Apple TV store rent/buy only. Netflix not listed.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/super-deluxe"
     },
     {
       "id": "vikram",
@@ -2223,7 +2290,8 @@
           "note": "ZEE5 no longer listed. Vi Movies & TV lists it (not in our list).",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/vikram-2021"
     },
     {
       "id": "kaithi",
@@ -2297,7 +2365,8 @@
           "note": "Tamil playback per provider not confirmed. Vi Movies & TV, Amazon MX Player also list it.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/kaithi"
     },
     {
       "id": "soorarai-pottru",
@@ -2344,7 +2413,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/soorarai-pottru"
     },
     {
       "id": "jai-bhim",
@@ -2386,13 +2456,28 @@
       ],
       "providers": [
         {
-          "providerId": "netflix",
+          "providerId": "prime-video",
           "type": "stream",
-          "deepLink": "https://www.netflix.com/in/",
-          "verifiedAt": null
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "mx-player",
+          "type": "free",
+          "deepLink": "https://www.mxplayer.in/",
+          "verifiedAt": "2026-11-14",
+          "ads": true
         }
       ],
-      "verifiedAt": null
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/jai-bhim",
+      "otherSources": [
+        {
+          "name": "ManoramaMax",
+          "note": "Official Prime Tamil page. Also ManoramaMax. Netflix was wrong.",
+          "verifiedAt": "2026-11-14"
+        }
+      ]
     },
     {
       "id": "96",
@@ -2449,7 +2534,8 @@
           ]
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/96"
     },
     {
       "id": "rrr",
@@ -2507,7 +2593,8 @@
           ]
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.zee5.com/movies/details/rrr/0-0-1z5145092"
     },
     {
       "id": "pushpa-the-rise",
@@ -2564,7 +2651,8 @@
           "note": "Telugu confirmed. Amazon MX Player ads listing, audio unconfirmed (not applied).",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/pushpa"
     },
     {
       "id": "baahubali-2-the-conclusion",
@@ -2624,7 +2712,8 @@
           ]
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/baahubali-2-the-conclusion"
     },
     {
       "id": "jersey",
@@ -2693,7 +2782,8 @@
           "note": "Vi Movies & TV also lists it (not in our provider list). MX Player not reconfirmed.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/jersey"
     },
     {
       "id": "sita-ramam",
@@ -2741,7 +2831,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/sita-ramam"
     },
     {
       "id": "mahanati",
@@ -2789,7 +2880,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/mahanati"
     },
     {
       "id": "hit-the-first-case",
@@ -2834,13 +2926,21 @@
       ],
       "providers": [
         {
-          "providerId": "aha",
+          "providerId": "prime-video",
           "type": "stream",
-          "deepLink": "https://www.aha.video/",
-          "verifiedAt": null
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "mx-player",
+          "type": "free",
+          "deepLink": "https://www.mxplayer.in/",
+          "verifiedAt": "2026-11-14",
+          "ads": true
         }
       ],
-      "verifiedAt": null
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/hit"
     },
     {
       "id": "kantara",
@@ -2898,7 +2998,8 @@
           ]
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/kantara"
     },
     {
       "id": "k-g-f-chapter-1",
@@ -2942,13 +3043,20 @@
       ],
       "providers": [
         {
-          "providerId": "jiohotstar",
+          "providerId": "prime-video",
           "type": "stream",
-          "deepLink": "https://www.hotstar.com/in/",
-          "verifiedAt": null
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
+        },
+        {
+          "providerId": "prime-video",
+          "type": "rent",
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": null
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/k-g-f-chapter-1"
     },
     {
       "id": "777-charlie",
@@ -3007,7 +3115,8 @@
           ]
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/777-charlie"
     },
     {
       "id": "praktan",
@@ -3048,7 +3157,8 @@
       ],
       "providers": [],
       "verifiedAt": "2026-11-14",
-      "availability": "unavailable"
+      "availability": "unavailable",
+      "sourceUrl": "https://www.justwatch.com/in/movie/praktan"
     },
     {
       "id": "belaseshe",
@@ -3089,15 +3199,10 @@
         "Family",
         "Feel-good"
       ],
-      "providers": [
-        {
-          "providerId": "prime-video",
-          "type": "stream",
-          "deepLink": "https://www.primevideo.com/",
-          "verifiedAt": null
-        }
-      ],
-      "verifiedAt": null
+      "providers": [],
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/belaseshe",
+      "availability": "unavailable"
     },
     {
       "id": "vinci-da",
@@ -3145,7 +3250,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/vinci-da"
     },
     {
       "id": "sairat",
@@ -3199,7 +3305,8 @@
           "note": "Marathi audio confirmed. Apple TV store rent/buy.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/sairat"
     },
     {
       "id": "court",
@@ -3237,15 +3344,10 @@
       "moods": [
         "Drama night"
       ],
-      "providers": [
-        {
-          "providerId": "netflix",
-          "type": "stream",
-          "deepLink": "https://www.netflix.com/in/",
-          "verifiedAt": null
-        }
-      ],
-      "verifiedAt": null
+      "providers": [],
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/court",
+      "availability": "unavailable"
     },
     {
       "id": "chintu-ka-birthday",
@@ -3292,7 +3394,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/chintu-ka-birthday"
     },
     {
       "id": "ramprasad-ki-tehrvi",
@@ -3340,7 +3443,8 @@
           "note": "Apple TV store rent/buy only.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/ramprasad-ki-tehrvi"
     },
     {
       "id": "qarib-qarib-singlle",
@@ -3392,7 +3496,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/qarib-qarib-singlle"
     },
     {
       "id": "bareilly-ki-barfi",
@@ -3439,7 +3544,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://ottasia.com/title/movie/467106/bareilly-ki-barfi"
     },
     {
       "id": "nil-battey-sannata",
@@ -3492,7 +3598,8 @@
           "note": "Not free. Also Eros Now Select channel.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/nil-battey-sannata"
     },
     {
       "id": "mukkabaaz",
@@ -3545,7 +3652,8 @@
           "note": "Not free. Also Eros Now Select channel.",
           "verifiedAt": "2026-11-14"
         }
-      ]
+      ],
+      "sourceUrl": "https://www.justwatch.com/in/movie/the-brawler"
     },
     {
       "id": "trapped",
@@ -3591,7 +3699,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/trapped"
     },
     {
       "id": "axone",
@@ -3638,7 +3747,8 @@
           "verifiedAt": "2026-11-14"
         }
       ],
-      "verifiedAt": "2026-11-14"
+      "verifiedAt": "2026-11-14",
+      "sourceUrl": "https://www.justwatch.com/in/movie/axone"
     }
   ]
 }

@@ -8,7 +8,7 @@ let role='';try{role=JSON.parse(Buffer.from(key.split('.')[1],'base64url')).role
 if(role==='service_role'||key.startsWith('sb_secret_'))throw Error('Use only the public anon key');
 const client=createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false},global:{headers:{'x-dekho-device':randomUUID()}}});
 const input=title=>({p_id:randomBytes(6).toString('base64url'),p_name:'Availability verification — safe to delete',p_note:'Automated availability guard check',p_creator_name:'Verification host',p_title_ids:[title,'panchayat'],p_deadline:new Date(Date.now()+600000).toISOString(),p_group_name:'Verification'});
-for(const title of ['article-15','praktan','super-deluxe','ramprasad-ki-tehrvi']){
+for(const title of ['article-15','praktan','super-deluxe','ramprasad-ki-tehrvi','belaseshe','court']){
  const args=input(title),{data,error}=await client.rpc('create_poll',args);
  if(!error){await client.rpc('close_poll',{p_id:data?.id??args.p_id});throw Error('Migration guard missing: blocked title was accepted');}
  if(!error.message.includes('not streaming in India'))throw Error(`Unexpected guard response (${error.code}); check migration setup`);

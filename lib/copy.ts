@@ -2784,6 +2784,78 @@ export const titleCopy = {
     "indianEnglish": "Check price on provider",
     "hinglish": "Check price on provider",
     "context": "title: verified availability information"
+  },
+  "availability_check": {
+    "indianEnglish": "Availability being confirmed",
+    "hinglish": "Availability being confirmed"
+  },
+  "report_link": {
+    "indianEnglish": "Wrong? Tell us",
+    "hinglish": "Wrong? Tell us"
+  },
+  "report_title": {
+    "indianEnglish": "Report availability",
+    "hinglish": "Report availability"
+  },
+  "could_not_play": {
+    "indianEnglish": "Couldn’t play it",
+    "hinglish": "Couldn’t play it"
+  },
+  "wrong_app": {
+    "indianEnglish": "Wrong app",
+    "hinglish": "Wrong app"
+  },
+  "wrong_language": {
+    "indianEnglish": "Wrong language",
+    "hinglish": "Wrong language"
+  },
+  "free_elsewhere": {
+    "indianEnglish": "It’s free on another app",
+    "hinglish": "It’s free on another app"
+  },
+  "report_provider": {
+    "indianEnglish": "Which app?",
+    "hinglish": "Which app?"
+  },
+  "report_unspecified": {
+    "indianEnglish": "Not listed / not sure",
+    "hinglish": "Not listed / not sure"
+  },
+  "report_reason": {
+    "indianEnglish": "What went wrong?",
+    "hinglish": "What went wrong?"
+  },
+  "report_note": {
+    "indianEnglish": "Anything else? (optional)",
+    "hinglish": "Anything else? (optional)"
+  },
+  "report_tag": {
+    "indianEnglish": "Tester tag (optional)",
+    "hinglish": "Tester tag (optional)"
+  },
+  "report_send": {
+    "indianEnglish": "Send report",
+    "hinglish": "Send report"
+  },
+  "report_sending": {
+    "indianEnglish": "Sending report…",
+    "hinglish": "Sending report…"
+  },
+  "report_sent": {
+    "indianEnglish": "Thanks. Your report has been saved.",
+    "hinglish": "Thanks. Your report has been saved."
+  },
+  "report_error": {
+    "indianEnglish": "Your report could not be saved. Please try again.",
+    "hinglish": "Your report could not be saved. Please try again."
+  },
+  "report_unavailable": {
+    "indianEnglish": "Reporting needs an internet connection and the online service. Please try again later.",
+    "hinglish": "Reporting needs an internet connection and the online service. Please try again later."
+  },
+  "report_done": {
+    "indianEnglish": "Done",
+    "hinglish": "Done"
   }
 } as const;
 export const shareCardCopy = {

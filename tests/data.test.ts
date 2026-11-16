@@ -106,9 +106,9 @@ describe('explainable similarity', () => {
   });
 });
 describe('providers and mood picks', () => {
-  it('keeps pending titles unverified and validates real verification dates', async () => {
+  it('records all title verification dates and validates calendar dates', async () => {
     expect((await dataSource.listProviders()).find(p => p.id === 'hoichoi')?.verifiedAt).toBe('2026-11-14');
-    const titles = await dataSource.listTitles(); expect(titles.filter(t => t.verifiedAt === null)).toHaveLength(13); expect(titles.filter(t => t.verifiedAt === null).every(t => t.providers.every(o => o.verifiedAt === null))).toBe(true);
+    const titles = await dataSource.listTitles(); expect(titles.filter(t => t.verifiedAt === '2026-11-14')).toHaveLength(68);
     const { catalog, providers } = await fixture();
     catalog.titles[0].providers[0].verifiedAt = '2026-02-30';
     expect(() => new JsonDataSource(catalog, providers)).toThrow('verifiedAt');
