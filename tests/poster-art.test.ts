@@ -5,10 +5,10 @@ import { dataSource } from '../lib/data';
 import { posterDesign, posterSeed, titleLockup, fitTitle, lineUnits } from '../lib/poster-art';
 import { GeneratedPoster } from '../components/poster/GeneratedPoster';
 describe('generated key art', () => {
-  it('is deterministic with distinct seeds for all 68 titles and all blob centres inside the canvas', async () => {
+  it('is deterministic with distinct seeds for all 73 titles and all blob centres inside the canvas', async () => {
     const titles = await dataSource.listTitles();
-    expect(titles).toHaveLength(68);
-    expect(new Set(titles.map((t) => posterSeed(t.id))).size).toBe(68);
+    expect(titles).toHaveLength(73);
+    expect(new Set(titles.map((t) => posterSeed(t.id))).size).toBe(73);
     for (const title of titles) {
       const design = posterDesign(title); expect(design).toEqual(posterDesign(structuredClone(title)));
       expect(design.blobs).toHaveLength(3); expect(design.blobs.every((p) => p.x >= 0 && p.x <= 100 && p.y >= 0 && p.y <= 100)).toBe(true);

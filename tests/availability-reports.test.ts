@@ -6,8 +6,9 @@ import { validAvailabilityReport } from '../lib/availability-reports';
 import { readFileSync } from 'node:fs';
 afterEach(()=>{vi.unstubAllEnvs();vi.resetModules();});
 it('hides sparse languages at four and exposes them when the flag is disabled',async()=>{
- const titles=await dataSource.listTitles();expect(selectableLanguages(titles)).toEqual(['Hindi','English','Tamil','Telugu','Malayalam']);expect(selectableLanguages(titles,0)).toEqual([...languages]);
- expect(selectableLanguages([...titles,{...titles.find(t=>t.id==='kantara')!,id:'fourth-kannada'}])).toContain('Kannada');
+ const titles=await dataSource.listTitles();expect(selectableLanguages(titles)).toEqual(['Hindi','English','Tamil','Telugu','Malayalam','Kannada']);expect(selectableLanguages(titles,0)).toEqual([...languages]);
+ const kannada=titles.filter(t=>t.originalLanguage==='Kannada');expect(kannada).toHaveLength(8);
+ expect(selectableLanguages(kannada.slice(0,3))).not.toContain('Kannada');expect(selectableLanguages(kannada.slice(0,4))).toContain('Kannada');
 });
 it('restores verified titles to hero eligibility, uses Netflix for Glass Onion, and marks Piku for confirmation',async()=>{
  const titles=await dataSource.listTitles();expect((await dataSource.getProviders('glass-onion')).map(o=>o.provider.name)).toEqual(['Netflix']);
@@ -15,10 +16,10 @@ it('restores verified titles to hero eligibility, uses Netflix for Glass Onion, 
  const hero=homeSelections(titles,{...defaultPreferences(),languages:['Malayalam'],services:['prime-video']}).hero;
  expect(hero.some(t=>t.id==='drishyam-2-malayalam'||t.id==='joji')).toBe(true);
 });
-it('stores HTTPS evidence for all 68 titles and rejects unsafe evidence URLs',async()=>{
+it('stores HTTPS evidence for all 73 titles and rejects unsafe evidence URLs',async()=>{
  const titles=await dataSource.listTitles();expect(titles.every(t=>t.sourceUrl?.startsWith('https://'))).toBe(true);
  // Every source URL was copied directly, without replacing evidence by inferred provider URLs.
- const csv=readFileSync('scripts/india-streaming-68-2026-11-14.csv','utf8');for(const t of titles)expect(csv).toContain(t.sourceUrl!);
+ const csv=readFileSync('scripts/india-streaming-68-2026-11-14.csv','utf8');for(const t of titles.filter(t=>t.verifiedAt==='2026-11-14'))expect(csv).toContain(t.sourceUrl!);
  titles[0].sourceUrl='javascript:alert(1)';const providers=await dataSource.listProviders();expect(()=>new JsonDataSource({version:1,region:'IN',illustrative:true,disclaimer:'Test',titles},providers)).toThrow('sourceUrl');
 });
 const input={titleId:'piku',providerId:'sonyliv',reason:'wrong_app' as const,note:'Could not find it',testerTag:'round-2'};

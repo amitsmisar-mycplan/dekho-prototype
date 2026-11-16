@@ -5,6 +5,8 @@ import { canPickTonight, hasOriginalAudio, type ProviderOffer, SimilarTitle, Tit
 import type { Preferences } from './preferences';
 import { hasFreeOffer, onServices } from './discovery';
 export function versionLabel(source: Title, candidate: Title): string | null {
+  if (source.sequelOf === candidate.id) return formatCopy(titleCopy['previous_chapter']);
+  if (candidate.sequelOf === source.id) return formatCopy(titleCopy['next_chapter']);
   if (source.remakeOf === candidate.id) return formatCopy(titleCopy['original_value_version'], { p1: candidate.originalLanguage });
   if (candidate.remakeOf === source.id) return formatCopy(titleCopy['value_remake'], { p1: candidate.originalLanguage });
   return null;
@@ -13,7 +15,7 @@ export function titleRecommendations(source: Title, similar: SimilarTitle[], ver
   const pinned = versions.filter(canPickTonight).map((title) => ({ title, score: 0, because: versionLabel(source, title)! }));
   const candidates = similar.filter((r) => !versions.some((t) => t.id === r.title.id));
   const allowed = (title: Title) => canPickTonight(title) && (prefs.freeOnly ? hasFreeOffer(title) : !onlyServices || onServices(title, prefs.services));
-  // The explicitly labelled original/remake is an editorial exception to the service filter.
+  // The explicitly labelled original/remake/previous chapter is an editorial exception to the service filter.
   return [...pinned.filter(r => !prefs.freeOnly || hasFreeOffer(r.title)), ...candidates.filter((r) => allowed(r.title))].slice(0, 8);
 }
 export function titleAvailabilityMessage(offers: ProviderOffer[], services: readonly string[], title?: Title) {

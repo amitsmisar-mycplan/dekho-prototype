@@ -17,6 +17,8 @@ export interface Title {
   aliases: string[];
   /** ID of the original; reverse links are derived, not circular. */
   remakeOf?: string;
+  /** ID of the preceding film; reverse links are derived. */
+  sequelOf?: string;
   type: 'movie' | 'series';
   year: number;
   runtimeMin?: number;
@@ -28,6 +30,7 @@ export interface Title {
   director: string;
   synopsis: string;
   tmdbRating: number;
+  tmdbRatingIllustrative?: true;
   certification: string;
   posterPath: string | null;
   backdropPath: string | null;

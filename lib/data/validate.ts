@@ -41,6 +41,7 @@ export function parseCatalog(input: unknown, providers: readonly Provider[]): Ca
     requireValue(typeof title.year === 'number' && Number.isInteger(title.year) && title.year >= 2015 && title.year <= 2026, `${title.id} year`);
     requireValue((title.type === 'movie' && positiveInteger(title.runtimeMin) && title.seasons === undefined) || (title.type === 'series' && positiveInteger(title.seasons) && title.runtimeMin === undefined), `${title.id} runtime/seasons`);
     requireValue(typeof title.tmdbRating === 'number' && Number.isFinite(title.tmdbRating) && title.tmdbRating >= 0 && title.tmdbRating <= 10, `${title.id} rating`);
+    requireValue(title.tmdbRatingIllustrative === undefined || title.tmdbRatingIllustrative === true, `${title.id} illustrative rating`);
     requireValue(artwork(title.posterPath) && artwork(title.backdropPath), `${title.id} artwork paths`);
     requireValue(strings(title.palette) && title.palette.length === 2 && title.palette.every((c) => /^#[a-f\d]{6}$/i.test(c)), `${title.id} palette`);
     requireValue(Array.isArray(title.providers), `${title.id} offers`);
@@ -63,6 +64,7 @@ export function parseCatalog(input: unknown, providers: readonly Provider[]): Ca
     }
   }
   for (const title of input.titles as Record<string, unknown>[]) {
+    requireValue(title.sequelOf === undefined || (typeof title.sequelOf === 'string' && title.sequelOf !== title.id && ids.has(title.sequelOf)), `${title.id} sequel reference`);
     requireValue(title.remakeOf === undefined || (typeof title.remakeOf === 'string' && title.remakeOf !== title.id && ids.has(title.remakeOf)), `${title.id} remake reference`);
   }
   return structuredClone(input) as unknown as CatalogData;

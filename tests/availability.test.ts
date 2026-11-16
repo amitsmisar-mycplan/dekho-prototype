@@ -8,23 +8,23 @@ import { localPollStore } from '../lib/polls/local';
 import { createSupabasePollStore } from '../lib/polls/supabase';
 const blocked=['article-15','praktan','super-deluxe','ramprasad-ki-tehrvi','belaseshe','court'];
 afterEach(()=>vi.unstubAllGlobals());
-it('matches all 68 dated checklist rows',async()=>{
+it('matches all 73 dated checklist rows',async()=>{
  const titles=await dataSource.listTitles(), providers=await dataSource.listProviders();
  const rows=readFileSync('scripts/availability-checklist-firstpass.md','utf8').split('\n').filter(l=>/^\| \d+ \|/.test(l));
- expect(rows).toHaveLength(68);
+ expect(rows).toHaveLength(73);
  let verified=0;
  for(const row of rows){const [,name,year,language,current,correct,,,date]=row.split('|').slice(1,-1).map(s=>s.trim());
  const t=titles.find(t=>String(t.year)===year&&t.originalLanguage===language&&(t.title===name||name===t.title+' (Malayalam)'||(name.startsWith('Glass Onion')&&t.id==='glass-onion')))!;expect(t).toBeTruthy();
- const label=t.providers.map(o=>`${providers.find(p=>p.id===o.providerId)!.name} (${[o.type,...o.ads?['ads']:[],...o.languages?[`${o.languages.join(', ')} only`]:[]].join(', ')})`).join('; ');
+ const label=t.providers.map(o=>`${providers.find(p=>p.id===o.providerId)!.name} (${[o.type,...o.ads?['ads']:[],...o.languages&&!hasOriginalAudio(t,o)?[`${o.languages.join(', ')} only`]:[]].join(', ')})`).join('; ');
  if(!date){expect(t.verifiedAt).toBeNull();expect(label).toBe(current);expect(t.providers.every(o=>o.verifiedAt===null)).toBe(true);continue;}
  verified++;expect(t.verifiedAt).toBe(date);expect(t.providers.every(o=>o.verifiedAt===date)).toBe(true);
  if(correct.startsWith('NONE')){expect(t.providers).toEqual([]);expect(t.availability).toBe(correct.includes('rent/buy')?'rentOnly':'unavailable');}else expect(label).toBe(correct);
- }expect(verified).toBe(68);
+ }expect(verified).toBe(73);
 });
 it('never recommends unavailable or rent-only titles and never puts pending titles in the hero',async()=>{
  const titles=await dataSource.listTitles(), providers=await dataSource.listProviders();const prefs={...defaultPreferences(),services:providers.map(p=>p.id),languages:[...languages]};
- for(const t of titles){const recommendations=await dataSource.getSimilar(t.id,68);expect(recommendations.every(r=>!blocked.includes(r.title.id))).toBe(true);}
- for(const mood of moods)expect((await dataSource.getMoodPicks(mood,prefs,68)).every(t=>!blocked.includes(t.id))).toBe(true);
+ for(const t of titles){const recommendations=await dataSource.getSimilar(t.id,73);expect(recommendations.every(r=>!blocked.includes(r.title.id))).toBe(true);}
+ for(const mood of moods)expect((await dataSource.getMoodPicks(mood,prefs,73)).every(t=>!blocked.includes(t.id))).toBe(true);
  const home=homeSelections(titles,prefs);expect(home.hero.every(t=>t.verifiedAt&&!blocked.includes(t.id))).toBe(true);
  expect(titles.filter(t=>!canPickTonight(t)).map(t=>t.id).sort()).toEqual([...blocked].sort());
 });
@@ -36,10 +36,10 @@ it('keeps Hindi dubs out of original-language service claims and ranks original 
  const offers=await dataSource.getProviders(t.id,['netflix']);expect(offers[0].providerId).toBe('zee5');expect(offers.find(o=>o.providerId==='netflix')!.onYourServices).toBe(false);
 });
 it('limits every free Home rail and mood to original-language ads offers, including sparse languages',async()=>{
- const titles=await dataSource.listTitles();expect(titles.filter(hasAdsOffer)).toHaveLength(15);
+ const titles=await dataSource.listTitles();expect(titles.filter(hasAdsOffer)).toHaveLength(16);
  for(const language of languages){const prefs={...defaultPreferences(),freeOnly:true,languages:[language]};const home=homeSelections(titles,prefs);
  for(const t of [...home.eligible,...home.included,...home.hero,...home.trending,...home.free])expect(hasAdsOffer(t)).toBe(true);
- for(const mood of moods)expect((await dataSource.getMoodPicks(mood,prefs,68)).every(hasAdsOffer)).toBe(true);
+ for(const mood of moods)expect((await dataSource.getMoodPicks(mood,prefs,73)).every(hasAdsOffer)).toBe(true);
  }
  expect(homeSelections(titles,{...defaultPreferences(),freeOnly:true,languages:['Bengali']}).eligible).toHaveLength(0);
  const fake={...titles[0],providers:[{providerId:'mx-player',type:'free' as const,verifiedAt:null}]};expect(hasAdsOffer(fake)).toBe(false);

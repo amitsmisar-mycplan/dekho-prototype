@@ -233,7 +233,7 @@ Placeholders such as `{p1}`, `{group}`, `{count}` and `{winner}` are runtime val
 | kit | 01_colour | 01 / COLOUR | 01 / COLOUR |
 | kit | every_title_one_deterministic_design_colour_follows_mood_shapes_f | Every title, one deterministic design. Colour follows mood; shapes follow genre. Provider dots mark your included OTT apps. | Every title, one deterministic design. Colour follows mood; shapes follow genre. Provider dots mark your included OTT apps. |
 | kit | the_whole_cinema_wall | The whole cinema wall. | The whole cinema wall. |
-| kit | 68_original_compositions | 68 / ORIGINAL COMPOSITIONS | 68 / ORIGINAL COMPOSITIONS |
+| kit | 68_original_compositions | {count} / ORIGINAL COMPOSITIONS | {count} / ORIGINAL COMPOSITIONS |
 | kit | explore_the_seeded_catalog | Explore the seeded catalogue  | Explore the seeded catalogue  |
 | kit | foundation_v0_1 |  FOUNDATION / V0.1 |  FOUNDATION / V0.1 |
 | kit | go_on_press_all_the_buttons | Go on, press all the buttons. | Go on, press all the buttons. |
@@ -700,7 +700,7 @@ Placeholders such as `{p1}`, `{group}`, `{count}` and `{winner}` are runtime val
 | title | no_matching_picks_on_these_services_yet_turn_off_the_filter_to_ex | No matching picks on these OTT apps yet. Turn off the filter to explore more. | No matching picks on these OTT apps yet. Turn off the filter to explore more. |
 | title | value_only | {p1} only | {p1} only |
 | title | free_only_preferences_apply_to_the_other_recommendations | Free-only preferences apply to the other recommendations. | Free-only preferences apply to the other recommendations. |
-| title | originals_and_remakes_stay_pinned_even_on_other_apps | Originals and remakes stay pinned, even on other apps. | Originals and remakes stay pinned, even on other apps. |
+| title | originals_and_remakes_stay_pinned_even_on_other_apps | Related versions and chapters stay pinned, even on other apps. | Related versions and chapters stay pinned, even on other apps. |
 | title | only_what_s_on_my_services |  Only what’s on my OTT apps |  Only what’s on my OTT apps |
 | title | more_like_this | More like this | More like this |
 | title | find_more_like_this | Find more like this | Find more like this |
@@ -736,6 +736,8 @@ Placeholders such as `{p1}`, `{group}`, `{count}` and `{winner}` are runtime val
 | title | no_subscription_streaming_listed | no subscription streaming listed | no subscription streaming listed |
 | title | streaming_on_value | streaming on {p1} | streaming on {p1} |
 | title | value_remake | {p1} remake | {p1} remake |
+| title | previous_chapter | Previous chapter | Previous chapter |
+| title | next_chapter | Next chapter | Next chapter |
 | title | original_value_version | Original {p1} version | Original {p1} version |
 | title | not_verified | Not yet verified | Not yet verified |
 | title | unavailable_now | Not streaming in India right now | Not streaming in India right now |

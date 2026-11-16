@@ -76,6 +76,13 @@ Store-only offers (Apple TV store, Google Play, YouTube, Amazon Video) are liste
 | 66 | Qarib Qarib Singlle | 2017 | Hindi | MX Player (free) | Prime Video (stream); ZEE5 (stream) | Medium | ZEE5 free-with-ads reported, not confirmed; not applied. | 2026-11-14 |
 | 67 | Ramprasad Ki Tehrvi | 2021 | Hindi | ZEE5 (free) | NONE (rent/buy only) | Medium | Apple TV store rent/buy only. | 2026-11-14 |
 | 68 | Trapped | 2017 | Hindi | MX Player (free) | ZEE5 (stream) | Medium | Free-with-ads disputed; not applied. | 2026-11-14 |
+| 69 | K.G.F: Chapter 2 | 2022 | Kannada | New title | Prime Video (stream); Prime Video (rent) | User verified | Provider assignments supplied by tester; rating illustrative. Sequel to Chapter 1. | 2026-11-16 |
+| 70 | Su From So | 2025 | Kannada | New title | JioHotstar (stream) | User verified | Provider assignments supplied by tester; rating illustrative. Kannada original; Telugu and Malayalam dubs. | 2026-11-16 |
+| 71 | Kirik Party | 2016 | Kannada | New title | JioHotstar (free, ads) | User verified | Provider assignments supplied by tester; rating illustrative. | 2026-11-16 |
+| 72 | Sapta Saagaradaache Ello – Side A | 2023 | Kannada | New title | Prime Video (stream) | User verified | Provider assignments supplied by tester; rating illustrative. | 2026-11-16 |
+| 73 | Garuda Gamana Vrishabha Vahana | 2021 | Kannada | New title | ZEE5 (stream) | User verified | Provider assignments supplied by tester; rating illustrative. | 2026-11-16 |
 
 
 Rows 31-68 verified 2026-11-14. Full evidence (sources, official pages, conflicts) is in scripts/india-streaming-68-2026-11-14.csv.
+
+Rows 69–73 use the provider assignments supplied by the tester on 2026-11-16; these additions are not part of the 68-title evidence CSV.

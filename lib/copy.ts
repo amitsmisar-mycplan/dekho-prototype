@@ -718,8 +718,8 @@ export const kitCopy = {
     "hinglish": "The whole cinema wall."
   },
   "68_original_compositions": {
-    "indianEnglish": "68 / ORIGINAL COMPOSITIONS",
-    "hinglish": "68 / ORIGINAL COMPOSITIONS"
+    "indianEnglish": "{count} / ORIGINAL COMPOSITIONS",
+    "hinglish": "{count} / ORIGINAL COMPOSITIONS"
   },
   "explore_the_seeded_catalog": {
     "indianEnglish": "Explore the seeded catalogue ",
@@ -2608,8 +2608,8 @@ export const titleCopy = {
     "hinglish": "Free-only preferences apply to the other recommendations."
   },
   "originals_and_remakes_stay_pinned_even_on_other_apps": {
-    "indianEnglish": "Originals and remakes stay pinned, even on other apps.",
-    "hinglish": "Originals and remakes stay pinned, even on other apps."
+    "indianEnglish": "Related versions and chapters stay pinned, even on other apps.",
+    "hinglish": "Related versions and chapters stay pinned, even on other apps."
   },
   "only_what_s_on_my_services": {
     "indianEnglish": " Only what’s on my OTT apps",
@@ -2750,6 +2750,14 @@ export const titleCopy = {
   "value_remake": {
     "indianEnglish": "{p1} remake",
     "hinglish": "{p1} remake"
+  },
+  "previous_chapter": {
+    "indianEnglish": "Previous chapter",
+    "hinglish": "Previous chapter"
+  },
+  "next_chapter": {
+    "indianEnglish": "Next chapter",
+    "hinglish": "Next chapter"
   },
   "original_value_version": {
     "indianEnglish": "Original {p1} version",

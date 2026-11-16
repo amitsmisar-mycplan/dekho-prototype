@@ -3749,6 +3749,285 @@
       ],
       "verifiedAt": "2026-11-14",
       "sourceUrl": "https://www.justwatch.com/in/movie/axone"
+    },
+    {
+      "id": "k-g-f-chapter-2",
+      "slug": "k-g-f-chapter-2",
+      "title": "K.G.F: Chapter 2",
+      "aliases": [
+        "kgf 2",
+        "kgf chapter 2",
+        "k g f chapter two",
+        "kgf chapter ii"
+      ],
+      "type": "movie",
+      "year": 2022,
+      "runtimeMin": 168,
+      "languages": [
+        "Kannada"
+      ],
+      "originalLanguage": "Kannada",
+      "genres": [
+        "Action",
+        "Crime",
+        "Drama"
+      ],
+      "cast": [
+        "Yash",
+        "Sanjay Dutt",
+        "Raveena Tandon",
+        "Srinidhi Shetty"
+      ],
+      "director": "Prashanth Neel",
+      "synopsis": "Rocky rules the gold fields, but power brings enemies on every side. A rival from the past and a determined government threaten everything he has built.",
+      "tmdbRating": 7.5,
+      "tmdbRatingIllustrative": true,
+      "certification": "U/A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#872D32",
+        "#172B49"
+      ],
+      "moods": [
+        "Edge-of-seat",
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-16"
+        },
+        {
+          "providerId": "prime-video",
+          "type": "rent",
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-16"
+        }
+      ],
+      "verifiedAt": "2026-11-16",
+      "sourceUrl": "https://www.justwatch.com/in/search?q=K.G.F%3A%20Chapter%202",
+      "sequelOf": "k-g-f-chapter-1"
+    },
+    {
+      "id": "su-from-so",
+      "slug": "su-from-so",
+      "title": "Su From So",
+      "aliases": [
+        "soo from so",
+        "su fram so",
+        "su from someshwara"
+      ],
+      "type": "movie",
+      "year": 2025,
+      "runtimeMin": 137,
+      "languages": [
+        "Kannada"
+      ],
+      "originalLanguage": "Kannada",
+      "genres": [
+        "Horror",
+        "Comedy"
+      ],
+      "cast": [
+        "J. P. Thuminad",
+        "Shaneel Gautham",
+        "Prakash Thuminad",
+        "Deepak Rai Panaje"
+      ],
+      "director": "J. P. Thuminad",
+      "synopsis": "A young man’s crush sets off a village rumour that he is possessed. His neighbours rally to deal with the supposed spirit, turning everyday life into comic chaos.",
+      "tmdbRating": 7.6,
+      "tmdbRatingIllustrative": true,
+      "certification": "U/A 16+",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#23564B",
+        "#692C72"
+      ],
+      "moods": [
+        "Laugh",
+        "Edge-of-seat"
+      ],
+      "providers": [
+        {
+          "providerId": "jiohotstar",
+          "type": "stream",
+          "deepLink": "https://www.hotstar.com/in/",
+          "verifiedAt": "2026-11-16",
+          "languages": [
+            "Kannada",
+            "Telugu",
+            "Malayalam"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-16",
+      "sourceUrl": "https://www.justwatch.com/in/search?q=Su%20From%20So"
+    },
+    {
+      "id": "kirik-party",
+      "slug": "kirik-party",
+      "title": "Kirik Party",
+      "aliases": [
+        "kirik paarty",
+        "kirikparty",
+        "kirik parti"
+      ],
+      "type": "movie",
+      "year": 2016,
+      "runtimeMin": 165,
+      "languages": [
+        "Kannada"
+      ],
+      "originalLanguage": "Kannada",
+      "genres": [
+        "Comedy",
+        "Romance",
+        "Drama"
+      ],
+      "cast": [
+        "Rakshit Shetty",
+        "Rashmika Mandanna",
+        "Samyuktha Hegde",
+        "Achyuth Kumar"
+      ],
+      "director": "Rishab Shetty",
+      "synopsis": "An engineering fresher finds his people through campus mischief and first love. As college life takes an unexpected turn, he must work out who he wants to become.",
+      "tmdbRating": 7.7,
+      "tmdbRatingIllustrative": true,
+      "certification": "U",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#C66A28",
+        "#285C85"
+      ],
+      "moods": [
+        "Laugh",
+        "Feel-good",
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "jiohotstar",
+          "type": "free",
+          "deepLink": "https://www.hotstar.com/in/",
+          "verifiedAt": "2026-11-16",
+          "ads": true
+        }
+      ],
+      "verifiedAt": "2026-11-16",
+      "sourceUrl": "https://www.justwatch.com/in/search?q=Kirik%20Party"
+    },
+    {
+      "id": "sapta-saagaradaache-ello-side-a",
+      "slug": "sapta-saagaradaache-ello-side-a",
+      "title": "Sapta Saagaradaache Ello – Side A",
+      "aliases": [
+        "sapta sagaradaache ello side a",
+        "sapta sagaradache ello",
+        "saptha sagaralu dhaati side a",
+        "sse side a",
+        "sapta saagaradaache ello"
+      ],
+      "type": "movie",
+      "year": 2023,
+      "runtimeMin": 140,
+      "languages": [
+        "Kannada"
+      ],
+      "originalLanguage": "Kannada",
+      "genres": [
+        "Romance",
+        "Drama"
+      ],
+      "cast": [
+        "Rakshit Shetty",
+        "Rukmini Vasanth",
+        "Avinash",
+        "Achyuth Kumar"
+      ],
+      "director": "Hemanth M. Rao",
+      "synopsis": "A driver and an aspiring singer dream of a quiet home by the sea. A risky shortcut to money puts their shared future, and their bond, under strain.",
+      "tmdbRating": 8.0,
+      "tmdbRatingIllustrative": true,
+      "certification": "U/A 13+",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#265E80",
+        "#A34B63"
+      ],
+      "moods": [
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "prime-video",
+          "type": "stream",
+          "deepLink": "https://www.primevideo.com/",
+          "verifiedAt": "2026-11-16"
+        }
+      ],
+      "verifiedAt": "2026-11-16",
+      "sourceUrl": "https://www.justwatch.com/in/search?q=Sapta%20Saagaradaache%20Ello%20%E2%80%93%20Side%20A"
+    },
+    {
+      "id": "garuda-gamana-vrishabha-vahana",
+      "slug": "garuda-gamana-vrishabha-vahana",
+      "title": "Garuda Gamana Vrishabha Vahana",
+      "aliases": [
+        "ggvv",
+        "garuda gamana",
+        "garuda gamana vrishbha vahana",
+        "garuda gamana vrishaba vahana"
+      ],
+      "type": "movie",
+      "year": 2021,
+      "runtimeMin": 151,
+      "languages": [
+        "Kannada"
+      ],
+      "originalLanguage": "Kannada",
+      "genres": [
+        "Crime",
+        "Drama"
+      ],
+      "cast": [
+        "Raj B. Shetty",
+        "Rishab Shetty",
+        "Gopalkrishna Deshpande",
+        "Vineet Kumar"
+      ],
+      "director": "Raj B. Shetty",
+      "synopsis": "Two childhood friends build a violent hold over Mangaluru’s streets. As ambition tests their loyalty, a police officer looks for the crack that could bring them down.",
+      "tmdbRating": 7.8,
+      "tmdbRatingIllustrative": true,
+      "certification": "A",
+      "posterPath": null,
+      "backdropPath": null,
+      "palette": [
+        "#71324E",
+        "#184B55"
+      ],
+      "moods": [
+        "Edge-of-seat",
+        "Drama night"
+      ],
+      "providers": [
+        {
+          "providerId": "zee5",
+          "type": "stream",
+          "deepLink": "https://www.zee5.com/",
+          "verifiedAt": "2026-11-16"
+        }
+      ],
+      "verifiedAt": "2026-11-16",
+      "sourceUrl": "https://www.justwatch.com/in/search?q=Garuda%20Gamana%20Vrishabha%20Vahana"
     }
   ]
 }

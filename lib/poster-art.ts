@@ -45,7 +45,7 @@ export function fitTitle(title: string, width = 252, minimum = 18, maximum = 49)
   const original = titleLockup(title).slice(0, 3);
   const fontSize = Math.max(minimum, Math.min(maximum, width / Math.max(1, ...original.map(lineUnits))));
   const lines = original.map((line) => {
-    if (lineUnits(line) * fontSize <= width) return line;
+    if (lineUnits(line) * fontSize <= width + 1e-6) return line;
     const chars = Array.from(line);
     while (chars.length && lineUnits(chars.join('') + '…') * fontSize > width) chars.pop();
     return chars.join('').trimEnd() + '…';

@@ -13,6 +13,6 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
   const { slug } = await params; const title = await dataSource.getTitle(slug);
   if (!title) notFound();
   const [providers, offers, similar, titles] = await Promise.all([dataSource.listProviders(), dataSource.getProviders(title.id), dataSource.getSimilar(title.id, 68), dataSource.listTitles()]);
-  const versions = titles.filter((candidate) => candidate.id === title.remakeOf || candidate.remakeOf === title.id);
+  const versions = titles.filter((candidate) => candidate.id === title.sequelOf || candidate.sequelOf === title.id || candidate.id === title.remakeOf || candidate.remakeOf === title.id);
   return <TitlePreview key={title.id} title={title} providers={providers} offers={offers} similar={similar} versions={versions}/>;
 }
