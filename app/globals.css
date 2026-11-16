@@ -1504,3 +1504,10 @@ a.text-action,a.wordmark { display:inline-flex; align-items:center; }
 .verdict-summary { color: var(--teal); font-size: 20px; margin: 16px 0; }
 
 .provider-affinity { display: block; margin-top: 4px; font-size: 12px; color: var(--text); }
+
+.availability-report-link { min-height:44px; font-size:13px; }
+.availability-report-form { display:grid; gap:12px; padding:0 20px 24px; }
+.availability-report-form fieldset { border:0; padding:0; min-width:0; }
+.availability-report-form input:not([type=radio]), .availability-report-form select, .availability-report-form textarea { width:100%; min-height:44px; padding:10px; border:1px solid var(--border); border-radius:10px; background:var(--surface); color:var(--text); }
+.report-reason { display:flex; align-items:center; gap:12px; min-height:48px; cursor:pointer; }
+.report-reason input { width:20px; height:20px; accent-color:var(--teal); }

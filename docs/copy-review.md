@@ -743,6 +743,24 @@ Placeholders such as `{p1}`, `{group}`, `{count}` and `{winner}` are runtime val
 | title | dub_language | {language} dub | {language} dub |
 | title | free_ads | Free with ads | Free with ads |
 | title | check_price | Check price on provider | Check price on provider |
+| title | availability_check | Availability being confirmed | Availability being confirmed |
+| title | report_link | Wrong? Tell us | Wrong? Tell us |
+| title | report_title | Report availability | Report availability |
+| title | could_not_play | Couldn’t play it | Couldn’t play it |
+| title | wrong_app | Wrong app | Wrong app |
+| title | wrong_language | Wrong language | Wrong language |
+| title | free_elsewhere | It’s free on another app | It’s free on another app |
+| title | report_provider | Which app? | Which app? |
+| title | report_unspecified | Not listed / not sure | Not listed / not sure |
+| title | report_reason | What went wrong? | What went wrong? |
+| title | report_note | Anything else? (optional) | Anything else? (optional) |
+| title | report_tag | Tester tag (optional) | Tester tag (optional) |
+| title | report_send | Send report | Send report |
+| title | report_sending | Sending report… | Sending report… |
+| title | report_sent | Thanks. Your report has been saved. | Thanks. Your report has been saved. |
+| title | report_error | Your report could not be saved. Please try again. | Your report could not be saved. Please try again. |
+| title | report_unavailable | Reporting needs an internet connection and the online service. Please try again later. | Reporting needs an internet connection and the online service. Please try again later. |
+| title | report_done | Done | Done |
 | shareCard | india_availability_is_illustrative | India · Availability is illustrative | India · Availability is illustrative |
 | shareCard | your_next_movie_night | your next movie night | your next movie night |
 | shareCard | on | on  | on  |

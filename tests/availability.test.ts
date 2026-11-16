@@ -6,9 +6,9 @@ import { homeSelections, onServices, offerLabel } from '../lib/discovery';
 import { defaultPreferences } from '../lib/preferences';
 import { localPollStore } from '../lib/polls/local';
 import { createSupabasePollStore } from '../lib/polls/supabase';
-const blocked=['article-15','praktan','super-deluxe','ramprasad-ki-tehrvi'];
+const blocked=['article-15','praktan','super-deluxe','ramprasad-ki-tehrvi','belaseshe','court'];
 afterEach(()=>vi.unstubAllGlobals());
-it('matches every dated checklist row and leaves all 13 pending provider assignments intact',async()=>{
+it('matches all 68 dated checklist rows',async()=>{
  const titles=await dataSource.listTitles(), providers=await dataSource.listProviders();
  const rows=readFileSync('scripts/availability-checklist-firstpass.md','utf8').split('\n').filter(l=>/^\| \d+ \|/.test(l));
  expect(rows).toHaveLength(68);
@@ -19,7 +19,7 @@ it('matches every dated checklist row and leaves all 13 pending provider assignm
  if(!date){expect(t.verifiedAt).toBeNull();expect(label).toBe(current);expect(t.providers.every(o=>o.verifiedAt===null)).toBe(true);continue;}
  verified++;expect(t.verifiedAt).toBe(date);expect(t.providers.every(o=>o.verifiedAt===date)).toBe(true);
  if(correct.startsWith('NONE')){expect(t.providers).toEqual([]);expect(t.availability).toBe(correct.includes('rent/buy')?'rentOnly':'unavailable');}else expect(label).toBe(correct);
- }expect(verified).toBe(55);
+ }expect(verified).toBe(68);
 });
 it('never recommends unavailable or rent-only titles and never puts pending titles in the hero',async()=>{
  const titles=await dataSource.listTitles(), providers=await dataSource.listProviders();const prefs={...defaultPreferences(),services:providers.map(p=>p.id),languages:[...languages]};
@@ -36,7 +36,7 @@ it('keeps Hindi dubs out of original-language service claims and ranks original 
  const offers=await dataSource.getProviders(t.id,['netflix']);expect(offers[0].providerId).toBe('zee5');expect(offers.find(o=>o.providerId==='netflix')!.onYourServices).toBe(false);
 });
 it('limits every free Home rail and mood to original-language ads offers, including sparse languages',async()=>{
- const titles=await dataSource.listTitles();expect(titles.filter(hasAdsOffer)).toHaveLength(12);
+ const titles=await dataSource.listTitles();expect(titles.filter(hasAdsOffer)).toHaveLength(15);
  for(const language of languages){const prefs={...defaultPreferences(),freeOnly:true,languages:[language]};const home=homeSelections(titles,prefs);
  for(const t of [...home.eligible,...home.included,...home.hero,...home.trending,...home.free])expect(hasAdsOffer(t)).toBe(true);
  for(const mood of moods)expect((await dataSource.getMoodPicks(mood,prefs,68)).every(hasAdsOffer)).toBe(true);
@@ -44,7 +44,7 @@ it('limits every free Home rail and mood to original-language ads offers, includ
  expect(homeSelections(titles,{...defaultPreferences(),freeOnly:true,languages:['Bengali']}).eligible).toHaveLength(0);
  const fake={...titles[0],providers:[{providerId:'mx-player',type:'free' as const,verifiedAt:null}]};expect(hasAdsOffer(fake)).toBe(false);
 });
-it('rejects all four unavailable titles at both PollStore creation boundaries, before any cloud write',async()=>{
+it('rejects all six unavailable titles at both PollStore creation boundaries, before any cloud write',async()=>{
  const values=new Map<string,string>();vi.stubGlobal('localStorage',{getItem:(k:string)=>values.get(k)??null,setItem:(k:string,v:string)=>values.set(k,v)});vi.stubGlobal('window',new EventTarget());vi.stubGlobal('BroadcastChannel',undefined);
  const rpc=vi.fn();const cloud=createSupabasePollStore({rpc} as unknown as SupabaseClient,false);
  for(const id of blocked){const input={name:'Test',note:'',titleIds:[id,'panchayat'],creator:{id:'this-device',name:'Amit'},deadline:new Date(Date.now()+3600000).toISOString(),expectedVoters:0};

@@ -48,6 +48,8 @@ export function parseCatalog(input: unknown, providers: readonly Provider[]): Ca
     requireValue(title.availability === undefined || ['unavailable', 'rentOnly'].includes(String(title.availability)), `${title.id} availability`);
     requireValue(!title.availability || title.providers.length === 0, `${title.id} unavailable offers`);
     requireValue(title.otherSources === undefined || (Array.isArray(title.otherSources) && title.otherSources.every(s => record(s) && text(s.name) && text(s.note) && verificationDate(s.verifiedAt))), `${title.id} other sources`);
+    requireValue(title.sourceUrl === undefined || safeUrl(title.sourceUrl), `${title.id} sourceUrl`);
+    requireValue(title.availabilityNote === undefined || title.availabilityNote === 'check', `${title.id} availabilityNote`);
     const offers = new Set<string>();
     for (const offer of title.providers) {
       requireValue(record(offer) && providers.some((p) => p.id === offer.providerId) && ['stream', 'rent', 'buy', 'free'].includes(String(offer.type)), `${title.id} provider reference/offer type`);

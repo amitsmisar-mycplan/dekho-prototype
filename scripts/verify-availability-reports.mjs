@@ -1,0 +1,20 @@
+import env from '@next/env';
+import { createClient } from '@supabase/supabase-js';
+import { randomUUID } from 'node:crypto';
+env.loadEnvConfig(process.cwd(),false,{info(){},error(){}});
+const url=process.env.NEXT_PUBLIC_SUPABASE_URL,key=process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+if(!url||!key)throw Error('Supabase configuration missing');
+let role='';try{role=JSON.parse(Buffer.from(key.split('.')[1],'base64url')).role;}catch{}
+if(role==='service_role'||key.startsWith('sb_secret_'))throw Error('Use only the public anon key');
+const device=randomUUID();const options={auth:{persistSession:false,autoRefreshToken:false}};
+const client=createClient(url,key,{...options,global:{headers:{'x-dekho-device':device}}}),guest=createClient(url,key,options);
+const args={p_title_id:'piku',p_provider_id:'sonyliv',p_reason:'wrong_app',p_note:'Automated report verification — safe to delete',p_tester_tag:'availability-rpc-test'};
+const assert=(ok,message)=>{if(!ok)throw Error(message);};
+const saved=await client.rpc('report_availability',args);assert(!saved.error,`Report RPC failed (${saved.error?.code??'unknown'}). Check migration.`);
+assert(Boolean((await guest.rpc('report_availability',args)).error),'Anonymous request without a device was accepted');
+assert(Boolean((await client.rpc('report_availability',{...args,p_reason:'invalid'})).error),'Invalid report reason accepted');
+assert(Boolean((await client.rpc('report_availability',{...args,p_note:'a'.repeat(501)})).error),'Oversized note accepted');
+assert(Boolean((await client.from('availability_reports').select('*')).error),'Reports publicly readable');
+assert(Boolean((await client.from('availability_reports').insert({title_id:'piku',provider_id:'sonyliv',reason:'wrong_app',note:'Must not save',device_id:randomUUID(),tester_tag:'test'})).error),'Direct forged insert accepted');
+console.log('PASS: report RPC accepts valid input, rejects missing identity and invalid input, and blocks public reads/direct inserts. One labelled verification report saved.');
+await client.removeAllChannels();await guest.removeAllChannels();

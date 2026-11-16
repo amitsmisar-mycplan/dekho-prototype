@@ -6,6 +6,8 @@ export type OfferType = 'stream' | 'rent' | 'buy' | 'free';
 export interface Provider { languageAffinity?: Language[]; id: string; name: string; color: string; homepageUrl: string; verifiedAt: string | null }
 export interface Offer { ads?: boolean; languages?: Language[]; providerId: string; type: OfferType; priceInr?: number; deepLink?: string; verifiedAt: string | null }
 export interface Title {
+  sourceUrl?: string;
+  availabilityNote?: 'check';
   verifiedAt?: string | null;
   availability?: 'unavailable' | 'rentOnly';
   otherSources?: { name: string; note: string; verifiedAt: string }[];

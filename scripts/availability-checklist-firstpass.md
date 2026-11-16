@@ -38,19 +38,19 @@ Store-only offers (Apple TV store, Google Play, YouTube, Amazon Video) are liste
 | 28 | Axone | 2019 | Hindi | ZEE5 (free) | Prime Video (stream) | Medium | Aggregator current; Prime page not playable in web check. | 2026-11-14 |
 | 29 | Baahubali 2: The Conclusion | 2017 | Telugu | Aha (stream) | JioHotstar (free, ads); SonyLIV (stream, Hindi only) | Medium | Netflix listing exists but Telugu not verified; do not count for Telugu. | 2026-11-14 |
 | 30 | Badhaai Ho | 2018 | Hindi | ZEE5 (stream) | JioHotstar (free, ads) | High | Neither ZEE5 nor Netflix listed. Vi Movies & TV also lists it. | 2026-11-14 |
-| 31 | Belaseshe | 2015 | Bengali | Prime Video (stream) | PENDING |  | Awaiting check. |  |
-| 32 | Court | 2015 | Marathi | Netflix (stream) | PENDING |  | Awaiting check. |  |
-| 33 | Darlings | 2022 | Hindi | SonyLIV (stream) | PENDING |  | Awaiting check. |  |
-| 34 | Drishyam 2 (Malayalam) | 2021 | Malayalam | Netflix (stream) | PENDING |  | Awaiting check. |  |
-| 35 | Everything Everywhere All at Once | 2022 | English | Prime Video (stream) | PENDING |  | Awaiting check. |  |
-| 36 | Get Out | 2017 | English | Lionsgate Play (stream) | PENDING |  | Awaiting check. |  |
-| 37 | Glass Onion: A Knives Out Mystery | 2022 | English | JioHotstar (stream) | PENDING |  | Awaiting check. |  |
-| 38 | Gully Boy | 2019 | Hindi | Netflix (stream) | PENDING |  | Awaiting check. |  |
-| 39 | HIT: The First Case | 2020 | Telugu | Aha (stream) | PENDING |  | Awaiting check. |  |
-| 40 | Iratta | 2023 | Malayalam | Prime Video (stream) | PENDING |  | Awaiting check. |  |
-| 41 | Jai Bhim | 2021 | Tamil | Netflix (stream) | PENDING |  | Awaiting check. |  |
-| 42 | Joji | 2021 | Malayalam | SonyLIV (stream) | PENDING |  | Awaiting check. |  |
-| 43 | K.G.F: Chapter 1 | 2018 | Kannada | JioHotstar (stream) | PENDING |  | Awaiting check. |  |
+| 31 | Belaseshe | 2015 | Bengali | Prime Video (stream) | NONE (not streaming in India) | High | JustWatch India: no stream; Hoichoi ended Jan 2023; Prime claim uncorroborated. | 2026-11-14 |
+| 32 | Court | 2015 | Marathi | Netflix (stream) | NONE (not streaming in India) | High | JustWatch India: no current offer; Netflix uncorroborated. | 2026-11-14 |
+| 33 | Darlings | 2022 | Hindi | SonyLIV (stream) | Netflix (stream) | High | Official Netflix India page lists Hindi. SonyLIV was wrong. | 2026-11-14 |
+| 34 | Drishyam 2 (Malayalam) | 2021 | Malayalam | Netflix (stream) | Prime Video (stream); MX Player (free, ads) | Medium | 2021 Malayalam film, not the Hindi remake. Ads-tier audio unverified. | 2026-11-14 |
+| 35 | Everything Everywhere All at Once | 2022 | English | Prime Video (stream) | SonyLIV (stream) | Medium | English listed. Also SonyLIV channel in Prime Video. Prime was wrong. | 2026-11-14 |
+| 36 | Get Out | 2017 | English | Lionsgate Play (stream) | JioHotstar (stream); ZEE5 (rent); Prime Video (rent) | High | English listed. Lionsgate Play was wrong. | 2026-11-14 |
+| 37 | Glass Onion: A Knives Out Mystery | 2022 | English | JioHotstar (stream) | Netflix (stream) | High | Official Netflix India page, English. JioHotstar was wrong. | 2026-11-14 |
+| 38 | Gully Boy | 2019 | Hindi | Netflix (stream) | Netflix (stream) | High | Apple TV store rent/buy. | 2026-11-14 |
+| 39 | HIT: The First Case | 2020 | Telugu | Aha (stream) | Prime Video (stream); MX Player (free, ads) | Medium | 2020 Telugu film, not the Hindi remake. Aha was wrong. | 2026-11-14 |
+| 40 | Iratta | 2023 | Malayalam | Prime Video (stream) | Netflix (stream) | Medium | Prime Video was wrong. | 2026-11-14 |
+| 41 | Jai Bhim | 2021 | Tamil | Netflix (stream) | Prime Video (stream); MX Player (free, ads) | Medium | Official Prime Tamil page. Also ManoramaMax. Netflix was wrong. | 2026-11-14 |
+| 42 | Joji | 2021 | Malayalam | SonyLIV (stream) | Prime Video (stream) | High | Official Prime page lists Malayalam. SonyLIV was wrong. | 2026-11-14 |
+| 43 | K.G.F: Chapter 1 | 2018 | Kannada | JioHotstar (stream) | Prime Video (stream); Prime Video (rent) | High | Prime Kannada edition. JioHotstar was wrong. | 2026-11-14 |
 | 44 | Kaithi | 2019 | Tamil | JioHotstar (stream) | JioHotstar (stream); Aha (stream); MX Player (free, ads) | Medium | Tamil playback per provider not confirmed. Vi Movies & TV, Amazon MX Player also list it. | 2026-11-14 |
 | 45 | Kantara | 2022 | Kannada | Prime Video (stream) | Prime Video (stream); Netflix (stream, Hindi only) | High | Amazon lists Kannada audio; Netflix listing is Hindi. | 2026-11-14 |
 | 46 | Mahanati | 2018 | Telugu | Prime Video (stream) | Prime Video (stream) | High | Official Telugu listing. | 2026-11-14 |
@@ -78,4 +78,4 @@ Store-only offers (Apple TV store, Google Play, YouTube, Amazon Video) are liste
 | 68 | Trapped | 2017 | Hindi | MX Player (free) | ZEE5 (stream) | Medium | Free-with-ads disputed; not applied. | 2026-11-14 |
 
 
-Rows 31-43 are PENDING. Rows marked (free, ads) only where ads access is confirmed; "reported" or "disputed" ads listings are noted, not applied.
+Rows 31-68 verified 2026-11-14. Full evidence (sources, official pages, conflicts) is in scripts/india-streaming-68-2026-11-14.csv.

@@ -16,7 +16,7 @@ export function Onboarding({ providers, languages, edit }: { providers: Provider
   const router = useRouter(); const reduced = useReducedMotion();
   const saved = usePrototype((s) => s.prefs); const completed = usePrototype((s) => s.onboardingComplete);
   const editing = edit && completed;
-  const [draft, setDraft] = useState<Preferences>(() => ({ ...saved, services: [...saved.services], languages: [...saved.languages] }));
+  const [draft, setDraft] = useState<Preferences>(() => ({ ...saved, services: [...saved.services], languages: saved.languages.filter(l => languages.includes(l)) }));
   const tone = toneForLanguages(draft.languages);
   const [step, setStep] = useState(0); const [celebrating, setCelebrating] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null); const lastTracked = useRef('');

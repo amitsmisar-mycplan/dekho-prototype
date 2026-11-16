@@ -31,7 +31,7 @@ describe('title decisions', () => {
   });
   it('uses only confirmed ad-supported offers for free discovery', async () => {
     const free = (await dataSource.listTitles()).filter(t => t.providers.some(o => o.ads));
-    expect(free).toHaveLength(12);
+    expect(free).toHaveLength(15);
     expect(free.every(t => t.providers.some(o => o.type === 'free' && o.ads === true && o.verifiedAt === '2026-11-14'))).toBe(true);
   });
   it('persists independent personal takes and watchlist selections', async () => {

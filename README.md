@@ -362,3 +362,13 @@ Demo routes:
 - `/t/article-15` and `/t/super-deluxe`: unavailable/rent-only states, Watchlist action, no watch button.
 - `/t/belaseshe`: pending verification note; it cannot enter the Home hero.
 - `/`: “Free tonight (with ads)” uses only ad-supported offers. Select free-only and Bengali to see the sparse/empty state; no paid titles are inserted.
+
+## Availability completion and tester reports
+
+Rows 31–43 are now applied; all 68 title records have a verification date and a non-rendered `sourceUrl` copied from `scripts/india-streaming-68-2026-11-14.csv`. See `docs/availability-31-43-changes.md` for the 12 provider changes. Piku keeps SonyLIV and shows “Availability being confirmed”. Historical verification notes above describe the earlier pass.
+
+Run the complete `supabase/migrations/005_availability_reports.sql` in Supabase SQL Editor as postgres **after** `005_availability_guard.sql`. These manually applied files share the requested 005 prefix; do not use numeric CLI ordering. The new migration adds private reports and extends the new-poll guard to Belaseshe and Court. Existing polls are preserved. Reports are insert-only through `report_availability`; the server derives the private device UUID from the request header. There is no public read access. Inspect reports as postgres in the SQL Editor or Table Editor. No new secrets or accounts are required.
+
+Demo `/t/piku`: read the confirmation note, choose **Wrong? Tell us**, select a reason and optional app/note/tester tag, then **Send report**. Errors retain the form for retry; local demo mode cannot send reports and says so. The app does not claim success without a successful server write. Test unavailable pages at `/t/belaseshe` and `/t/court`, Netflix at `/t/glass-onion`, and the language choices at `/welcome?edit=services` and `/kit/catalog` with no saved languages.
+
+`MIN_TITLES_PER_LANGUAGE = 4` in `lib/catalog-config.ts` controls selectable languages. Counts use streamable original-language titles, including free offers. Bengali and Marathi each have one, and Kannada has three, so all three are hidden. Set the threshold to 0 to restore all choices. Hidden-language titles remain searchable and saved watchlists are preserved. Editing preferences removes hidden selections from the draft; it does not erase the catalogue languages.
